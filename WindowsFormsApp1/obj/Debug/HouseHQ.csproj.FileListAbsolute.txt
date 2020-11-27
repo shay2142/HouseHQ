@@ -1,0 +1,16 @@
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Interop.MSTSCLib.dll
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\AxInterop.MSTSCLib.dll
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\HouseHQ.csprojAssemblyReference.cache
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Interop.MSTSCLib.dll
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\AxInterop.MSTSCLib.dll
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\HouseHQ.csproj.ResolveComReference.cache
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.login.resources
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\HouseHQ.csproj.GenerateResource.cache
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\HouseHQ.csproj.CoreCompileInputs.cache
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\shay5\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
