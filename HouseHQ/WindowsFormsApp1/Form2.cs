@@ -72,10 +72,10 @@ namespace WindowsFormsApp1
                 //axMsRdpClient81.RemoteProgram.RemoteProgramMode = true;
 
                 /*****remote app no working!!!*****/
-                //axMsRdpClient81.OnConnected += axMsRdpClient81_OnConnecting;
-                //axMsRdpClient81.RemoteProgram.RemoteProgramMode = true;
-                //axMsRdpClient81.RemoteProgram2.RemoteApplicationName = "Calculator";
-                //axMsRdpClient81.RemoteProgram2.RemoteApplicationProgram = @"C:\Windows\system32\calc.exe";
+                axMsRdpClient81.OnConnected += axMsRdpClient81_OnConnecting;
+                axMsRdpClient81.RemoteProgram.RemoteProgramMode = true;
+                axMsRdpClient81.RemoteProgram2.RemoteApplicationName = "Calculator";
+                axMsRdpClient81.RemoteProgram2.RemoteApplicationProgram = @"C:\Windows\system32\calc.exe";
 
 
                 axMsRdpClient81.Connect();
