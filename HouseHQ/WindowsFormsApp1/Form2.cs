@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+using MSTSCLib;
+
 namespace WindowsFormsApp1
 {
     public partial class Form2 : Form
@@ -19,7 +22,6 @@ namespace WindowsFormsApp1
             this.axMsRdpClient81.Size = new System.Drawing.Size(Form2.ActiveForm.ClientSize.Width, Form2.ActiveForm.ClientSize.Height - 25);
             try
             {
-
 
                 axMsRdpClient81.Server = server; //IP address of remote machine
                 axMsRdpClient81.UserName = userName;
@@ -35,7 +37,7 @@ namespace WindowsFormsApp1
                 axMsRdpClient81.DesktopHeight = Screen.PrimaryScreen.Bounds.Height;
                 axMsRdpClient81.DesktopWidth = Screen.PrimaryScreen.Bounds.Width;
                 axMsRdpClient81.FullScreen = false;
-                axMsRdpClient81.ColorDepth = 15; //or 32 bit color
+                axMsRdpClient81.ColorDepth = 32; //or 32 bit color
 
                 axMsRdpClient81.AdvancedSettings8.RedirectDrives = false;
                 axMsRdpClient81.AdvancedSettings8.RedirectPrinters = true;
@@ -44,11 +46,22 @@ namespace WindowsFormsApp1
 
                 //axMsRdpClient81.AdvancedSettings8.ConnectToServerConsole //admin 
                 //button
+                
                 axMsRdpClient81.AdvancedSettings8.ConnectionBarShowMinimizeButton = true;
                 axMsRdpClient81.AdvancedSettings8.ConnectionBarShowPinButton = true;
                 axMsRdpClient81.AdvancedSettings8.ConnectionBarShowRestoreButton = true;
 
                 axMsRdpClient81.AdvancedSettings8.DisableCtrlAltDel = 0;
+
+                //axMsRdpClient81.SecuredSettings3.StartProgram = @"C:\Windows\system32\calc.exe";
+
+                //axMsRdpClient81.Dock = DockStyle.Fill;
+                //this.Controls.Add(axMsRdpClient81); 
+
+                //axMsRdpClient81.OnConnected += axMsRdpClient81_OnConnecting;
+
+                //axMsRdpClient81.RemoteProgram2.RemoteProgramMode = true;
+                axMsRdpClient81.RemoteProgram2.RemoteApplicationProgram = @"C:\Windows\System32\calc.exe";
 
                 //axMsRdpClient81.AdvancedSettings8.DisplayConnectionBar = false; //מבטל את הפס הכחול
 
@@ -72,11 +85,18 @@ namespace WindowsFormsApp1
                 //axMsRdpClient81.RemoteProgram.RemoteProgramMode = true;
 
                 /*****remote app no working!!!*****/
-                axMsRdpClient81.OnConnected += axMsRdpClient81_OnConnecting;
-                axMsRdpClient81.RemoteProgram.RemoteProgramMode = true;
-                axMsRdpClient81.RemoteProgram2.RemoteApplicationName = "Calculator";
-                axMsRdpClient81.RemoteProgram2.RemoteApplicationProgram = @"C:\Windows\system32\calc.exe";
+                //axMsRdpClient81.OnConnected += axMsRdpClient81_OnConnecting;
+                //axMsRdpClient81.RemoteProgram.RemoteProgramMode = true;
+                //axMsRdpClient81.RemoteProgram2.RemoteApplicationName = "Calculator";
+                //axMsRdpClient81.RemoteProgram2.RemoteApplicationProgram = @"C:\Windows\system32\calc.exe";
 
+                //axMsRdpClient81.RemoteProgram.RemoteProgramMode = true;
+                //// ServerStartProgram can only be called on an open session; wait for connected until calling
+                //axMsRdpClient81.OnConnected += (_1, _2) => { axMsRdpClient81.RemoteProgram.ServerStartProgram(@"%SYSTEMROOT%\notepad.exe", "", "%SYSTEMROOT%", true, "", false); };
+                //// needed to allow password
+                //axMsRdpClient81.AdvancedSettings7.PublicMode = false;
+                //// needed to allow dimensions other than the size of the control
+                //axMsRdpClient81.AdvancedSettings7.SmartSizing = true;
 
                 axMsRdpClient81.Connect();
 
@@ -84,16 +104,18 @@ namespace WindowsFormsApp1
             catch (Exception Ex)
             {
                 MessageBox.Show("Error Connecting", "Error connecting to remote desktop " + server + " Error:  " + Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
         }
-
         private void axMsRdpClient81_OnConnecting(object sender, EventArgs e)
         {
             this.axMsRdpClient81.Size = new System.Drawing.Size(Form2.ActiveForm.ClientSize.Width, Form2.ActiveForm.ClientSize.Height - 25);
+            this.axMsRdpClient81.RemoteProgram.ServerStartProgram(@"%SYSTEMROOT%\notepad.exe", "", "%SYSTEMROOT%", true, "", false);
+
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -110,7 +132,7 @@ namespace WindowsFormsApp1
                 if (axMsRdpClient81.Connected.ToString() == "1")
                 {
                     axMsRdpClient81.Disconnect();
-                    this.Close();
+                    Application.Exit();//Exit all windows
                 }
             }
             catch (Exception Ex)

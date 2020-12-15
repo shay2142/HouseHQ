@@ -44,6 +44,7 @@ namespace WindowsFormsApp1
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.axMsRdpClient81)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -117,5 +118,6 @@ namespace WindowsFormsApp1
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton1;
         private ToolStripButton toolStripButton2;
+        private ColorDialog colorDialog1;
     }
 }
