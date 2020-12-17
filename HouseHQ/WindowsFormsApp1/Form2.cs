@@ -61,7 +61,7 @@ namespace WindowsFormsApp1
                 //axMsRdpClient81.OnConnected += axMsRdpClient81_OnConnecting;
 
                 //axMsRdpClient81.RemoteProgram2.RemoteProgramMode = true;
-                axMsRdpClient81.RemoteProgram2.RemoteApplicationProgram = @"C:\Windows\System32\calc.exe";
+                //axMsRdpClient81.RemoteProgram2.RemoteApplicationProgram = @"C:\Windows\System32\calc.exe";
 
                 //axMsRdpClient81.AdvancedSettings8.DisplayConnectionBar = false; //מבטל את הפס הכחול
 

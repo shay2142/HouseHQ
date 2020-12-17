@@ -45,9 +45,9 @@ namespace HouseHQ_server
 
         private void createRemoteApp_Click(object sender, EventArgs e)
         {
-            var i;
-            System.Diagnostics.Process.Start("reg.exe", @"ADD \\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text));
-            MessageBox.Show(fileContent, "File Content at path: " + filename, MessageBoxButtons.OK);
+            //var i;
+            //System.Diagnostics.Process.Start("reg.exe", @"ADD \\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text));
+            //MessageBox.Show(fileContent, "File Content at path: " + filename, MessageBoxButtons.OK);
         }
     }
 }

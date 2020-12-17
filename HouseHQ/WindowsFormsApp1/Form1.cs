@@ -40,10 +40,9 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error Disconnecting", "Error disconnecting from remote desktop " + txtServer + " Error:  " + Ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }*/
             
-            //Form2 form = new Form2(ipServer.Text, user.Text, pass.Text);
-            Form3 form3 = new Form3();
-            this.Hide();
-            form3.Show();
+            Form2 form = new Form2(ipServer.Text, user.Text, pass.Text);
+            //this.Hide();
+            form.Show();
 
         }
 
@@ -60,6 +59,13 @@ namespace WindowsFormsApp1
         private void pass_TextChanged(object sender, EventArgs e)
         {
             pass.PasswordChar = '*';
+        }
+
+        private void remoteapp_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            //this.Hide();
+            form3.Show();
         }
     }
 }
