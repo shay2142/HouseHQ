@@ -114,7 +114,7 @@ namespace WindowsFormsApp1
         private void axMsRdpClient81_OnConnecting(object sender, EventArgs e)
         {
             this.axMsRdpClient81.Size = new System.Drawing.Size(Form2.ActiveForm.ClientSize.Width, Form2.ActiveForm.ClientSize.Height - 25);
-            this.axMsRdpClient81.RemoteProgram.ServerStartProgram(@"%SYSTEMROOT%\notepad.exe", "", "%SYSTEMROOT%", true, "", false);
+            //this.axMsRdpClient81.RemoteProgram.ServerStartProgram(@"%SYSTEMROOT%\notepad.exe", "", "%SYSTEMROOT%", true, "", false);
 
         }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace WindowsFormsApp1
 {
@@ -30,6 +31,18 @@ namespace WindowsFormsApp1
         {
             //appList.Items.Add("List item text", 3);
             System.Diagnostics.Process.Start(@"C:\Users\shay5\Desktop\Calculator.rdp");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //foreach (var process in Process.GetProcessesByName("mstsc"))
+            //{
+            //    process.Kill();
+            //}
+            foreach (var process in Process.GetProcessesByName("mstsc"))
+            {
+                process.Kill();
+            }
         }
     }
 }

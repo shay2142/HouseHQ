@@ -39,15 +39,25 @@ namespace HouseHQ_server
  
             }
 
-            filename = Path.GetFileNameWithoutExtension(filePath);
-            MessageBox.Show(fileContent, "File Content at path: " + filename, MessageBoxButtons.OK);
+            //filename = Path.GetFileNameWithoutExtension(filePath);
+            //MessageBox.Show(fileContent, "File Content at path: " + filename, MessageBoxButtons.OK);
         }
 
         private void createRemoteApp_Click(object sender, EventArgs e)
         {
             //var i;
-            //System.Diagnostics.Process.Start("reg.exe", @"ADD \\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text));
+            //string path = @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\";
+            string path = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\";
+            MessageBox.Show("ADD " + '"' + path + Path.GetFileNameWithoutExtension(namePath.Text) + '"', "test" , MessageBoxButtons.OK);
+            //System(@"REG QUERY " + path + " /s");
+            //System.Diagnostics.Process.Start("reg.exe", "ADD " + '"' + path + Path.GetFileNameWithoutExtension(namePath.Text) + '"');
             //MessageBox.Show(fileContent, "File Content at path: " + filename, MessageBoxButtons.OK);
+            string test = path + Path.GetFileNameWithoutExtension(namePath.Text);
+
+            Microsoft.Win32.RegistryKey key;
+            key = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(test);
+            key.SetValue("Path", Path.GetFileName(namePath.Text));
+            key.Close();
         }
     }
 }
