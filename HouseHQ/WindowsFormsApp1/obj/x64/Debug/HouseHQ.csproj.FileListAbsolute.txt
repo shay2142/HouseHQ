@@ -14,3 +14,4 @@ C:\Users\shay5\source\repos\HouseHQ\HouseHQ\WindowsFormsApp1\obj\x64\Debug\House
 C:\Users\shay5\source\repos\HouseHQ\HouseHQ\WindowsFormsApp1\obj\x64\Debug\HouseHQ.csproj.CoreCompileInputs.cache
 C:\Users\shay5\source\repos\HouseHQ\HouseHQ\WindowsFormsApp1\obj\x64\Debug\WindowsFormsApp1.exe
 C:\Users\shay5\source\repos\HouseHQ\HouseHQ\WindowsFormsApp1\obj\x64\Debug\WindowsFormsApp1.pdb
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ\WindowsFormsApp1\obj\x64\Debug\WindowsFormsApp1.Form3.resources

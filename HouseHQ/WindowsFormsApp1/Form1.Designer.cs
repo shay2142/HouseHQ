@@ -29,7 +29,6 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.ipServer = new System.Windows.Forms.TextBox();
             this.pass = new System.Windows.Forms.TextBox();
             this.user = new System.Windows.Forms.TextBox();
@@ -37,7 +36,6 @@ namespace WindowsFormsApp1
             this.userName = new System.Windows.Forms.Label();
             this.password = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.remoteapp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -101,12 +99,6 @@ namespace WindowsFormsApp1
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
             // remoteapp
             // 
             this.remoteapp.Location = new System.Drawing.Point(12, 149);
@@ -145,7 +137,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label userName;
         private System.Windows.Forms.Label password;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button remoteapp;
     }
 }

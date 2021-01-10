@@ -1,0 +1,15 @@
+{
+  "name": "electron.hello-world",
+  "version": "0.0.0",
+  "description": "Electron.HelloWorld",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "electron": "3.0.6"
+  }
+}

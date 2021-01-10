@@ -49,6 +49,32 @@ namespace HouseHQ_server
             ProcessStartInfo startInfo = new ProcessStartInfo("reg.exe", "Add " + '"' + @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text) + '"' + @" /v Path /t REG_SZ /d " + namePath.Text);
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             System.Diagnostics.Process.Start(startInfo);
+
+            /*****עובד אך עדיין לא גמור!!!*****/
+            
+            //string path = @"test.bat";
+
+            //// Create the file, or overwrite if the file exists.
+            //using (FileStream fs = File.Create(path))
+            //{
+            //    byte[] info = new UTF8Encoding(true).GetBytes("REG QUERY " + '"' + @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" + '"' + " > test1.txt");
+            //    // Add some information to the file.
+            //    fs.Write(info, 0, info.Length);
+            //}
+
+            //System.Diagnostics.Process.Start("test.bat");
+
+            //// Open the stream and read it back.
+            //using (StreamReader sr = File.OpenText("test1.txt"))
+            //{
+            //    string s = "";
+            //    while ((s = sr.ReadLine()) != null)
+            //    {
+            //        //Console.WriteLine(s);
+            //        MessageBox.Show(Path.GetFileNameWithoutExtension(s), "", MessageBoxButtons.OK);
+            //    }
+            //}
         }
+
     }
 }
