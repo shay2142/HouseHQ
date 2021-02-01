@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\httpServer\httpServer\bin\Debug\netcoreapp3.1\httpServer.exe
+C:\Users\user\source\repos\httpServer\httpServer\bin\Debug\netcoreapp3.1\httpServer.deps.json
+C:\Users\user\source\repos\httpServer\httpServer\bin\Debug\netcoreapp3.1\httpServer.runtimeconfig.json
+C:\Users\user\source\repos\httpServer\httpServer\bin\Debug\netcoreapp3.1\httpServer.runtimeconfig.dev.json
+C:\Users\user\source\repos\httpServer\httpServer\bin\Debug\netcoreapp3.1\httpServer.dll
+C:\Users\user\source\repos\httpServer\httpServer\bin\Debug\netcoreapp3.1\httpServer.pdb
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.csprojAssemblyReference.cache
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.AssemblyInfo.cs
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.dll
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.pdb
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.genruntimeconfig.cache
+C:\Users\user\source\repos\httpServer\httpServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\httpServer\httpServer\obj\Debug\netcoreapp3.1\httpServer.csproj.CopyComplete
