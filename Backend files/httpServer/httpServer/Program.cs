@@ -136,12 +136,7 @@ namespace HttpListenerExample
                 okLogin test = new okLogin()
                 {
                     name = user.name,
-                    appList = new List<string>
-                    {
-                        "app1",
-                        "app2",
-                        "app3"
-                    }
+                    appList = db.getUserApplications(con, user.name)
                 };
                 return "201&" + JsonConvert.SerializeObject(test);
             }
@@ -229,7 +224,7 @@ namespace HttpListenerExample
         public static void Main(string[] args)
         {
             //string path = @"MyDatabase.sqlite";
-            string path = @"C:\Users\shay5\Documents\HHQ\Backend files\httpServer\httpServer\MyDatabase.sqlite";
+            string path = @"C:\Users\shay5\Documents\househq\Backend files\httpServer\httpServer\MyDatabase.sqlite";
             string cs = @"URI=file:" + path;
             
             con = new SQLiteConnection(cs);

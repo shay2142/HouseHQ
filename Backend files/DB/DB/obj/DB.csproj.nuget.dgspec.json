@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj": {}
+    "C:\\Users\\shay5\\Documents\\househq\\Backend files\\DB\\DB\\DB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj": {
+    "C:\\Users\\shay5\\Documents\\househq\\Backend files\\DB\\DB\\DB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj",
+        "projectUniqueName": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\DB\\DB\\DB.csproj",
         "projectName": "DB",
-        "projectPath": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj",
+        "projectPath": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\DB\\DB\\DB.csproj",
         "packagesPath": "C:\\Users\\shay5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\obj\\",
+        "outputPath": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\DB\\DB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

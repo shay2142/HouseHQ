@@ -1198,11 +1198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\httpServer\\httpServer\\httpServer.csproj",
+      "projectUniqueName": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\httpServer\\httpServer\\httpServer.csproj",
       "projectName": "httpServer",
-      "projectPath": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\httpServer\\httpServer\\httpServer.csproj",
+      "projectPath": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\httpServer\\httpServer\\httpServer.csproj",
       "packagesPath": "C:\\Users\\shay5\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\httpServer\\httpServer\\obj\\",
+      "outputPath": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\httpServer\\httpServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

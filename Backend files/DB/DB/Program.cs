@@ -11,7 +11,7 @@ namespace DB
         {
             Console.WriteLine("Hello World!");
 
-            string path = @"C:\Users\shay5\Documents\HHQ\Backend files\DB\DB\MyDatabase.sqlite";
+            string path = @"C:\Users\shay5\Documents\househq\Backend files\DB\DB\MyDatabase.sqlite";
             string cs = @"URI=file:" + path;
 
             using var con = new SQLiteConnection(cs);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YDZL6+xmIqucqGPeioro+ilbv7wMg+kdQl/exPK6vgnrSIEu1LwdHngIg3qwLxArZkpJzqX1P9GNiAlPJW5JSg==",
+  "dgSpecHash": "JIVksMbBqOBYgD6c7uLThor/fZ1dW06yYJN33q3k3Os3Vb5og68gDegBlPWuYKAfmufuU6E9b9eNljAFLmW7Vw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\httpServer\\httpServer\\httpServer.csproj",
+  "projectFilePath": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\httpServer\\httpServer\\httpServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shay5\\.nuget\\packages\\entityframework\\6.3.0\\entityframework.6.3.0.nupkg.sha512",
     "C:\\Users\\shay5\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
