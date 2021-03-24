@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shay5\\source\\repos\\DB\\DB\\DB.csproj": {}
+    "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shay5\\source\\repos\\DB\\DB\\DB.csproj": {
+    "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shay5\\source\\repos\\DB\\DB\\DB.csproj",
+        "projectUniqueName": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj",
         "projectName": "DB",
-        "projectPath": "C:\\Users\\shay5\\source\\repos\\DB\\DB\\DB.csproj",
+        "projectPath": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\DB.csproj",
         "packagesPath": "C:\\Users\\shay5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shay5\\source\\repos\\DB\\DB\\obj\\",
+        "outputPath": "C:\\Users\\shay5\\Documents\\HHQ\\Backend files\\DB\\DB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -44,6 +44,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.113.7, )"
+            },
             "System.Data.SQLite.Core": {
               "target": "Package",
               "version": "[1.0.113.7, )"
@@ -64,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -10,13 +10,22 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
+using System.Data.SQLite;
+
+using jsonDeserialize;
+using jsonSerializer;
+using dataBase;
 
 namespace HttpListenerExample
 {
     class HttpServer
     {
+        public static SQLiteConnection con;
         public static HttpListener listener;
-        public static string url = "http://192.168.0.194:8080/";
+        public static DB db = new DB();
+        public static string url = "http://192.168.0.131:8080/";
         public static int requestCount = 0;
         public static string pageData =
             "<!DOCTYPE>" +
@@ -30,7 +39,18 @@ namespace HttpListenerExample
             "  </body>" +
             "</html>";
 
-
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
         public static async Task HandleIncomingConnections()
         {
             bool runServer = true;
@@ -68,18 +88,31 @@ namespace HttpListenerExample
                         Console.WriteLine(json[0]);
                         Console.WriteLine(json[1]);
                         //Console.WriteLine();
+                        string msg = "";
                         if (IsValidJson(json[1]))
                         {
                             switch (json[0])
                             {
-                                case "101":
-                                    var user = System.Text.Json.JsonSerializer.Deserialize<login>(json[1]);
-                                    Console.WriteLine(user.name);
+                                case "101"://login
+                                    msg = login(json[1]);
                                     break;
-                                default:
+                                case "102": //singup
+                                    msg = singup(json[1]);
+                                    break;
+                                case "103"://change account
+                                    break;
+                                case "109"://logout
+                                    break;
+                                case "104"://add apps?
+                                    break;
+                                case "105"://all apps
+                                    break;
+                                case "106"://delete apps?
+                                    break;
+                                default://400 error
                                     break;
                             }
-                            response(resp, json[1], "json");
+                            response(resp, msg, "json");
                         }
                         else
                         {
@@ -93,6 +126,64 @@ namespace HttpListenerExample
                 }
                 
             }
+        }
+        public static string login(string json)
+        {
+            var user = System.Text.Json.JsonSerializer.Deserialize<login>(json);
+            Console.WriteLine(user.name);
+            if (db.userNameIsExists(con, user.name) && db.passwordIsCorrect(con, user.name, user.password))
+            {
+                okLogin test = new okLogin()
+                {
+                    name = user.name,
+                    appList = new List<string>
+                    {
+                        "app1",
+                        "app2",
+                        "app3"
+                    }
+                };
+                return "201&" + JsonConvert.SerializeObject(test);
+            }
+            else
+            {
+                return error("Username or password incorrect");
+            }
+        }
+        public static string singup(string json)
+        {
+            var user = System.Text.Json.JsonSerializer.Deserialize<singup>(json);
+            //DB
+            if (!db.userNameIsExists(con, user.name))
+            {
+                db.insertVluesToUsers(con, user.name, user.password, user.mail, user.key);
+                return "202&";
+            }
+            else
+            {
+                return error("username is exist");
+            }
+            
+        }
+        public static string changeAccount()
+        {
+            return "203&";
+        }
+        public static string logout()//return???
+        {
+            return "209&";
+        }
+        public static string allApps()
+        {
+            return "205&";
+        }
+        public static string error(string msg)
+        {
+            error err = new error()
+            {
+                msg = msg
+            };
+            return "400&" + JsonConvert.SerializeObject(err);
         }
         public static void response(HttpListenerResponse resp, string msg, string ContentType)
         {
@@ -137,9 +228,24 @@ namespace HttpListenerExample
 
         public static void Main(string[] args)
         {
+            //string path = @"MyDatabase.sqlite";
+            string path = @"C:\Users\shay5\Documents\HHQ\Backend files\httpServer\httpServer\MyDatabase.sqlite";
+            string cs = @"URI=file:" + path;
+            
+            con = new SQLiteConnection(cs);
+            //using var con = new SQLiteConnection(cs);
+            con.Open();
+            db.createTables(con);
+            
             // Create a Http server and start listening for incoming connections
+            //url = "http://" + GetLocalIPAddress() + ":8080/";
+            url = "http://+:8080/";
+            //String[] prefixes = { "http://+:8080/"/*, "https://+:8443/"*/ };
+            String[] prefixes = { "http://+:8080/"/*, "https://+:8443/"*/ };
             listener = new HttpListener();
-            listener.Prefixes.Add(url);
+            //listener.Prefixes.Add(url);
+            foreach (string s in prefixes)
+                listener.Prefixes.Add(s);
             listener.Start();
             Console.WriteLine("Listening for connections on {0}", url);
 
@@ -147,6 +253,8 @@ namespace HttpListenerExample
             Task listenTask = HandleIncomingConnections();
             listenTask.GetAwaiter().GetResult();
 
+            //close DB
+            con.Dispose();
             // Close the listener
             listener.Close();
         }
