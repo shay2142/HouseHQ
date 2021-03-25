@@ -186,6 +186,21 @@ namespace dataBase
             return appsList;
         }
 
+        public List<string> getAllApplications(SQLiteConnection con)
+        {
+            List<string> appsList = new List<string>();
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT NAME FROM APP", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    appsList.Add(rdr.GetString(0));
+                }
+            }
+            return appsList;
+        }
+
         public void printUsersTable(SQLiteConnection con)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM USERS", con))

@@ -21,8 +21,9 @@ namespace jsonDeserialize
 
         public string key { get; set; }
     }
-    class error
+    class addAppForUser
     {
-        public string msg { get; set; }
+        public string userName { get; set; }
+        public string appName { get; set; }
     }
 }

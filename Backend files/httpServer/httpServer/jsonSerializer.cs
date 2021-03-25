@@ -16,10 +16,21 @@ namespace jsonSerializer
 
         public string img { get; set; }
     }
+
     class okSingup
     {
         // Make sure all class attributes have relevant getter setter.
 
         public bool ok { get; set; }
+    }
+
+    class error
+    {
+        public string msg { get; set; }
+    }
+
+    class getAllApps
+    {
+        public List<string> allAppList { get; set; }
     }
 }

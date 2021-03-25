@@ -52,28 +52,31 @@ namespace HouseHQ_server
 
             /*****עובד אך עדיין לא גמור!!!*****/
 
-            //string path = @"test.bat";
+            string path = @"test.bat";
 
-            //// Create the file, or overwrite if the file exists.
-            //using (FileStream fs = File.Create(path))
-            //{
-            //    byte[] info = new UTF8Encoding(true).GetBytes("REG QUERY " + '"' + @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" + '"' + " > test1.txt");
-            //    // Add some information to the file.
-            //    fs.Write(info, 0, info.Length);
-            //}
+            // Create the file, or overwrite if the file exists.
+            using (FileStream fs = File.Create(path))
+            {
+                byte[] info = new UTF8Encoding(true).GetBytes("REG QUERY " + '"' + @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" + '"' + " > test1.txt");
+                // Add some information to the file.
+                fs.Write(info, 0, info.Length);
+            }
 
-            //System.Diagnostics.Process.Start("test.bat");
+            System.Diagnostics.Process.Start("test.bat");
 
-            //// Open the stream and read it back.
-            //using (StreamReader sr = File.OpenText("test1.txt"))
-            //{
-            //    string s = "";
-            //    while ((s = sr.ReadLine()) != null)
-            //    {
-            //        //Console.WriteLine(s);
-            //        MessageBox.Show(Path.GetFileNameWithoutExtension(s), "", MessageBoxButtons.OK);
-            //    }
-            //}
+            // Open the stream and read it back.
+            using (StreamReader sr = File.OpenText("test1.txt"))
+            {
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
+                {
+                    //Console.WriteLine(s);
+                    if (Path.GetFileNameWithoutExtension(s) != "")
+                    {
+                        MessageBox.Show(Path.GetFileNameWithoutExtension(s), "", MessageBoxButtons.OK);
+                    }
+                }
+            }
         }
 
         private void namePath_TextChanged(object sender, EventArgs e)

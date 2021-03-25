@@ -51,6 +51,7 @@ namespace HttpListenerExample
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
+
         public static async Task HandleIncomingConnections()
         {
             bool runServer = true;
@@ -101,13 +102,19 @@ namespace HttpListenerExample
                                     break;
                                 case "103"://change account
                                     break;
-                                case "109"://logout
-                                    break;
                                 case "104"://add apps?
                                     break;
                                 case "105"://all apps
+                                    msg = allApps();
                                     break;
                                 case "106"://delete apps?
+                                    break;
+                                case "107"://delete apps for user
+                                    break;
+                                case "108"://add apps for user
+                                    msg = addAppForUser(json[1]);
+                                    break;
+                                case "109"://logout
                                     break;
                                 default://400 error
                                     break;
@@ -127,6 +134,7 @@ namespace HttpListenerExample
                 
             }
         }
+
         public static string login(string json)
         {
             var user = System.Text.Json.JsonSerializer.Deserialize<login>(json);
@@ -145,6 +153,7 @@ namespace HttpListenerExample
                 return error("Username or password incorrect");
             }
         }
+
         public static string singup(string json)
         {
             var user = System.Text.Json.JsonSerializer.Deserialize<singup>(json);
@@ -160,18 +169,34 @@ namespace HttpListenerExample
             }
             
         }
+
         public static string changeAccount()
         {
             return "203&";
         }
+
         public static string logout()//return???
         {
             return "209&";
         }
+
         public static string allApps()
         {
+            getAllApps msg = new getAllApps()
+            {
+                allAppList = db.getAllApplications(con)
+            };
             return "205&";
         }
+
+        public static string addAppForUser(string json)
+        {
+            var user = System.Text.Json.JsonSerializer.Deserialize<addAppForUser>(json);
+            db.addAppForUser(con, user.userName, user.appName);
+            //check if app or user name exist mybe and password
+            return "208&";
+        }
+
         public static string error(string msg)
         {
             error err = new error()
@@ -180,6 +205,7 @@ namespace HttpListenerExample
             };
             return "400&" + JsonConvert.SerializeObject(err);
         }
+
         public static void response(HttpListenerResponse resp, string msg, string ContentType)
         {
             // Write the response info
@@ -191,6 +217,7 @@ namespace HttpListenerExample
             resp.OutputStream.WriteAsync(data, 0, data.Length);
             resp.Close();
         }
+
         private static bool IsValidJson(string strInput)
         {
             if (string.IsNullOrWhiteSpace(strInput)) { return false; }
@@ -254,6 +281,7 @@ namespace HttpListenerExample
             listener.Close();
         }
     }
+
     class login
     {
         // Make sure all class attributes have relevant getter setter.

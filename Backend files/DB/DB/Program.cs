@@ -41,6 +41,8 @@ namespace DB
             printUsersTable(con);
             //deleteValueFromeTable(con, "USERS", "USERNAME", "shay");
 
+            getAllApplications(con).ForEach(Console.WriteLine);
+
             con.Dispose();
         }
 
@@ -178,6 +180,22 @@ namespace DB
             }
             return appsList;
         }
+
+        public static List<string> getAllApplications(SQLiteConnection con)
+        {
+            List<string> appsList = new List<string>();
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT NAME FROM APP", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    appsList.Add(rdr.GetString(0));
+                }
+            }
+            return appsList;
+        }
+
         //אולי לשנות תפונק' שיבדוק בצורה קצת שונה
         public static bool passwordIsCorrect(SQLiteConnection con, string userName, string password)
         {
