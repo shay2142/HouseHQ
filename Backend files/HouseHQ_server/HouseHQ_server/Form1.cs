@@ -46,9 +46,9 @@ namespace HouseHQ_server
         private void createRemoteApp_Click(object sender, EventArgs e)
         {
             //create RemoteApp not workin with Program Files check it!
-            ProcessStartInfo startInfo = new ProcessStartInfo("reg.exe", "Add " + '"' + @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text) + '"' + @" /v Path /t REG_SZ /d " + namePath.Text);
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            System.Diagnostics.Process.Start(startInfo);
+            //ProcessStartInfo startInfo = new ProcessStartInfo("reg.exe", "Add " + '"' + @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text) + '"' + @" /v Path /t REG_SZ /d " + namePath.Text);
+            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //System.Diagnostics.Process.Start(startInfo);
 
             /*****עובד אך עדיין לא גמור!!!*****/
 

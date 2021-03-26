@@ -31,13 +31,13 @@ namespace dataBase
         //}
         //public DB()
         //{ 
-        
+
         //}
         public void createTables(SQLiteConnection con)
         {
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
-                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS USERS(usersID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, USERNAME TEXT NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, LEVEL_KEY TEXT, STATUS TEXT);";/*STATUS NOT NULL*/
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS USERS(usersID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, USERNAME TEXT NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, ADMIN INTEGER, STATUS TEXT);";/*STATUS NOT NULL*/
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS APP(appID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, NAME TEXT NOT NULL, REMOTEAPP TEXT NOT NULL, PHAT_IMG TEXT);";
@@ -49,13 +49,13 @@ namespace dataBase
             //Console.WriteLine("This table created");
         }
 
-        public void insertVluesToUsers(SQLiteConnection con, string userName, string password, string email, string levelKey)
+        public void insertVluesToUsers(SQLiteConnection con, string userName, string password, string email)
         {
             if (!userNameIsExists(con, userName))
             {
                 using (SQLiteCommand cmd = new SQLiteCommand(con))
                 {
-                    cmd.CommandText = "INSERT INTO USERS(USERNAME, PASSWORD, EMAIL, LEVEL_KEY) VALUES('" + userName + "', '" + password + "', '" + email + "', '" + levelKey + "')";
+                    cmd.CommandText = "INSERT INTO USERS(USERNAME, PASSWORD, EMAIL) VALUES('" + userName + "', '" + password + "', '" + email + "')";
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -134,6 +134,23 @@ namespace dataBase
             return false;
         }
 
+        public bool userIsAdmin(SQLiteConnection con, string userName)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select ADMIN from  USERS where USERNAME = '" + userName + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.GetInt32(0) == 1 || rdr.GetInt32(0) == 2)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         //אולי לשנות תפונק' שיבדוק בצורה קצת שונה
         public bool passwordIsCorrect(SQLiteConnection con, string userName, string password)
         {
@@ -201,6 +218,58 @@ namespace dataBase
             return appsList;
         }
 
+        public string updateUser(SQLiteConnection con, string userName, string oldPassword, string newPassword, string mail, int admin)
+        {
+            if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, oldPassword))
+            {
+                if (newPassword != "")
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(con))
+                    {
+                        cmd.CommandText = "update  USERS set  PASSWORD = '" + newPassword + "' where USERNAME = '" + userName + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                if (mail != "")
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(con))
+                    {
+                        cmd.CommandText = "update  USERS set  EMAIL = '" + mail + "' where USERNAME = '" + userName + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                if (admin != 0)
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(con))
+                    {
+                        cmd.CommandText = "update  USERS set  ADMIN = " + admin + " where USERNAME = '" + userName + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return "";
+            }
+            else
+            {
+                return "Username or password is incorrect";
+            }
+        }
+
+        public void updateAdmin(SQLiteConnection con, string userName, string password, int admin)
+        {
+            if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, password))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(con))
+                {
+                    cmd.CommandText = "update  USERS set  ADMIN = " + admin + " where USERNAME = '" + userName + "'";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Username or password is incorrect");
+            }
+        }
+
         public void printUsersTable(SQLiteConnection con)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM USERS", con))
@@ -221,6 +290,15 @@ namespace dataBase
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
                 cmd.CommandText = "DELETE FROM " + table + " WHERE " + column + " = '" + value + "'";
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void deleteAppsFromUser(SQLiteConnection con, string userName, string appName)
+        {
+            //check input??
+            using (SQLiteCommand cmd = new SQLiteCommand(con))
+            {
+                cmd.CommandText = "DELETE FROM apps WHERE usersID = (SELECT usersID from USERS WHERE USERNAME='" + userName + "') and  appID = (SELECT appID from APP WHERE NAME='" + appName + "')";
                 cmd.ExecuteNonQuery();
             }
         }

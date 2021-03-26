@@ -26,4 +26,22 @@ namespace jsonDeserialize
         public string userName { get; set; }
         public string appName { get; set; }
     }
+    class deleteUser
+    {
+        public string userNameDelete { get; set; }
+        public string adminUserName { get; set; }
+    }
+    class changeAccount
+    {
+        public string userName { get; set; }
+        public string oldPassword { get; set; }
+        public string newPassword { get; set; }
+        public string mail { get; set; }
+        public int admin { get; set; }
+    }
+    class deleteAppFromUser
+    {
+        public string userName { get; set; }
+        public string appName { get; set; }
+    }
 }

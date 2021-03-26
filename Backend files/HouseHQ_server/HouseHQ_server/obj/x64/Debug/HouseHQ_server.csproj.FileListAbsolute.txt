@@ -8,3 +8,13 @@ C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\
 C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CoreCompileInputs.cache
 C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
 C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe.config
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form1.resources
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Properties.Resources.resources
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.GenerateResource.cache
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CoreCompileInputs.cache
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb

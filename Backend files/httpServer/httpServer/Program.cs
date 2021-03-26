@@ -65,7 +65,7 @@ namespace HttpListenerExample
                 // Peel out the requests and response objects
                 HttpListenerRequest req = ctx.Request;
                 HttpListenerResponse resp = ctx.Response;
-               
+
                 Console.WriteLine(ctx.Request.HttpMethod);
 
                 // Print out some info about the request
@@ -90,7 +90,7 @@ namespace HttpListenerExample
                         Console.WriteLine(json[1]);
                         //Console.WriteLine();
                         string msg = "";
-                        if (IsValidJson(json[1]))
+                        if (IsValidJson(json[1]) || (Int32.Parse(json[0]) > 100 && Int32.Parse(json[0]) < 200))
                         {
                             switch (json[0])
                             {
@@ -101,6 +101,7 @@ namespace HttpListenerExample
                                     msg = singup(json[1]);
                                     break;
                                 case "103"://change account
+                                    msg = changeAccount(json[1]);
                                     break;
                                 case "104"://add apps?
                                     break;
@@ -109,14 +110,19 @@ namespace HttpListenerExample
                                     break;
                                 case "106"://delete apps?
                                     break;
-                                case "107"://delete apps for user
+                                case "107"://delete apps from user
+                                    msg = deleteAppsFromUser(json[1]);
                                     break;
                                 case "108"://add apps for user
                                     msg = addAppForUser(json[1]);
                                     break;
                                 case "109"://logout
                                     break;
+                                case "110"://delete user
+                                    msg = deleteUser(json[1]);
+                                    break;
                                 default://400 error
+                                    msg = error("code is incorrect");
                                     break;
                             }
                             response(resp, msg, "json");
@@ -131,7 +137,7 @@ namespace HttpListenerExample
                 {
                     response(resp, String.Format(pageData), "text/html");
                 }
-                
+
             }
         }
 
@@ -160,24 +166,27 @@ namespace HttpListenerExample
             //DB
             if (!db.userNameIsExists(con, user.name))
             {
-                db.insertVluesToUsers(con, user.name, user.password, user.mail, user.key);
+                db.insertVluesToUsers(con, user.name, user.password, user.mail);
                 return "202&";
             }
             else
             {
                 return error("username is exist");
             }
-            
+
         }
 
-        public static string changeAccount()
+        public static string changeAccount(string json)
         {
+            var user = System.Text.Json.JsonSerializer.Deserialize<changeAccount>(json);
+
+            string answer = db.updateUser(con, user.userName, user.oldPassword, user.newPassword, user.mail, user.admin);
+
+            if (answer != "")
+            {
+                return error(answer);
+            }
             return "203&";
-        }
-
-        public static string logout()//return???
-        {
-            return "209&";
         }
 
         public static string allApps()
@@ -186,7 +195,16 @@ namespace HttpListenerExample
             {
                 allAppList = db.getAllApplications(con)
             };
-            return "205&";
+            return "205&" + JsonConvert.SerializeObject(msg);
+        }
+
+        public static string deleteAppsFromUser(string json)
+        {
+            var user = System.Text.Json.JsonSerializer.Deserialize<deleteAppFromUser>(json);
+
+            db.deleteAppsFromUser(con, user.userName, user.appName);
+
+            return "207&";
         }
 
         public static string addAppForUser(string json)
@@ -195,6 +213,26 @@ namespace HttpListenerExample
             db.addAppForUser(con, user.userName, user.appName);
             //check if app or user name exist mybe and password
             return "208&";
+        }
+
+        public static string logout()//return???
+        {
+            return "209&";
+        }
+
+        public static string deleteUser(string json)
+        {
+            var user = System.Text.Json.JsonSerializer.Deserialize<deleteUser>(json);
+            if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && db.userIsAdmin(con, user.adminUserName))
+            {
+                db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
+                return "210&";
+            }
+            else
+            {
+                return error("username is incorrect");
+            }
+            
         }
 
         public static string error(string msg)
