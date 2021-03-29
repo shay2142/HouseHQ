@@ -34,24 +34,29 @@ namespace Dashboard
          );
 
         public string IP_server;
+        public List<string> apps;
         public Form1(string result, string ip)
         {
             InitializeComponent();
             this.IP_server = ip;
-            //var user = JsonConvert.DeserializeObject<okLogin>(result);
-            //label1.Text = user.name;
+            var user = JsonConvert.DeserializeObject<okLogin>(result);
+            apps = user.appList;
+            label1.Text = user.name;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             pnlNav.Height = btnApps.Height;
             pnlNav.Top = btnApps.Top;
             pnlNav.Left = btnApps.Left;
 
             lbltitle.Text = "HouseHQ";
-            frmApps frmDashboard_vrb = new frmApps() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmApps frmDashboard_vrb = new frmApps(apps, IP_server) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmDashboard_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmDashboard_vrb);
             frmDashboard_vrb.Show();
 
-            //panel1.Controls.Remove(btnManager);
+            if (user.key != "admin")
+            {
+                panel1.Controls.Remove(btnManager);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,7 +73,7 @@ namespace Dashboard
 
             lbltitle.Text = "Apps";
             this.pnlFormLoader.Controls.Clear();
-            frmApps frmDashboard_vrb = new frmApps() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmApps frmDashboard_vrb = new frmApps(apps, IP_server) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmDashboard_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmDashboard_vrb);
             frmDashboard_vrb.Show();
