@@ -154,16 +154,16 @@
   </data>
   <data name="btn2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAAOwAAADsAXkocb0AAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
-        AAABrElEQVRYR+3XvS4EURjG8U00qESrEiUlhYqGEEKjFRINkXAFhFKUEjdAJVQuQaVAfFyAloYCCRL8
-        n82cydnJO1+bM0vhSX7JZM67887nmdlagXRhE5d4iVxgAxqrNKN4xHeKB4ygkgzhDVZjn2oGETRtuIPV
-        0HID/SZYJmA1yjKOYNmF1STLDoLlEFaTLAcIln1YTbLsIViWYDXJsohg6cYzrEaWJwSflFZhNbOsoJIU
-        eRqC3v1WZnCNZOMrTKNl6cVkRMv/qSSzOIVes8lrnuccy2gqnTiBteE8r5hDMpqYjiK5k1SzzSVtDtBT
-        4mq0nBqddn+DZWjD7jugB9voxxh0ZlydlrVOY6pRbRxdc3+jZUzB5RhWjUW1cbK++bJ8wh39MJLj+kpa
-        i9xG63z6TT1fSA4WoR3ogNKHe7gxNW+Hi5b9nVCtflOPW9mMebjoDfoOrddRJ7MOjalGtXH8DZb1qzvw
-        gbRLoNPtXwLV+V/ZQS5B3k2ondBRi/WJH9+EZ0gOFuU/hmUms4bHMFQ0uWxhAFkTkWoaJqKq4k/F+mPb
-        8vgvowWt+IOp1X4Axoyb30ZNT24AAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGsSURBVFhH7de9
+        LgRRGMbxTTSoRKsSJSWFioYQQqMVEg2RcAWEUpQSN0AlVC5BpUB8XICWhgIJEvyfzZzJ2ck7X5szS+FJ
+        fslkzrvzzueZ2VqBdGETl3iJXGADGqs0o3jEd4oHjKCSDOENVmOfagYRNG24g9XQcgP9JlgmYDXKMo5g
+        2YXVJMsOguUQVpMsBwiWfVhNsuwhWJZgNcmyiGDpxjOsRpYnBJ+UVmE1s6ygkhR5GoLe/VZmcI1k4ytM
+        o2XpxWREy/+pJLM4hV6zyWue5xzLaCqdOIG14TyvmEMympiOIrmTVLPNJW0O0FPiarScGp12f4NlaMPu
+        O6AH2+jHGHRmXJ2WtU5jqlFtHF1zf6NlTMHlGFaNRbVxsr75snzCHf0wkuP6SlqL3EbrfPpNPV9IDhah
+        HeiA0od7uDE1b4eLlv2dUK1+U49b2Yx5uOgN+g6t11Ensw6NqUa1cfwNlvWrO/CBtEug0+1fAtX5X9lB
+        LkHeTaid0FGL9Ykf34RnSA4W5T+GZSazhscwVDS5bGEAWRORahomoqriT8X6Y9vy+C+jBa34g6nVfgDG
+        jJvfRk1PbgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btn1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

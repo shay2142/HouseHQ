@@ -37,7 +37,7 @@ namespace dataBase
         {
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
-                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS USERS(usersID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, USERNAME TEXT NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, ADMIN INTEGER, STATUS TEXT);";/*STATUS NOT NULL*/
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS USERS(usersID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, USERNAME TEXT NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, LEVEL_KEY TEXT, STATUS TEXT);";/*STATUS NOT NULL*/
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS APP(appID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, NAME TEXT NOT NULL, REMOTEAPP TEXT NOT NULL, PHAT_IMG TEXT);";
@@ -134,24 +134,37 @@ namespace dataBase
             return false;
         }
 
-        public bool userIsAdmin(SQLiteConnection con, string userName)
+        //???
+        public void updateLevelKey(SQLiteConnection con, string userName, string password, string level)
         {
-            using (SQLiteCommand cmd = new SQLiteCommand("select ADMIN from  USERS where USERNAME = '" + userName + "'", con))
+            if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, password))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(con))
+                {
+                    cmd.CommandText = "update USERS set LEVEL_KEY = " + level + " where USERNAME = '" + userName + "'";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Username or password is incorrect");
+            }
+        }
+
+        public string getLevelKey(SQLiteConnection con, string userName)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select LEVEL_KEY from  USERS where USERNAME = '" + userName + "'", con))
             {
                 using SQLiteDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    if (rdr.GetInt32(0) == 1 || rdr.GetInt32(0) == 2)
-                    {
-                        return true;
-                    }
+                    return rdr.GetString(0);
                 }
             }
-            return false;
+            return "";
         }
 
-        //אולי לשנות תפונק' שיבדוק בצורה קצת שונה
         public bool passwordIsCorrect(SQLiteConnection con, string userName, string password)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT USERNAME, PASSWORD FROM USERS", con))
@@ -218,31 +231,31 @@ namespace dataBase
             return appsList;
         }
 
-        public string updateUser(SQLiteConnection con, string userName, string oldPassword, string newPassword, string mail, int admin)
+        public string updateUser(SQLiteConnection con, string userName, string oldPassword, string newPassword, string mail, string level)
         {
             if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, oldPassword))
             {
-                if (newPassword != "")
+                if (newPassword != "" && newPassword != null)
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(con))
                     {
-                        cmd.CommandText = "update  USERS set  PASSWORD = '" + newPassword + "' where USERNAME = '" + userName + "'";
+                        cmd.CommandText = "update USERS set  PASSWORD = '" + newPassword + "' where USERNAME = '" + userName + "'";
                         cmd.ExecuteNonQuery();
                     }
                 }
-                if (mail != "")
+                if (mail != "" && mail != null)
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(con))
                     {
-                        cmd.CommandText = "update  USERS set  EMAIL = '" + mail + "' where USERNAME = '" + userName + "'";
+                        cmd.CommandText = "update USERS set  EMAIL = '" + mail + "' where USERNAME = '" + userName + "'";
                         cmd.ExecuteNonQuery();
                     }
                 }
-                if (admin != 0)
+                if (level != null)
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(con))
                     {
-                        cmd.CommandText = "update  USERS set  ADMIN = " + admin + " where USERNAME = '" + userName + "'";
+                        cmd.CommandText = "update USERS set LEVEL_KEY = '"+ level + "' where USERNAME = '" + userName + "'";
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -251,22 +264,6 @@ namespace dataBase
             else
             {
                 return "Username or password is incorrect";
-            }
-        }
-
-        public void updateAdmin(SQLiteConnection con, string userName, string password, int admin)
-        {
-            if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, password))
-            {
-                using (SQLiteCommand cmd = new SQLiteCommand(con))
-                {
-                    cmd.CommandText = "update  USERS set  ADMIN = " + admin + " where USERNAME = '" + userName + "'";
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Username or password is incorrect");
             }
         }
 

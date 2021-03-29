@@ -16,13 +16,19 @@ namespace HttpClientEx
             //var content = await client.GetStringAsync("http://192.168.0.194:8080/");
 
             //Console.WriteLine(content);
-            login test = new login()
+            //login test = new login()
+            //{
+            //    name = "shay",
+            //    password = "12345"
+            //};
+            changeAccount test = new changeAccount()
             {
-                name = "shay",
-                password = "12345"
+                userName = "shay",
+                oldPassword = "12345",
+                level = "admin"
             };
             string json = JsonConvert.SerializeObject(test);
-            var data = new StringContent("101&" + json, Encoding.UTF8, "application/json");
+            var data = new StringContent("103&" + json, Encoding.UTF8, "application/json");
             var url = "http://localhost:8080/";
             using var client = new HttpClient();
 
@@ -55,5 +61,14 @@ namespace HttpClientEx
         public string name { get; set; }
 
         public string password { get; set; }
+    }
+
+    class changeAccount
+    {
+        public string userName { get; set; }
+        public string oldPassword { get; set; }
+        public string newPassword { get; set; }
+        public string mail { get; set; }
+        public string level { get; set; }
     }
 }

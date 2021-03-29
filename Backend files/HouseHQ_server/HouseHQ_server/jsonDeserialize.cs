@@ -37,7 +37,7 @@ namespace jsonDeserialize
         public string oldPassword { get; set; }
         public string newPassword { get; set; }
         public string mail { get; set; }
-        public int admin { get; set; }
+        public string level { get; set; }
     }
     class deleteAppFromUser
     {

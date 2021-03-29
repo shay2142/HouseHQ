@@ -44,7 +44,7 @@ namespace HouseHQ_server
         public void runServer()
         {
             //string path = @"MyDatabase.sqlite";
-            string path = @"C:\Users\shay5\Documents\househq\Backend files\httpServer\httpServer\MyDatabase.sqlite";
+            string path = @"C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\MyDatabase.sqlite";
             string cs = @"URI=file:" + path;
 
             con = new SQLiteConnection(cs);
@@ -185,7 +185,8 @@ namespace HouseHQ_server
                 okLogin test = new okLogin()
                 {
                     name = user.name,
-                    appList = db.getUserApplications(con, user.name)
+                    appList = db.getUserApplications(con, user.name),
+                    key = db.getLevelKey(con, user.name)
                 };
                 return "201&" + JsonConvert.SerializeObject(test);
             }
@@ -215,7 +216,7 @@ namespace HouseHQ_server
         {
             var user = JsonConvert.DeserializeObject<changeAccount>(json);
 
-            string answer = db.updateUser(con, user.userName, user.oldPassword, user.newPassword, user.mail, user.admin);
+            string answer = db.updateUser(con, user.userName, user.oldPassword, user.newPassword, user.mail, user.level);
 
             if (answer != "")
             {
@@ -258,7 +259,7 @@ namespace HouseHQ_server
         public string deleteUser(string json)
         {
             var user = JsonConvert.DeserializeObject<deleteUser>(json);
-            if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && db.userIsAdmin(con, user.adminUserName))
+            if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "1"))
             {
                 db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
                 return "210&";
