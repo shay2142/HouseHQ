@@ -24,7 +24,7 @@ namespace HttpClientEx
             string json = JsonConvert.SerializeObject(test);
             var data = new StringContent("101&" + json, Encoding.UTF8, "application/json");
 
-            var url = "http://192.168.0.194:8080/";
+            var url = "http://192.168.0.130:8080/";
             using var client = new HttpClient();
 
             //var content = await client.GetStringAsync("http://192.168.0.194:8080/");
