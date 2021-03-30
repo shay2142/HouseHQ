@@ -35,4 +35,16 @@ namespace jsonSerializer
     {
         public List<string> allAppList { get; set; }
     }
+
+    class getAllUsers
+    {
+        public List<string> usersList { get; set; }
+    }
+
+    class userInformation
+    {
+        public string password { get; set; }
+        public string mail { get; set; }
+        public string key { get; set; }
+    }
 }

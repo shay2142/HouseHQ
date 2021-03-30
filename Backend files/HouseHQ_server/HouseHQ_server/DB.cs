@@ -218,6 +218,23 @@ namespace dataBase
             return "";
         }
 
+        public string getPassForUser(SQLiteConnection con, string userName)
+        {
+            if (userNameIsExists(con, userName))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand("select  PASSWORD from  USERS where  USERNAME = '" + userName + "'", con))
+                {
+                    using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        return (rdr.GetString(0));
+                    }
+                }
+            }
+            return "";
+        }
+
         public List<string> getUserApplications(SQLiteConnection con, string userName)
         {
             List<string> appsList = new List<string>();
@@ -233,6 +250,20 @@ namespace dataBase
             return appsList;
         }
 
+        public List<string> getAllUsers(SQLiteConnection con)
+        {
+            List<string> usersList = new List<string>();
+            using (SQLiteCommand cmd = new SQLiteCommand("select USERNAME from USERS;", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    usersList.Add(rdr.GetString(0));
+                }
+            }
+            return usersList;
+        }
         public List<string> getAllApplications(SQLiteConnection con)
         {
             List<string> appsList = new List<string>();

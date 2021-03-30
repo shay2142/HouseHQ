@@ -13,7 +13,7 @@ namespace Dashboard
     public partial class frmManager : Form
     {
         public string IP;
-        public frmManager(string ip)
+        public frmManager(string ip, string userName)
         {
             InitializeComponent();
             IP = ip;
@@ -23,6 +23,11 @@ namespace Dashboard
         {
             frmRegister form = new frmRegister(IP);
             form.Show();
+        }
+
+        private void btnChangeDet_Click(object sender, EventArgs e)
+        {
+            new frmChangeAccount(IP, "", "admin", "manager").Show();
         }
     }
 }

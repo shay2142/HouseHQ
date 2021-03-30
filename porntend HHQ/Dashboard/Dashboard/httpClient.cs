@@ -102,4 +102,26 @@ namespace HTTP_CLIENT
     {
         public string msg { get; set; }
     }
+    class getAllUsers
+    {
+        public List<string> usersList { get; set; }
+    }
+    class userInformation
+    {
+        public string password { get; set; }
+        public string mail { get; set; }
+        public string key { get; set; }
+    }
+    class getUserInformation
+    {
+        public string userName { get; set; }
+    }
+    class changeAccount
+    {
+        public string userName { get; set; }
+        public string oldPassword { get; set; }
+        public string newPassword { get; set; }
+        public string mail { get; set; }
+        public string level { get; set; }
+    }
 }

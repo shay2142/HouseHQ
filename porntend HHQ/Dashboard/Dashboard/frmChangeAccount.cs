@@ -20,23 +20,104 @@ namespace Dashboard
     public partial class frmChangeAccount : Form
     {
         public string IP;
-        public frmChangeAccount(string ip, string userName, string key)
+        public ComboBox comboUsers;
+        public string UserName;
+        public string type;
+
+        public frmChangeAccount(string ip, string userName, string key, string type)
         {
             InitializeComponent();
             IP = ip;
+            this.type = type;
 
-            if (key != "admin")
+            if (type == "user")
             {
+                txtUsername = new TextBox();
+                txtUsername.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+                txtUsername.BorderStyle = BorderStyle.None;
+                txtUsername.Font = new Font("MS UI Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+                txtUsername.Location = new Point(38, 102);
+                txtUsername.Multiline = true;
+                txtUsername.Name = "txtUsername";
+                txtUsername.Size = new Size(216, 28);
+                txtUsername.TabIndex = 2;
+                Controls.Add(txtUsername);
+
                 checkbxAdmin.Enabled = false;
                 txtUsername.Enabled = false;
                 txtUsername.Text = userName;
+
+                if (key == "admin")
+                {
+                    checkbxAdmin.Checked = true;
+                }
+
+                UserName = txtUsername.Text;
             }
+            else if (type == "manager")
+            {
+                comboUsers = new ComboBox();
+                comboUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+                comboUsers.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                comboUsers.Location = new System.Drawing.Point(38, 102);
+                comboUsers.Name = "comboUsers";
+                comboUsers.Size = new System.Drawing.Size(216, 28);
+                comboUsers.TabIndex = 2;
+                comboUsers.SelectedIndexChanged += new System.EventHandler(this.comboUsers_Click);
+                Controls.Add(comboUsers);
+
+                httpClient testLogin = new httpClient();
+                string result = testLogin.sent(null, testLogin.hostToIp(IP), "111");
+                if (result != null)
+                {
+                    string[] results = result.Split('&');
+                    if (results[0] == "211")
+                    {
+                        var users = JsonConvert.DeserializeObject<getAllUsers>(results[1]);
+                        foreach (var user in users.usersList)
+                        {
+
+                            comboUsers.Items.Add(user);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void comboUsers_Click(object sender, EventArgs e)
+        {
+            getUserInformation msg = new getUserInformation()
+            {
+                userName = comboUsers.Text
+            };
+            string json = JsonConvert.SerializeObject(msg);
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(json, testLogin.hostToIp(IP), "112");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+                if (results[0] == "212")
+                {
+                    var user = JsonConvert.DeserializeObject<userInformation>(results[1]);
+                    if (user.key == "admin")
+                    {
+                        checkbxAdmin.Checked = true;
+                    }
+                    else
+                    {
+                        checkbxAdmin.Checked = false;
+                    }
+                    txtMail.Text = user.mail;
+                    oldPass.Text = user.password;
+                }
+            }
+            UserName = comboUsers.Text;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string level = null;
-            if (txtUsername.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtMail.Text == "")
+            if (txtComPassword.Text == "" || txtMail.Text == "")
             {
                 MessageBox.Show("Fields are empty", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -47,31 +128,31 @@ namespace Dashboard
                 {
                     level = "admin";
                 }
-                singup test = new singup()
+                changeAccount test = new changeAccount()
                 {
-                    name = txtUsername.Text,
-                    password = txtPassword.Text,
-                    mail = txtMail.Text,
-                    key = level
+                   userName = UserName,
+                   oldPassword = oldPass.Text,
+                   newPassword = txtPassword.Text,
+                   mail = txtMail.Text,
+                   level = level
                 };
+
                 string json = JsonConvert.SerializeObject(test);
                 //httpClient shay = new httpClient(json);
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(IP), "102");
+                string result = testLogin.sent(json, testLogin.hostToIp(IP), "103");
                 if (result != null)
                 {
                     string[] results = result.Split('&');
                     //MessageBox.Show(results[1], "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (results[0] == "202")
+                    if (results[0] == "203")
                     {
-                        var user = JsonConvert.DeserializeObject<okSingup>(results[1]);
-                        new frmLogin().Show();
-                        this.Hide();
+                        MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else if (results[0] == "400")
                     {
                         var user = JsonConvert.DeserializeObject<error>(results[1]);
-                        MessageBox.Show(user.msg, "Singup Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(user.msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 //txtUsername.Text = "";
@@ -106,11 +187,16 @@ namespace Dashboard
 
         private void button2_Click(object sender, EventArgs e)
         {
-            txtUsername.Text = "";
             txtPassword.Text = "";
             txtComPassword.Text = "";
             txtMail.Text = "";
-            txtUsername.Focus();
+            oldPass.Text = "";
+
+            if (type == "user")
+            { 
+                txtUsername.Text = "";
+                txtUsername.Focus();
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)

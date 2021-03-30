@@ -64,6 +64,7 @@
             // 
             this.btnChangeDet.FlatAppearance.BorderSize = 2;
             this.btnChangeDet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeDet.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnChangeDet.Image = ((System.Drawing.Image)(resources.GetObject("btnChangeDet.Image")));
             this.btnChangeDet.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnChangeDet.Location = new System.Drawing.Point(9, 10);
@@ -73,6 +74,7 @@
             this.btnChangeDet.TabIndex = 2;
             this.btnChangeDet.Text = "Change User Details      ";
             this.btnChangeDet.UseVisualStyleBackColor = true;
+            this.btnChangeDet.Click += new System.EventHandler(this.btnChangeDet_Click);
             // 
             // btnRemU
             // 

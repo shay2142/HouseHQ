@@ -44,7 +44,7 @@ namespace HouseHQ_server
         public void runServer()
         {
             //string path = @"MyDatabase.sqlite";
-            string path = @"C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\MyDatabase.sqlite";
+            string path = @"C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\MyDatabase.sqlite";
             string cs = @"URI=file:" + path;
 
             con = new SQLiteConnection(cs);
@@ -130,13 +130,13 @@ namespace HouseHQ_server
                             switch (json[0])
                             {
                                 case "101"://login
-                                    msg = login(json[1]);
+                                    msg = login(json[1]);//
                                     break;
                                 case "102": //singup
-                                    msg = singup(json[1]);
+                                    msg = singup(json[1]);//?
                                     break;
                                 case "103"://change account
-                                    msg = changeAccount(json[1]);
+                                    msg = changeAccount(json[1]);//
                                     break;
                                 case "104"://add apps?
                                     break;
@@ -156,11 +156,18 @@ namespace HouseHQ_server
                                 case "110"://delete user
                                     msg = deleteUser(json[1]);
                                     break;
+                                case "111"://getAllUsers
+                                    msg = getAllUsers();//
+                                    break;
+                                case "112"://get user information 
+                                    msg = getUserInformation(json[1]);//
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
                             }
                             response(resp, msg, "json");
+                            Console.WriteLine(msg);
                         }
                         else
                         {
@@ -276,6 +283,27 @@ namespace HouseHQ_server
                 return error("username is incorrect");
             }
 
+        }
+
+        public string getAllUsers()
+        {
+            getAllUsers msg = new getAllUsers()
+            {
+                usersList = db.getAllUsers(con)
+            };
+            return "211&" + JsonConvert.SerializeObject(msg);
+        }
+
+        public string getUserInformation(string json)
+        {
+            var user = JsonConvert.DeserializeObject<getUserInformation>(json);
+            userInformation msg = new userInformation()
+            {
+                password = db.getPassForUser(con, user.userName),
+                mail = db.getMailForUser(con, user.userName),
+                key = db.getLevelKey(con, user.userName)
+            };
+            return "212&" + JsonConvert.SerializeObject(msg);
         }
 
         public string error(string msg)

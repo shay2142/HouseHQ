@@ -44,4 +44,9 @@ namespace jsonDeserialize
         public string userName { get; set; }
         public string appName { get; set; }
     }
+
+    class getUserInformation
+    {
+        public string userName { get; set; }
+    }
 }

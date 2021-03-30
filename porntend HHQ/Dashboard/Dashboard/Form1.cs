@@ -35,13 +35,17 @@ namespace Dashboard
 
         public string IP_server;
         public List<string> apps;
-        public okLogin USER;
+        public string userName;
+        public string key;
+
         public Form1(string result, string ip)
         {
             InitializeComponent();
             this.IP_server = ip;
-            user = JsonConvert.DeserializeObject<okLogin>(result);
+            var user = JsonConvert.DeserializeObject<okLogin>(result);
             apps = user.appList;
+            userName = user.name;
+            key = user.key;
             label1.Text = user.name;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             pnlNav.Height = btnApps.Height;
@@ -89,7 +93,7 @@ namespace Dashboard
 
             lbltitle.Text = "Manager";
             this.pnlFormLoader.Controls.Clear();
-            frmManager frmAnalytics_vrb = new frmManager(IP_server) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmManager frmAnalytics_vrb = new frmManager(IP_server, userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmAnalytics_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmAnalytics_vrb);
             frmAnalytics_vrb.Show();
@@ -116,7 +120,7 @@ namespace Dashboard
             btnsettings.BackColor = Color.FromArgb(46, 51, 73);
 
             this.pnlFormLoader.Controls.Clear();
-            frmSettings frmSettings_vrb = new frmSettings(IP_server, ) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmSettings frmSettings_vrb = new frmSettings(IP_server, userName, key) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmSettings_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmSettings_vrb);
             frmSettings_vrb.Show();

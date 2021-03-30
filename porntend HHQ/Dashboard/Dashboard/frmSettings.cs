@@ -27,7 +27,7 @@ namespace Dashboard
 
         private void btnChangeDet_Click(object sender, EventArgs e)
         {
-            new frmChangeAccount(ip, userName, key).Show();
+            new frmChangeAccount(ip, userName, key, "user").Show();
         }
     }
 }
