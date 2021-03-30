@@ -124,4 +124,17 @@ namespace HTTP_CLIENT
         public string mail { get; set; }
         public string level { get; set; }
     }
+    public class getDB
+    {
+        public int ID { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+        public string mail { get; set; }
+        public string LEVEL_KEY { get; set; }
+        public string STATUS { get; set; }
+    }
+    class jsonSentDB
+    {
+        public List<getDB> db { get; set; }
+    }
 }

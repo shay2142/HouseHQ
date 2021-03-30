@@ -34,6 +34,8 @@
             this.btnChangeDet = new System.Windows.Forms.Button();
             this.btnRemU = new System.Windows.Forms.Button();
             this.btnAddU = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRemS
@@ -101,6 +103,14 @@
             this.btnAddU.UseVisualStyleBackColor = true;
             this.btnAddU.Click += new System.EventHandler(this.btnAddU_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(9, 51);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(712, 375);
+            this.dataGridView1.TabIndex = 5;
+            // 
             // frmManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,6 +118,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(733, 482);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnRemS);
             this.Controls.Add(this.btnAddS);
             this.Controls.Add(this.btnChangeDet);
@@ -116,6 +127,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmManager";
             this.Text = "frmAnalytics";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -127,5 +139,6 @@
         private System.Windows.Forms.Button btnChangeDet;
         private System.Windows.Forms.Button btnAddS;
         private System.Windows.Forms.Button btnRemS;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

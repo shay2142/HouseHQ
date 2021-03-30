@@ -162,6 +162,9 @@ namespace HouseHQ_server
                                 case "112"://get user information 
                                     msg = getUserInformation(json[1]);//
                                     break;
+                                case "113"://sent DB
+                                    msg = sentDB();//
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -306,6 +309,16 @@ namespace HouseHQ_server
             return "212&" + JsonConvert.SerializeObject(msg);
         }
 
+        public string sentDB()
+        {
+            jsonSentDB msg = new jsonSentDB
+            {
+                db = getDB()
+            };
+
+            return "213&" + JsonConvert.SerializeObject(msg);
+        }
+
         public string error(string msg)
         {
             error err = new error()
@@ -313,6 +326,25 @@ namespace HouseHQ_server
                 msg = msg
             };
             return "400&" + JsonConvert.SerializeObject(err);
+        }
+
+        public List<sentDB> getDB()
+        {
+            var list = new List<sentDB>();
+            List<string> userList = db.getAllUsers(con);
+            foreach (var user in userList)
+            {
+                list.Add(new sentDB()
+                {
+                    ID = db.getIdForUser(con, user),
+                    userName = user,
+                    password = db.getPassForUser(con, user),
+                    mail = db.getMailForUser(con, user),
+                    LEVEL_KEY = db.getLevelKey(con, user),
+                    STATUS = db.getStatusForUser(con, user)
+                });
+            }
+            return list; 
         }
 
         public void response(HttpListenerResponse resp, string msg, string ContentType)

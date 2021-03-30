@@ -28,7 +28,7 @@ namespace Dashboard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string level = null;
+            string level = "no";
             if (txtUsername.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtMail.Text == "")
             {
                 MessageBox.Show("Fields are empty", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -58,8 +58,6 @@ namespace Dashboard
                     if (results[0] == "202")
                     {
                         var user = JsonConvert.DeserializeObject<okSingup>(results[1]);
-                        new frmLogin().Show();
-                        this.Hide();
                     }
                     else if (results[0] == "400")
                     {

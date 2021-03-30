@@ -159,7 +159,14 @@ namespace dataBase
 
                 while (rdr.Read())
                 {
-                    return rdr.GetString(0);
+                    try
+                    {
+                        return rdr.GetString(0);
+                    }
+                    catch (InvalidCastException e)
+                    {
+                        return "";
+                    }
                 }
             }
             return "";
@@ -218,6 +225,54 @@ namespace dataBase
             return "";
         }
 
+        public string getStatusForUser(SQLiteConnection con, string userName)
+        {
+            if (userNameIsExists(con, userName))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand("select STATUS from  USERS where  USERNAME = '" + userName + "'", con))
+                {
+                    using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        try
+                        {
+                            return (rdr.GetString(0));
+                        }
+                        catch (InvalidCastException e)
+                        {
+                            return "";
+                        }
+                    }
+                }
+            }
+            return "";
+        }
+
+        public int getIdForUser(SQLiteConnection con, string userName)
+        {
+            if (userNameIsExists(con, userName))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand("select usersID from  USERS where  USERNAME = '" + userName + "'", con))
+                {
+                    using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        try
+                        {
+                            return (rdr.GetInt32(0));
+                        }
+                        catch (InvalidCastException e)
+                        {
+                            return 0;
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+
         public string getPassForUser(SQLiteConnection con, string userName)
         {
             if (userNameIsExists(con, userName))
@@ -228,7 +283,14 @@ namespace dataBase
 
                     while (rdr.Read())
                     {
-                        return (rdr.GetString(0));
+                        try
+                        {
+                            return (rdr.GetString(0));
+                        }  
+                        catch (InvalidCastException e)
+                        {
+                            return "";
+                        }
                     }
                 }
             }
