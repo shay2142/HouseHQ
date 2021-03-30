@@ -40,20 +40,18 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(317, 181);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(238, 147);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(321, 39);
+            this.label1.Size = new System.Drawing.Size(261, 31);
             this.label1.TabIndex = 1;
             this.label1.Text = "Your Settings Here";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Dashboard.Properties.Resources.Lrg_settings;
-            this.pictureBox1.Location = new System.Drawing.Point(351, 223);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(263, 181);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(265, 191);
+            this.pictureBox1.Size = new System.Drawing.Size(199, 155);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -64,24 +62,24 @@
             this.btnChangeDet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangeDet.Image = ((System.Drawing.Image)(resources.GetObject("btnChangeDet.Image")));
             this.btnChangeDet.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnChangeDet.Location = new System.Drawing.Point(0, 12);
+            this.btnChangeDet.Location = new System.Drawing.Point(11, 11);
+            this.btnChangeDet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnChangeDet.Name = "btnChangeDet";
-            this.btnChangeDet.Size = new System.Drawing.Size(197, 44);
+            this.btnChangeDet.Size = new System.Drawing.Size(148, 36);
             this.btnChangeDet.TabIndex = 8;
             this.btnChangeDet.Text = "Change User Details      ";
             this.btnChangeDet.UseVisualStyleBackColor = true;
             // 
             // frmSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(977, 593);
+            this.ClientSize = new System.Drawing.Size(733, 482);
             this.Controls.Add(this.btnChangeDet);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmSettings";
             this.Text = "frmSettings";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

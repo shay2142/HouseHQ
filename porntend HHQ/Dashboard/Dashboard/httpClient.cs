@@ -8,21 +8,16 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using System.Net;
-//using System.Text.Json;
-//using System.Text.Json.Serialization;
+
 
 namespace HTTP_CLIENT
 {
     class httpClient
     {
-        //string json;
-        //string result;
-        //public string result;
-        public httpClient(/*string json*/)
+        public httpClient()
         {
-            //this.json = json;
-            //setLogin();
         }
+
         public string hostToIp(string host)
         {
             string ip = host;
@@ -43,8 +38,6 @@ namespace HTTP_CLIENT
             string result = "";
             try
             {
-                //Task listenTask = msg<string>(json, ip, code);
-                //listenTask.GetAwaiter().GetResult();
                 Task<string> task = Task.Run(async () => await msg(json, ip, code));
                 result = task.Result;
             }
@@ -62,16 +55,10 @@ namespace HTTP_CLIENT
             var url = "http://" + ip + ":8080/";
             /*using*/
             var client = new HttpClient();
-            //var content = await client.GetStringAsync("http://192.168.0.194:8080/");
-            //Console.WriteLine(content);
 
             var response = await client.PostAsync(url, data);
-            //sConsole.WriteLine(response.RequestMessage);
-            //Console.WriteLine("test");
+
             return response.Content.ReadAsStringAsync().Result;
-            //Console.WriteLine(result);
-            //MessageBox.Show(result, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //var user = System.Text.Json.JsonSerializer.Deserialize<ok>(json);
         }
     }
     class okLogin

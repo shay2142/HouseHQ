@@ -12,9 +12,17 @@ namespace Dashboard
 {
     public partial class frmManager : Form
     {
-        public frmManager()
+        public string IP;
+        public frmManager(string ip)
         {
             InitializeComponent();
+            IP = ip;
+        }
+
+        private void btnAddU_Click(object sender, EventArgs e)
+        {
+            frmRegister form = new frmRegister(IP);
+            form.Show();
         }
     }
 }

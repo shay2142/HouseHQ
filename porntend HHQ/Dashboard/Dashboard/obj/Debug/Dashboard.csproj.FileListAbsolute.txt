@@ -56,3 +56,5 @@ C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\bin\Debug\Circ
 C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\bin\Debug\Newtonsoft.Json.dll
 C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\bin\Debug\WinFormAnimation.dll
 C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\bin\Debug\Newtonsoft.Json.xml
+C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmLogin.resources
+C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmRegister.resources

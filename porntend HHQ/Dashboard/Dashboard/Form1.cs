@@ -88,7 +88,7 @@ namespace Dashboard
 
             lbltitle.Text = "Manager";
             this.pnlFormLoader.Controls.Clear();
-            frmManager frmAnalytics_vrb = new frmManager() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmManager frmAnalytics_vrb = new frmManager(IP_server) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmAnalytics_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmAnalytics_vrb);
             frmAnalytics_vrb.Show();

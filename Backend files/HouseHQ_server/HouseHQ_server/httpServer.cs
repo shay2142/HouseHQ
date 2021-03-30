@@ -203,6 +203,12 @@ namespace HouseHQ_server
             if (!db.userNameIsExists(con, user.name))
             {
                 db.insertVluesToUsers(con, user.name, user.password, user.mail);
+
+                if (user.key == "admin")
+                {
+                    db.updateUser(con, user.name, user.password, null, null, user.key);
+                }
+
                 return "202&";
             }
             else

@@ -100,12 +100,6 @@ namespace Dashboard
             }
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-            new frmRegister().Show();
-            this.Hide();
-        }
-
         private void frmLogin_Load(object sender, EventArgs e)
         {
 

@@ -19,32 +19,38 @@ namespace Dashboard
 {
     public partial class frmRegister : Form
     {
-        public frmRegister()
+        public string IP;
+        public frmRegister(string ip)
         {
             InitializeComponent();
+            IP = ip;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            if (txtUsername.Text == "" || txtSecurity.Text == "" || txtAuthorization.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtIp.Text == "" || txtMail.Text == "")
+            string level = null;
+            if (txtUsername.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtMail.Text == "")
             {
                 MessageBox.Show("Fields are empty", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             else if (txtPassword.Text == txtComPassword.Text)
             {
+                if(checkbxAdmin.Checked)
+                {
+                    level = "admin";
+                }
                 singup test = new singup()
                 {
                     name = txtUsername.Text,
                     password = txtPassword.Text,
                     mail = txtMail.Text,
-                    key = txtAuthorization.Text
+                    key = level
                 };
                 string json = JsonConvert.SerializeObject(test);
                 //httpClient shay = new httpClient(json);
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(txtIp.Text), "102");
+                string result = testLogin.sent(json, testLogin.hostToIp(IP), "102");
                 if (result != null)
                 {
                     string[] results = result.Split('&');
@@ -96,10 +102,7 @@ namespace Dashboard
             txtUsername.Text = "";
             txtPassword.Text = "";
             txtComPassword.Text = "";
-            txtAuthorization.Text = "";
             txtMail.Text = "";
-            txtSecurity.Text = "";
-            txtIp.Text = "";
             txtUsername.Focus();
         }
 
@@ -122,6 +125,11 @@ namespace Dashboard
         private void kryptonDateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }
