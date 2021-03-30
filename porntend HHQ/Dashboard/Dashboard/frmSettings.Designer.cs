@@ -63,12 +63,13 @@
             this.btnChangeDet.Image = ((System.Drawing.Image)(resources.GetObject("btnChangeDet.Image")));
             this.btnChangeDet.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnChangeDet.Location = new System.Drawing.Point(11, 11);
-            this.btnChangeDet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangeDet.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangeDet.Name = "btnChangeDet";
             this.btnChangeDet.Size = new System.Drawing.Size(148, 36);
             this.btnChangeDet.TabIndex = 8;
             this.btnChangeDet.Text = "Change User Details      ";
             this.btnChangeDet.UseVisualStyleBackColor = true;
+            this.btnChangeDet.Click += new System.EventHandler(this.btnChangeDet_Click);
             // 
             // frmSettings
             // 

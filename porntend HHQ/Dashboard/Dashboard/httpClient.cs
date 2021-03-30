@@ -67,6 +67,8 @@ namespace HTTP_CLIENT
 
         public string name { get; set; }
 
+        public string mail { get; set; }
+
         public List<string> appList { get; set; }
 
         public string key { get; set; }

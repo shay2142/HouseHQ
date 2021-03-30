@@ -12,9 +12,22 @@ namespace Dashboard
 {
     public partial class frmSettings : Form
     {
-        public frmSettings()
+        public string ip;
+        public string userName;
+        public string key;
+
+        public frmSettings(string ip, string userName, string key)
         {
             InitializeComponent();
+
+            this.ip = ip;
+            this.userName = userName;
+            this.key = key;
+        }
+
+        private void btnChangeDet_Click(object sender, EventArgs e)
+        {
+            new frmChangeAccount(ip, userName, key).Show();
         }
     }
 }

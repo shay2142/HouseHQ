@@ -201,6 +201,23 @@ namespace dataBase
             }
         }
 
+        public string getMailForUser(SQLiteConnection con, string userName)
+        {
+            if (userNameIsExists(con, userName))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand("select  EMAIL from  USERS where  USERNAME = '" + userName + "'", con))
+                {
+                    using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        return (rdr.GetString(0));
+                    }
+                }
+            }
+            return "";
+        }
+
         public List<string> getUserApplications(SQLiteConnection con, string userName)
         {
             List<string> appsList = new List<string>();

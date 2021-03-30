@@ -185,6 +185,7 @@ namespace HouseHQ_server
                 okLogin test = new okLogin()
                 {
                     name = user.name,
+                    mail = db.getMailForUser(con, user.name),
                     appList = db.getUserApplications(con, user.name),
                     key = db.getLevelKey(con, user.name)
                 };
