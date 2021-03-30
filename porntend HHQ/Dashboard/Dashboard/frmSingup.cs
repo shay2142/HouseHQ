@@ -48,16 +48,15 @@ namespace Dashboard
                     key = level
                 };
                 string json = JsonConvert.SerializeObject(test);
-                //httpClient shay = new httpClient(json);
                 httpClient testLogin = new httpClient();
                 string result = testLogin.sent(json, testLogin.hostToIp(IP), "102");
                 if (result != null)
                 {
                     string[] results = result.Split('&');
-                    //MessageBox.Show(results[1], "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     if (results[0] == "202")
                     {
-                        var user = JsonConvert.DeserializeObject<okSingup>(results[1]);
+                        MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else if (results[0] == "400")
                     {
@@ -65,11 +64,6 @@ namespace Dashboard
                         MessageBox.Show(user.msg, "Singup Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                //txtUsername.Text = "";
-                //txtPassword.Text = "";
-                //txtComPassword.Text = "";
-
-                //MessageBox.Show("Your Account has been Successfully Created", "Registration Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             else
@@ -112,7 +106,7 @@ namespace Dashboard
 
         private void frmRegister_Load(object sender, EventArgs e)
         {
-            //label2.Text = kryptonDateTimePicker1.Value.ToShortDateString();
+
         }
 
         private void label2_Click(object sender, EventArgs e)

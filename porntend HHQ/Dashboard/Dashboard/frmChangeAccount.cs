@@ -32,17 +32,8 @@ namespace Dashboard
 
             if (type == "user")
             {
-                txtUsername = new TextBox();
-                txtUsername.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-                txtUsername.BorderStyle = BorderStyle.None;
-                txtUsername.Font = new Font("MS UI Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-                txtUsername.Location = new Point(38, 102);
-                txtUsername.Multiline = true;
-                txtUsername.Name = "txtUsername";
-                txtUsername.Size = new Size(216, 28);
-                txtUsername.TabIndex = 2;
-                Controls.Add(txtUsername);
-
+                createTxtUsername();
+                
                 checkbxAdmin.Enabled = false;
                 txtUsername.Enabled = false;
                 txtUsername.Text = userName;
@@ -53,18 +44,11 @@ namespace Dashboard
                 }
 
                 UserName = txtUsername.Text;
+                sendGetUserInformation(txtUsername.Text);
             }
             else if (type == "manager")
             {
-                comboUsers = new ComboBox();
-                comboUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-                comboUsers.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                comboUsers.Location = new System.Drawing.Point(38, 102);
-                comboUsers.Name = "comboUsers";
-                comboUsers.Size = new System.Drawing.Size(216, 28);
-                comboUsers.TabIndex = 2;
-                comboUsers.SelectedIndexChanged += new System.EventHandler(this.comboUsers_Click);
-                Controls.Add(comboUsers);
+                createComboText();
 
                 httpClient testLogin = new httpClient();
                 string result = testLogin.sent(null, testLogin.hostToIp(IP), "111");
@@ -84,11 +68,11 @@ namespace Dashboard
             }
         }
 
-        private void comboUsers_Click(object sender, EventArgs e)
+        public void sendGetUserInformation(string userName)
         {
             getUserInformation msg = new getUserInformation()
             {
-                userName = comboUsers.Text
+                userName = userName
             };
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
@@ -108,12 +92,47 @@ namespace Dashboard
                         checkbxAdmin.Checked = false;
                     }
                     txtMail.Text = user.mail;
-                    oldPass.Text = user.password;
+                    if (type == "manager")
+                    {
+                        oldPass.Text = user.password;
+                    }
                 }
             }
-            UserName = comboUsers.Text;
+            UserName = userName;
         }
 
+        private void createComboText()
+        {
+            comboUsers = new ComboBox();
+            comboUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+            comboUsers.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            comboUsers.Location = new System.Drawing.Point(38, 102);
+            comboUsers.Name = "comboUsers";
+            comboUsers.Size = new System.Drawing.Size(216, 28);
+            comboUsers.TabIndex = 2;
+            comboUsers.SelectedIndexChanged += new System.EventHandler(this.comboUsers_Click);
+            Controls.Add(comboUsers);
+        }
+
+        private void createTxtUsername()
+        {
+            txtUsername = new TextBox();
+            txtUsername.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+            txtUsername.BorderStyle = BorderStyle.None;
+            txtUsername.Font = new Font("MS UI Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            txtUsername.Location = new Point(38, 102);
+            txtUsername.Multiline = true;
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(216, 28);
+            txtUsername.TabIndex = 2;
+            Controls.Add(txtUsername);
+        }
+
+        private void comboUsers_Click(object sender, EventArgs e)
+        {
+            sendGetUserInformation(comboUsers.Text);
+        }
+        
         private void button1_Click(object sender, EventArgs e)
         {
             string level = null;
@@ -138,13 +157,13 @@ namespace Dashboard
                 };
 
                 string json = JsonConvert.SerializeObject(test);
-                //httpClient shay = new httpClient(json);
+
                 httpClient testLogin = new httpClient();
                 string result = testLogin.sent(json, testLogin.hostToIp(IP), "103");
                 if (result != null)
                 {
                     string[] results = result.Split('&');
-                    //MessageBox.Show(results[1], "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     if (results[0] == "203")
                     {
                         MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -155,12 +174,6 @@ namespace Dashboard
                         MessageBox.Show(user.msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                //txtUsername.Text = "";
-                //txtPassword.Text = "";
-                //txtComPassword.Text = "";
-
-                //MessageBox.Show("Your Account has been Successfully Created", "Registration Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             else
             {
@@ -207,7 +220,7 @@ namespace Dashboard
 
         private void frmRegister_Load(object sender, EventArgs e)
         {
-            //label2.Text = kryptonDateTimePicker1.Value.ToShortDateString();
+
         }
 
         private void label2_Click(object sender, EventArgs e)
