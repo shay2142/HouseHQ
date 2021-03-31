@@ -19,12 +19,17 @@ namespace Dashboard
         public string IP;
         public string userName;
 
-        public FrmDeleteApps(string ip, List<string> apps, string userName)
+        public frmApps appsWindow { get; set; }
+        public Form1 dashbord { get; set; }
+
+        public FrmDeleteApps(string ip, List<string> apps, string userName, frmApps window, Form1 window2)
         {
             InitializeComponent();
 
             this.userName = userName;
             IP = ip;
+            appsWindow = window;
+            dashbord = window2;
 
             foreach (var app in apps)
             {
@@ -101,6 +106,11 @@ namespace Dashboard
             {
                 MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
+                appsWindow.Close();
+                frmApps apps = new frmApps(IP, userName, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                apps.FormBorderStyle = FormBorderStyle.None;
+                dashbord.pnlFormLoader.Controls.Add(apps);
+                apps.Show();
             }
         }
     }

@@ -8,7 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Newtonsoft.Json;
+
 using System.IO;
+using HTTP_CLIENT;
 
 namespace Dashboard
 {
@@ -17,13 +20,37 @@ namespace Dashboard
         public List<string> apps;
         public string IP_server;
         public string userName;
+        public Form1 dashbord;
 
-        public frmApps(List<string> apps, string ip, string userName)
+        public frmApps(string ip, string userName, Form1 form)
         {
             InitializeComponent();
-            this.apps = apps;
+            
             this.userName = userName;
             IP_server = ip;
+            dashbord = form;
+
+            getData();
+        }
+
+        public void getData()
+        {
+            getUserInformation msg = new getUserInformation()
+            {
+                userName = userName
+            };
+            string json = JsonConvert.SerializeObject(msg);
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(json, testLogin.hostToIp(IP_server), "114");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+                if (results[0] == "214")
+                {
+                    var user = JsonConvert.DeserializeObject<getAllApps>(results[1]);
+                    apps = user.allAppList;
+                }
+            }
 
             foreach (var app in apps)
             {
@@ -93,7 +120,7 @@ namespace Dashboard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FrmAddApps(IP_server, apps, userName).Show();
+            new FrmAddApps(IP_server, apps, userName, this, dashbord).Show();
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -103,7 +130,7 @@ namespace Dashboard
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new FrmDeleteApps(IP_server, apps, userName).Show();
+            new FrmDeleteApps(IP_server, apps, userName, this, dashbord).Show();
         }
     }
 }

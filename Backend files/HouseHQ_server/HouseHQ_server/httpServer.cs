@@ -165,6 +165,9 @@ namespace HouseHQ_server
                                 case "113"://sent DB
                                     msg = sentDB();//
                                     break;
+                                case "114":
+                                    msg = getUserApps(json[1]);
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -317,6 +320,18 @@ namespace HouseHQ_server
             };
 
             return "213&" + JsonConvert.SerializeObject(msg);
+        }
+
+        public string getUserApps(string json)
+        {
+            var user = JsonConvert.DeserializeObject<getUserInformation>(json);
+            getAllApps msg = new getAllApps()
+            {
+                allAppList = db.getUserApplications(con, user.userName)
+            };
+
+            return "214&" + JsonConvert.SerializeObject(msg);
+
         }
 
         public string error(string msg)

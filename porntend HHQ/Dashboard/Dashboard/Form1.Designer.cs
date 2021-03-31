@@ -265,7 +265,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lbltitle;
         private System.Windows.Forms.Button btnManager;
-        private System.Windows.Forms.Panel pnlFormLoader;
+        public System.Windows.Forms.Panel pnlFormLoader;
     }
 }
 

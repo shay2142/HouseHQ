@@ -21,13 +21,18 @@ namespace Dashboard
         public string IP;
         public string userName;
 
-        public FrmAddApps(string ip, List<string> userApps, string userName)
+        public frmApps appsWindow { get; set; }
+        public Form1 dashbord { get; set; }
+
+        public FrmAddApps(string ip, List<string> userApps, string userName, frmApps window, Form1 window2)
         {
             InitializeComponent();
 
             this.userApps = userApps;
             this.userName = userName;
             IP = ip;
+            appsWindow = window;
+            dashbord = window2;
 
             httpClient testLogin = new httpClient();
             string result = testLogin.sent(null, testLogin.hostToIp(ip), "105");
@@ -92,11 +97,12 @@ namespace Dashboard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bool good = true;
+            bool good = false;
             foreach (var newApp in flowLayoutPanel1.Controls)
             { 
-                if ((newApp is CheckBox) && ((CheckBox)newApp).Checked)
+                if ((newApp is CheckBox) && ((CheckBox)newApp).Checked && (((CheckBox)newApp).Enabled == true))
                 {
+                    good = true;
                     addAppForUser msg = new addAppForUser()
                     {
                         userName = userName,
@@ -120,7 +126,15 @@ namespace Dashboard
             if(good)
             {
                 MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
+            }
+            this.Hide();
+            if (appsWindow != null)
+            {
+                appsWindow.Close();
+                frmApps apps = new frmApps(IP, userName, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                apps.FormBorderStyle = FormBorderStyle.None;
+                dashbord.pnlFormLoader.Controls.Add(apps);
+                apps.Show();
             }
         }
     }
