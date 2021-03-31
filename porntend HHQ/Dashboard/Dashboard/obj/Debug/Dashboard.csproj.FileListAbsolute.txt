@@ -82,3 +82,4 @@ C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\bin\Debug\N
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\bin\Debug\WinFormAnimation.xml
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CopyComplete
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmChangeAccount.resources
+C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.FrmAddApps.resources

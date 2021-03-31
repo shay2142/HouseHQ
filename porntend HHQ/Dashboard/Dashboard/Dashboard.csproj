@@ -63,6 +63,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAddApps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddApps.Designer.cs">
+      <DependentUpon>FrmAddApps.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmChangeAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddApps.resx">
+      <DependentUpon>FrmAddApps.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChangeAccount.resx">
       <DependentUpon>frmChangeAccount.cs</DependentUpon>

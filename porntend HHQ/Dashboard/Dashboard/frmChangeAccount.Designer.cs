@@ -204,7 +204,6 @@
             this.oldPass.Location = new System.Drawing.Point(37, 205);
             this.oldPass.Multiline = true;
             this.oldPass.Name = "oldPass";
-            this.oldPass.PasswordChar = '\0';
             this.oldPass.Size = new System.Drawing.Size(216, 28);
             this.oldPass.TabIndex = 24;
             // 
@@ -221,7 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.ClientSize = new System.Drawing.Size(285, 489);
             this.Controls.Add(this.oldPass);
             this.Controls.Add(this.label5);

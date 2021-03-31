@@ -53,7 +53,7 @@ namespace Dashboard
             pnlNav.Left = btnApps.Left;
 
             lbltitle.Text = "HouseHQ";
-            frmApps frmDashboard_vrb = new frmApps(apps, IP_server) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmApps frmDashboard_vrb = new frmApps(apps, IP_server, userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmDashboard_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmDashboard_vrb);
             frmDashboard_vrb.Show();
@@ -78,7 +78,7 @@ namespace Dashboard
 
             lbltitle.Text = "Apps";
             this.pnlFormLoader.Controls.Clear();
-            frmApps frmDashboard_vrb = new frmApps(apps, IP_server) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmApps frmDashboard_vrb = new frmApps(apps, IP_server, userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmDashboard_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmDashboard_vrb);
             frmDashboard_vrb.Show();

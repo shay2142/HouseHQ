@@ -137,4 +137,13 @@ namespace HTTP_CLIENT
     {
         public List<getDB> db { get; set; }
     }
+    class getAllApps
+    {
+        public List<string> allAppList { get; set; }
+    }
+    class addAppForUser
+    {
+        public string userName { get; set; }
+        public string appName { get; set; }
+    }
 }
