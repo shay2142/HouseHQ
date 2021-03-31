@@ -20,10 +20,13 @@ namespace Dashboard
     public partial class frmRegister : Form
     {
         public string IP;
-        public frmRegister(string ip)
+        public frmManager manager;
+
+        public frmRegister(string ip, frmManager window)
         {
             InitializeComponent();
             IP = ip;
+            manager = window;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,6 +60,7 @@ namespace Dashboard
                     if (results[0] == "202")
                     {
                         MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        manager.GetDB();
                     }
                     else if (results[0] == "400")
                     {

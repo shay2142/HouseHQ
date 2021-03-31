@@ -84,3 +84,4 @@ C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\D
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmChangeAccount.resources
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.FrmAddApps.resources
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.FrmDeleteApps.resources
+C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmDeleteUser.resources

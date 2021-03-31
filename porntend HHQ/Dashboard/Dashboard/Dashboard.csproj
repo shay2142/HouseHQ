@@ -81,6 +81,12 @@
     <Compile Include="FrmDeleteApps.Designer.cs">
       <DependentUpon>FrmDeleteApps.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDeleteUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDeleteUser.Designer.cs">
+      <DependentUpon>frmDeleteUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDeleteApps.resx">
       <DependentUpon>FrmDeleteApps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDeleteUser.resx">
+      <DependentUpon>frmDeleteUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

@@ -94,6 +94,7 @@
             this.btnRemU.Size = new System.Drawing.Size(39, 41);
             this.btnRemU.TabIndex = 1;
             this.btnRemU.UseVisualStyleBackColor = true;
+            this.btnRemU.Click += new System.EventHandler(this.btnRemU_Click);
             // 
             // btnAddU
             // 

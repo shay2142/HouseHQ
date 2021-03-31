@@ -133,7 +133,7 @@ namespace HouseHQ_server
                                     msg = login(json[1]);//
                                     break;
                                 case "102": //singup
-                                    msg = singup(json[1]);//?
+                                    msg = singup(json[1]);//
                                     break;
                                 case "103"://change account
                                     msg = changeAccount(json[1]);//
@@ -146,7 +146,7 @@ namespace HouseHQ_server
                                 case "106"://delete apps?
                                     break;
                                 case "107"://delete apps from user
-                                    msg = deleteAppsFromUser(json[1]);
+                                    msg = deleteAppsFromUser(json[1]);//
                                     break;
                                 case "108"://add apps for user
                                     msg = addAppForUser(json[1]);//
@@ -166,7 +166,7 @@ namespace HouseHQ_server
                                     msg = sentDB();//
                                     break;
                                 case "114":
-                                    msg = getUserApps(json[1]);
+                                    msg = getUserApps(json[1]);//
                                     break;
                                 default://400 error
                                     msg = error("code is incorrect");
@@ -279,7 +279,7 @@ namespace HouseHQ_server
         public string deleteUser(string json)
         {
             var user = JsonConvert.DeserializeObject<deleteUser>(json);
-            if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "1"))
+            if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "admin"))
             {
                 db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
                 return "210&";

@@ -151,4 +151,9 @@ namespace HTTP_CLIENT
         public string userName { get; set; }
         public string appName { get; set; }
     }
+    class deleteUser
+    {
+        public string userNameDelete { get; set; }
+        public string adminUserName { get; set; }
+    }
 }

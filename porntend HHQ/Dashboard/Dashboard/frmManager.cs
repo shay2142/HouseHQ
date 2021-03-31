@@ -18,18 +18,17 @@ namespace Dashboard
     public partial class frmManager : Form
     {
         public string IP;
-        public List<getDB> DB { get; set; }
+        public string UserName;
 
         public frmManager(string ip, string userName)
         {
             InitializeComponent();
             IP = ip;
-            DB = GetDB();
-            dataGridView1.DataSource = DB;
-            //dataGridView1.add
+            UserName = userName;
+            GetDB();
         }
 
-        public List<getDB> GetDB()
+        public void GetDB()
         {
             var list = new List<getDB>();
             httpClient testLogin = new httpClient();
@@ -44,17 +43,23 @@ namespace Dashboard
                     list = user.db;
                 }
             }
-            return list;
+            dataGridView1.DataSource = list;
         }
         private void btnAddU_Click(object sender, EventArgs e)
         {
-            frmRegister form = new frmRegister(IP);
+            frmRegister form = new frmRegister(IP, this);
             form.Show();
         }
 
         private void btnChangeDet_Click(object sender, EventArgs e)
         {
             new frmChangeAccount(IP, "", "admin", "manager").Show();
+        }
+
+        private void btnRemU_Click(object sender, EventArgs e)
+        {
+            frmDeleteUser form = new frmDeleteUser(IP, UserName, this);
+            form.Show();
         }
     }
 }
