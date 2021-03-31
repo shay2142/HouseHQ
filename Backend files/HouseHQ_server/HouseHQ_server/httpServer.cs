@@ -141,7 +141,7 @@ namespace HouseHQ_server
                                 case "104"://add apps?
                                     break;
                                 case "105"://all apps
-                                    msg = allApps();
+                                    msg = allApps();//
                                     break;
                                 case "106"://delete apps?
                                     break;
@@ -149,7 +149,7 @@ namespace HouseHQ_server
                                     msg = deleteAppsFromUser(json[1]);
                                     break;
                                 case "108"://add apps for user
-                                    msg = addAppForUser(json[1]);
+                                    msg = addAppForUser(json[1]);//
                                     break;
                                 case "109"://logout
                                     break;

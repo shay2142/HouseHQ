@@ -146,4 +146,9 @@ namespace HTTP_CLIENT
         public string userName { get; set; }
         public string appName { get; set; }
     }
+    class deleteAppFromUser
+    {
+        public string userName { get; set; }
+        public string appName { get; set; }
+    }
 }

@@ -83,3 +83,4 @@ C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\bin\Debug\W
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CopyComplete
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmChangeAccount.resources
 C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.FrmAddApps.resources
+C:\Users\shay5\source\repos\HouseHQ\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.FrmDeleteApps.resources

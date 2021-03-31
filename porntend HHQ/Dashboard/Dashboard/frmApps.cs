@@ -100,5 +100,10 @@ namespace Dashboard
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new FrmDeleteApps(IP_server, apps, userName).Show();
+        }
     }
 }
