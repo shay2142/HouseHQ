@@ -11,14 +11,18 @@ using System.IO;
 
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Data.SQLite;
+using dataBase;
 
 namespace HouseHQ_server
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public httpServer Http;
+        public Form1(httpServer http)
         {
             InitializeComponent();
+            Http = http;
         }
 
         private void path_Click(object sender, EventArgs e)
@@ -46,26 +50,25 @@ namespace HouseHQ_server
         private void createRemoteApp_Click(object sender, EventArgs e)
         {
             //create RemoteApp not workin with Program Files check it!
-            //ProcessStartInfo startInfo = new ProcessStartInfo("reg.exe", "Add " + '"' + @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text) + '"' + @" /v Path /t REG_SZ /d " + namePath.Text);
-            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //System.Diagnostics.Process.Start(startInfo);
+            ProcessStartInfo startInfo = new ProcessStartInfo("reg.exe", "Add " + '"' + @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text) + '"' + @" /v Path /t REG_SZ /d " + namePath.Text);
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            System.Diagnostics.Process.Start(startInfo);
 
             /*****עובד אך עדיין לא גמור!!!*****/
 
-            string path = @"test.bat";
+            string path = @"readApp.bat";
 
             // Create the file, or overwrite if the file exists.
             using (FileStream fs = File.Create(path))
             {
-                byte[] info = new UTF8Encoding(true).GetBytes("REG QUERY " + '"' + @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" + '"' + " > test1.txt");
+                byte[] info = new UTF8Encoding(true).GetBytes("REG QUERY " + '"' + @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" + '"' + " > app.txt");
                 // Add some information to the file.
                 fs.Write(info, 0, info.Length);
             }
-
-            System.Diagnostics.Process.Start("test.bat");
-
+            System.Diagnostics.Process.Start(path).WaitForExit();
+            
             // Open the stream and read it back.
-            using (StreamReader sr = File.OpenText("test1.txt"))
+            using (StreamReader sr = File.OpenText("app.txt"))
             {
                 string s = "";
                 while ((s = sr.ReadLine()) != null)
@@ -73,7 +76,11 @@ namespace HouseHQ_server
                     //Console.WriteLine(s);
                     if (Path.GetFileNameWithoutExtension(s) != "")
                     {
-                        MessageBox.Show(Path.GetFileNameWithoutExtension(s), "", MessageBoxButtons.OK);
+                        //MessageBox.Show(Path.GetFileNameWithoutExtension(s), "", MessageBoxButtons.OK);
+                        if (!Http.db.appIsExists(Http.con, Path.GetFileNameWithoutExtension(s)))
+                        {
+                            Http.db.insertVluesToAPP(Http.con, Path.GetFileNameWithoutExtension(s), Path.GetFileNameWithoutExtension(s));
+                        }
                     }
                 }
             }

@@ -14,14 +14,17 @@ using System.Data.SQLite;
 using jsonDeserialize;
 using jsonSerializer;
 using dataBase;
+using System.Windows.Forms;
+using System.Threading;
+
 
 namespace HouseHQ_server
 {
-    class httpServer
+    public class httpServer
     {
         public SQLiteConnection con;
         public HttpListener listener;
-        public DB db = new DB();
+        internal DB db = new DB();
         public string url = "http://192.168.0.131:8080/";
         public int requestCount = 0;
         public string pageData =
@@ -41,6 +44,11 @@ namespace HouseHQ_server
             
         }
 
+        public void frmNewFormThread()
+        {
+            Application.Run(new Form1(this));
+        }
+
         public void runServer()
         {
             //string path = @"MyDatabase.sqlite";
@@ -51,6 +59,10 @@ namespace HouseHQ_server
             //using var con = new SQLiteConnection(cs);
             con.Open();
             db.createTables(con);
+
+            var newThread = new System.Threading.Thread(frmNewFormThread);
+            newThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            newThread.Start();
 
             // Create a Http server and start listening for incoming connections
             //url = "http://" + GetLocalIPAddress() + ":8080/";
@@ -350,7 +362,7 @@ namespace HouseHQ_server
             return "400&" + JsonConvert.SerializeObject(err);
         }
 
-        public List<sentDB> getDB()
+        internal List<sentDB> getDB()
         {
             var list = new List<sentDB>();
             List<string> userList = db.getAllUsers(con);

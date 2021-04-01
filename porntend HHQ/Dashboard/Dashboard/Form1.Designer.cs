@@ -221,6 +221,7 @@
             // pnlFormLoader
             // 
             this.pnlFormLoader.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlFormLoader.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlFormLoader.Location = new System.Drawing.Point(186, 75);
             this.pnlFormLoader.Name = "pnlFormLoader";
             this.pnlFormLoader.Size = new System.Drawing.Size(733, 477);

@@ -343,7 +343,7 @@ namespace dataBase
 
         public void updateStatus(SQLiteConnection con, string userName, string status)
         {
-            if (userNameIsExists(con, userName))
+            if (userNameIsExists(con, userName) )
             {
                 using (SQLiteCommand cmd = new SQLiteCommand(con))
                 {
@@ -377,11 +377,19 @@ namespace dataBase
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(con))
                     {
-                        cmd.CommandText = "update USERS set LEVEL_KEY = '"+ level + "' where USERNAME = '" + userName + "'";
+                        cmd.CommandText = "update USERS set LEVEL_KEY = '" + level + "' where USERNAME = '" + userName + "'";
                         cmd.ExecuteNonQuery();
                     }
                 }
-                return "";
+                else if (level == null)
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(con))
+                    {
+                        cmd.CommandText = "update USERS set LEVEL_KEY = '' where USERNAME = '" + userName + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                    return "";
             }
             else
             {
