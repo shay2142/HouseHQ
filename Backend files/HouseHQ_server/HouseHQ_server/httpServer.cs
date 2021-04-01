@@ -152,9 +152,10 @@ namespace HouseHQ_server
                                     msg = addAppForUser(json[1]);//
                                     break;
                                 case "109"://logout
+                                    msg = logout(json[1]);
                                     break;
                                 case "110"://delete user
-                                    msg = deleteUser(json[1]);
+                                    msg = deleteUser(json[1]);//
                                     break;
                                 case "111"://getAllUsers
                                     msg = getAllUsers();//
@@ -201,7 +202,9 @@ namespace HouseHQ_server
                     mail = db.getMailForUser(con, user.name),
                     appList = db.getUserApplications(con, user.name),
                     key = db.getLevelKey(con, user.name)
-                };
+                }; 
+                db.updateStatus(con, user.name, "online");
+
                 return "201&" + JsonConvert.SerializeObject(test);
             }
             else
@@ -222,6 +225,7 @@ namespace HouseHQ_server
                 {
                     db.updateUser(con, user.name, user.password, null, null, user.key);
                 }
+                db.updateStatus(con, user.name, "offline");
 
                 return "202&";
             }
@@ -271,8 +275,11 @@ namespace HouseHQ_server
             return "208&";
         }
 
-        public string logout()//return???
+        public string logout(string json)//return???
         {
+            var user = JsonConvert.DeserializeObject<logoutUser>(json);
+            db.updateStatus(con, user.userName, "offline");
+
             return "209&";
         }
 

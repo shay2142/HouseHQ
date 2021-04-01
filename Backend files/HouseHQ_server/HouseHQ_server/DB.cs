@@ -341,6 +341,18 @@ namespace dataBase
             return appsList;
         }
 
+        public void updateStatus(SQLiteConnection con, string userName, string status)
+        {
+            if (userNameIsExists(con, userName))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(con))
+                {
+                    cmd.CommandText = "update USERS set  STATUS = '" + status + "' where USERNAME = '" + userName + "'";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public string updateUser(SQLiteConnection con, string userName, string oldPassword, string newPassword, string mail, string level)
         {
             if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, oldPassword))

@@ -48,9 +48,10 @@ namespace Dashboard
             key = user.key;
             label1.Text = user.name;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
-            pnlNav.Height = btnApps.Height;
-            pnlNav.Top = btnApps.Top;
-            pnlNav.Left = btnApps.Left;
+            //pnlNav.Height = btnApps.Height;
+            //pnlNav.Top = btnApps.Top;
+            //pnlNav.Left = btnApps.Left;
+            pnlNav.BackColor = Color.FromArgb(24, 30, 54);
 
             lbltitle.Text = "HouseHQ";
             //frmApps frmDashboard_vrb = new frmApps(IP_server, userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
@@ -75,6 +76,7 @@ namespace Dashboard
             pnlNav.Top = btnApps.Top;
             pnlNav.Left = btnApps.Left;
             btnApps.BackColor = Color.FromArgb(46, 51, 73);
+            pnlNav.BackColor = Color.FromArgb(0, 126, 249);
 
             lbltitle.Text = "Apps";
             this.pnlFormLoader.Controls.Clear();
@@ -90,6 +92,7 @@ namespace Dashboard
             pnlNav.Height = btnManager.Height;
             pnlNav.Top = btnManager.Top;
             btnManager.BackColor = Color.FromArgb(46, 51, 73);
+            pnlNav.BackColor = Color.FromArgb(0, 126, 249);
 
             lbltitle.Text = "Manager";
             this.pnlFormLoader.Controls.Clear();
@@ -104,6 +107,7 @@ namespace Dashboard
             pnlNav.Height = btnContactUs.Height;
             pnlNav.Top = btnContactUs.Top;
             btnContactUs.BackColor = Color.FromArgb(46, 51, 73);
+            pnlNav.BackColor = Color.FromArgb(0, 126, 249);
 
             this.pnlFormLoader.Controls.Clear();
             frmContactUs frmContactUs_vrb = new frmContactUs() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
@@ -118,6 +122,7 @@ namespace Dashboard
             pnlNav.Height = btnsettings.Height;
             pnlNav.Top = btnsettings.Top;
             btnsettings.BackColor = Color.FromArgb(46, 51, 73);
+            pnlNav.BackColor = Color.FromArgb(0, 126, 249);
 
             this.pnlFormLoader.Controls.Clear();
             frmSettings frmSettings_vrb = new frmSettings(IP_server, userName, key) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
@@ -149,6 +154,7 @@ namespace Dashboard
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            logout();
             Application.Exit();
         }
 
@@ -176,7 +182,19 @@ namespace Dashboard
         {
             File.Delete(@"reamoteapp.rdp");
             new frmLogin().Show();
+            logout();
             this.Hide();
+        }
+
+        public void logout()
+        {
+            logoutUser test = new logoutUser()
+            {
+                userName = userName
+            };
+            string json = JsonConvert.SerializeObject(test);
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(json, testLogin.hostToIp(IP_server), "109");
         }
     }
 }

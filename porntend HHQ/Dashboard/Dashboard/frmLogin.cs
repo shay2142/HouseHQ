@@ -25,7 +25,6 @@ namespace Dashboard
         public bool checkInput()
         {
             IPAddress ip;
-            httpClient http = new httpClient();//Test
 
             if (IP.Text != "" && txtpassword.Text != "" && txtUsername.Text != "")
             {

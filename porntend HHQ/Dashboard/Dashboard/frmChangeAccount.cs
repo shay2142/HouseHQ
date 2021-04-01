@@ -136,12 +136,12 @@ namespace Dashboard
         private void button1_Click(object sender, EventArgs e)
         {
             string level = null;
-            if (txtComPassword.Text == "" || txtMail.Text == "")
-            {
-                MessageBox.Show("Fields are empty", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //if (txtComPassword.Text == "" || txtMail.Text == "")
+            //{
+            //    MessageBox.Show("Fields are empty", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            }
-            else if (txtPassword.Text == txtComPassword.Text)
+            //}
+            if (txtPassword.Text == txtComPassword.Text)
             {
                 if(checkbxAdmin.Checked)
                 {

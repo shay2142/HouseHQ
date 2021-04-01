@@ -49,4 +49,9 @@ namespace jsonDeserialize
     {
         public string userName { get; set; }
     }
+
+    class logoutUser
+    {
+        public string userName { get; set; }
+    }
 }
