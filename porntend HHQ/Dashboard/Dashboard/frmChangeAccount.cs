@@ -19,6 +19,8 @@ namespace Dashboard
 {
     public partial class frmChangeAccount : Form
     {
+        public hash hashPass = new hash();
+
         public string IP;
         public ComboBox comboUsers;
         public string UserName;
@@ -150,8 +152,8 @@ namespace Dashboard
                 changeAccount test = new changeAccount()
                 {
                    userName = UserName,
-                   oldPassword = oldPass.Text,
-                   newPassword = txtPassword.Text,
+                   oldPassword = hashPass.ComputeSha256Hash(oldPass.Text),
+                   newPassword = hashPass.ComputeSha256Hash(txtPassword.Text),
                    mail = txtMail.Text,
                    level = level
                 };

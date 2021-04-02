@@ -19,6 +19,7 @@ namespace Dashboard
 {
     public partial class frmRegister : Form
     {
+        public hash hashPass = new hash();
         public string IP;
         public frmManager manager;
 
@@ -46,7 +47,7 @@ namespace Dashboard
                 singup test = new singup()
                 {
                     name = txtUsername.Text,
-                    password = txtPassword.Text,
+                    password = hashPass.ComputeSha256Hash(txtPassword.Text),
                     mail = txtMail.Text,
                     key = level
                 };

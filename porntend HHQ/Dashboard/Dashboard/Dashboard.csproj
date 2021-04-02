@@ -123,6 +123,7 @@
     <Compile Include="frmSingup.Designer.cs">
       <DependentUpon>frmSingup.cs</DependentUpon>
     </Compile>
+    <Compile Include="hash.cs" />
     <Compile Include="httpClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

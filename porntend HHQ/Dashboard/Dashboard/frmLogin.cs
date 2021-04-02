@@ -18,10 +18,13 @@ namespace Dashboard
 {
     public partial class frmLogin : Form
     {
+        public hash hashPass = new hash();
+
         public frmLogin()
         {
             InitializeComponent();
         }
+
         public bool checkInput()
         {
             IPAddress ip;
@@ -44,12 +47,13 @@ namespace Dashboard
             {
                 MessageBox.Show("Invalid username or password or IP", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-            
+
+            MessageBox.Show(hashPass.ComputeSha256Hash(txtpassword.Text), "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             login test = new login()
             {
                 name = txtUsername.Text,
-                password = txtpassword.Text
+                password = hashPass.ComputeSha256Hash(txtpassword.Text)
             };
             string json = JsonConvert.SerializeObject(test);
             //httpClient shay = new httpClient(json);
