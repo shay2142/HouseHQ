@@ -46,7 +46,7 @@ client
 
 ## Authors
 
-* **shay cohen** - *BakeEnd*
+* **shay cohen** - *BackEnd*
 
 * **Ilay Lemmy Illouz** - *FrontEnd*
 
