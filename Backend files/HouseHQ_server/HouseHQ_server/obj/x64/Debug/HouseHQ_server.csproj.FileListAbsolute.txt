@@ -12,7 +12,6 @@ C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin
 C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe
 C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.pdb
 C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
-C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form1.resources
 C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Properties.Resources.resources
 C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.GenerateResource.cache
 C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CoreCompileInputs.cache
@@ -50,3 +49,11 @@ C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\
 C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CopyComplete
 C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
 C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Microsoft.Win32.Registry.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Microsoft.Win32.Registry.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form2.resources
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.AddApps.resources

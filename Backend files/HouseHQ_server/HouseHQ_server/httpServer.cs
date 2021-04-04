@@ -46,7 +46,7 @@ namespace HouseHQ_server
 
         public void frmNewFormThread()
         {
-            Application.Run(new Form1(this));
+            Application.Run(new Form2(this));
         }
 
         public void runServer()

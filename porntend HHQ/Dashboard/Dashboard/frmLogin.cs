@@ -48,8 +48,6 @@ namespace Dashboard
                 MessageBox.Show("Invalid username or password or IP", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            MessageBox.Show(hashPass.ComputeSha256Hash(txtpassword.Text), "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             login test = new login()
             {
                 name = txtUsername.Text,
