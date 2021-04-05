@@ -7,32 +7,11 @@ namespace dataBase
 {
     class DB
     {
-        //static void Main(string[] args)
-        //{
-        //    Console.WriteLine("Hello World!");
-
-        //    string path = @"MyDatabase.sqlite";
-        //    string cs = @"URI=file:" + path;
-
-        //    using var con = new SQLiteConnection(cs);
-        //    con.Open();
-
-        //    createTables(con);
-        //    //deleteTable(con, "USERS");
-        //    insertVluesToUsers(con, "shay", "12345", "shay@gmail.com", "1");
-        //    //insertVluesToSingupKey(con, "12345");
-        //    printUsersTable(con);
-        //    Console.WriteLine(passwordIsCorrect(con, "shay", "1234"));
-        //    Console.WriteLine(passwordIsCorrect(con, "shay", "12345"));
-        //    printUsersTable(con);
-        //    //deleteValueFromeTable(con, "USERS", "USERNAME", "shay");
-
-        //    con.Dispose();
-        //}
-        //public DB()
-        //{ 
-
-        //}
+        /*
+         
+         input:
+         output:
+         */
         public void createTables(SQLiteConnection con)
         {
             using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -46,9 +25,12 @@ namespace dataBase
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS APPS(appsID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, usersID INTEGER, appID INTEGER, FOREIGN KEY(usersID) REFERENCES USERS(usersID), FOREIGN KEY(appID) REFERENCES APP(appID));";
                 cmd.ExecuteNonQuery();
             }
-            //Console.WriteLine("This table created");
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public void insertVluesToUsers(SQLiteConnection con, string userName, string password, string email)
         {
             if (!userNameIsExists(con, userName))
@@ -65,7 +47,11 @@ namespace dataBase
             }
 
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public void insertVluesToAPP(SQLiteConnection con, string nameApp, string remoteApp /*string pathImg,*/)
         {
             if (!appIsExists(con, nameApp))
@@ -73,7 +59,6 @@ namespace dataBase
                 using (SQLiteCommand cmd = new SQLiteCommand(con))
                 {
                     cmd.CommandText = "INSERT INTO APP(NAME, REMOTEAPP) VALUES('" + nameApp + "', '" + remoteApp + "')";
-                    //cmd.CommandText = "INSERT INTO APP(NAME, REMOTEAPP) VALUES('" + nameApp + "', '" + remoteApp + "', '" + pathImg + "')";
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -82,7 +67,11 @@ namespace dataBase
                 Console.WriteLine(nameApp + "is exists");
             }
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public bool userNameIsExists(SQLiteConnection con, string userName)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT USERNAME FROM USERS", con))
@@ -99,7 +88,11 @@ namespace dataBase
             }
             return false;
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public bool appIsExists(SQLiteConnection con, string appName)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT NAME FROM APP", con))
@@ -116,7 +109,11 @@ namespace dataBase
             }
             return false;
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public bool appIsExistsInUser(SQLiteConnection con, string userName, string appName)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select APP.NAME from USERS join APPS ON  USERS.usersID = APPS.usersID JOIN APP ON APPS.appID = APP.appID WHERE USERS.USERNAME = '" + userName + "'", con))
@@ -133,8 +130,11 @@ namespace dataBase
             }
             return false;
         }
-
-        //???
+        /*
+         
+         input:
+         output:
+         */
         public void updateLevelKey(SQLiteConnection con, string userName, string password, string level)
         {
             if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, password))
@@ -150,7 +150,11 @@ namespace dataBase
                 Console.WriteLine("Username or password is incorrect");
             }
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public string getLevelKey(SQLiteConnection con, string userName)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select LEVEL_KEY from  USERS where USERNAME = '" + userName + "'", con))
@@ -171,7 +175,11 @@ namespace dataBase
             }
             return "";
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public bool passwordIsCorrect(SQLiteConnection con, string userName, string password)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT USERNAME, PASSWORD FROM USERS", con))
@@ -188,7 +196,11 @@ namespace dataBase
             }
             return false;
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public void addAppForUser(SQLiteConnection con, string userName, string nameApp)
         {
             if (appIsExists(con, nameApp) || userNameIsExists(con, userName))
@@ -207,7 +219,11 @@ namespace dataBase
                 Console.WriteLine("Username or app is not exists");
             }
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public string getMailForUser(SQLiteConnection con, string userName)
         {
             if (userNameIsExists(con, userName))
@@ -224,7 +240,11 @@ namespace dataBase
             }
             return "";
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public string getStatusForUser(SQLiteConnection con, string userName)
         {
             if (userNameIsExists(con, userName))
@@ -248,7 +268,11 @@ namespace dataBase
             }
             return "";
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public int getIdForUser(SQLiteConnection con, string userName)
         {
             if (userNameIsExists(con, userName))
@@ -272,7 +296,11 @@ namespace dataBase
             }
             return 0;
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public string getPassForUser(SQLiteConnection con, string userName)
         {
             if (userNameIsExists(con, userName))
@@ -296,7 +324,11 @@ namespace dataBase
             }
             return "";
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public List<string> getUserApplications(SQLiteConnection con, string userName)
         {
             List<string> appsList = new List<string>();
@@ -311,7 +343,11 @@ namespace dataBase
             }
             return appsList;
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public List<string> getAllUsers(SQLiteConnection con)
         {
             List<string> usersList = new List<string>();
@@ -326,6 +362,11 @@ namespace dataBase
             }
             return usersList;
         }
+        /*
+         
+         input:
+         output:
+         */
         public List<string> getAllApplications(SQLiteConnection con)
         {
             List<string> appsList = new List<string>();
@@ -340,7 +381,11 @@ namespace dataBase
             }
             return appsList;
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public void updateStatus(SQLiteConnection con, string userName, string status)
         {
             if (userNameIsExists(con, userName) )
@@ -352,7 +397,11 @@ namespace dataBase
                 }
             }
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public string updateUser(SQLiteConnection con, string userName, string oldPassword, string newPassword, string mail, string level)
         {
             if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, oldPassword))
@@ -396,7 +445,11 @@ namespace dataBase
                 return "Username or password is incorrect";
             }
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public void printUsersTable(SQLiteConnection con)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM USERS", con))
@@ -411,7 +464,11 @@ namespace dataBase
                 }
             }
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public void deleteValueFromeTable(SQLiteConnection con, string table, string column, string value) //value = just string value
         {
             using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -420,6 +477,11 @@ namespace dataBase
                 cmd.ExecuteNonQuery();
             }
         }
+        /*
+         
+         input:
+         output:
+         */
         public void deleteAppsFromUser(SQLiteConnection con, string userName, string appName)
         {
             //check input??
@@ -429,7 +491,11 @@ namespace dataBase
                 cmd.ExecuteNonQuery();
             }
         }
-
+        /*
+         
+         input:
+         output:
+         */
         public void deleteTable(SQLiteConnection con, string table) //value = just string value
         {
             using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -439,40 +505,6 @@ namespace dataBase
             }
             createTables(con);
         }
-
-        //public void insertVluesToSingupKey(SQLiteConnection con, string password)
-        //{
-        //    if (!singupKeyIsExists(con, password))
-        //    {
-        //        using (SQLiteCommand cmd = new SQLiteCommand(con))
-        //        {
-        //            cmd.CommandText = "INSERT INTO SINGUP_KEY(PASSWORD) VALUES('" + password + "')";
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("SingupKey " + password + " exists");
-        //    }
-
-        //}
-
-        //public bool singupKeyIsExists(SQLiteConnection con, string singupKey)
-        //{
-        //    using (SQLiteCommand cmd = new SQLiteCommand("SELECT PASSWORD FROM SINGUP_KEY", con))
-        //    {
-        //        using SQLiteDataReader rdr = cmd.ExecuteReader();
-
-        //        while (rdr.Read())
-        //        {
-        //            if (rdr.GetString(0) == singupKey)
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //    return false;
-        //}
     }
 }
 
