@@ -56,23 +56,22 @@ namespace HouseHQ_server
             string cs = @"URI=file:" + path;
 
             con = new SQLiteConnection(cs);
-            //using var con = new SQLiteConnection(cs);
             con.Open();
+
             db.createTables(con);
 
             var newThread = new System.Threading.Thread(frmNewFormThread);
             newThread.SetApartmentState(System.Threading.ApartmentState.STA);
             newThread.Start();
 
-            // Create a Http server and start listening for incoming connections
-            //url = "http://" + GetLocalIPAddress() + ":8080/";
+
             url = "http://+:8080/";
-            //String[] prefixes = { "http://+:8080/"/*, "https://+:8443/"*/ };
-            String[] prefixes = { "http://+:8080/"/*, "https://+:8443/"*/ };
+            String[] prefixes = { url };
             listener = new HttpListener();
-            //listener.Prefixes.Add(url);
             foreach (string s in prefixes)
+            { 
                 listener.Prefixes.Add(s);
+            }
             listener.Start();
             Console.WriteLine("Listening for connections on {0}", url);
 
@@ -103,7 +102,6 @@ namespace HouseHQ_server
         {
             bool runServer = true;
 
-            // While a user hasn't visited the `shutdown` url, keep on handling requests
             while (runServer)
             {
                 // Will wait here until we hear from a connection
@@ -123,8 +121,7 @@ namespace HouseHQ_server
                 Console.WriteLine(req.UserAgent);
                 Console.WriteLine();
 
-                // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
-                if ((req.HttpMethod == "POST") /*&& (req.Url.AbsolutePath == "/shutdown")*/)
+                if ((req.HttpMethod == "POST"))
                 {
                     Console.WriteLine("test");
                     using (System.IO.StreamReader reader = new System.IO.StreamReader(req.InputStream, req.ContentEncoding))
@@ -142,44 +139,44 @@ namespace HouseHQ_server
                             switch (json[0])
                             {
                                 case "101"://login
-                                    msg = login(json[1]);//
+                                    msg = login(json[1]);
                                     break;
                                 case "102": //singup
-                                    msg = singup(json[1]);//
+                                    msg = singup(json[1]);
                                     break;
                                 case "103"://change account
-                                    msg = changeAccount(json[1]);//
+                                    msg = changeAccount(json[1]);
                                     break;
                                 case "104"://add apps?
                                     break;
                                 case "105"://all apps
-                                    msg = allApps();//
+                                    msg = allApps();
                                     break;
                                 case "106"://delete apps?
                                     break;
                                 case "107"://delete apps from user
-                                    msg = deleteAppsFromUser(json[1]);//
+                                    msg = deleteAppsFromUser(json[1]);
                                     break;
                                 case "108"://add apps for user
-                                    msg = addAppForUser(json[1]);//
+                                    msg = addAppForUser(json[1]);
                                     break;
                                 case "109"://logout
                                     msg = logout(json[1]);
                                     break;
                                 case "110"://delete user
-                                    msg = deleteUser(json[1]);//
+                                    msg = deleteUser(json[1]);
                                     break;
                                 case "111"://getAllUsers
-                                    msg = getAllUsers();//
+                                    msg = getAllUsers()
                                     break;
                                 case "112"://get user information 
-                                    msg = getUserInformation(json[1]);//
+                                    msg = getUserInformation(json[1]);
                                     break;
                                 case "113"://sent DB
-                                    msg = sentDB();//
+                                    msg = sentDB();
                                     break;
                                 case "114":
-                                    msg = getUserApps(json[1]);//
+                                    msg = getUserApps(json[1]);
                                     break;
                                 default://400 error
                                     msg = error("code is incorrect");

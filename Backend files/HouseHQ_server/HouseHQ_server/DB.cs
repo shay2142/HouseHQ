@@ -8,9 +8,12 @@ namespace dataBase
     class DB
     {
         /*
-         
-         input:
-         output:
+         Create tables for DB if they do not exist.
+
+         input: 
+            - con: SQLiteConnection
+
+         output: none
          */
         public void createTables(SQLiteConnection con)
         {
@@ -26,10 +29,17 @@ namespace dataBase
                 cmd.ExecuteNonQuery();
             }
         }
+
         /*
-         
+         The function enters appropriate values in the "USERS" table and thus creates a new user.
+
          input:
-         output:
+            -con: SQLiteConnection
+            -userName: string
+            -password: string
+            -email: string
+
+         output: none
          */
         public void insertVluesToUsers(SQLiteConnection con, string userName, string password, string email)
         {
@@ -47,10 +57,16 @@ namespace dataBase
             }
 
         }
+
         /*
-         
+         The function adds appropriate values to the "APP" table and thus adds new applications to reamoteApp.
+
          input:
-         output:
+            -con: SQLiteConnection
+            -nameApp: string
+            -remoteApp: string
+
+         output: none
          */
         public void insertVluesToAPP(SQLiteConnection con, string nameApp, string remoteApp /*string pathImg,*/)
         {
@@ -67,10 +83,16 @@ namespace dataBase
                 Console.WriteLine(nameApp + "is exists");
             }
         }
+
         /*
-         
+         The function checks if the user exists.
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+
          output:
+            -true or false type bool
          */
         public bool userNameIsExists(SQLiteConnection con, string userName)
         {
@@ -88,10 +110,16 @@ namespace dataBase
             }
             return false;
         }
+
         /*
-         
+         The function checks if an application exists.
+
          input:
+            -con: SQLiteConnection
+            -appName: string
+
          output:
+            -true or false type bool
          */
         public bool appIsExists(SQLiteConnection con, string appName)
         {
@@ -109,10 +137,17 @@ namespace dataBase
             }
             return false;
         }
+
         /*
-         
+         The function checks if an application exists in a user.
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+            -appName: string
+
          output:
+            -true or false type boll
          */
         public bool appIsExistsInUser(SQLiteConnection con, string userName, string appName)
         {
@@ -130,10 +165,17 @@ namespace dataBase
             }
             return false;
         }
+
         /*
-         
+         The function updates the "LevelKey" in DB.
+
          input:
-         output:
+            -con: SQLiteConnection
+            -userName: string
+            -password: string
+            -level: string
+
+         output: none
          */
         public void updateLevelKey(SQLiteConnection con, string userName, string password, string level)
         {
@@ -150,10 +192,15 @@ namespace dataBase
                 Console.WriteLine("Username or password is incorrect");
             }
         }
+
         /*
-         
+         The function returns the "LevelKey" according to the user it receives.
+
          input:
+            -con: SQLiteConnection
+            -userName: string
          output:
+            return string level key if there's something wrong the func retun ""
          */
         public string getLevelKey(SQLiteConnection con, string userName)
         {
@@ -175,10 +222,18 @@ namespace dataBase
             }
             return "";
         }
+
         /*
-         
+         The function checks if a username and password are correct.
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+            -password: string
+
          output:
+            -return true when all is well
+            -return false when there's something wrong
          */
         public bool passwordIsCorrect(SQLiteConnection con, string userName, string password)
         {
@@ -196,10 +251,16 @@ namespace dataBase
             }
             return false;
         }
+
         /*
-         
+         The function connects the applications with the user.
+
          input:
-         output:
+            -con: SQLiteConnection
+            -userName: string
+            -nameApp: string
+
+         output: none
          */
         public void addAppForUser(SQLiteConnection con, string userName, string nameApp)
         {
@@ -219,10 +280,16 @@ namespace dataBase
                 Console.WriteLine("Username or app is not exists");
             }
         }
+
         /*
-         
+         The function gives the user's email.
+
          input:
+            -con: SQLiteConnection
+            -userName: userName
+
          output:
+             return the email
          */
         public string getMailForUser(SQLiteConnection con, string userName)
         {
@@ -240,10 +307,16 @@ namespace dataBase
             }
             return "";
         }
+
         /*
-         
+         The function sends the status of the user "online" or "offline".
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+
          output:
+            return the status of user
          */
         public string getStatusForUser(SQLiteConnection con, string userName)
         {
@@ -268,10 +341,16 @@ namespace dataBase
             }
             return "";
         }
+
         /*
-         
+         The function returns the "userID" of the user
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+
          output:
+            return the userID if user name is not exists return 0
          */
         public int getIdForUser(SQLiteConnection con, string userName)
         {
@@ -296,10 +375,16 @@ namespace dataBase
             }
             return 0;
         }
+
         /*
-         
+         The function returns the user's password.
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+
          output:
+            return the password if there's something wrong return ""
          */
         public string getPassForUser(SQLiteConnection con, string userName)
         {
@@ -324,10 +409,16 @@ namespace dataBase
             }
             return "";
         }
+
         /*
-         
+         The function returns all the applications that the user has
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+
          output:
+           return List<string> of apps
          */
         public List<string> getUserApplications(SQLiteConnection con, string userName)
         {
@@ -343,10 +434,15 @@ namespace dataBase
             }
             return appsList;
         }
+
         /*
-         
+         The function returns all existing users in DB.
+
          input:
+            -con: SQLiteConnection
+
          output:
+            return the list users
          */
         public List<string> getAllUsers(SQLiteConnection con)
         {
@@ -362,10 +458,15 @@ namespace dataBase
             }
             return usersList;
         }
+
         /*
-         
+         The function returns all the applications that are on the server.
+
          input:
+            -con: SQLiteConnection
+
          output:
+            return the list apps
          */
         public List<string> getAllApplications(SQLiteConnection con)
         {
@@ -381,10 +482,16 @@ namespace dataBase
             }
             return appsList;
         }
+
         /*
-         
+         The function updates the status status of the user.
+
          input:
-         output:
+            -con: SQLiteConnection
+            -userName: string
+            -status: string
+
+         output: none
          */
         public void updateStatus(SQLiteConnection con, string userName, string status)
         {
@@ -397,15 +504,24 @@ namespace dataBase
                 }
             }
         }
+
         /*
-         
+         The function updates the user information according to the parameters it receives.
+
          input:
+            -con: SQLiteConnection
+            -userName: string
+            -oldPassword: string
+            -newPassword: string
+
          output:
+            return error msg if necessary.
          */
         public string updateUser(SQLiteConnection con, string userName, string oldPassword, string newPassword, string mail, string level)
-        {
+        { 
             if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, oldPassword))
             {
+                //update password
                 if (newPassword != "" && newPassword != null)
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -414,6 +530,7 @@ namespace dataBase
                         cmd.ExecuteNonQuery();
                     }
                 }
+                //update mail
                 if (mail != "" && mail != null)
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -422,6 +539,7 @@ namespace dataBase
                         cmd.ExecuteNonQuery();
                     }
                 }
+                //update level key
                 if (level != null)
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -446,9 +564,12 @@ namespace dataBase
             }
         }
         /*
-         
+         The function prints the user table.
+
          input:
-         output:
+            -con: SQLiteConnection
+
+         output: none
          */
         public void printUsersTable(SQLiteConnection con)
         {
@@ -464,10 +585,17 @@ namespace dataBase
                 }
             }
         }
+
         /*
-         
+         The function deletes values in tables according to the values that enter the function.
+
          input:
-         output:
+            -con: SQLiteConnection
+            -table: string
+            -column: string
+            -value: string
+
+         output: none
          */
         public void deleteValueFromeTable(SQLiteConnection con, string table, string column, string value) //value = just string value
         {
@@ -477,14 +605,19 @@ namespace dataBase
                 cmd.ExecuteNonQuery();
             }
         }
+
         /*
-         
+         The function deletes applications from users
+
          input:
-         output:
+            -con: SQLiteConnection
+            -userName: string
+            -appName: string
+
+         output: none
          */
         public void deleteAppsFromUser(SQLiteConnection con, string userName, string appName)
         {
-            //check input??
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
                 cmd.CommandText = "DELETE FROM apps WHERE usersID = (SELECT usersID from USERS WHERE USERNAME='" + userName + "') and  appID = (SELECT appID from APP WHERE NAME='" + appName + "')";
@@ -492,19 +625,31 @@ namespace dataBase
             }
         }
 
+        /*
+         The function deletes applications from users.
+         input:
+            -con: SQLiteConnection
+            -userName: string
+
+         output: none
+         */
         public void deleteAppsUser(SQLiteConnection con, string userName)
         {
-            //check input??
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
                 cmd.CommandText = "DELETE FROM apps WHERE usersID = (SELECT usersID from USERS WHERE USERNAME='" + userName + "')";
                 cmd.ExecuteNonQuery();
             }
         }
+
         /*
-         
+         The function deletes tables and recreates them.
+
          input:
-         output:
+            -con: SQLiteConnection
+            -table: string
+
+         output: none
          */
         public void deleteTable(SQLiteConnection con, string table) //value = just string value
         {
