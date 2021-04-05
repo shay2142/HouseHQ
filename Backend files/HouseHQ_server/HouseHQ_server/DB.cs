@@ -491,6 +491,16 @@ namespace dataBase
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void deleteAppsUser(SQLiteConnection con, string userName)
+        {
+            //check input??
+            using (SQLiteCommand cmd = new SQLiteCommand(con))
+            {
+                cmd.CommandText = "DELETE FROM apps WHERE usersID = (SELECT usersID from USERS WHERE USERNAME='" + userName + "')";
+                cmd.ExecuteNonQuery();
+            }
+        }
         /*
          
          input:

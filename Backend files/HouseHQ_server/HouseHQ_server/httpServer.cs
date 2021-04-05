@@ -300,12 +300,9 @@ namespace HouseHQ_server
             var user = JsonConvert.DeserializeObject<deleteUser>(json);
             if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "admin"))
             {
+                db.deleteAppsUser(con, user.userNameDelete);
                 db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
 
-                foreach (var appName in db.getUserApplications(con, user.userNameDelete))
-                {
-                    db.deleteAppsFromUser(con, user.userNameDelete, appName);
-                }
                 return "210&";
             }
             else
