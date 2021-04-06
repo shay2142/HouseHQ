@@ -51,7 +51,6 @@ namespace HouseHQ_server
 
         public void runServer()
         {
-            //string path = @"MyDatabase.sqlite";
             string path = @"D:\househq\Backend files\HouseHQ_server\HouseHQ_server\MyDatabase.sqlite";
             string cs = @"URI=file:" + path;
 
@@ -132,7 +131,7 @@ namespace HouseHQ_server
                         string[] json = s.Split('&');
                         Console.WriteLine(json[0]);
                         Console.WriteLine(json[1]);
-                        //Console.WriteLine();
+
                         string msg = "";
                         if (IsValidJson(json[1]) || (Int32.Parse(json[0]) > 100 && Int32.Parse(json[0]) < 200))
                         {

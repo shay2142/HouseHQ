@@ -54,15 +54,11 @@ namespace Dashboard
                 password = hashPass.ComputeSha256Hash(txtpassword.Text)
             };
             string json = JsonConvert.SerializeObject(test);
-            //httpClient shay = new httpClient(json);
             httpClient testLogin = new httpClient();
             string result = testLogin.sent(json, testLogin.hostToIp(ip), "101");
-            //string result = await msg(json, IP.Text, "101");
             if (result != null)
             {
                 string[] results = result.Split('&');
-                //MessageBox.Show(user.name, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                //MessageBox.Show(results[1], "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 if (results[0] == "201")
                 {
                     var user = JsonConvert.DeserializeObject<okLogin>(results[1]);
@@ -75,8 +71,6 @@ namespace Dashboard
                     MessageBox.Show(user.msg, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            
-            //var data = new StringContent("101&" + json, Encoding.UTF8, "application/json");
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -55,12 +55,10 @@ namespace Dashboard
                 test.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                 test.Font = new System.Drawing.Font("Nirmala UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 test.ForeColor = System.Drawing.Color.FromArgb(0, 126, 249);
-                //test.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image"))); /*test.Image = Image.FromFile(@"C:\Images\Dock.jpg");*/
-                //test.Location = new System.Drawing.Point(290, 9);
+
                 test.Margin = new System.Windows.Forms.Padding(2);
                 test.Name = app;
                 test.Size = new System.Drawing.Size(101, 91);
-                //test.TabIndex = 27;
                 test.Text = app;
                 test.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
                 test.UseVisualStyleBackColor = true;

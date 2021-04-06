@@ -29,12 +29,6 @@ namespace HouseHQ_server
         {
             httpServer server2 = new httpServer();
             server2.runServer();
-            //Thread thr = new Thread(new ThreadStart(server2.runServer));
-            //thr.Start();
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-
         }
     }
 }

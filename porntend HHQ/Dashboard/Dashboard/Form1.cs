@@ -48,16 +48,9 @@ namespace Dashboard
             key = user.key;
             label1.Text = user.name;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
-            //pnlNav.Height = btnApps.Height;
-            //pnlNav.Top = btnApps.Top;
-            //pnlNav.Left = btnApps.Left;
             pnlNav.BackColor = Color.FromArgb(24, 30, 54);
 
             lbltitle.Text = "HouseHQ";
-            //frmApps frmDashboard_vrb = new frmApps(IP_server, userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            //frmDashboard_vrb.FormBorderStyle = FormBorderStyle.None;
-            //this.pnlFormLoader.Controls.Add(frmDashboard_vrb);
-            //frmDashboard_vrb.Show();
 
             if (user.key != "admin")
             {

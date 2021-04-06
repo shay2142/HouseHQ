@@ -36,7 +36,6 @@ namespace Dashboard
             if (result != null)
             {
                 string[] results = result.Split('&');
-                //MessageBox.Show(results[1], "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (results[0] == "213")
                 {
                     var user = JsonConvert.DeserializeObject<jsonSentDB>(results[1]);
