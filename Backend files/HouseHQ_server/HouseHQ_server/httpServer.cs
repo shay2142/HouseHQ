@@ -52,7 +52,7 @@ namespace HouseHQ_server
         public void runServer()
         {
             //string path = @"MyDatabase.sqlite";
-            string path = @"C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\MyDatabase.sqlite";
+            string path = @"D:\househq\Backend files\HouseHQ_server\HouseHQ_server\MyDatabase.sqlite";
             string cs = @"URI=file:" + path;
 
             con = new SQLiteConnection(cs);
@@ -167,7 +167,7 @@ namespace HouseHQ_server
                                     msg = deleteUser(json[1]);
                                     break;
                                 case "111"://getAllUsers
-                                    msg = getAllUsers()
+                                    msg = getAllUsers();
                                     break;
                                 case "112"://get user information 
                                     msg = getUserInformation(json[1]);
