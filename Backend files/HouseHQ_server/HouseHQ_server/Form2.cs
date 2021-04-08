@@ -24,6 +24,12 @@ namespace HouseHQ_server
             Http = http;
 
             GetLocalIPAddress();
+
+            if (!Http.db.adminIsExist(Http.con))
+            {
+                new Form1(http, "create admin").Show();
+                //this.Hide();
+            }
         }
 
         public void GetLocalIPAddress()

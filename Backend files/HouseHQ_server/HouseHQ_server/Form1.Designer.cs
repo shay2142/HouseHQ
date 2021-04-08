@@ -1,6 +1,7 @@
-﻿namespace Dashboard
+﻿
+namespace HouseHQ_server
 {
-    partial class frmRegister
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +41,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.checkbxAdmin = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -174,25 +174,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(39, 135);
+            this.label10.Location = new System.Drawing.Point(37, 133);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 17);
             this.label10.TabIndex = 14;
             this.label10.Text = "mail";
-            // 
-            // buttonClose
-            // 
-            this.buttonClose.BackColor = System.Drawing.Color.Transparent;
-            this.buttonClose.FlatAppearance.BorderSize = 0;
-            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClose.ForeColor = System.Drawing.Color.Black;
-            this.buttonClose.Location = new System.Drawing.Point(248, 12);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(25, 25);
-            this.buttonClose.TabIndex = 21;
-            this.buttonClose.Text = "X";
-            this.buttonClose.UseVisualStyleBackColor = false;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // checkbxAdmin
             // 
@@ -206,14 +192,13 @@
             this.checkbxAdmin.Text = "Admin";
             this.checkbxAdmin.UseVisualStyleBackColor = true;
             // 
-            // frmRegister
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.ClientSize = new System.Drawing.Size(285, 440);
             this.Controls.Add(this.checkbxAdmin);
-            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtMail);
             this.Controls.Add(this.button2);
@@ -228,9 +213,8 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "frmRegister";
+            this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmRegister_Load);
@@ -240,7 +224,6 @@
         }
 
         #endregion
-
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtUsername;
@@ -253,8 +236,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.CheckBox checkbxAdmin;
     }
 }
-

@@ -85,3 +85,4 @@ D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data
 D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.xml
 D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.xml
 D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CopyComplete
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form1.resources

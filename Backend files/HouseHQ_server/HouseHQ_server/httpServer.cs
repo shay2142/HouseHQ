@@ -51,7 +51,7 @@ namespace HouseHQ_server
 
         public void runServer()
         {
-            string path = @"D:\househq\Backend files\HouseHQ_server\HouseHQ_server\MyDatabase.sqlite";
+            string path = @"HHQ_DB.sqlite";
             string cs = @"URI=file:" + path;
 
             con = new SQLiteConnection(cs);

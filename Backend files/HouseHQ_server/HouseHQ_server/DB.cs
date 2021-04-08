@@ -660,6 +660,33 @@ namespace dataBase
             }
             createTables(con);
         }
+
+        /*
+         
+         */
+        public void createAdminDefault(SQLiteConnection con, string userName, string password, string mail)
+        {
+            insertVluesToUsers(con, userName, password, mail);
+            updateUser(con, userName, password, null, null, "admin");
+            updateStatus(con, userName, "offline");
+        }
+
+        public bool adminIsExist(SQLiteConnection con)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT LEVEL_KEY FROM USERS", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.GetString(0) == "admin")
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
 
