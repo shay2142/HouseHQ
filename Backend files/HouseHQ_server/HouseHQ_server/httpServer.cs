@@ -63,6 +63,8 @@ namespace HouseHQ_server
             newThread.SetApartmentState(System.Threading.ApartmentState.STA);
             newThread.Start();
 
+            remoteApp app = new remoteApp();
+            app.laodApp(this);
 
             url = "http://+:8080/";
             String[] prefixes = { url };

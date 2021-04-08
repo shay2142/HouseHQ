@@ -103,6 +103,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="remoteApp.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="AddApps.cs">
       <SubType>Form</SubType>

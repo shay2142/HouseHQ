@@ -27,47 +27,18 @@ namespace HouseHQ_server
 
         private void createRemoteApp_Click(object sender, EventArgs e)
         {
-            //create RemoteApp not workin with Program Files check it!
-            //ProcessStartInfo startInfo = new ProcessStartInfo("reg.exe", "Add " + '"' + @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text) + '"' + @" /v Path /t REG_SZ /d " + namePath.Text);
-            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //System.Diagnostics.Process.Start(startInfo);
 
             if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text)) == null)
             {
                 RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text));
                 key.SetValue("Path", namePath.Text);
                 key.Close();
+
+                remoteApp app = new remoteApp();
+                app.laodApp(Http);
             }
 
-            /*****עובד אך עדיין לא גמור!!!*****/
 
-            string path = @"readApp.bat";
-
-            // Create the file, or overwrite if the file exists.
-            using (FileStream fs = File.Create(path))
-            {
-                byte[] info = new UTF8Encoding(true).GetBytes("REG QUERY " + '"' + @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" + '"' + " > app.txt");
-                // Add some information to the file.
-                fs.Write(info, 0, info.Length);
-            }
-            System.Diagnostics.Process.Start(path).WaitForExit();
-
-            // Open the stream and read it back.
-            using (StreamReader sr = File.OpenText("app.txt"))
-            {
-                string s = "";
-                while ((s = sr.ReadLine()) != null)
-                {
-                    //Console.WriteLine(s);
-                    if (Path.GetFileNameWithoutExtension(s) != "")
-                    {
-                        if (!Http.db.appIsExists(Http.con, Path.GetFileNameWithoutExtension(s)))
-                        {
-                            Http.db.insertVluesToAPP(Http.con, Path.GetFileNameWithoutExtension(s), Path.GetFileNameWithoutExtension(s));
-                        }
-                    }
-                }
-            }
         }
 
         private void namePath_TextChanged(object sender, EventArgs e)
@@ -107,5 +78,6 @@ namespace HouseHQ_server
         {
             this.Hide();
         }
+
     }
 }
