@@ -7,10 +7,13 @@ Server that is on the public and private network, it contains files and programs
 
 What things you need to install the software and how to install them
 
-RDP Wrapper Library v1.6.2
+**[RDP Wrapper Library v1.6.2](https://github.com/stascorp/rdpwrap)**
 ```
-Give examples
+git clone https://github.com/stascorp/rdpwrap.git
 ```
+or
+
+**[Installer downloads](https://github.com/stascorp/rdpwrap/releases)**
 
 ### Installing
 
@@ -20,16 +23,19 @@ Download all the files from the Git:
 git clone git@gitlab.com:magshimim-markez-2021/06/606/househq.git
 ```
 
-Download all the files from the Git:
+#### Download all the files from the Git:
+
+Take the server files and transfer them to all the server:
+
+*HouseHQ_server is only available for: Windows 10 Pro
+```
+HouseHQ_server
+```
+
+Take the client files and transfer them to all the clients:
 
 ```
-server
-```
-
-Take the client files and transfer them to all the clients
-
-```
-client
+HouseHQ_clien
 ```
 
 ## Usage
