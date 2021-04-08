@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cHfV1LQnqI9fQF9Gqnb6fMUVXwQs0HfYU7Miv6t09gc3JMopmpxvKoQpUauhOSyHeS5HMffxtZSYk0QIoJWFGg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\shay5\\Documents\\househq\\Backend files\\httpClient\\httpClient\\httpClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shay5\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

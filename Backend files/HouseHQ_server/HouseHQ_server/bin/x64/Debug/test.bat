@@ -1,0 +1,1 @@
+REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" > test1.txt

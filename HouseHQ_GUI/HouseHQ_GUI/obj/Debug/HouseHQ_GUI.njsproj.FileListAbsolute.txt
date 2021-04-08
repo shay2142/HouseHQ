@@ -1,0 +1,3 @@
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_GUI\HouseHQ_GUI\obj\Debug\HouseHQ_GUI.njsprojAssemblyReference.cache
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_GUI\HouseHQ_GUI\obj\Debug\HouseHQ_GUI.njsproj.CoreCompileInputs.cache
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_GUI\HouseHQ_GUI\bin\Microsoft.NodejsTools.WebRole.dll
