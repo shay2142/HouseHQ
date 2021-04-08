@@ -1,0 +1,88 @@
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe.config
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form1.resources
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Properties.Resources.resources
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.GenerateResource.cache
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CoreCompileInputs.cache
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\source\repos\HouseHQ\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe.config
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Properties.Resources.resources
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.GenerateResource.cache
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CoreCompileInputs.cache
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.SqlServer.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.EF6.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.Linq.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.SqlServer.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CopyComplete
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe.config
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.dll
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.SqlServer.dll
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.dll
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.EF6.dll
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.Linq.dll
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.xml
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.SqlServer.xml
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.xml
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form1.resources
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Properties.Resources.resources
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.GenerateResource.cache
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CoreCompileInputs.cache
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CopyComplete
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
+C:\Users\shay5\source\repos\HouseHQ\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Microsoft.Win32.Registry.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.dll
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Microsoft.Win32.Registry.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.xml
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form2.resources
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.AddApps.resources
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.AddApps.resources
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form2.resources
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Properties.Resources.resources
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.GenerateResource.cache
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CoreCompileInputs.cache
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe.config
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.exe
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\HouseHQ_server.pdb
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.SqlServer.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Microsoft.Win32.Registry.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Newtonsoft.Json.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.EF6.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.Linq.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.dll
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.xml
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\EntityFramework.SqlServer.xml
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Microsoft.Win32.Registry.xml
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Newtonsoft.Json.xml
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.xml
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.xml
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.xml
+D:\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CopyComplete
+C:\Users\shay5\Documents\househq\Backend files\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form1.resources
