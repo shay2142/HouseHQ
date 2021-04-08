@@ -7,76 +7,98 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
-using Microsoft.Win32;
-using System.Diagnostics;
+using dataBase;
 
 namespace HouseHQ_server
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public hash hashPass = new hash();
+        public httpServer Http;
+
+        public Form1(httpServer http, string type)
         {
             InitializeComponent();
+
+            Http = http;
+            label1.Text = type;
         }
 
-        private void path_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
-            var filename = string.Empty;
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "Programs (*.exe, *.com, *.cmd, *.bat)| *.exe;*.com;*.cmd;*.bat|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (txtUsername.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtMail.Text == "")
             {
-                //Get the path of specified file
-                filePath = openFileDialog.FileName;
-                namePath.Text = filePath;
-                //Read the contents of the file into a stream
-                var fileStream = openFileDialog.OpenFile();
- 
+                MessageBox.Show("Fields are empty", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else if (txtPassword.Text == txtComPassword.Text)
+            {
+                if (label1.Text == "create admin")
+                {
+                    Http.db.createAdminDefault(Http.con, txtUsername.Text, hashPass.ComputeSha256Hash(txtPassword.Text), txtMail.Text);
+                }
+                else
+                {
+                    if (!Http.db.userNameIsExists(Http.con, txtUsername.Text))
+                    {
+                        Http.db.insertVluesToUsers(Http.con, txtUsername.Text, hashPass.ComputeSha256Hash(txtPassword.Text), txtMail.Text);
+
+                        if (checkbxAdmin.Checked)
+                        {
+                            Http.db.updateUser(Http.con, txtUsername.Text, hashPass.ComputeSha256Hash(txtPassword.Text), null, null, "admin");
+                        }
+                        Http.db.updateStatus(Http.con, txtUsername.Text, "offline");
+                    }
+                }
+                MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //new Form2(Http).Show();
+            }
+            else
+            {
+                MessageBox.Show("Passwords does not match, Please Re-enter", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Text = "";
+                txtComPassword.Text = "";
+                txtPassword.Focus();
             }
         }
 
-        private void createRemoteApp_Click(object sender, EventArgs e)
+        private void checkbxShowPas_CheckedChanged(object sender, EventArgs e)
         {
-            //create RemoteApp not workin with Program Files check it!
-            ProcessStartInfo startInfo = new ProcessStartInfo("reg.exe", "Add " + '"' + @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text) + '"' + @" /v Path /t REG_SZ /d " + namePath.Text);
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            System.Diagnostics.Process.Start(startInfo);
-
-            /*****עובד אך עדיין לא גמור!!!*****/
-
-            //string path = @"test.bat";
-
-            //// Create the file, or overwrite if the file exists.
-            //using (FileStream fs = File.Create(path))
-            //{
-            //    byte[] info = new UTF8Encoding(true).GetBytes("REG QUERY " + '"' + @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications" + '"' + " > test1.txt");
-            //    // Add some information to the file.
-            //    fs.Write(info, 0, info.Length);
-            //}
-
-            //System.Diagnostics.Process.Start("test.bat");
-
-            //// Open the stream and read it back.
-            //using (StreamReader sr = File.OpenText("test1.txt"))
-            //{
-            //    string s = "";
-            //    while ((s = sr.ReadLine()) != null)
-            //    {
-            //        //Console.WriteLine(s);
-            //        MessageBox.Show(Path.GetFileNameWithoutExtension(s), "", MessageBoxButtons.OK);
-            //    }
-            //}
+            if (checkbxShowPas.Checked)
+            {
+                txtPassword.PasswordChar = '\0';
+                txtComPassword.PasswordChar = '\0';
+            }
+            else
+            {
+                txtPassword.PasswordChar = '•';
+                txtComPassword.PasswordChar = '•';
+            }
         }
 
-        private void namePath_TextChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtUsername.Text = "";
+            txtPassword.Text = "";
+            txtComPassword.Text = "";
+            txtMail.Text = "";
+            txtUsername.Focus();
+        }
+
+        private void frmRegister_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kryptonDateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
         }
