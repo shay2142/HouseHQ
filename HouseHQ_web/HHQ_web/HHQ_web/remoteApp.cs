@@ -11,11 +11,9 @@ namespace HHQ_web
     {
         public void createRemoteAppFile(string ip, string remoteAppName)
         {
-            string path = @"D:\HHQ_web\HHQ_web\remoteApp\reamoteapp.c";
-            string path2 = @"D:\HHQ_web\HHQ_web\remoteApp\gcc.bat";
+            string path = @"C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\reamoteapp.c";
 
             File.Delete(path);
-            File.Delete(path2);
 
             if (!File.Exists(path))
             {
@@ -63,7 +61,7 @@ namespace HHQ_web
                     sw.WriteLine(); 
                 }
             }
-            var process = System.Diagnostics.Process.Start(@"D:\HHQ_web\HHQ_web\remoteApp\gcc.exe", @"-o D:\HHQ_web\HHQ_web\remoteApp\" + remoteAppName.Replace(" ", "") + @".exe D:\HHQ_web\HHQ_web\remoteApp\reamoteapp.c");
+            var process = System.Diagnostics.Process.Start(@"C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\gcc.exe", @"-o C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\" + remoteAppName.Replace(" ", "") + @".exe C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\reamoteapp.c");
             process.WaitForExit();
         }
     }

@@ -55,7 +55,7 @@ namespace HHQ_web
                 {
                     manager();
                 }
-
+                ContactUs();
                 //user1.InnerHtml = "Hi there, " + user.name + "!";
                 userName.InnerHtml = user.name;
                 IP = Session["ip"].ToString();
@@ -112,12 +112,12 @@ namespace HHQ_web
 
         protected void btnApps(object sender, EventArgs e)
         {
-
+            getData();
         }
 
         protected void btnManger(object sender, EventArgs e)
         {
-
+            Response.Redirect("Manager.aspx");
         }
 
         protected void btnContact(object sender, EventArgs e)
