@@ -5,7 +5,7 @@ import pygame
 
 WIDTH = 1920
 HEIGHT = 1080
-host = "192.168.0.178"
+host = "192.168.0.128"
 port = 5001
 
 
