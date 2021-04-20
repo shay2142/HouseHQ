@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-
 namespace HouseHQ_server
 {
     public class remoteApp

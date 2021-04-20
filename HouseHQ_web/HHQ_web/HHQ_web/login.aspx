@@ -108,6 +108,7 @@
         <div class="input-container">
             <input required type="text" id="ipServer" runat="server"/>
             <label>IP</label>
+            
         </div>
         <div class="input-container">
             <input required type="text" id="userName" runat="server"/>

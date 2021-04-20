@@ -21,10 +21,10 @@ namespace HHQ_web
         public void button_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            remoteApp1.createRemoteAppFile(IP, button.Text);
+            remoteApp1.createRemoteAppFile(IP, button.Text, userName.InnerHtml);
             Response.ContentType = "application/exe";
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + button.Text + ".exe");
-            Response.TransmitFile(Server.MapPath("~/remoteApp/" + button.Text.Replace(" ", "") + ".exe"));
+            Response.TransmitFile(Server.MapPath("~/remoteApp/" + userName.InnerHtml + "_" +button.Text.Replace(" ", "") + ".exe"));
             Response.End();
         }
         public void getData()

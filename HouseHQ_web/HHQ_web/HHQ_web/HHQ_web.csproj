@@ -106,6 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Download.aspx" />
     <Content Include="login.aspx" />
     <Content Include="Manager.aspx" />
     <Content Include="singup.aspx" />
@@ -113,8 +114,16 @@
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="Apps.aspx" />
+    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Download.aspx.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Download.aspx.designer.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+    </Compile>
     <Compile Include="hash.cs" />
     <Compile Include="httpClient.cs" />
     <Compile Include="json.cs" />
@@ -161,6 +170,10 @@
     </Compile>
     <Compile Include="Apps.aspx.designer.cs">
       <DependentUpon>Apps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
