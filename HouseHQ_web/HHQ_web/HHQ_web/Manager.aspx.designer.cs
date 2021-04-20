@@ -114,30 +114,30 @@ namespace HHQ_web
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// Button4 control.
+        /// createUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        protected global::System.Web.UI.WebControls.Button createUsers;
 
         /// <summary>
-        /// Button5 control.
+        /// deleteUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button5;
+        protected global::System.Web.UI.WebControls.Button deleteUsers;
 
         /// <summary>
-        /// Button6 control.
+        /// changeUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button6;
+        protected global::System.Web.UI.WebControls.Button changeUser;
     }
 }

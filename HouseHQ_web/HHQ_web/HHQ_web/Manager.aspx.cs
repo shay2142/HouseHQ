@@ -86,5 +86,20 @@ namespace HHQ_web
                 }
             }
         }
+
+        protected void createUsers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void deleteUsers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void changeUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
