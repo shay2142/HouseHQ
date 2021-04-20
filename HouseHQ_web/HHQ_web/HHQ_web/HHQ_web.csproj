@@ -114,7 +114,7 @@
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="Apps.aspx" />
-    <Content Include="WebService1.asmx" />
+    <Content Include="HHQ_WebService.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Download.aspx.cs">
@@ -171,8 +171,8 @@
     <Compile Include="Apps.aspx.designer.cs">
       <DependentUpon>Apps.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebService1.asmx.cs">
-      <DependentUpon>WebService1.asmx</DependentUpon>
+    <Compile Include="HHQ_WebService.asmx.cs">
+      <DependentUpon>HHQ_WebService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
