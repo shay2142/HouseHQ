@@ -106,15 +106,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CreateUsers.aspx" />
+    <Content Include="Download.aspx" />
     <Content Include="login.aspx" />
     <Content Include="Manager.aspx" />
     <Content Include="singup.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
-    <Content Include="WebForm2.aspx" />
     <Content Include="Apps.aspx" />
+    <Content Include="HHQ_WebService.asmx" />
+    <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateUsers.aspx.cs">
+      <DependentUpon>CreateUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateUsers.aspx.designer.cs">
+      <DependentUpon>CreateUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Download.aspx.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Download.aspx.designer.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+    </Compile>
     <Compile Include="hash.cs" />
     <Compile Include="httpClient.cs" />
     <Compile Include="json.cs" />
@@ -148,19 +165,23 @@
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Apps.aspx.cs">
       <DependentUpon>Apps.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Apps.aspx.designer.cs">
       <DependentUpon>Apps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HHQ_WebService.asmx.cs">
+      <DependentUpon>HHQ_WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

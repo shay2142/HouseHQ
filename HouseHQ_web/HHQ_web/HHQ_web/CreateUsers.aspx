@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="HHQ_web.login1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateUsers.aspx.cs" Inherits="HHQ_web.CreateUsers" %>
 
 <!DOCTYPE html>
 
@@ -13,7 +13,7 @@
         form {
             background-color: rgb(24, 30, 54);
             width: 325px;
-            height: 325px;
+            height: 450px;
             margin: 30px auto 0;
             overflow: auto;
             box-shadow: 0px 0px 8px 1px rgba(0,0,0,.75);
@@ -97,22 +97,22 @@
             border: solid transparent;
             border-width: 0 0 0px 0;
         }
-        .auto-style1 {
-            direction: ltr;
+        h7 {
+            color: white;
         }
-    </style>
+        </style>
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="input-container">
-            <input required type="text" id="ipServer" runat="server"/>
-            <label>IP</label>
+            <input required type="text" id="userName" runat="server"/>
+            <label>User name</label>
             
         </div>
         <div class="input-container">
-            <input required type="text" id="userName" runat="server"/>
-            <label>Name</label>
+            <input required type="text" id="mail" runat="server"/>
+            <label>mail</label>
         </div>
 
         <div class="input-container">
@@ -120,12 +120,16 @@
             <label>Password</label>
         </div>
         <div class="input-container">
+            <input required type="password" id="conPassword" runat="server"/>
+            <label>Confirm password</label>
+        </div>
+        <div class="input-container">
+            <input id="Checkbox1" type="checkbox"/><h7> Admin</h7>
+        </div>
+        <div class="input-container">
             <%--<input type="submit" value="Login" />--%>
-            <asp:Button id="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
+            <asp:Button id="Button1" runat="server" Text="Create" OnClick="Button1_Click" />
         </div>
     </form>
-    <p class="auto-style1">
-        &nbsp;</p>
-</body>
+    </body>
 </html>
-

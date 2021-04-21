@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.Web.UI.WebControls;
 using System.IO;
+
 
 namespace HHQ_web
 {
     public class remoteApp
     {
-        public void createRemoteAppFile(string ip, string remoteAppName)
+        public void createRemoteAppFile(string ip, string remoteAppName, string userName)
         {
             string path = @"C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\reamoteapp.c";
 
@@ -58,10 +59,11 @@ namespace HHQ_web
                     sw.WriteLine("\n");
                     sw.WriteLine("  return 0;");
                     sw.WriteLine("}");
-                    sw.WriteLine(); 
+                    sw.WriteLine();
                 }
             }
-            var process = System.Diagnostics.Process.Start(@"C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\gcc.exe", @"-o C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\" + remoteAppName.Replace(" ", "") + @".exe C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\reamoteapp.c");
+
+            var process = System.Diagnostics.Process.Start(@"C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\gcc.exe", @"-o C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\" + userName + "_" + remoteAppName.Replace(" ", "") + @".exe " + path);
             process.WaitForExit();
         }
     }

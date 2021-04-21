@@ -172,9 +172,9 @@
             </asp:GridView>
             <br>
             <br>
-            <asp:Button ID="Button4" runat="server" Text="create users" class="mybtn1" />
-            <asp:Button ID="Button5" runat="server" Text="delete users" class="mybtn1" />
-            <asp:Button ID="Button6" runat="server" Text="change" class="mybtn1" />
+            <asp:Button ID="createUsers" runat="server" Text="create users" class="mybtn1" OnClick="createUsers_Click" />
+            <asp:Button ID="deleteUsers" runat="server" Text="delete users" class="mybtn1" OnClick="deleteUsers_Click" />
+            <asp:Button ID="changeUser" runat="server" Text="change user" class="mybtn1" OnClick="changeUser_Click" />
         </div>
 
         <script>

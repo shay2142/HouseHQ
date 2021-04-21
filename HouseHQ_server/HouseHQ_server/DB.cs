@@ -27,6 +27,9 @@ namespace dataBase
 
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS APPS(appsID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, usersID INTEGER, appID INTEGER, FOREIGN KEY(usersID) REFERENCES USERS(usersID), FOREIGN KEY(appID) REFERENCES APP(appID));";
                 cmd.ExecuteNonQuery();
+
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LOGS(logID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, DATE_LOGS TEXT NOT NULL, CODE TEXT NOT NULL, TYPE TEXT NOT NULL, J_LOG TEXT);";
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -84,6 +87,18 @@ namespace dataBase
             }
         }
 
+
+        public void insertVluesToLOGS(SQLiteConnection con, string json, string type)
+        {
+            DateTime aDate = DateTime.Now;
+            string[] jsons = json.Split('&');
+
+            using (SQLiteCommand cmd = new SQLiteCommand(con))
+            {
+                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + jsons[0] + "', '" + type + "', '" + jsons[1] + "')";
+                cmd.ExecuteNonQuery();
+            }
+        }
         /*
          The function checks if the user exists.
 

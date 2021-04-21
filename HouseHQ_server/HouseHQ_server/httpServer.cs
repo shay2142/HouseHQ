@@ -130,6 +130,8 @@ namespace HouseHQ_server
                         string s = reader.ReadToEnd();
                         Console.WriteLine("InputStream: {0}", s);
 
+                        db.insertVluesToLOGS(con, s, "client->server");
+
                         string[] json = s.Split('&');
                         Console.WriteLine(json[0]);
                         Console.WriteLine(json[1]);
@@ -184,6 +186,7 @@ namespace HouseHQ_server
                                     break;
                             }
                             response(resp, msg, "json");
+                            db.insertVluesToLOGS(con, msg, "server->client");
                             Console.WriteLine(msg);
                         }
                         else
