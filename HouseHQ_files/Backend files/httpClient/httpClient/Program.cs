@@ -28,7 +28,7 @@ namespace HttpClientEx
             //    level = "admin"
             //};
             string json = JsonConvert.SerializeObject(test);
-            var data = new StringContent("101&" + json, Encoding.UTF8, "application/json");
+            var data = new StringContent("115&"/* + json*/, Encoding.UTF8, "application/json");
             var url = "http://localhost:8080/";
             using var client = new HttpClient();
 

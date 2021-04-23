@@ -11,42 +11,29 @@ namespace HHQ_web
 
     class okLogin
     {
-        // Make sure all class attributes have relevant getter setter.
-
         public string name { get; set; }
-
         public string mail { get; set; }
-
         public List<string> appList { get; set; }
-
         public string key { get; set; }
-
         public string img { get; set; }
     }
 
     class okSingup
     {
-        // Make sure all class attributes have relevant getter setter.
-
         public bool ok { get; set; }
     }
 
     class login
     {
-        // Make sure all class attributes have relevant getter setter.
         public string name { get; set; }
-
         public string password { get; set; }
     }
 
     class singup
     {
         public string name { get; set; }
-
         public string password { get; set; }
-
         public string mail { get; set; }
-
         public string key { get; set; }
     }
 

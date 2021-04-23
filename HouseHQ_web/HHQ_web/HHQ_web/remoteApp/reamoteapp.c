@@ -6,7 +6,7 @@
 
 int main ()
 {
-  char IP_server[] = "shay2142.tplinkdns.com";
+  char IP_server[] = "127.0.0.1";
   char remoteAppName[] = "Adobe Photoshop CC 2018";
   char fileName[] = "remoteApp.rdp";
   FILE * fp;

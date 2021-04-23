@@ -28,7 +28,7 @@ namespace dataBase
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS APPS(appsID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, usersID INTEGER, appID INTEGER, FOREIGN KEY(usersID) REFERENCES USERS(usersID), FOREIGN KEY(appID) REFERENCES APP(appID));";
                 cmd.ExecuteNonQuery();
 
-                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LOGS(logID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, DATE_LOGS TEXT NOT NULL, CODE TEXT NOT NULL, TYPE TEXT NOT NULL, J_LOG TEXT);";
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LOGS(logID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, DATE_LOGS TEXT NOT NULL, CODE TEXT NOT NULL, TYPE TEXT NOT NULL, J_LOG TEXT NOT NULL);";
                 cmd.ExecuteNonQuery();
             }
         }
@@ -95,7 +95,7 @@ namespace dataBase
 
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
-                cmd.CommandText = "INSERT INTO APP(DATE_LOGS, CODE, TYPE, J_LOG) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + jsons[0] + "', '" + type + "', '" + jsons[1] + "')";
+                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + jsons[0] + "', '" + type + "', '" + jsons[1] + "')";
                 cmd.ExecuteNonQuery();
             }
         }
@@ -391,6 +391,90 @@ namespace dataBase
             return 0;
         }
 
+
+        public string getDateForLog(SQLiteConnection con, int logID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select DATE_LOGS from LOGS where  logID = '" + logID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                        try
+                        {
+                            return (rdr.GetString(0));
+                        }
+                        catch (InvalidCastException e)
+                        {
+                            return "";
+                        }
+                    }
+                }
+            return "";
+        }
+
+        public string getCodeForLog(SQLiteConnection con, int logID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select CODE from LOGS where  logID = '" + logID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    try
+                    {
+                        return (rdr.GetString(0));
+                    }
+                    catch (InvalidCastException e)
+                    {
+                        return "";
+                    }
+                }
+            }
+            return "";
+        }
+
+        public string getSourceForLog(SQLiteConnection con, int logID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select TYPE from LOGS where  logID = '" + logID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    try
+                    {
+                        return (rdr.GetString(0));
+                    }
+                    catch (InvalidCastException e)
+                    {
+                        return "";
+                    }
+                }
+            }
+            return "";
+        }
+
+        public string getJ_LOGForLog(SQLiteConnection con, int logID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select J_LOG from LOGS where  logID = '" + logID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    try
+                    {
+                        return (rdr.GetString(0));
+                    }
+                    catch (InvalidCastException e)
+                    {
+                        return "";
+                    }
+                }
+            }
+            return "";
+        }
         /*
          The function returns the user's password.
 
@@ -472,6 +556,21 @@ namespace dataBase
                 }
             }
             return usersList;
+        }
+
+        public List<int> getAllLogsID(SQLiteConnection con)
+        {
+            List<int> logsList = new List<int>();
+            using (SQLiteCommand cmd = new SQLiteCommand("select logID from LOGS;", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    logsList.Add(rdr.GetInt32(0));
+                }
+            }
+            return logsList;
         }
 
         /*

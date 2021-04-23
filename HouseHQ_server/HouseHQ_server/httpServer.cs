@@ -22,6 +22,7 @@ namespace HouseHQ_server
 {
     public class httpServer
     {
+        public Dictionary<string, string> CODE;
         public SQLiteConnection con;
         public HttpListener listener;
         internal DB db = new DB();
@@ -58,6 +59,8 @@ namespace HouseHQ_server
             con.Open();
 
             db.createTables(con);
+
+            CODE = codes();
 
             var newThread = new System.Threading.Thread(frmNewFormThread);
             newThread.SetApartmentState(System.Threading.ApartmentState.STA);
@@ -181,12 +184,15 @@ namespace HouseHQ_server
                                 case "114":
                                     msg = getUserApps(json[1]);
                                     break;
+                                case "115":
+                                    msg = sentLogs();
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
                             }
                             response(resp, msg, "json");
-                            db.insertVluesToLOGS(con, s, "server->client");
+                            db.insertVluesToLOGS(con, msg, "server->client");
                             Console.WriteLine(msg);
                         }
                         else
@@ -353,7 +359,16 @@ namespace HouseHQ_server
             };
 
             return "214&" + JsonConvert.SerializeObject(msg);
+        }
 
+        public string sentLogs()
+        {
+            jsonSentLogs msg = new jsonSentLogs()
+            {
+                jsonLogs = sentLogsDB()
+            };
+
+            return "215&" + JsonConvert.SerializeObject(msg);
         }
 
         public string error(string msg)
@@ -384,6 +399,61 @@ namespace HouseHQ_server
             return list; 
         }
 
+        internal List<sentLogs> sentLogsDB()
+        {
+            var list = new List<sentLogs>();
+            List<int> logsID = db.getAllLogsID(con);
+            foreach (int logID in logsID)
+            {
+                list.Add(new sentLogs()
+                {
+                    ID = logID,
+                    dateLogs = db.getDateForLog(con, logID),
+                    typeLog = CODE[db.getCodeForLog(con, logID)],
+                    source = db.getSourceForLog(con, logID),
+                    log = db.getJ_LOGForLog(con, logID)
+                });
+            }
+            return list;
+        }
+
+        public Dictionary<string, string> codes() 
+        {
+            return new Dictionary<string, string>()
+            {
+                {"101", "login"},
+                {"102", "singup"},
+                {"103", "change account"},
+                {"104", "add apps"},
+                {"105", "all apps"},
+                {"106", "delete apps"},
+                {"107", "delete apps from user"},
+                {"108", "add apps for user"},
+                {"109", "logout"},
+                {"110", "delete user"},
+                {"111", "getAllUsers"},
+                {"112", "getAllUsers"},
+                {"113", "sent DB"},
+                {"114", "get user apps"},
+                {"115", "sent logs"},
+                {"400", "error"},
+                {"201", "ok login"},
+                {"202", "ok singup"},
+                {"203", "ok change account"},
+                {"204", "ok add apps"},
+                {"205", "ok all apps"},
+                {"206", "ok delete apps"},
+                {"207", "ok delete apps from user"},
+                {"208", "ok add apps for user"},
+                {"209", "ok logout"},
+                {"210", "ok delete user"},
+                {"211", "ok getAllUsers"},
+                {"212", "ok getAllUsers"},
+                {"213", "ok sent DB"},
+                {"214", "ok get user apps"},
+                {"215", "ok sent logs"},
+            };
+        }
         public void response(HttpListenerResponse resp, string msg, string ContentType)
         {
             // Write the response info
