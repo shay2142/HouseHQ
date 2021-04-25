@@ -30,7 +30,82 @@ namespace dataBase
 
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LOGS(logID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, DATE_LOGS TEXT NOT NULL, CODE TEXT NOT NULL, TYPE TEXT NOT NULL, J_LOG TEXT NOT NULL);";
                 cmd.ExecuteNonQuery();
+
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LEVEL(levelID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name_level TEXT NOT NULL, admin BOOLEAN NOT NULL);";
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LEVELS(levelsID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, levelID INTEGER, appID INTEGER, FOREIGN KEY(levelID) REFERENCES LEVEL(levelID), FOREIGN KEY(appID) REFERENCES APP(appID));";
+                cmd.ExecuteNonQuery();
+
             }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public void createLevel(SQLiteConnection con, string nameLevel, bool isAdmin)
+        {
+            if (!levelIsExists(con, nameLevel))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(con))
+                {
+                    cmd.CommandText = "INSERT INTO LEVEL(name_level, admin) VALUES('" + nameLevel + "', '" + isAdmin.ToString() + "')";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public void insertAppToLevel(SQLiteConnection con, string nameLevel, List<string> apps)
+        {
+            if (levelIsExists(con, nameLevel))
+            {
+                foreach (string app in apps)
+                {
+                    if (appIsExists(con, app))
+                    {
+                        using (SQLiteCommand cmd = new SQLiteCommand(con))
+                        {
+                            cmd.CommandText = "insert into LEVELS(levelID, appID) VALUES ((SELECT levelID from LEVEL WHERE name_level='" + nameLevel + "'), (SELECT appID from APP WHERE NAME='" + app + "'))";
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public bool levelIsExists(SQLiteConnection con, string levelName)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT name_level FROM LEVEL", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.GetString(0) == levelName)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         /*
@@ -87,7 +162,13 @@ namespace dataBase
             }
         }
 
+        /*
 
+
+         input: 
+
+         output:
+         */
         public void insertVluesToLOGS(SQLiteConnection con, string json, string type)
         {
             DateTime aDate = DateTime.Now;
@@ -391,7 +472,13 @@ namespace dataBase
             return 0;
         }
 
+        /*
 
+
+         input: 
+
+         output:
+         */
         public string getDateForLog(SQLiteConnection con, int logID)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select DATE_LOGS from LOGS where  logID = '" + logID + "'", con))
@@ -413,6 +500,13 @@ namespace dataBase
             return "";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getCodeForLog(SQLiteConnection con, int logID)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select CODE from LOGS where  logID = '" + logID + "'", con))
@@ -434,6 +528,13 @@ namespace dataBase
             return "";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getSourceForLog(SQLiteConnection con, int logID)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select TYPE from LOGS where  logID = '" + logID + "'", con))
@@ -455,6 +556,13 @@ namespace dataBase
             return "";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getJ_LOGForLog(SQLiteConnection con, int logID)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select J_LOG from LOGS where  logID = '" + logID + "'", con))
@@ -677,6 +785,7 @@ namespace dataBase
                 return "Username or password is incorrect";
             }
         }
+
         /*
          The function prints the user table.
 
@@ -776,7 +885,11 @@ namespace dataBase
         }
 
         /*
-         
+
+
+         input: 
+
+         output:
          */
         public void createAdminDefault(SQLiteConnection con, string userName, string password, string mail)
         {
@@ -785,6 +898,13 @@ namespace dataBase
             updateStatus(con, userName, "offline");
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public bool adminIsExist(SQLiteConnection con)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("SELECT LEVEL_KEY FROM USERS", con))
