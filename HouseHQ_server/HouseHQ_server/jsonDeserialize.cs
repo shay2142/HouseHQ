@@ -54,4 +54,11 @@ namespace jsonDeserialize
     {
         public string userName { get; set; }
     }
+
+    class addLevelKey
+    {
+        public string nameLevel { get; set; }
+        public List<string> apps { get; set; }
+        public bool admin { get; set; }
+    }
 }

@@ -187,6 +187,9 @@ namespace HouseHQ_server
                                 case "115":
                                     msg = sentLogs();
                                     break;
+                                case "116":
+                                    msg = addLevelKey(json[1]);
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -371,6 +374,18 @@ namespace HouseHQ_server
             return "215&" + JsonConvert.SerializeObject(msg);
         }
 
+        public string addLevelKey(string json)
+        {
+            var user = JsonConvert.DeserializeObject<addLevelKey>(json);
+            if (!db.levelIsExists(con, user.nameLevel))
+            {
+                db.createLevel(con, user.nameLevel, user.admin);
+            }
+            db.insertAppToLevel(con, user.nameLevel, user.apps);
+
+            return "216&";
+        }
+
         public string error(string msg)
         {
             error err = new error()
@@ -436,6 +451,7 @@ namespace HouseHQ_server
                 {"113", "sent DB"},
                 {"114", "get user apps"},
                 {"115", "sent logs"},
+                {"116", "add level"},
                 {"400", "error"},
                 {"201", "ok login"},
                 {"202", "ok singup"},
@@ -452,6 +468,7 @@ namespace HouseHQ_server
                 {"213", "ok sent DB"},
                 {"214", "ok get user apps"},
                 {"215", "ok sent logs"},
+                {"216", "ok add level"}
             };
         }
         public void response(HttpListenerResponse resp, string msg, string ContentType)
