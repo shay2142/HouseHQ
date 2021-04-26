@@ -190,6 +190,18 @@ namespace HouseHQ_server
                                 case "116":
                                     msg = addLevelKey(json[1]);
                                     break;
+                                case "117":
+                                    msg = getLevelKey();
+                                    break;
+                                case "118":
+                                    msg = deleteAppForLevel(json[1]);
+                                    break;
+                                case "119":
+                                    msg = deleteLevel(json[1]);
+                                    break;
+                                case "120":
+                                    msg = updateAppsForLevel(json[1]);
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -386,6 +398,48 @@ namespace HouseHQ_server
             return "216&";
         }
 
+        public string getLevelKey()
+        {
+            jsonSentLevels msg = new jsonSentLevels()
+            {
+                jsonLevels = sentLevelsInformation()
+            };
+
+            return "217&" + JsonConvert.SerializeObject(msg);
+        }
+
+        public string deleteAppForLevel(string json)
+        { 
+            var user = JsonConvert.DeserializeObject<deleteAppForLevel>(json);
+            db.deleteAppForLevel(con, user.nameLevel, user.apps);
+            return "218&";
+        }
+
+        public string deleteLevel(string json)
+        {
+            var user = JsonConvert.DeserializeObject<deleteLevel>(json);
+            db.deleteLevel(con, user.nameLevel);
+            return "219&";
+        }
+
+        public string updateAppsForLevel(string json)
+        {
+            var user = JsonConvert.DeserializeObject<updateAppsForLevel>(json);
+
+            var appList = new List<string>();
+
+            foreach (string app in user.apps)
+            {
+                if (!db.appIsExistsInLevel(con, user.nameLevel, app))
+                {
+                    appList.Add(app);
+                }
+            }
+            db.insertAppToLevel(con, user.nameLevel, appList);
+
+            return "220&";
+        }
+
         public string error(string msg)
         {
             error err = new error()
@@ -432,6 +486,23 @@ namespace HouseHQ_server
             return list;
         }
 
+        internal List<sentLevels> sentLevelsInformation()
+        { 
+            var list = new List<sentLevels>();
+            List<int> levelsID = db.getAllLevelID(con);
+            foreach(int levelID in levelsID)
+            {
+                list.Add(new sentLevels()
+                {
+                    ID = levelID,
+                    name = db.getNameForLevel(con, levelID),
+                    admin = Convert.ToBoolean(db.getAdminForLevel(con, levelID)),
+                    apps = db.getLevelApplications(con, db.getNameForLevel(con, levelID))
+                });
+            }
+            return list;
+        }
+
         public Dictionary<string, string> codes() 
         {
             return new Dictionary<string, string>()
@@ -452,6 +523,10 @@ namespace HouseHQ_server
                 {"114", "get user apps"},
                 {"115", "sent logs"},
                 {"116", "add level"},
+                {"117", "get level key"},
+                {"118", "delete app for level"},
+                {"119", "delete level"},
+                {"120", "update apps for level"},
                 {"400", "error"},
                 {"201", "ok login"},
                 {"202", "ok singup"},
@@ -468,7 +543,11 @@ namespace HouseHQ_server
                 {"213", "ok sent DB"},
                 {"214", "ok get user apps"},
                 {"215", "ok sent logs"},
-                {"216", "ok add level"}
+                {"216", "ok add level"},
+                {"217", "ok get level key"},
+                {"218", "ok delete app for level"},
+                {"219", "ok delete level"},
+                {"220", "ok update apps for level"}
             };
         }
         public void response(HttpListenerResponse resp, string msg, string ContentType)

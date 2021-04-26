@@ -40,6 +40,70 @@ namespace dataBase
             }
         }
 
+        public void deleteLevel(SQLiteConnection con, string levelName)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand(con))
+            {
+                cmd.CommandText = "DELETE FROM LEVELS WHERE levelID = (SELECT levelID from LEVEL WHERE name_level='" + levelName + "')";
+                cmd.ExecuteNonQuery();
+            }
+            deleteLevelFromUsers(con, levelName);
+            deleteValueFromeTable(con, "LEVEL", "name_level", levelName);
+        }
+
+        public void deleteAppForLevel(SQLiteConnection con, string nameLevel, List<string> apps)
+        {
+            foreach (string app in apps)
+            {
+                if (appIsExists(con, app))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(con))
+                    {
+                        cmd.CommandText = "DELETE FROM LEVELS WHERE levelsID = (SELECT levelID from LEVEL WHERE name_level='" + nameLevel + "') and  appID = (SELECT appID from APP WHERE NAME='" + app + "')";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        public void deleteLevelFromUsers(SQLiteConnection con, string levelName)
+        {
+            List<string> users = getAllUsers(con);
+            foreach (string user in users)
+            {
+                if (getLevelKey(con, user) == levelName)
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(con))
+                    {
+                        cmd.CommandText = "update USERS set LEVEL_KEY = '' where USERNAME = '" + user + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<string> getLevelApplications(SQLiteConnection con, string nameLevel)
+        {
+            List<string> appsList = new List<string>();
+            using (SQLiteCommand cmd = new SQLiteCommand("select APP.NAME from LEVEL join LEVELS ON LEVEL.levelID = LEVELS.levelID JOIN APP ON LEVELS.appID = APP.appID WHERE LEVEL.name_level = '" + nameLevel + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    appsList.Add(rdr.GetString(0));
+                }
+            }
+            return appsList;
+        }
+
         /*
 
 
@@ -226,6 +290,21 @@ namespace dataBase
                 while (rdr.Read())
                 {
                     if (rdr.GetString(0) == appName)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool appIsExistsInLevel(SQLiteConnection con, string levelName, string appName)
+        {
+            if (levelIsExists(con, levelName))
+            {
+                foreach (string app in getLevelApplications(con, levelName))
+                {
+                    if (app == appName)
                     {
                         return true;
                     }
@@ -507,6 +586,62 @@ namespace dataBase
 
          output:
          */
+        public string getNameForLevel(SQLiteConnection con, int levelID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select name_level from LEVEL where levelID = '" + levelID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    try
+                    {
+                        return (rdr.GetString(0));
+                    }
+                    catch (InvalidCastException e)
+                    {
+                        return "";
+                    }
+                }
+            }
+            return "";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getAdminForLevel(SQLiteConnection con, int levelID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select admin from LEVEL where levelID = '" + levelID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    try
+                    {
+                        return (rdr.GetString(0));
+                    }
+                    catch (InvalidCastException e)
+                    {
+                        return "";
+                    }
+                }
+            }
+            return "";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getCodeForLog(SQLiteConnection con, int logID)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select CODE from LOGS where  logID = '" + logID + "'", con))
@@ -666,6 +801,13 @@ namespace dataBase
             return usersList;
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public List<int> getAllLogsID(SQLiteConnection con)
         {
             List<int> logsList = new List<int>();
@@ -679,6 +821,28 @@ namespace dataBase
                 }
             }
             return logsList;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<int> getAllLevelID(SQLiteConnection con)
+        {
+            List<int> levelsList = new List<int>();
+            using (SQLiteCommand cmd = new SQLiteCommand("select levelID from LEVEL;", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    levelsList.Add(rdr.GetInt32(0));
+                }
+            }
+            return levelsList;
         }
 
         /*

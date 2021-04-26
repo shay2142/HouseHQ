@@ -68,4 +68,17 @@ namespace jsonSerializer
     {
         public List<sentLogs> jsonLogs { get; set; }
     }
+
+    class sentLevels
+    {
+        public int ID { get; set; }
+        public string name { get; set; }
+        public List<string> apps { get; set; }
+        public bool admin { get; set; }
+    }
+
+    class jsonSentLevels
+    { 
+        public List<sentLevels> jsonLevels { get; set; }
+    }
 }

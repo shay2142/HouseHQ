@@ -11,6 +11,7 @@ namespace jsonDeserialize
 
         public string password { get; set; }
     }
+
     class singup
     {
         public string name { get; set; }
@@ -21,16 +22,19 @@ namespace jsonDeserialize
 
         public string key { get; set; }
     }
+
     class addAppForUser
     {
         public string userName { get; set; }
         public string appName { get; set; }
     }
+
     class deleteUser
     {
         public string userNameDelete { get; set; }
         public string adminUserName { get; set; }
     }
+
     class changeAccount
     {
         public string userName { get; set; }
@@ -39,6 +43,7 @@ namespace jsonDeserialize
         public string mail { get; set; }
         public string level { get; set; }
     }
+
     class deleteAppFromUser
     {
         public string userName { get; set; }
@@ -60,5 +65,22 @@ namespace jsonDeserialize
         public string nameLevel { get; set; }
         public List<string> apps { get; set; }
         public bool admin { get; set; }
+    }
+
+    class deleteAppForLevel
+    { 
+        public string nameLevel { get; set; }
+        public List<string> apps { get; set; }
+    }
+
+    class deleteLevel
+    { 
+        public string nameLevel { get; set; }
+    }
+
+    class updateAppsForLevel
+    { 
+        public string nameLevel { get; set; }
+        public List<string> apps { get; set; }
     }
 }
