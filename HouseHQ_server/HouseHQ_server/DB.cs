@@ -40,6 +40,13 @@ namespace dataBase
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void deleteLevel(SQLiteConnection con, string levelName)
         {
             using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -51,6 +58,13 @@ namespace dataBase
             deleteValueFromeTable(con, "LEVEL", "name_level", levelName);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void deleteAppForLevel(SQLiteConnection con, string nameLevel, List<string> apps)
         {
             foreach (string app in apps)
@@ -66,6 +80,13 @@ namespace dataBase
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void deleteLevelFromUsers(SQLiteConnection con, string levelName)
         {
             List<string> users = getAllUsers(con);
@@ -298,6 +319,13 @@ namespace dataBase
             return false;
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public bool appIsExistsInLevel(SQLiteConnection con, string levelName, string appName)
         {
             if (levelIsExists(con, levelName))
@@ -1087,4 +1115,3 @@ namespace dataBase
         }
     }
 }
-
