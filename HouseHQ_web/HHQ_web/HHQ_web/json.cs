@@ -110,4 +110,18 @@ namespace HHQ_web
     {
         public string userName { get; set; }
     }
+
+    public class sentLogs
+    {
+        public int ID { get; set; }
+        public string dateLogs { get; set; }
+        public string typeLog { get; set; }
+        public string source { get; set; }
+        public string log { get; set; }
+    }
+
+    public class jsonSentLogs
+    {
+        public List<sentLogs> jsonLogs { get; set; }
+    }
 }

@@ -206,6 +206,7 @@ namespace HHQ_web
             }
             return "400";
         }
+
         [WebMethod]
         public jsonSentDB getDB(string ip)
         {
@@ -221,6 +222,23 @@ namespace HHQ_web
                 }
             }
             return new jsonSentDB();
+        }
+
+        [WebMethod]
+        public jsonSentLogs getLogs(string ip)
+        {
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(null, testLogin.hostToIp(ip), "115");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+                if (results[0] == "215")
+                {
+                    var user = JsonConvert.DeserializeObject<jsonSentLogs>(results[1]);
+                    return user;
+                }
+            }
+            return new jsonSentLogs();
         }
     }
 }

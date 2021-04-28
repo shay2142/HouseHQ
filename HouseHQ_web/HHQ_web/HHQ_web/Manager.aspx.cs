@@ -55,7 +55,7 @@ namespace HHQ_web
 
         protected void btnApps(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/Apps.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -80,6 +80,10 @@ namespace HHQ_web
         protected void changeUser_Click(object sender, EventArgs e)
         {
 
+        }
+        protected void viewLogs_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/logs.aspx");
         }
     }
 }

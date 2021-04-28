@@ -155,6 +155,39 @@
           <s:element minOccurs="0" maxOccurs="1" name="STATUS" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="getLogs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLogsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLogsResult" type="tns:jsonSentLogs" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="jsonSentLogs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="jsonLogs" type="tns:ArrayOfSentLogs" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSentLogs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sentLogs" nillable="true" type="tns:sentLogs" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sentLogs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="dateLogs" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="typeLog" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="log" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -199,6 +232,12 @@
   <wsdl:message name="getDBSoapOut">
     <wsdl:part name="parameters" element="tns:getDBResponse" />
   </wsdl:message>
+  <wsdl:message name="getLogsSoapIn">
+    <wsdl:part name="parameters" element="tns:getLogs" />
+  </wsdl:message>
+  <wsdl:message name="getLogsSoapOut">
+    <wsdl:part name="parameters" element="tns:getLogsResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -227,6 +266,10 @@
     <wsdl:operation name="getDB">
       <wsdl:input message="tns:getDBSoapIn" />
       <wsdl:output message="tns:getDBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLogs">
+      <wsdl:input message="tns:getLogsSoapIn" />
+      <wsdl:output message="tns:getLogsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -294,6 +337,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getLogs">
+      <soap:operation soapAction="http://tempuri.org/getLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -353,6 +405,15 @@
     </wsdl:operation>
     <wsdl:operation name="getDB">
       <soap12:operation soapAction="http://tempuri.org/getDB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLogs">
+      <soap12:operation soapAction="http://tempuri.org/getLogs" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

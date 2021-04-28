@@ -43,6 +43,8 @@ namespace HHQ_web.localhost {
         
         private System.Threading.SendOrPostCallback getDBOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getLogsOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -101,6 +103,9 @@ namespace HHQ_web.localhost {
         
         /// <remarks/>
         public event getDBCompletedEventHandler getDBCompleted;
+        
+        /// <remarks/>
+        public event getLogsCompletedEventHandler getLogsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -322,6 +327,35 @@ namespace HHQ_web.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getLogs", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public jsonSentLogs getLogs(string ip) {
+            object[] results = this.Invoke("getLogs", new object[] {
+                        ip});
+            return ((jsonSentLogs)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getLogsAsync(string ip) {
+            this.getLogsAsync(ip, null);
+        }
+        
+        /// <remarks/>
+        public void getLogsAsync(string ip, object userState) {
+            if ((this.getLogsOperationCompleted == null)) {
+                this.getLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetLogsOperationCompleted);
+            }
+            this.InvokeAsync("getLogs", new object[] {
+                        ip}, this.getLogsOperationCompleted, userState);
+        }
+        
+        private void OngetLogsOperationCompleted(object arg) {
+            if ((this.getLogsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getLogsCompleted(this, new getLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -438,6 +472,96 @@ namespace HHQ_web.localhost {
             }
             set {
                 this.imgField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class sentLogs {
+        
+        private int idField;
+        
+        private string dateLogsField;
+        
+        private string typeLogField;
+        
+        private string sourceField;
+        
+        private string logField;
+        
+        /// <remarks/>
+        public int ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateLogs {
+            get {
+                return this.dateLogsField;
+            }
+            set {
+                this.dateLogsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string typeLog {
+            get {
+                return this.typeLogField;
+            }
+            set {
+                this.typeLogField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string source {
+            get {
+                return this.sourceField;
+            }
+            set {
+                this.sourceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string log {
+            get {
+                return this.logField;
+            }
+            set {
+                this.logField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class jsonSentLogs {
+        
+        private sentLogs[] jsonLogsField;
+        
+        /// <remarks/>
+        public sentLogs[] jsonLogs {
+            get {
+                return this.jsonLogsField;
+            }
+            set {
+                this.jsonLogsField = value;
             }
         }
     }
@@ -764,6 +888,32 @@ namespace HHQ_web.localhost {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((jsonSentDB)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void getLogsCompletedEventHandler(object sender, getLogsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public jsonSentLogs Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((jsonSentLogs)(this.results[0]));
             }
         }
     }
