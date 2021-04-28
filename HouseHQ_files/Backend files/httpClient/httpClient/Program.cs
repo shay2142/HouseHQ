@@ -16,20 +16,36 @@ namespace HttpClientEx
             //var content = await client.GetStringAsync("http://192.168.0.194:8080/");
 
             //Console.WriteLine(content);
-            login test = new login()
-            {
-                name = "shay",
-                password = "12345"
-            };
+            //addLevelKey test = new addLevelKey()
+            //{
+            //    nameLevel = "test",
+            //    admin = true,
+            //    apps = new List<string>()
+            //        {
+            //            "notepad"
+            //        }
+            //   };
             //changeAccount test = new changeAccount()
             //{
             //    userName = "shay",
             //    oldPassword = "12345",
             //    level = "admin"
             //};
+            //deleteAppForLevel test = new deleteAppForLevel()
+            //{
+            //    apps = new List<string>()
+            //            {
+            //                "notepad"
+            //            },
+            //    nameLevel = "test"
+            //};
+            deleteLevel test = new deleteLevel()
+            { 
+                nameLevel = "test"
+            };
             string json = JsonConvert.SerializeObject(test);
-            var data = new StringContent("105&"/* + json*/, Encoding.UTF8, "application/json");
-            var url = "http://localhost:8080/";
+            var data = new StringContent("117&" /*+ json*/, Encoding.UTF8, "application/json");
+            var url = "http://192.168.0.128:8080/";
             using var client = new HttpClient();
 
             //var content = await client.GetStringAsync("http://192.168.0.194:8080/");
@@ -70,5 +86,23 @@ namespace HttpClientEx
         public string newPassword { get; set; }
         public string mail { get; set; }
         public string level { get; set; }
+    }
+
+    class addLevelKey
+    {
+        public string nameLevel { get; set; }
+        public List<string> apps { get; set; }
+        public bool admin { get; set; }
+    }
+
+    class deleteAppForLevel
+    {
+        public string nameLevel { get; set; }
+        public List<string> apps { get; set; }
+    }
+
+    class deleteLevel
+    {
+        public string nameLevel { get; set; }
     }
 }

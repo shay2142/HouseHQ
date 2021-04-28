@@ -36,20 +36,11 @@ namespace HHQ_web
 
         public void GetDB()
         {
-            var list = new List<getDB>();
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, testLogin.hostToIp(IP), "113");
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                if (results[0] == "213")
-                {
-                    var user = JsonConvert.DeserializeObject<jsonSentDB>(results[1]);
-                    list = user.db;
-                }
-            }
-            GridView1.DataSource = list;
+            localhost.WebService1 getDB = new localhost.WebService1();
+
+            GridView1.DataSource = getDB.getDB(IP).db;
             GridView1.DataBind();
+            
         }
 
         protected void btnMangar(object sender, EventArgs e)
@@ -69,21 +60,10 @@ namespace HHQ_web
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            logoutUser msg = new logoutUser()
+            localhost.WebService1 logout = new localhost.WebService1();
+            if (logout.logout(IP, userName.InnerHtml) == "209")
             {
-                userName = userName.InnerHtml
-            };
-
-            string json = JsonConvert.SerializeObject(msg);
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp("shaypc"), "109");//
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                if (results[0] == "209")
-                {
-                    Response.Redirect("~/login.aspx");
-                }
+                Response.Redirect("~/login.aspx");
             }
         }
 
