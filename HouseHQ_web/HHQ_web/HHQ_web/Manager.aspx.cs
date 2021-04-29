@@ -69,7 +69,7 @@ namespace HHQ_web
 
         protected void createUsers_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/CreateUsers.aspx");
         }
 
         protected void deleteUsers_Click(object sender, EventArgs e)

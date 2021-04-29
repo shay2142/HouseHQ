@@ -25,27 +25,16 @@ namespace HttpClientEx
             //            "notepad"
             //        }
             //   };
-            //changeAccount test = new changeAccount()
-            //{
-            //    userName = "shay",
-            //    oldPassword = "12345",
-            //    level = "admin"
-            //};
-            //deleteAppForLevel test = new deleteAppForLevel()
-            //{
-            //    apps = new List<string>()
-            //            {
-            //                "notepad"
-            //            },
-            //    nameLevel = "test"
-            //};
+
             deleteLevel test = new deleteLevel()
             { 
                 nameLevel = "test"
             };
             string json = JsonConvert.SerializeObject(test);
-            var data = new StringContent("117&" /*+ json*/, Encoding.UTF8, "application/json");
-            var url = "http://192.168.0.128:8080/";
+            var data = new StringContent("121&" /*+ json*/, Encoding.UTF8, "application/json");
+            var data2 = new StringContent("115&" /*+ json*/, Encoding.UTF8, "application/json");
+
+            var url = "http://127.0.0.1:8080/";
             using var client = new HttpClient();
 
             //var content = await client.GetStringAsync("http://192.168.0.194:8080/");
@@ -56,6 +45,12 @@ namespace HttpClientEx
             //Console.WriteLine("test");
             string result = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(result);
+
+            //var response2 = await client.PostAsync(url, data2);
+            //Console.WriteLine(response2.RequestMessage);
+            ////Console.WriteLine("test");
+            //string result2 = response2.Content.ReadAsStringAsync().Result;
+            //Console.WriteLine(result2);
 
         }
     }

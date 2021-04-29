@@ -202,6 +202,9 @@ namespace HouseHQ_server
                                 case "120":
                                     msg = updateAppsForLevel(json[1]);
                                     break;
+                                case "121":
+                                    msg = deleteLogs();
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -440,6 +443,12 @@ namespace HouseHQ_server
             return "220&";
         }
 
+        public string deleteLogs()
+        {
+            db.deleteTable(con, "LOGS");
+            return "221&";
+        }
+
         public string error(string msg)
         {
             error err = new error()
@@ -527,6 +536,7 @@ namespace HouseHQ_server
                 {"118", "delete app for level"},
                 {"119", "delete level"},
                 {"120", "update apps for level"},
+                {"121", "delete logs"},
                 {"400", "error"},
                 {"201", "ok login"},
                 {"202", "ok singup"},
@@ -547,7 +557,8 @@ namespace HouseHQ_server
                 {"217", "ok get level key"},
                 {"218", "ok delete app for level"},
                 {"219", "ok delete level"},
-                {"220", "ok update apps for level"}
+                {"220", "ok update apps for level"},
+                {"221", "ok delete logs"},
             };
         }
         public void response(HttpListenerResponse resp, string msg, string ContentType)

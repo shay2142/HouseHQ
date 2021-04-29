@@ -42,19 +42,19 @@ namespace HHQ_web
         public string msg { get; set; }
     }
 
-    class getAllUsers
+    public class getAllUsers
     {
         public List<string> usersList { get; set; }
     }
 
-    class userInformation
+    public class userInformation
     {
         public string password { get; set; }
         public string mail { get; set; }
         public string key { get; set; }
     }
 
-    class getUserInformation
+    class getUserInformation    
     {
         public string userName { get; set; }
     }

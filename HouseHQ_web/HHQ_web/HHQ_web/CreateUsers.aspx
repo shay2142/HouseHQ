@@ -13,7 +13,7 @@
         form {
             background-color: rgb(24, 30, 54);
             width: 325px;
-            height: 450px;
+            height: 500px;
             margin: 30px auto 0;
             overflow: auto;
             box-shadow: 0px 0px 8px 1px rgba(0,0,0,.75);
@@ -71,7 +71,7 @@
             top: -60px;
         }
 
-        #Button1 {
+        #Button1{
             cursor: pointer;
             margin: auto;
             width: 100%;
@@ -97,6 +97,24 @@
             border: solid transparent;
             border-width: 0 0 0px 0;
         }
+        #Button2 {
+            margin: auto;
+            background: none;
+            color: white;
+            border: none;
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: bold;
+            padding: 10px 10px;
+        }
+         #Button2:hover {
+            color: #f1f1f1;
+            font-size: 150%;
+        }
+        #Button2:active {
+            color: #808080;
+            font-size: 125%;
+        }
+       
         h7 {
             color: white;
         }
@@ -105,6 +123,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:Button ID="Button2" runat="server" Text="Back" OnClick="Button2_Click" formnovalidate/>
         <div class="input-container">
             <input required type="text" id="userName" runat="server"/>
             <label>User name</label>
@@ -124,7 +143,7 @@
             <label>Confirm password</label>
         </div>
         <div class="input-container">
-            <input id="Checkbox1" type="checkbox"/><h7> Admin</h7>
+            <input id="Checkbox1" type="checkbox" runat="server"/><h7> Admin</h7>
         </div>
         <div class="input-container">
             <%--<input type="submit" value="Login" />--%>

@@ -32,7 +32,7 @@ namespace Dashboard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string level = "no";
+            string level = "";
             if (txtUsername.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtMail.Text == "")
             {
                 MessageBox.Show("Fields are empty", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);

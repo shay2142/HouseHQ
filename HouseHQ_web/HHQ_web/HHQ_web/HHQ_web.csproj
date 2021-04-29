@@ -121,6 +121,9 @@
     <Content Include="Web References\localhost\getAllApps.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\localhost\getAllUsers.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\localhost\HHQ_WebService.disco" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
@@ -241,6 +244,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Web References\localhost\WS_Login.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\localhost\userInformation.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
