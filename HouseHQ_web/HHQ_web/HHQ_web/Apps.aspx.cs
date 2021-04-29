@@ -18,6 +18,7 @@ namespace HHQ_web
         {
             getData();
         }
+
         public void button_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -27,6 +28,7 @@ namespace HHQ_web
             Response.TransmitFile(Server.MapPath("~/remoteApp/" + userName.InnerHtml + "_" +button.Text.Replace(" ", "") + ".exe"));
             Response.End();
         }
+
         public void getData()
         {
             if (Session["json"] != null && Session["ip"] != null)
@@ -47,6 +49,7 @@ namespace HHQ_web
                 userName.InnerHtml = user.name;
                 
             }
+
             foreach (var app in apps)
             {
                 Button button = new Button();
@@ -72,6 +75,7 @@ namespace HHQ_web
         {
 
         }
+
         protected void lbl_Click(object sender, EventArgs e)
         {
 
@@ -110,6 +114,7 @@ namespace HHQ_web
             button1.Click += btnManger;
             mySidenav.Controls.Add(button1);
         }
+
         protected void ContactUs()
         {
             Button button1 = new Button();

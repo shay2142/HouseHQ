@@ -1045,7 +1045,7 @@ namespace dataBase
         }
 
         /*
-         The function deletes applications from users.
+         The function deletes all applications from users.
          input:
             -con: SQLiteConnection
             -userName: string
@@ -1116,6 +1116,25 @@ namespace dataBase
                 }
             }
             return false;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public void deleteApps(SQLiteConnection con, string appName)
+        {
+            if (appIsExists(con, appName))
+            {
+                foreach (string user in getAllUsers(con))
+                {
+                    deleteAppsFromUser(con, user, appName);
+                }
+                deleteValueFromeTable(con, "APP", "NAME", appName);
+            }
         }
     }
 }
