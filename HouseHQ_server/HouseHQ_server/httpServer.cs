@@ -123,9 +123,10 @@ namespace HouseHQ_server
                 Console.WriteLine(req.HttpMethod);
                 Console.WriteLine(req.UserHostName);
                 Console.WriteLine(req.UserAgent);
+                Console.WriteLine(req.RemoteEndPoint);
                 Console.WriteLine();
-
-                if ((req.HttpMethod == "POST"))
+                
+                if ((req.HttpMethod == "POST") && !db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
                     Console.WriteLine("test");
                     using (System.IO.StreamReader reader = new System.IO.StreamReader(req.InputStream, req.ContentEncoding))
@@ -219,7 +220,7 @@ namespace HouseHQ_server
                         }
                     }
                 }
-                else
+                else if(!db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
                     response(resp, String.Format(pageData), "text/html");
                 }
