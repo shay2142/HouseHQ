@@ -89,7 +89,7 @@ namespace dataBase
          */
         public void insertVluesToBLOCKS_IP(SQLiteConnection con, string ip)
         {
-            if (!ipIsBlock(con, ip)
+            if (!ipIsBlock(con, ip))
             {
                 using (SQLiteCommand cmd = new SQLiteCommand(con))
                 {
