@@ -481,7 +481,7 @@ namespace HHQ_web
         }
 
         [WebMethod]
-        public getAllAppsOnPC getAllAppsOnPC(string ip)
+        public string getAllAppsOnPC(string ip)
         {
             httpClient connect = new httpClient();
             string result = connect.sent(null, connect.hostToIp(ip), "122");
@@ -491,10 +491,10 @@ namespace HHQ_web
 
                 if (results[0] == "222")
                 {
-                    return JsonConvert.DeserializeObject<getAllAppsOnPC>(results[1]);
+                    return results[1];
                 }
             }
-            return new getAllAppsOnPC();
+            return "";
         }
     }
 }
