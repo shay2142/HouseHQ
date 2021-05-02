@@ -26,7 +26,7 @@ namespace HouseHQ_server
         public SQLiteConnection con;
         public HttpListener listener;
         internal DB db = new DB();
-        public string url = "http://192.168.0.131:8080/";
+        public string url = "http://+:8080/";
         public int requestCount = 0;
         public string pageData =
             "<!DOCTYPE>" +
