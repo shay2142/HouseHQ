@@ -83,4 +83,24 @@ namespace jsonDeserialize
         public string nameLevel { get; set; }
         public List<string> apps { get; set; }
     }
+
+    class addAppsOnServer
+    {
+        public string userName { get; set; }
+        public string password { get; set; }
+        public List<addApps> listApps { get; set; }
+    }
+
+    class addApps
+    { 
+        public string pathExeFile { get; set; }
+        public string nameApp { get; set; }
+    }
+
+    class deleteAppsForServer
+    {
+        public string userName { get; set; }
+        public string password { get; set; }
+        public List<string> appsList { get; set; }
+    }
 }

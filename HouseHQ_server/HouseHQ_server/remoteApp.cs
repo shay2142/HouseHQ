@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.Win32;
 
 namespace HouseHQ_server
 {
@@ -48,6 +49,36 @@ namespace HouseHQ_server
                     Http.db.deleteApps(Http.con, app);
                 }
             }
+        }
+
+        public void createRemoteApp(httpServer Http, string pathApp, string nameApp)
+        {
+            if (nameApp == null)
+            {
+                nameApp = Path.GetFileNameWithoutExtension(pathApp);
+            }
+
+            if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + nameApp) == null)
+            {
+                RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + nameApp);
+                key.SetValue("Path", pathApp);
+                key.Close();
+
+                laodApp(Http);
+            }
+        }
+
+        public void deleteRemoteApp(httpServer Http, string nameApp)
+        {
+            nameApp = Path.GetFileNameWithoutExtension(nameApp);
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + nameApp, true))
+            {
+                if (key != null)
+                {
+                    key.DeleteSubKey(nameApp);
+                }
+            }
+            laodApp(Http);
         }
     }
 }

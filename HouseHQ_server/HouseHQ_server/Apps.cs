@@ -91,7 +91,7 @@ namespace HouseHQ_server
         }
     }
 
-    class app
+    public class app
     {
         public string appName { get; set; }
         public string folder { get; set; }

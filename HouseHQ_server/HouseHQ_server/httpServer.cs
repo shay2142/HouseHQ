@@ -154,12 +154,14 @@ namespace HouseHQ_server
                                 case "103"://change account
                                     msg = changeAccount(json[1]);
                                     break;
-                                case "104"://add apps?
+                                case "104"://add apps
+                                    msg = addAppsToServer(json[1]);
                                     break;
                                 case "105"://all apps
                                     msg = allApps();
                                     break;
-                                case "106"://delete apps?
+                                case "106"://delete apps
+                                    msg = deleteAppsForServer(json[1]);
                                     break;
                                 case "107"://delete apps from user
                                     msg = deleteAppsFromUser(json[1]);
@@ -205,6 +207,9 @@ namespace HouseHQ_server
                                     break;
                                 case "121":
                                     msg = deleteLogs();
+                                    break;
+                                case "122":
+                                    msg = getAllAppsOnPC();
                                     break;
                                 default://400 error
                                     msg = error("code is incorrect");
@@ -287,6 +292,23 @@ namespace HouseHQ_server
             return "203&";
         }
 
+        public string addAppsToServer(string json)
+        {
+            var user = JsonConvert.DeserializeObject<addAppsOnServer>(json);
+
+            remoteApp remote = new remoteApp();
+
+            if (db.passwordIsCorrect(con, user.userName, user.password) && db.userNameIsExists(con, user.userName) && db.getLevelKey(con, user.userName) == "admin")
+            {
+                foreach (var app in user.listApps)
+                {
+                    remote.createRemoteApp(this, app.pathExeFile, app.nameApp);
+                }
+                return "204&";
+            }
+            return error("access is denied");
+        }
+
         public string allApps()
         {
             getAllApps msg = new getAllApps()
@@ -294,6 +316,26 @@ namespace HouseHQ_server
                 allAppList = db.getAllApplications(con)
             };
             return "205&" + JsonConvert.SerializeObject(msg);
+        }
+
+        public string deleteAppsForServer(string json)
+        { 
+            var user = JsonConvert.DeserializeObject<deleteAppsForServer>(json);
+
+            remoteApp remote = new remoteApp();
+
+            if (db.passwordIsCorrect(con, user.userName, user.password) && db.userNameIsExists(con, user.userName) && db.getLevelKey(con, user.userName) == "admin")
+            {
+                foreach (string app in user.appsList)
+                {
+                    if (db.appIsExists(con, app))
+                    {
+                        remote.deleteRemoteApp(this, app);
+                        return "206&";
+                    }
+                }
+            }
+            return error("access is denied");
         }
 
         public string deleteAppsFromUser(string json)
@@ -450,6 +492,16 @@ namespace HouseHQ_server
             return "221&";
         }
 
+        public string getAllAppsOnPC()
+        {
+            Apps getApps = new Apps();
+            getAllAppsOnPC msg = new getAllAppsOnPC()
+            {
+                getApps = getApps.getAppsOnPC()
+            };
+            return "222&" + JsonConvert.SerializeObject(msg);
+        }
+
         public string error(string msg)
         {
             error err = new error()
@@ -538,6 +590,7 @@ namespace HouseHQ_server
                 {"119", "delete level"},
                 {"120", "update apps for level"},
                 {"121", "delete logs"},
+                {"122", "getAllAppsOnPC" },
                 {"400", "error"},
                 {"201", "ok login"},
                 {"202", "ok singup"},
@@ -560,6 +613,7 @@ namespace HouseHQ_server
                 {"219", "ok delete level"},
                 {"220", "ok update apps for level"},
                 {"221", "ok delete logs"},
+                {"222", "ok getAllAppsOnPC" }
             };
         }
         public void response(HttpListenerResponse resp, string msg, string ContentType)

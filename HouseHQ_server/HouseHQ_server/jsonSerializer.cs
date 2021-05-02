@@ -81,4 +81,9 @@ namespace jsonSerializer
     { 
         public List<sentLevels> jsonLevels { get; set; }
     }
+
+    class getAllAppsOnPC
+    { 
+        public Dictionary<string, HouseHQ_server.app> getApps { get; set; }
+    }
 }
