@@ -124,4 +124,42 @@ namespace HHQ_web
     {
         public List<sentLogs> jsonLogs { get; set; }
     }
+
+    class updateAppsForLevel
+    {
+        public string nameLevel { get; set; }
+        public List<string> apps { get; set; }
+    }
+
+    class addAppsOnServer
+    {
+        public string userName { get; set; }
+        public string password { get; set; }
+        public List<addApps> listApps { get; set; }
+    }
+
+    public class addApps
+    {
+        public string pathExeFile { get; set; }
+        public string nameApp { get; set; }
+    }
+
+    class deleteAppsForServer
+    {
+        public string userName { get; set; }
+        public string password { get; set; }
+        public List<string> appsList { get; set; }
+    }
+
+    public class app
+    {
+        public string appName { get; set; }
+        public string folder { get; set; }
+        public string EXE_File { get; set; }
+    }
+
+    public class getAllAppsOnPC
+    {
+        public Dictionary<string, app> getApps { get; set; }
+    }
 }

@@ -423,5 +423,78 @@ namespace HHQ_web
             }
             return new userInformation();
         }
+
+        [WebMethod]
+        public string addAppsToServer(string ip, string userName, string password, List<addApps> listApps)
+        {
+            addAppsOnServer addApps = new addAppsOnServer
+            {
+                userName = userName,
+                password = password,
+                listApps = listApps
+            };
+            string json = JsonConvert.SerializeObject(addApps);
+            httpClient connect = new httpClient();
+            string result = connect.sent(json, connect.hostToIp(ip), "104");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+
+                if (results[0] == "204")
+                {
+                    return results[0];
+                }
+                else
+                { 
+                    return JsonConvert.DeserializeObject<error>(results[1]).msg;
+                }
+            }
+            return "error";
+        }
+
+        [WebMethod]
+        public string deleteAppsForServer(string ip, string userName, string password, List<string> listApps)
+        {
+            deleteAppsForServer delete = new deleteAppsForServer
+            {
+                userName = userName,
+                password = password,
+                appsList = listApps
+            };
+            string json = JsonConvert.SerializeObject(delete);
+            httpClient connect = new httpClient();
+            string result = connect.sent(json, connect.hostToIp(ip), "106");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+
+                if (results[0] == "206")
+                {
+                    return results[0];
+                }
+                else
+                {
+                    return JsonConvert.DeserializeObject<error>(results[1]).msg;
+                }
+            }
+            return "error";
+        }
+
+        [WebMethod]
+        public getAllAppsOnPC getAllAppsOnPC(string ip)
+        {
+            httpClient connect = new httpClient();
+            string result = connect.sent(null, connect.hostToIp(ip), "122");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+
+                if (results[0] == "222")
+                {
+                    return JsonConvert.DeserializeObject<getAllAppsOnPC>(results[1]);
+                }
+            }
+            return new getAllAppsOnPC();
+        }
     }
 }
