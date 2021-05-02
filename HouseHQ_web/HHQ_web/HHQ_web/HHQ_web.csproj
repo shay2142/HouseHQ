@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateUsers.aspx" />
+    <Content Include="Delete users.aspx" />
     <Content Include="Download.aspx" />
     <Content Include="levelKeyManager.aspx" />
     <Content Include="login.aspx" />
@@ -138,6 +139,13 @@
     </Compile>
     <Compile Include="CreateUsers.aspx.designer.cs">
       <DependentUpon>CreateUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Delete users.aspx.cs">
+      <DependentUpon>Delete users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Delete users.aspx.designer.cs">
+      <DependentUpon>Delete users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Download.aspx.cs">
       <DependentUpon>Download.aspx</DependentUpon>

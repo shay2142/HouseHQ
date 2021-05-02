@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="delete users.aspx.cs" Inherits="HHQ_web.delete_users" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Delete users.aspx.cs" Inherits="HHQ_web.delete_users" %>
 
 <!DOCTYPE html>
 
