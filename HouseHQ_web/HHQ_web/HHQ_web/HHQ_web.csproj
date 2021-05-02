@@ -107,10 +107,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateUsers.aspx" />
+    <Content Include="Delete users.aspx" />
     <Content Include="Download.aspx" />
+    <Content Include="levelKeyManager.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="logs.aspx" />
     <Content Include="Manager.aspx" />
     <Content Include="singup.aspx" />
+    <Content Include="usersManager.aspx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\localhost\getAllApps.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\localhost\getAllUsers.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\localhost\HHQ_WebService.disco" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Apps.aspx" />
@@ -125,6 +140,13 @@
     <Compile Include="CreateUsers.aspx.designer.cs">
       <DependentUpon>CreateUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Delete users.aspx.cs">
+      <DependentUpon>Delete users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Delete users.aspx.designer.cs">
+      <DependentUpon>Delete users.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Download.aspx.cs">
       <DependentUpon>Download.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -135,12 +157,26 @@
     <Compile Include="hash.cs" />
     <Compile Include="httpClient.cs" />
     <Compile Include="json.cs" />
+    <Compile Include="levelKeyManager.aspx.cs">
+      <DependentUpon>levelKeyManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="levelKeyManager.aspx.designer.cs">
+      <DependentUpon>levelKeyManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logs.aspx.cs">
+      <DependentUpon>logs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logs.aspx.designer.cs">
+      <DependentUpon>logs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager.aspx.cs">
       <DependentUpon>Manager.aspx</DependentUpon>
@@ -150,6 +186,11 @@
       <DependentUpon>Manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="remoteApp.cs" />
     <Compile Include="singup.aspx.cs">
       <DependentUpon>singup.aspx</DependentUpon>
@@ -157,6 +198,18 @@
     </Compile>
     <Compile Include="singup.aspx.designer.cs">
       <DependentUpon>singup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="usersManager.aspx.cs">
+      <DependentUpon>usersManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usersManager.aspx.designer.cs">
+      <DependentUpon>usersManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\localhost\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -183,9 +236,27 @@
     <Compile Include="WebForm2.aspx.designer.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WS_Json.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Web References\localhost\HHQ_WebService.wsdl" />
+    <Content Include="Web References\localhost\jsonSentDB.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\localhost\jsonSentLogs.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\localhost\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\localhost\WS_Login.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\localhost\userInformation.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -195,6 +266,25 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://localhost:44349/HHQ_WebService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\localhost\</RelPath>
+      <UpdateFromURL>https://localhost:44349/HHQ_WebService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>HHQ_web_localhost_WebService1</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

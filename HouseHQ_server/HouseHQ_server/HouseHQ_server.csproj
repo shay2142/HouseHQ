@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apps.cs" />
     <Compile Include="remoteApp.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="AddApps.cs">

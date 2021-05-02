@@ -18,6 +18,7 @@ namespace HHQ_web
         {
             getData();
         }
+
         public void button_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -27,30 +28,18 @@ namespace HHQ_web
             Response.TransmitFile(Server.MapPath("~/remoteApp/" + userName.InnerHtml + "_" +button.Text.Replace(" ", "") + ".exe"));
             Response.End();
         }
+
         public void getData()
         {
             if (Session["json"] != null && Session["ip"] != null)
             {
-
+                IP = Session["ip"].ToString();
                 var user = JsonConvert.DeserializeObject<okLogin>(Session["json"].ToString());
 
-                getUserInformation msg = new getUserInformation()
-                {
-                    userName = user.name
-                };
+                localhost.WebService1 getApps = new localhost.WebService1();
+                var jsongetApps = getApps.getAllAppsForUser(IP, user.name);
+                apps = new List<string>(jsongetApps.allAppList);
 
-                string json = JsonConvert.SerializeObject(msg);
-                httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(Session["ip"].ToString()), "114");
-                if (result != null)
-                {
-                    string[] results = result.Split('&');
-                    if (results[0] == "214")
-                    {
-                        var application = JsonConvert.DeserializeObject<getAllApps>(results[1]);
-                        apps = application.allAppList;
-                    }
-                }
                 if (user.key == "admin")
                 {
                     manager();
@@ -58,8 +47,9 @@ namespace HHQ_web
                 ContactUs();
                 //user1.InnerHtml = "Hi there, " + user.name + "!";
                 userName.InnerHtml = user.name;
-                IP = Session["ip"].ToString();
+                
             }
+
             foreach (var app in apps)
             {
                 Button button = new Button();
@@ -85,6 +75,7 @@ namespace HHQ_web
         {
 
         }
+
         protected void lbl_Click(object sender, EventArgs e)
         {
 
@@ -92,21 +83,10 @@ namespace HHQ_web
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            logoutUser msg = new logoutUser()
+            localhost.WebService1 logout = new localhost.WebService1();
+            if (logout.logout(IP, userName.InnerHtml) == "209")
             {
-                userName = userName.InnerHtml
-            };
-
-            string json = JsonConvert.SerializeObject(msg);
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(IP), "109");
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                if (results[0] == "209")
-                {
-                    Response.Redirect("~/login.aspx");
-                }
+                Response.Redirect("~/login.aspx");
             }
         }
 
@@ -134,6 +114,7 @@ namespace HHQ_web
             button1.Click += btnManger;
             mySidenav.Controls.Add(button1);
         }
+
         protected void ContactUs()
         {
             Button button1 = new Button();

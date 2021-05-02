@@ -9,7 +9,7 @@ namespace HHQ_web
     {
     }
 
-    class okLogin
+    public class okLogin
     {
         public string name { get; set; }
         public string mail { get; set; }
@@ -37,24 +37,24 @@ namespace HHQ_web
         public string key { get; set; }
     }
 
-    class error
+    public class error
     {
         public string msg { get; set; }
     }
 
-    class getAllUsers
+    public class getAllUsers
     {
         public List<string> usersList { get; set; }
     }
 
-    class userInformation
+    public class userInformation
     {
         public string password { get; set; }
         public string mail { get; set; }
         public string key { get; set; }
     }
 
-    class getUserInformation
+    class getUserInformation    
     {
         public string userName { get; set; }
     }
@@ -78,12 +78,12 @@ namespace HHQ_web
         public string STATUS { get; set; }
     }
 
-    class jsonSentDB
+    public class jsonSentDB
     {
         public List<getDB> db { get; set; }
     }
 
-    class getAllApps
+    public class getAllApps
     {
         public List<string> allAppList { get; set; }
     }
@@ -109,5 +109,19 @@ namespace HHQ_web
     class logoutUser
     {
         public string userName { get; set; }
+    }
+
+    public class sentLogs
+    {
+        public int ID { get; set; }
+        public string dateLogs { get; set; }
+        public string typeLog { get; set; }
+        public string source { get; set; }
+        public string log { get; set; }
+    }
+
+    public class jsonSentLogs
+    {
+        public List<sentLogs> jsonLogs { get; set; }
     }
 }

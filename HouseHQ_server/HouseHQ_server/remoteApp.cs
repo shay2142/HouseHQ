@@ -12,6 +12,7 @@ namespace HouseHQ_server
         public void laodApp(httpServer Http)
         {
             string path = @"readApp.bat";
+            List<string> appsInServer = new List<string>();
 
             // Create the file, or overwrite if the file exists.
             using (FileStream fs = File.Create(path))
@@ -30,6 +31,7 @@ namespace HouseHQ_server
                 {
                     if (Path.GetFileNameWithoutExtension(s) != "")
                     {
+                        appsInServer.Add(Path.GetFileNameWithoutExtension(s));
                         if (!Http.db.appIsExists(Http.con, Path.GetFileNameWithoutExtension(s)))
                         {
                             Http.db.insertVluesToAPP(Http.con, Path.GetFileNameWithoutExtension(s), Path.GetFileNameWithoutExtension(s));
@@ -38,6 +40,14 @@ namespace HouseHQ_server
                 }
             }
             File.Delete("app.txt");
+
+            foreach (string app in Http.db.getAllApplications(Http.con))
+            {
+                if (!appsInServer.Contains(app))
+                {
+                    Http.db.deleteApps(Http.con, app);
+                }
+            }
         }
     }
 }

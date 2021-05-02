@@ -19,7 +19,7 @@ namespace dataBase
         {
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
-                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS USERS(usersID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, USERNAME TEXT NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, LEVEL_KEY TEXT, STATUS TEXT);";/*STATUS NOT NULL*/
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS USERS(usersID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, USERNAME TEXT NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, LEVEL_KEY TEXT, STATUS TEXT);";/* , IP_ADDRESS TEXT STATUS NOT NULL*/
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS APP(appID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, NAME TEXT NOT NULL, REMOTEAPP TEXT NOT NULL, PHAT_IMG TEXT);";
@@ -37,7 +37,90 @@ namespace dataBase
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LEVELS(levelsID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, levelID INTEGER, appID INTEGER, FOREIGN KEY(levelID) REFERENCES LEVEL(levelID), FOREIGN KEY(appID) REFERENCES APP(appID));";
                 cmd.ExecuteNonQuery();
 
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS BLOCKS_IP(ipID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ip TEXT NOT NULL);";
+                cmd.ExecuteNonQuery();
+
             }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<string> getAllBlockIp(SQLiteConnection con)
+        {
+            List<string> ipBlock = new List<string>();
+            using (SQLiteCommand cmd = new SQLiteCommand("select ip from BLOCKS_IP;", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    ipBlock.Add(rdr.GetString(0));
+                }
+            }
+            return ipBlock;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public void deleteIpblock(SQLiteConnection con, string ip)
+        {
+            if (ipIsBlock(con, ip))
+            {
+                deleteValueFromeTable(con, "BLOCKS_IP", "ip", ip);
+            }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public void insertVluesToBLOCKS_IP(SQLiteConnection con, string ip)
+        {
+            if (!ipIsBlock(con, ip))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(con))
+                {
+                    cmd.CommandText = "insert into BLOCKS_IP(ip) VALUES ('" + ip + "')";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public bool ipIsBlock(SQLiteConnection con, string ip)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT ip FROM BLOCKS_IP", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.GetString(0) == ip)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         /*
@@ -259,6 +342,10 @@ namespace dataBase
             DateTime aDate = DateTime.Now;
             string[] jsons = json.Split('&');
 
+            if (jsons[0] == "215")
+            {
+                jsons[1] = "sent logs";
+            }
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
                 cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + jsons[0] + "', '" + type + "', '" + jsons[1] + "')";
@@ -1041,7 +1128,7 @@ namespace dataBase
         }
 
         /*
-         The function deletes applications from users.
+         The function deletes all applications from users.
          input:
             -con: SQLiteConnection
             -userName: string
@@ -1113,5 +1200,25 @@ namespace dataBase
             }
             return false;
         }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public void deleteApps(SQLiteConnection con, string appName)
+        {
+            if (appIsExists(con, appName))
+            {
+                foreach (string user in getAllUsers(con))
+                {
+                    deleteAppsFromUser(con, user, appName);
+                }
+                deleteValueFromeTable(con, "APP", "NAME", appName);
+            }
+        }
     }
 }
+
