@@ -26,5 +26,19 @@ namespace HouseHQ_server
                 return builder.ToString();
             }
         }
+
+        public string getUserNameHash(httpServer Http, string hashUser)
+        {
+            List<string> userName = Http.db.getAllUsers(Http.con);
+
+            foreach (string user in userName)
+            {
+                if (hashUser == ComputeSha256Hash(user))
+                {
+                    return user;
+                }
+            }
+            return "";
+        }
     }
 }

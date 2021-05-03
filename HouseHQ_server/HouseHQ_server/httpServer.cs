@@ -217,6 +217,10 @@ namespace HouseHQ_server
                             }
                             response(resp, msg, "json");
                             db.insertVluesToLOGS(con, msg, "server->client");
+                            if (json.Length == 3)
+                            {
+                                updateStatus(json[2]);
+                            }
                             Console.WriteLine(msg);
                         }
                         else
@@ -565,6 +569,16 @@ namespace HouseHQ_server
             return list;
         }
 
+        public void updateStatus(string hashUser)
+        {
+            hash hashUsers = new hash();
+            string userName = hashUsers.getUserNameHash(this, hashUser);
+            if (userName != "")
+            {
+                db.updateStatus(con, userName, "online");
+            }
+        }
+
         public Dictionary<string, string> codes() 
         {
             return new Dictionary<string, string>()
@@ -649,7 +663,7 @@ namespace HouseHQ_server
                 catch (Exception ex) //some other exception
                 {
                     Console.WriteLine(ex.ToString());
-                    return false;
+                    return false; 
                 }
             }
             else
