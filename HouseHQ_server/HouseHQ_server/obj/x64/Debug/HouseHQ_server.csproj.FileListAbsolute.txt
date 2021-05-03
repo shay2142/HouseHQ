@@ -144,3 +144,5 @@ C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Hou
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.CopyComplete
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.exe
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
+C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.dll
+C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.xml
