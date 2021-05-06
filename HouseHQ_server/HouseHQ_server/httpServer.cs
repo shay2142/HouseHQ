@@ -211,6 +211,14 @@ namespace HouseHQ_server
                                 case "122":
                                     msg = getAllAppsOnPC();
                                     break;
+                                case "123"://sent msg
+                                    break;
+                                case "124"://logoff all users
+                                    break;
+                                case "125"://logoff user
+                                    break;
+                                case "126"://get all users connet to remoteApp
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
