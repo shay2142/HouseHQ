@@ -44,7 +44,6 @@ namespace HTTP_CLIENT
             var data = new StringContent(code + "&" + json, Encoding.UTF8, "application/json");
 
             var url = "http://" + ip + ":" + port + "/";
-            //var url = "http://shay2142.tplinkdns.com:8080/";
 
             var client = new HttpClient();
 

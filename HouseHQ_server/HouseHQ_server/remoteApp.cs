@@ -11,6 +11,14 @@ namespace HouseHQ_server
 {
     public class remoteApp
     {
+
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void laodApp(httpServer Http)
         {
             string path = @"readApp.bat";
@@ -52,6 +60,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void createRemoteApp(httpServer Http, string pathApp, string nameApp)
         {
             if (nameApp == null)
@@ -69,6 +84,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void deleteRemoteApp(httpServer Http, string nameApp)
         {
             nameApp = Path.GetFileNameWithoutExtension(nameApp);

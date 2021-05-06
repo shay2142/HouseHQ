@@ -2,11 +2,15 @@
 using System.IO;
 using System.Data.SQLite;
 using System.Collections.Generic;
+using jsonSerializer;
+using HouseHQ_server; 
 
 namespace dataBase
 {
     class DB
     {
+        public Codes codes = new Codes();
+
         /*
          Create tables for DB if they do not exist.
 
@@ -53,7 +57,7 @@ namespace dataBase
         public List<string> getAllBlockIp(SQLiteConnection con)
         {
             List<string> ipBlock = new List<string>();
-            using (SQLiteCommand cmd = new SQLiteCommand("select ip from BLOCKS_IP;", con))
+            using (SQLiteCommand cmd = new SQLiteCommand("select ip from BLOCKS_IP", con))
             {
                 using SQLiteDataReader rdr = cmd.ExecuteReader();
 
@@ -1218,6 +1222,81 @@ namespace dataBase
                 }
                 deleteValueFromeTable(con, "APP", "NAME", appName);
             }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<sentDB> getDB(SQLiteConnection con)
+        {
+            var list = new List<sentDB>();
+            List<string> userList = getAllUsers(con);
+            foreach (var user in userList)
+            {
+                list.Add(new sentDB()
+                {
+                    ID = getIdForUser(con, user),
+                    userName = user,
+                    password = getPassForUser(con, user),
+                    mail = getMailForUser(con, user),
+                    LEVEL_KEY = getLevelKey(con, user),
+                    STATUS = getStatusForUser(con, user)
+                });
+            }
+            return list;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<sentLogs> sentLogsDB(SQLiteConnection con)
+        {
+            var list = new List<sentLogs>();
+            List<int> logsID = getAllLogsID(con);
+            foreach (int logID in logsID)
+            {
+                list.Add(new sentLogs()
+                {
+                    ID = logID,
+                    dateLogs = getDateForLog(con, logID),
+                    typeLog = codes.codes()[getCodeForLog(con, logID)],
+                    source = getSourceForLog(con, logID),
+                    log = getJ_LOGForLog(con, logID)
+                });
+            }
+            return list;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<sentLevels> sentLevelsInformation(SQLiteConnection con)
+        {
+            var list = new List<sentLevels>();
+            List<int> levelsID = getAllLevelID(con);
+            foreach (int levelID in levelsID)
+            {
+                list.Add(new sentLevels()
+                {
+                    ID = levelID,
+                    name = getNameForLevel(con, levelID),
+                    admin = Convert.ToBoolean(getAdminForLevel(con, levelID)),
+                    apps = getLevelApplications(con, getNameForLevel(con, levelID))
+                });
+            }
+            return list;
         }
     }
 }

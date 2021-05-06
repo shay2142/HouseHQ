@@ -9,6 +9,14 @@ namespace HouseHQ_server
 {
     class remoteApp_Management
     {
+
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void killProcess(List<string> namePc, List<string> processToKill)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
@@ -41,6 +49,14 @@ namespace HouseHQ_server
                 }
             }
         }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
         public int getSessionId(string namePc)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
@@ -58,6 +74,13 @@ namespace HouseHQ_server
             return 0;
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void sentMsg(int sessionId, string msg)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
@@ -74,6 +97,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void logOff(int sessionId)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
@@ -90,6 +120,14 @@ namespace HouseHQ_server
             }
         }
 
+
+        /*
+
+
+         input: 
+
+         output:
+         */
         public bool theUserIsConnect(int sessionId)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
@@ -114,6 +152,14 @@ namespace HouseHQ_server
             }
         }
 
+
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getLastInputTime(int sessionId)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
@@ -132,6 +178,13 @@ namespace HouseHQ_server
             }  
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void logOffAllUsers()
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
@@ -148,6 +201,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public List<string> getAllClientName()
         {
             List<string> ans = new List<string>();
@@ -166,6 +226,13 @@ namespace HouseHQ_server
             return ans;
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void disconnectInactiveUsers()
         {
             string time;
@@ -185,6 +252,13 @@ namespace HouseHQ_server
 
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public bool userIsOff(DateTime userLastInputTime)
         {
             DateTime now = DateTime.Now;

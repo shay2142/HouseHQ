@@ -15,21 +15,6 @@ namespace HHQ_web
         {
         }
 
-        public string hostToIp(string host)
-        {
-            string ip = host;
-            IPAddress address;
-
-            IPAddress[] ipaddress = Dns.GetHostAddresses(host);
-            foreach (IPAddress ipaddr in ipaddress)
-            {
-                if (IPAddress.TryParse(ipaddr.ToString(), out address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    ip = ipaddr.ToString();
-                }
-            }
-            return ip;
-        }
 
         public string sent(string json, string ip, string code)
         {

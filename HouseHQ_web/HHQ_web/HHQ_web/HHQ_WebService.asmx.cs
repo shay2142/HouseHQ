@@ -35,7 +35,7 @@ namespace HHQ_web
             string json = JsonConvert.SerializeObject(login);
             httpClient testLogin = new httpClient();
 
-            string result = testLogin.sent(json, testLogin.hostToIp(ipServer), "101");
+            string result = testLogin.sent(json, ipServer, "101");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -74,7 +74,7 @@ namespace HHQ_web
             string json = JsonConvert.SerializeObject(login);
             httpClient testLogin = new httpClient();
 
-            string result = testLogin.sent(json, testLogin.hostToIp(ipServer), "101");
+            string result = testLogin.sent(json, ipServer, "101");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -120,7 +120,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(test);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(ip), "101");
+            string result = testLogin.sent(json, ip, "101");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -164,7 +164,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(ip), "114");
+            string result = testLogin.sent(json, ip, "114");
 
             if (result != null)
             {
@@ -192,7 +192,7 @@ namespace HHQ_web
 
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(ip), "109");
+            string result = testLogin.sent(json, ip, "109");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -205,7 +205,7 @@ namespace HHQ_web
         public jsonSentDB getDB(string ip)
         {
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, testLogin.hostToIp(ip), "113");
+            string result = testLogin.sent(null, ip, "113");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -222,7 +222,7 @@ namespace HHQ_web
         public jsonSentLogs getLogs(string ip)
         {
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, testLogin.hostToIp(ip), "115");
+            string result = testLogin.sent(null, ip, "115");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -247,7 +247,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(create);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(ip), "102");
+            string result = testLogin.sent(json, ip, "102");
 
             if (result != null)
             {
@@ -279,7 +279,7 @@ namespace HHQ_web
             string json = JsonConvert.SerializeObject(change);
 
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(ip), "103");
+            string result = testLogin.sent(json, ip, "103");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -302,7 +302,7 @@ namespace HHQ_web
         public getAllApps allApps(string ip)
         {
             httpClient connect = new httpClient();
-            string result = connect.sent(null, connect.hostToIp(ip), "105");
+            string result = connect.sent(null, ip, "105");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -325,7 +325,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(deleteApp);
             httpClient connect = new httpClient();
-            string result = connect.sent(json, connect.hostToIp(ip), "107");
+            string result = connect.sent(json, ip, "107");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -349,7 +349,7 @@ namespace HHQ_web
 
             string json = JsonConvert.SerializeObject(addApps);
             httpClient connect = new httpClient();
-            string result = connect.sent(json, connect.hostToIp(ip), "108");
+            string result = connect.sent(json, ip, "108");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -372,7 +372,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(delete);
             httpClient connect = new httpClient();
-            string result = connect.sent(json, connect.hostToIp(ip), "110");
+            string result = connect.sent(json, ip, "110");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -389,7 +389,7 @@ namespace HHQ_web
         public getAllUsers allUsers(string ip)
         {
             httpClient connect = new httpClient();
-            string result = connect.sent(null, connect.hostToIp(ip), "111");
+            string result = connect.sent(null, ip, "111");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -411,7 +411,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(userInf);
             httpClient connect = new httpClient();
-            string result = connect.sent(json, connect.hostToIp(ip), "112");
+            string result = connect.sent(json, ip, "112");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -435,7 +435,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(addApps);
             httpClient connect = new httpClient();
-            string result = connect.sent(json, connect.hostToIp(ip), "104");
+            string result = connect.sent(json, ip, "104");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -463,7 +463,7 @@ namespace HHQ_web
             };
             string json = JsonConvert.SerializeObject(delete);
             httpClient connect = new httpClient();
-            string result = connect.sent(json, connect.hostToIp(ip), "106");
+            string result = connect.sent(json, ip, "106");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -484,7 +484,7 @@ namespace HHQ_web
         public string getAllAppsOnPC(string ip)
         {
             httpClient connect = new httpClient();
-            string result = connect.sent(null, connect.hostToIp(ip), "122");
+            string result = connect.sent(null, ip, "122");
             if (result != null)
             {
                 string[] results = result.Split('&');

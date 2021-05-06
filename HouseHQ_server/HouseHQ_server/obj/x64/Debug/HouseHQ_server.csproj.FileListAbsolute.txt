@@ -146,3 +146,4 @@ C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Hou
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.pdb
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.dll
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.xml
+C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.DB_view.resources

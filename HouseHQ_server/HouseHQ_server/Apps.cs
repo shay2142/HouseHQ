@@ -9,6 +9,13 @@ namespace HouseHQ_server
 {
     class Apps
     {
+        /*
+
+
+         input: 
+
+         output:
+         */
         public Dictionary<string, app> getAppsOnPC()
         {
             var apps = new Dictionary<string, app>();
