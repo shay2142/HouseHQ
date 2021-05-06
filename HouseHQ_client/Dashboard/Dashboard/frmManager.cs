@@ -32,7 +32,7 @@ namespace Dashboard
         {
             var list = new List<getDB>();
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, testLogin.hostToIp(IP), "113");
+            string result = testLogin.sent(null, IP, "113");
             if (result != null)
             {
                 string[] results = result.Split('&');

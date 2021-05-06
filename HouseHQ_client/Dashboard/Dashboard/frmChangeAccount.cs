@@ -53,7 +53,7 @@ namespace Dashboard
                 createComboText();
 
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(null, testLogin.hostToIp(IP), "111");
+                string result = testLogin.sent(null, IP, "111");
                 if (result != null)
                 {
                     string[] results = result.Split('&');
@@ -78,7 +78,7 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(IP), "112");
+            string result = testLogin.sent(json, IP, "112");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -156,7 +156,7 @@ namespace Dashboard
                 string json = JsonConvert.SerializeObject(test);
 
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(IP), "103");
+                string result = testLogin.sent(json, IP, "103");
                 if (result != null)
                 {
                     string[] results = result.Split('&');

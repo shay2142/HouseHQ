@@ -86,7 +86,7 @@ namespace Dashboard
                     };
                     string json = JsonConvert.SerializeObject(msg);
                     httpClient testLogin = new httpClient();
-                    string result = testLogin.sent(json, testLogin.hostToIp(IP), "107");
+                    string result = testLogin.sent(json, IP, "107");
                     if (result != null)
                     {
                         string[] results = result.Split('&');
