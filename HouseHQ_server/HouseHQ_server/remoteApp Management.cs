@@ -41,7 +41,7 @@ namespace HouseHQ_server
                 }
             }
         }
-        public int getSession(string namePc)
+        public int getSessionId(string namePc)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
             using (ITerminalServer server = manager.GetLocalServer())
@@ -64,12 +64,12 @@ namespace HouseHQ_server
             using (ITerminalServer server = manager.GetLocalServer())
             {
                 server.Open();
-                foreach (ITerminalServicesSession session in server.GetSessions())
+                try
                 {
-                    if (session.SessionId == sessionId && session.ClientName.ToString() != "")
-                    {
-                        session.MessageBox(msg);
-                    }
+                    server.GetSession(sessionId).MessageBox(msg);
+                }
+                catch
+                { 
                 }
             }
         }
@@ -80,12 +80,12 @@ namespace HouseHQ_server
             using (ITerminalServer server = manager.GetLocalServer())
             {
                 server.Open();
-                foreach (ITerminalServicesSession session in server.GetSessions())
+                try
                 {
-                    if (session.SessionId == sessionId && session.ClientName.ToString() != "")
-                    {
-                        session.Logoff();
-                    }
+                    server.GetSession(sessionId).Logoff();
+                }
+                catch
+                { 
                 }
             }
         }
@@ -96,15 +96,22 @@ namespace HouseHQ_server
             using (ITerminalServer server = manager.GetLocalServer())
             {
                 server.Open();
-                foreach (ITerminalServicesSession session in server.GetSessions())
+                try
                 {
-                    if (session.SessionId == sessionId && session.ClientName.ToString() != "")
+                    if (server.GetSession(sessionId).ToString() != "")
                     {
                         return true;
                     }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
                 }
             }
-            return false;
         }
 
         public string getLastInputTime(int sessionId)
@@ -113,15 +120,16 @@ namespace HouseHQ_server
             using (ITerminalServer server = manager.GetLocalServer())
             {
                 server.Open();
-                foreach (ITerminalServicesSession session in server.GetSessions())
+                try
                 {
-                    if (session.SessionId == sessionId && session.ClientName.ToString() != "")
-                    {
-                        return session.LastInputTime.ToString();
-                    }
+                    return server.GetSession(sessionId).LastInputTime.ToString();
                 }
-            }
-            return "";
+                catch
+                {
+                    return "";
+                }
+                
+            }  
         }
 
         public void logOffAllUsers()
@@ -156,6 +164,36 @@ namespace HouseHQ_server
                 }
             }
             return ans;
+        }
+
+        public void disconnectInactiveUsers()
+        {
+            string time;
+            foreach (var user in getAllClientName())
+            {
+                time = getLastInputTime(getSessionId(user));
+                if (time != "")
+                {
+                    if (userIsOff(DateTime.ParseExact(time, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)))
+                    {
+                        sentMsg(getSessionId(user), "Inactivity you are disconnected");
+                        System.Threading.Thread.Sleep(50);
+                        logOff(getSessionId(user));
+                    }
+                }
+            }
+
+        }
+
+        public bool userIsOff(DateTime userLastInputTime)
+        {
+            DateTime now = DateTime.Now;
+
+            if ((now - userLastInputTime).Minutes > 5 || (now - userLastInputTime).Hours >= 1 || (now - userLastInputTime).Days >= 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
