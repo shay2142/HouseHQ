@@ -17,14 +17,12 @@ namespace HouseHQ_server
 {
     public partial class DB_view : Form
     {
-        public SQLiteConnection con;
         public httpServer Http;
 
         public DB_view(httpServer http)
         {
             InitializeComponent();
 
-            con = http.con;
             Http = http;
         }
 
@@ -36,8 +34,27 @@ namespace HouseHQ_server
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Http.db.getDB(con);
-            dataGridView1.DataSource = Http.db.getDB(con);
+            dataGridView1.DataSource = Http.db.getDB(Http.con);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = Http.db.sentApp(Http.con);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = Http.db.sentLogsDB(Http.con);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = Http.db.sentLevelsInformation(Http.con);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = Http.db.sentBLOCKS_IP(Http.con);
         }
     }
 }

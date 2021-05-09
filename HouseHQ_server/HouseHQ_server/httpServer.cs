@@ -42,7 +42,7 @@ namespace HouseHQ_server
 
         public httpServer()
         {
-        
+
         }
 
         /*
@@ -85,7 +85,7 @@ namespace HouseHQ_server
             String[] prefixes = { url };
             listener = new HttpListener();
             foreach (string s in prefixes)
-            { 
+            {
                 listener.Prefixes.Add(s);
             }
             listener.Start();
@@ -151,7 +151,7 @@ namespace HouseHQ_server
                 Console.WriteLine(req.UserAgent);
                 Console.WriteLine(req.RemoteEndPoint);
                 Console.WriteLine();
-                
+
                 if ((req.HttpMethod == "POST") && !db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
                     Console.WriteLine("test");
@@ -238,12 +238,23 @@ namespace HouseHQ_server
                                     msg = getAllAppsOnPC();
                                     break;
                                 case "123"://sent msg
+                                    msg = sentMsg(json[1]);
                                     break;
                                 case "124"://logoff all users
+                                    msg = logoffAllUsers();
                                     break;
                                 case "125"://logoff user
                                     break;
                                 case "126"://get all users connet to remoteApp
+                                    break;
+                                case "127"://sent app db
+                                    msg = sentApp();
+                                    break;
+                                case "128"://sent blockIp db
+                                    msg = sentBLOCKS_IP();
+                                    break;
+                                case "129"://connect to remote app ? now just app no hhq_web
+                                    //sent computer name and open thred remote app manager
                                     break;
                                 default://400 error
                                     msg = error("code is incorrect");
@@ -263,7 +274,7 @@ namespace HouseHQ_server
                         }
                     }
                 }
-                else if(!db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
+                else if (!db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
                     response(resp, String.Format(pageData), "text/html");
                 }
@@ -290,7 +301,7 @@ namespace HouseHQ_server
                     mail = db.getMailForUser(con, user.name),
                     appList = db.getUserApplications(con, user.name),
                     key = db.getLevelKey(con, user.name)
-                }; 
+                };
                 db.updateStatus(con, user.name, "online");
 
                 return "201&" + JsonConvert.SerializeObject(test);
@@ -399,7 +410,7 @@ namespace HouseHQ_server
          output:
          */
         public string deleteAppsForServer(string json)
-        { 
+        {
             var user = JsonConvert.DeserializeObject<deleteAppsForServer>(json);
 
             remoteApp remote = new remoteApp();
@@ -619,7 +630,7 @@ namespace HouseHQ_server
          output:
          */
         public string deleteAppForLevel(string json)
-        { 
+        {
             var user = JsonConvert.DeserializeObject<deleteAppForLevel>(json);
             db.deleteAppForLevel(con, user.nameLevel, user.apps);
             return "218&";
@@ -692,6 +703,89 @@ namespace HouseHQ_server
                 getApps = getApps.getAppsOnPC()
             };
             return "222&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string sentMsg(string json)
+        {
+            var user = JsonConvert.DeserializeObject<sentMsg>(json);
+
+            remoteApp_Management remote = new remoteApp_Management();
+            remote.sentMsg(remote.getSessionId(user.namePc), user.msg);
+
+            return "223&";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string logoffAllUsers()
+        {
+            remoteApp_Management remote = new remoteApp_Management();
+            remote.logOffAllUsers();
+            return "224&";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getAllUsersRemoteApp()
+        {
+            remoteApp_Management remote = new remoteApp_Management();
+
+            getAllUsersRemoteApp msg = new getAllUsersRemoteApp()
+            {
+                users = remote.getAllClientName()
+            };
+            return "226&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string sentApp()
+        {
+            jsonSentApp msg = new jsonSentApp()
+            {
+                jsonApp = db.sentApp(con)
+            };
+
+            return "227&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string sentBLOCKS_IP()
+        {
+            jsonSentBLOCKS_IP msg = new jsonSentBLOCKS_IP()
+            {
+                jsonBLOCKS_IP = db.sentBLOCKS_IP(con)
+            };
+
+            return "228&" + JsonConvert.SerializeObject(msg);
         }
 
         /*

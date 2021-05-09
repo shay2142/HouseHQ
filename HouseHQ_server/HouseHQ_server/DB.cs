@@ -685,16 +685,16 @@ namespace dataBase
 
                 while (rdr.Read())
                 {
-                        try
-                        {
-                            return (rdr.GetString(0));
-                        }
-                        catch (InvalidCastException e)
-                        {
-                            return "";
-                        }
+                    try
+                    {
+                        return (rdr.GetString(0));
+                    }
+                    catch (InvalidCastException e)
+                    {
+                        return "";
                     }
                 }
+            }
             return "";
         }
 
@@ -860,7 +860,7 @@ namespace dataBase
                         try
                         {
                             return (rdr.GetString(0));
-                        }  
+                        }
                         catch (InvalidCastException e)
                         {
                             return "";
@@ -987,6 +987,69 @@ namespace dataBase
             }
             return appsList;
         }
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<int> getAppID(SQLiteConnection con)
+        {
+            List<int> appsID = new List<int>();
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT appID FROM APP", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    appsID.Add(rdr.GetInt32(0));
+                }
+            }
+            return appsID;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getNameForApp(SQLiteConnection con, int appID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select NAME from APP where appID = '" + appID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    return (rdr.GetString(0));
+                }
+            }
+            return "";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getRemoteAppForApp(SQLiteConnection con, int appID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select REMOTEAPP from APP where appID = '" + appID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    return (rdr.GetString(0));
+                }
+            }
+            return "";
+        }
 
         /*
          The function updates the status status of the user.
@@ -1000,7 +1063,7 @@ namespace dataBase
          */
         public void updateStatus(SQLiteConnection con, string userName, string status)
         {
-            if (userNameIsExists(con, userName) )
+            if (userNameIsExists(con, userName))
             {
                 using (SQLiteCommand cmd = new SQLiteCommand(con))
                 {
@@ -1023,7 +1086,7 @@ namespace dataBase
             return error msg if necessary.
          */
         public string updateUser(SQLiteConnection con, string userName, string oldPassword, string newPassword, string mail, string level)
-        { 
+        {
             if (userNameIsExists(con, userName) && passwordIsCorrect(con, userName, oldPassword))
             {
                 //update password
@@ -1061,7 +1124,7 @@ namespace dataBase
                         cmd.ExecuteNonQuery();
                     }
                 }
-                    return "";
+                return "";
             }
             else
             {
@@ -1297,6 +1360,94 @@ namespace dataBase
                 });
             }
             return list;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<sentApp> sentApp(SQLiteConnection con)
+        {
+            var list = new List<sentApp>();
+            List<int> appIDs = getAppID(con);
+            foreach(int appID in appIDs)
+            {
+                list.Add(new sentApp() 
+                { 
+                    appID = appID,
+                    name = getNameForApp(con, appID),
+                    REMOTEAPP = getRemoteAppForApp(con, appID)
+                });
+            }
+            return list;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<sentBLOCKS_IP> sentBLOCKS_IP(SQLiteConnection con)
+        {
+            var list = new List<sentBLOCKS_IP>();
+            List<int> ipIDs = getIpID(con);
+            foreach (int ipID in ipIDs)
+            {
+                list.Add(new sentBLOCKS_IP()
+                {
+                    ipID = ipID,
+                    ip = getIp(con, ipID),
+                });
+            }
+            return list;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public List<int> getIpID(SQLiteConnection con)
+        {
+            List<int> appsID = new List<int>();
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT ipID FROM BLOCKS_IP", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    appsID.Add(rdr.GetInt32(0));
+                }
+            }
+            return appsID;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getIp(SQLiteConnection con, int ipID)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select ip from BLOCKS_IP where ipID = '" + ipID + "'", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    return (rdr.GetString(0));
+                }
+            }
+            return "";
         }
     }
 }

@@ -34,6 +34,12 @@ namespace HouseHQ_server
                 {"120", "update apps for level"},
                 {"121", "delete logs"},
                 {"122", "getAllAppsOnPC" },
+                {"123", "sent msg" },
+                {"124", "logoff all users" },
+                {"125", "logoff user" },
+                {"126", "get all users connet to remoteApp" },
+                {"127", "sent app db" },
+                {"128", "sent blockIp db" },
                 {"400", "error"},
                 {"201", "ok login"},
                 {"202", "ok singup"},
@@ -56,7 +62,13 @@ namespace HouseHQ_server
                 {"219", "ok delete level"},
                 {"220", "ok update apps for level"},
                 {"221", "ok delete logs"},
-                {"222", "ok getAllAppsOnPC" }
+                {"222", "ok getAllAppsOnPC" },
+                {"223", "ok sent msg" },
+                {"224", "ok logoff all users" },
+                {"225", "ok logoff user" },
+                {"226", "ok get all users connet to remoteApp" },
+                {"227", "ok sent app db" },
+                {"228", "ok sent blockIp db" }
             };
         }
     }
