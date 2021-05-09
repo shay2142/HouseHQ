@@ -18,28 +18,18 @@ namespace HTTP_CLIENT
         {
         }
 
-        public string hostToIp(string host)
-        {
-            string ip = host;
-            IPAddress address;
-            
-            IPAddress[] ipaddress = Dns.GetHostAddresses(host);
-            foreach (IPAddress ipaddr in ipaddress)
-            {
-                if (IPAddress.TryParse(ipaddr.ToString(), out address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    ip = ipaddr.ToString();
-                }
-            }
-            return ip;
-        }
-
         public string sent(string json, string ip, string code)
         {
             string result = "";
+            string port = "8080";
+            var splitList = ip.Split(':');
+            if (splitList.Length > 1 && (splitList[1] == null || splitList[1] == ""))
+            {
+                port = splitList[1];
+            }
             try
             {
-                Task<string> task = Task.Run(async () => await msg(json, ip, code));
+                Task<string> task = Task.Run(async () => await msg(json, splitList[0], port, code));
                 result = task.Result;
             }
             catch (InvalidCastException e)
@@ -49,11 +39,11 @@ namespace HTTP_CLIENT
             return result;
         }
 
-        public async Task<string> msg(string json, string ip, string code)
+        public async Task<string> msg(string json, string ip, string port, string code)
         {
             var data = new StringContent(code + "&" + json, Encoding.UTF8, "application/json");
 
-            var url = "http://" + ip + ":8080/";
+            var url = "http://" + ip + ":" + port + "/";
 
             var client = new HttpClient();
 

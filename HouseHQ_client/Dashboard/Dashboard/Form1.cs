@@ -187,7 +187,7 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(test);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(IP_server), "109");
+            string result = testLogin.sent(json, IP_server, "109");
         }
     }
 }

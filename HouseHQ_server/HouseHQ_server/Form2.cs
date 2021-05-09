@@ -60,5 +60,11 @@ namespace HouseHQ_server
         {
             new Form1(Http, "").Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new DB_view(Http).Show();
+            this.Hide();
+        }
     }
 }

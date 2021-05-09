@@ -86,4 +86,32 @@ namespace jsonSerializer
     { 
         public Dictionary<string, HouseHQ_server.app> getApps { get; set; }
     }
+
+    class sentApp
+    {
+        public int appID { get; set; }
+        public string name { get; set; }
+        public string REMOTEAPP { get; set; }
+    }
+
+    class sentBLOCKS_IP
+    { 
+        public int ipID { get; set; }
+        public string ip { get; set; }
+    }
+
+    class jsonSentApp
+    {
+        public List<sentApp> jsonApp { get; set; }
+    }
+
+    class jsonSentBLOCKS_IP
+    {
+        public List<sentBLOCKS_IP> jsonBLOCKS_IP { get; set; }
+    }
+
+    class getAllUsersRemoteApp
+    { 
+        public List<string> users { get; set; }
+    }
 }

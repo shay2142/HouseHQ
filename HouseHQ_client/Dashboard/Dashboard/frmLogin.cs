@@ -38,11 +38,7 @@ namespace Dashboard
         private void  button1_Click(object sender, EventArgs e)
         {
             string ip = IP.Text;
-            var splitList = IP.Text.Split(':');
-            if (splitList.Length == 2)
-            {
-                ip = splitList[0];
-            }
+
             if (!checkInput())
             {
                 MessageBox.Show("Invalid username or password or IP", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -55,7 +51,7 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(test);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(ip), "101");
+            string result = testLogin.sent(json, ip, "101");
             if (result != null)
             {
                 string[] results = result.Split('&');

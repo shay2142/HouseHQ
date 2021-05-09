@@ -27,6 +27,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getUserNameHash(httpServer Http, string hashUser)
         {
             List<string> userName = Http.db.getAllUsers(Http.con);

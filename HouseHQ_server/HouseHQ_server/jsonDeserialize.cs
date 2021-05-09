@@ -103,4 +103,10 @@ namespace jsonDeserialize
         public string password { get; set; }
         public List<string> appsList { get; set; }
     }
+
+    class sentMsg
+    { 
+        public string namePc { get; set; }
+        public string msg { get; set; }
+    } 
 }

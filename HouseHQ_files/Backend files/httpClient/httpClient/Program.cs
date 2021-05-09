@@ -32,13 +32,13 @@ namespace HttpClientEx
                 nameLevel = "test"
             };
             string json = JsonConvert.SerializeObject(test);
-            var data = new StringContent("105&&" + hashUser.ComputeSha256Hash("shay1")/*+ json*/, Encoding.UTF8, "application/json");
+            var data = new StringContent("105&"/*+ json*/, Encoding.UTF8, "application/json");
             //var data2 = new StringContent("115&" /*+ json*/, Encoding.UTF8, "application/json");
 
-            var url = "http://192.168.0.128:8080/";
+            var url = "http://127.0.0.1:8080/";
             using var client = new HttpClient();
 
-            //var content = await client.GetStringAsync("http://192.168.0.194:8080/");
+            //var content = await client.GetStringAsync("http://:8080/");
             //Console.WriteLine(content);
 
             var response = await client.PostAsync(url, data);

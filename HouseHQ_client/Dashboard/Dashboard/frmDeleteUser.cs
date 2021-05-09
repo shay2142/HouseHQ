@@ -29,7 +29,7 @@ namespace Dashboard
             adminUserName = admin;
 
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, testLogin.hostToIp(IP), "111");
+            string result = testLogin.sent(null, IP, "111");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -60,7 +60,7 @@ namespace Dashboard
                 };
                 string json = JsonConvert.SerializeObject(msg);
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(IP), "110");
+                string result = testLogin.sent(json, IP, "110");
                 if (result != null)
                 {
                     string[] results = result.Split('&');

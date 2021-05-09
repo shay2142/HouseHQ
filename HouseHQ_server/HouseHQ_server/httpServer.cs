@@ -22,7 +22,7 @@ namespace HouseHQ_server
 {
     public class httpServer
     {
-        public Dictionary<string, string> CODE;
+        public Codes codes = new Codes();
         public SQLiteConnection con;
         public HttpListener listener;
         internal DB db = new DB();
@@ -42,14 +42,28 @@ namespace HouseHQ_server
 
         public httpServer()
         {
-            
+
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void frmNewFormThread()
         {
             Application.Run(new Form2(this));
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void runServer()
         {
             string path = @"HHQ_DB.sqlite";
@@ -59,8 +73,6 @@ namespace HouseHQ_server
             con.Open();
 
             db.createTables(con);
-
-            CODE = codes();
 
             var newThread = new System.Threading.Thread(frmNewFormThread);
             newThread.SetApartmentState(System.Threading.ApartmentState.STA);
@@ -73,7 +85,7 @@ namespace HouseHQ_server
             String[] prefixes = { url };
             listener = new HttpListener();
             foreach (string s in prefixes)
-            { 
+            {
                 listener.Prefixes.Add(s);
             }
             listener.Start();
@@ -89,6 +101,13 @@ namespace HouseHQ_server
             listener.Close();
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -102,6 +121,13 @@ namespace HouseHQ_server
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public async Task HandleIncomingConnections()
         {
             bool runServer = true;
@@ -125,7 +151,7 @@ namespace HouseHQ_server
                 Console.WriteLine(req.UserAgent);
                 Console.WriteLine(req.RemoteEndPoint);
                 Console.WriteLine();
-                
+
                 if ((req.HttpMethod == "POST") && !db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
                     Console.WriteLine("test");
@@ -211,6 +237,25 @@ namespace HouseHQ_server
                                 case "122":
                                     msg = getAllAppsOnPC();
                                     break;
+                                case "123"://sent msg
+                                    msg = sentMsg(json[1]);
+                                    break;
+                                case "124"://logoff all users
+                                    msg = logoffAllUsers();
+                                    break;
+                                case "125"://logoff user
+                                    break;
+                                case "126"://get all users connet to remoteApp
+                                    break;
+                                case "127"://sent app db
+                                    msg = sentApp();
+                                    break;
+                                case "128"://sent blockIp db
+                                    msg = sentBLOCKS_IP();
+                                    break;
+                                case "129"://connect to remote app ? now just app no hhq_web
+                                    //sent computer name and open thred remote app manager
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -229,7 +274,7 @@ namespace HouseHQ_server
                         }
                     }
                 }
-                else if(!db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
+                else if (!db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
                     response(resp, String.Format(pageData), "text/html");
                 }
@@ -237,6 +282,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string login(string json)
         {
             var user = JsonConvert.DeserializeObject<login>(json);
@@ -249,7 +301,7 @@ namespace HouseHQ_server
                     mail = db.getMailForUser(con, user.name),
                     appList = db.getUserApplications(con, user.name),
                     key = db.getLevelKey(con, user.name)
-                }; 
+                };
                 db.updateStatus(con, user.name, "online");
 
                 return "201&" + JsonConvert.SerializeObject(test);
@@ -260,6 +312,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string singup(string json)
         {
             var user = JsonConvert.DeserializeObject<singup>(json);
@@ -283,6 +342,13 @@ namespace HouseHQ_server
 
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string changeAccount(string json)
         {
             var user = JsonConvert.DeserializeObject<changeAccount>(json);
@@ -296,6 +362,13 @@ namespace HouseHQ_server
             return "203&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string addAppsToServer(string json)
         {
             var user = JsonConvert.DeserializeObject<addAppsOnServer>(json);
@@ -313,6 +386,13 @@ namespace HouseHQ_server
             return error("access is denied");
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string allApps()
         {
             getAllApps msg = new getAllApps()
@@ -322,8 +402,15 @@ namespace HouseHQ_server
             return "205&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string deleteAppsForServer(string json)
-        { 
+        {
             var user = JsonConvert.DeserializeObject<deleteAppsForServer>(json);
 
             remoteApp remote = new remoteApp();
@@ -342,6 +429,13 @@ namespace HouseHQ_server
             return error("access is denied");
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string deleteAppsFromUser(string json)
         {
             var user = JsonConvert.DeserializeObject<deleteAppFromUser>(json);
@@ -351,6 +445,13 @@ namespace HouseHQ_server
             return "207&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string addAppForUser(string json)
         {
             var user = JsonConvert.DeserializeObject<addAppForUser>(json);
@@ -359,6 +460,13 @@ namespace HouseHQ_server
             return "208&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string logout(string json)//return???
         {
             var user = JsonConvert.DeserializeObject<logoutUser>(json);
@@ -367,6 +475,13 @@ namespace HouseHQ_server
             return "209&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string deleteUser(string json)
         {
             var user = JsonConvert.DeserializeObject<deleteUser>(json);
@@ -384,6 +499,13 @@ namespace HouseHQ_server
 
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getAllUsers()
         {
             getAllUsers msg = new getAllUsers()
@@ -393,6 +515,13 @@ namespace HouseHQ_server
             return "211&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getUserInformation(string json)
         {
             var user = JsonConvert.DeserializeObject<getUserInformation>(json);
@@ -405,16 +534,30 @@ namespace HouseHQ_server
             return "212&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string sentDB()
         {
             jsonSentDB msg = new jsonSentDB
             {
-                db = getDB()
+                db = db.getDB(con)
             };
 
             return "213&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getUserApps(string json)
         {
             var user = JsonConvert.DeserializeObject<getUserInformation>(json);
@@ -426,16 +569,30 @@ namespace HouseHQ_server
             return "214&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string sentLogs()
         {
             jsonSentLogs msg = new jsonSentLogs()
             {
-                jsonLogs = sentLogsDB()
+                jsonLogs = db.sentLogsDB(con)
             };
 
             return "215&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string addLevelKey(string json)
         {
             var user = JsonConvert.DeserializeObject<addLevelKey>(json);
@@ -448,23 +605,44 @@ namespace HouseHQ_server
             return "216&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getLevelKey()
         {
             jsonSentLevels msg = new jsonSentLevels()
             {
-                jsonLevels = sentLevelsInformation()
+                jsonLevels = db.sentLevelsInformation(con)
             };
 
             return "217&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string deleteAppForLevel(string json)
-        { 
+        {
             var user = JsonConvert.DeserializeObject<deleteAppForLevel>(json);
             db.deleteAppForLevel(con, user.nameLevel, user.apps);
             return "218&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string deleteLevel(string json)
         {
             var user = JsonConvert.DeserializeObject<deleteLevel>(json);
@@ -472,6 +650,13 @@ namespace HouseHQ_server
             return "219&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string updateAppsForLevel(string json)
         {
             var user = JsonConvert.DeserializeObject<updateAppsForLevel>(json);
@@ -490,12 +675,26 @@ namespace HouseHQ_server
             return "220&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string deleteLogs()
         {
             db.deleteTable(con, "LOGS");
             return "221&";
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string getAllAppsOnPC()
         {
             Apps getApps = new Apps();
@@ -506,6 +705,96 @@ namespace HouseHQ_server
             return "222&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string sentMsg(string json)
+        {
+            var user = JsonConvert.DeserializeObject<sentMsg>(json);
+
+            remoteApp_Management remote = new remoteApp_Management();
+            remote.sentMsg(remote.getSessionId(user.namePc), user.msg);
+
+            return "223&";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string logoffAllUsers()
+        {
+            remoteApp_Management remote = new remoteApp_Management();
+            remote.logOffAllUsers();
+            return "224&";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getAllUsersRemoteApp()
+        {
+            remoteApp_Management remote = new remoteApp_Management();
+
+            getAllUsersRemoteApp msg = new getAllUsersRemoteApp()
+            {
+                users = remote.getAllClientName()
+            };
+            return "226&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string sentApp()
+        {
+            jsonSentApp msg = new jsonSentApp()
+            {
+                jsonApp = db.sentApp(con)
+            };
+
+            return "227&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string sentBLOCKS_IP()
+        {
+            jsonSentBLOCKS_IP msg = new jsonSentBLOCKS_IP()
+            {
+                jsonBLOCKS_IP = db.sentBLOCKS_IP(con)
+            };
+
+            return "228&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string error(string msg)
         {
             error err = new error()
@@ -515,60 +804,13 @@ namespace HouseHQ_server
             return "400&" + JsonConvert.SerializeObject(err);
         }
 
-        internal List<sentDB> getDB()
-        {
-            var list = new List<sentDB>();
-            List<string> userList = db.getAllUsers(con);
-            foreach (var user in userList)
-            {
-                list.Add(new sentDB()
-                {
-                    ID = db.getIdForUser(con, user),
-                    userName = user,
-                    password = db.getPassForUser(con, user),
-                    mail = db.getMailForUser(con, user),
-                    LEVEL_KEY = db.getLevelKey(con, user),
-                    STATUS = db.getStatusForUser(con, user)
-                });
-            }
-            return list; 
-        }
+        /*
 
-        internal List<sentLogs> sentLogsDB()
-        {
-            var list = new List<sentLogs>();
-            List<int> logsID = db.getAllLogsID(con);
-            foreach (int logID in logsID)
-            {
-                list.Add(new sentLogs()
-                {
-                    ID = logID,
-                    dateLogs = db.getDateForLog(con, logID),
-                    typeLog = CODE[db.getCodeForLog(con, logID)],
-                    source = db.getSourceForLog(con, logID),
-                    log = db.getJ_LOGForLog(con, logID)
-                });
-            }
-            return list;
-        }
 
-        internal List<sentLevels> sentLevelsInformation()
-        { 
-            var list = new List<sentLevels>();
-            List<int> levelsID = db.getAllLevelID(con);
-            foreach(int levelID in levelsID)
-            {
-                list.Add(new sentLevels()
-                {
-                    ID = levelID,
-                    name = db.getNameForLevel(con, levelID),
-                    admin = Convert.ToBoolean(db.getAdminForLevel(con, levelID)),
-                    apps = db.getLevelApplications(con, db.getNameForLevel(con, levelID))
-                });
-            }
-            return list;
-        }
+         input: 
 
+         output:
+         */
         public void updateStatus(string hashUser)
         {
             hash hashUsers = new hash();
@@ -579,57 +821,13 @@ namespace HouseHQ_server
             }
         }
 
-        public Dictionary<string, string> codes() 
-        {
-            return new Dictionary<string, string>()
-            {
-                {"101", "login"},
-                {"102", "singup"},
-                {"103", "change account"},
-                {"104", "add apps"},
-                {"105", "all apps"},
-                {"106", "delete apps"},
-                {"107", "delete apps from user"},
-                {"108", "add apps for user"},
-                {"109", "logout"},
-                {"110", "delete user"},
-                {"111", "getAllUsers"},
-                {"112", "getAllUsers"},
-                {"113", "sent DB"},
-                {"114", "get user apps"},
-                {"115", "sent logs"},
-                {"116", "add level"},
-                {"117", "get level key"},
-                {"118", "delete app for level"},
-                {"119", "delete level"},
-                {"120", "update apps for level"},
-                {"121", "delete logs"},
-                {"122", "getAllAppsOnPC" },
-                {"400", "error"},
-                {"201", "ok login"},
-                {"202", "ok singup"},
-                {"203", "ok change account"},
-                {"204", "ok add apps"},
-                {"205", "ok all apps"},
-                {"206", "ok delete apps"},
-                {"207", "ok delete apps from user"},
-                {"208", "ok add apps for user"},
-                {"209", "ok logout"},
-                {"210", "ok delete user"},
-                {"211", "ok getAllUsers"},
-                {"212", "ok getAllUsers"},
-                {"213", "ok sent DB"},
-                {"214", "ok get user apps"},
-                {"215", "ok sent logs"},
-                {"216", "ok add level"},
-                {"217", "ok get level key"},
-                {"218", "ok delete app for level"},
-                {"219", "ok delete level"},
-                {"220", "ok update apps for level"},
-                {"221", "ok delete logs"},
-                {"222", "ok getAllAppsOnPC" }
-            };
-        }
+        /*
+
+
+         input: 
+
+         output:
+         */
         public void response(HttpListenerResponse resp, string msg, string ContentType)
         {
             // Write the response info
@@ -642,6 +840,13 @@ namespace HouseHQ_server
             resp.Close();
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         private bool IsValidJson(string strInput)
         {
             if (string.IsNullOrWhiteSpace(strInput)) { return false; }

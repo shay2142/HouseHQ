@@ -46,7 +46,7 @@ namespace HHQ_web
 
                 string json = JsonConvert.SerializeObject(msg);
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(Session["ip"].ToString()), "114");
+                string result = testLogin.sent(json, Session["ip"].ToString(), "114");
                 if (result != null)
                 {
                     string[] results = result.Split('&');
