@@ -8,11 +8,13 @@ using Newtonsoft.Json;
 
 namespace HHQ_web
 {
-    public partial class logs : System.Web.UI.Page
+    public partial class logs1 : System.Web.UI.Page
     {
         public string IP;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Master.page = "LOGS";
             if (Session["json"] != null && Session["ip"] != null)
             {
 
@@ -21,15 +23,15 @@ namespace HHQ_web
                 {
                     Response.Redirect("~/login.aspx");
                 }
-                userName.InnerHtml = user.name;
+                Master.UserNamePropertyOnMasterPage = user.name;
                 IP = Session["ip"].ToString();
+                Master.getIp(IP);
                 localhost.WebService1 getLogs = new localhost.WebService1();
 
                 GridView1.DataSource = getLogs.getLogs(IP).jsonLogs;
                 GridView1.DataBind();
             }
         }
-
         protected void btnApps(object sender, EventArgs e)
         {
             Response.Redirect("~/Apps.aspx");
@@ -38,15 +40,6 @@ namespace HHQ_web
         protected void btnContact(object sender, EventArgs e)
         {
 
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            localhost.WebService1 logout = new localhost.WebService1();
-            if (logout.logout(IP, userName.InnerHtml) == "209")
-            {
-                Response.Redirect("~/login.aspx");
-            }
         }
 
         protected void btnMangar(object sender, EventArgs e)

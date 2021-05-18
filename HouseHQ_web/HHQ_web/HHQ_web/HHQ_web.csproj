@@ -119,6 +119,7 @@
     <Content Include="mas.Master" />
     <Content Include="WebForm3.aspx" />
     <Content Include="WebForm5.aspx" />
+    <Content Include="Apps.aspx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,10 +131,12 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="test.Master" />
+    <Content Include="Web References\localhost\getAllUsersRemoteApp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\localhost\HHQ_WebService.disco" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
-    <Content Include="Apps.aspx" />
     <Content Include="HHQ_WebService.asmx" />
     <Content Include="WebForm2.aspx" />
   </ItemGroup>
@@ -237,13 +240,6 @@
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Apps.aspx.cs">
-      <DependentUpon>Apps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Apps.aspx.designer.cs">
-      <DependentUpon>Apps.aspx</DependentUpon>
-    </Compile>
     <Compile Include="HHQ_WebService.asmx.cs">
       <DependentUpon>HHQ_WebService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -269,6 +265,13 @@
     <Compile Include="WebForm5.aspx.designer.cs">
       <DependentUpon>WebForm5.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Apps.aspx.cs">
+      <DependentUpon>Apps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps.aspx.designer.cs">
+      <DependentUpon>Apps.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WS_Json.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +281,12 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\localhost\jsonSentLogs.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\localhost\jsonSentApp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\localhost\jsonSentBLOCKS_IP.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\localhost\Reference.map">

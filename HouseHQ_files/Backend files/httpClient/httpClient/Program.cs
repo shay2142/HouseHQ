@@ -32,7 +32,7 @@ namespace HttpClientEx
                 nameLevel = "test"
             };
             string json = JsonConvert.SerializeObject(test);
-            var data = new StringContent("105&"/*+ json*/, Encoding.UTF8, "application/json");
+            var data = new StringContent("122&"/*+ json*/, Encoding.UTF8, "application/json");
             //var data2 = new StringContent("115&" /*+ json*/, Encoding.UTF8, "application/json");
 
             var url = "http://127.0.0.1:8080/";

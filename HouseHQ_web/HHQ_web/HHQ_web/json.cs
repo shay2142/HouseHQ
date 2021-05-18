@@ -162,4 +162,38 @@ namespace HHQ_web
     {
         public Dictionary<string, app> getApps { get; set; }
     }
+
+    class sentMsg
+    {
+        public string namePc { get; set; }
+        public string msg { get; set; }
+    }
+
+    public class sentApp
+    {
+        public int appID { get; set; }
+        public string name { get; set; }
+        public string REMOTEAPP { get; set; }
+    }
+
+    public class sentBLOCKS_IP
+    {
+        public int ipID { get; set; }
+        public string ip { get; set; }
+    }
+
+    public class jsonSentApp
+    {
+        public List<sentApp> jsonApp { get; set; }
+    }
+
+    public class jsonSentBLOCKS_IP
+    {
+        public List<sentBLOCKS_IP> jsonBLOCKS_IP { get; set; }
+    }
+
+    public class getAllUsersRemoteApp
+    {
+        public List<string> users { get; set; }
+    }
 }

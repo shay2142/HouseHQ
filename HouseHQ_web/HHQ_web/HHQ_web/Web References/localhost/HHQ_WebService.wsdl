@@ -377,6 +377,116 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="sentMsg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="namePc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sentMsgResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sentMsgResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="logOffAllUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="logOffAllUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="logOffAllUsersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAllUsersRemoteApps">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAllUsersRemoteAppsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAllUsersRemoteAppsResult" type="tns:getAllUsersRemoteApp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="getAllUsersRemoteApp">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="users" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getAppDB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAppDBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAppDBResult" type="tns:jsonSentApp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="jsonSentApp">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="jsonApp" type="tns:ArrayOfSentApp" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSentApp">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sentApp" nillable="true" type="tns:sentApp" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sentApp">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="appID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMOTEAPP" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getBLOCKS_IP_DB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getBLOCKS_IP_DBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getBLOCKS_IP_DBResult" type="tns:jsonSentBLOCKS_IP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="jsonSentBLOCKS_IP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="jsonBLOCKS_IP" type="tns:ArrayOfSentBLOCKS_IP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSentBLOCKS_IP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sentBLOCKS_IP" nillable="true" type="tns:sentBLOCKS_IP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sentBLOCKS_IP">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ipID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="getAllAppsForUsersSoapIn">
@@ -487,6 +597,36 @@
   <wsdl:message name="getAllAppsOnPCSoapOut">
     <wsdl:part name="parameters" element="tns:getAllAppsOnPCResponse" />
   </wsdl:message>
+  <wsdl:message name="sentMsgSoapIn">
+    <wsdl:part name="parameters" element="tns:sentMsg" />
+  </wsdl:message>
+  <wsdl:message name="sentMsgSoapOut">
+    <wsdl:part name="parameters" element="tns:sentMsgResponse" />
+  </wsdl:message>
+  <wsdl:message name="logOffAllUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:logOffAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="logOffAllUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:logOffAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAllUsersRemoteAppsSoapIn">
+    <wsdl:part name="parameters" element="tns:getAllUsersRemoteApps" />
+  </wsdl:message>
+  <wsdl:message name="getAllUsersRemoteAppsSoapOut">
+    <wsdl:part name="parameters" element="tns:getAllUsersRemoteAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAppDBSoapIn">
+    <wsdl:part name="parameters" element="tns:getAppDB" />
+  </wsdl:message>
+  <wsdl:message name="getAppDBSoapOut">
+    <wsdl:part name="parameters" element="tns:getAppDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBLOCKS_IP_DBSoapIn">
+    <wsdl:part name="parameters" element="tns:getBLOCKS_IP_DB" />
+  </wsdl:message>
+  <wsdl:message name="getBLOCKS_IP_DBSoapOut">
+    <wsdl:part name="parameters" element="tns:getBLOCKS_IP_DBResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="getAllAppsForUsers">
       <wsdl:input message="tns:getAllAppsForUsersSoapIn" />
@@ -559,6 +699,26 @@
     <wsdl:operation name="getAllAppsOnPC">
       <wsdl:input message="tns:getAllAppsOnPCSoapIn" />
       <wsdl:output message="tns:getAllAppsOnPCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="sentMsg">
+      <wsdl:input message="tns:sentMsgSoapIn" />
+      <wsdl:output message="tns:sentMsgSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="logOffAllUsers">
+      <wsdl:input message="tns:logOffAllUsersSoapIn" />
+      <wsdl:output message="tns:logOffAllUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllUsersRemoteApps">
+      <wsdl:input message="tns:getAllUsersRemoteAppsSoapIn" />
+      <wsdl:output message="tns:getAllUsersRemoteAppsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAppDB">
+      <wsdl:input message="tns:getAppDBSoapIn" />
+      <wsdl:output message="tns:getAppDBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getBLOCKS_IP_DB">
+      <wsdl:input message="tns:getBLOCKS_IP_DBSoapIn" />
+      <wsdl:output message="tns:getBLOCKS_IP_DBSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -725,6 +885,51 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="sentMsg">
+      <soap:operation soapAction="http://tempuri.org/sentMsg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOffAllUsers">
+      <soap:operation soapAction="http://tempuri.org/logOffAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllUsersRemoteApps">
+      <soap:operation soapAction="http://tempuri.org/getAllUsersRemoteApps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAppDB">
+      <soap:operation soapAction="http://tempuri.org/getAppDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBLOCKS_IP_DB">
+      <soap:operation soapAction="http://tempuri.org/getBLOCKS_IP_DB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -883,6 +1088,51 @@
     </wsdl:operation>
     <wsdl:operation name="getAllAppsOnPC">
       <soap12:operation soapAction="http://tempuri.org/getAllAppsOnPC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sentMsg">
+      <soap12:operation soapAction="http://tempuri.org/sentMsg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOffAllUsers">
+      <soap12:operation soapAction="http://tempuri.org/logOffAllUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllUsersRemoteApps">
+      <soap12:operation soapAction="http://tempuri.org/getAllUsersRemoteApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAppDB">
+      <soap12:operation soapAction="http://tempuri.org/getAppDB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBLOCKS_IP_DB">
+      <soap12:operation soapAction="http://tempuri.org/getBLOCKS_IP_DB" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

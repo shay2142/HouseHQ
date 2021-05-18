@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace HHQ_web
 {
-    public partial class WebForm4 : System.Web.UI.Page
+    public partial class WebForm6 : System.Web.UI.Page
     {
         public List<string> apps;
         public string IP;
@@ -16,17 +16,8 @@ namespace HHQ_web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Master.setPageName = "APPS";
             getData();
-        }
-
-        public void button_Click(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            remoteApp1.createRemoteAppFile(IP, button.Text, userName.InnerHtml);
-            Response.ContentType = "application/exe";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + button.Text + ".exe");
-            Response.TransmitFile(Server.MapPath("~/remoteApp/" + userName.InnerHtml + "_" +button.Text.Replace(" ", "") + ".exe"));
-            Response.End();
         }
 
         public void getData()
@@ -34,6 +25,7 @@ namespace HHQ_web
             if (Session["json"] != null && Session["ip"] != null)
             {
                 IP = Session["ip"].ToString();
+                Master.getIp(IP);
                 var user = JsonConvert.DeserializeObject<okLogin>(Session["json"].ToString());
 
                 localhost.WebService1 getApps = new localhost.WebService1();
@@ -46,8 +38,8 @@ namespace HHQ_web
                 }
                 ContactUs();
                 //user1.InnerHtml = "Hi there, " + user.name + "!";
-                userName.InnerHtml = user.name;
-                
+                Master.UserNamePropertyOnMasterPage = user.name;
+
             }
 
             foreach (var app in apps)
@@ -71,38 +63,9 @@ namespace HHQ_web
             }
         }
 
-        protected void btnLogin_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void lbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            localhost.WebService1 logout = new localhost.WebService1();
-            if (logout.logout(IP, userName.InnerHtml) == "209")
-            {
-                Response.Redirect("~/login.aspx");
-            }
-        }
-
         protected void btnApps(object sender, EventArgs e)
         {
             getData();
-        }
-
-        protected void btnManger(object sender, EventArgs e)
-        {
-            Response.Redirect("Manager.aspx");
-        }
-
-        protected void btnContact(object sender, EventArgs e)
-        {
-
         }
 
         protected void manager()
@@ -112,7 +75,22 @@ namespace HHQ_web
             button1.ID = "Manager";
             button1.CssClass = "mybtn";
             button1.Click += btnManger;
-            mySidenav.Controls.Add(button1);
+            Master.test1 = button1;
+        }
+
+        protected void btnManger(object sender, EventArgs e)
+        {
+            Response.Redirect("Manager.aspx");
+        }
+
+        public void button_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            remoteApp1.createRemoteAppFile(IP, button.Text, Master.UserNamePropertyOnMasterPage);
+            Response.ContentType = "application/exe";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + button.Text + ".exe");
+            Response.TransmitFile(Server.MapPath("~/remoteApp/" + Master.UserNamePropertyOnMasterPage + "_" + button.Text.Replace(" ", "") + ".exe"));
+            Response.End();
         }
 
         protected void ContactUs()
@@ -122,7 +100,12 @@ namespace HHQ_web
             button1.ID = "ContactUs";
             button1.CssClass = "mybtn";
             button1.Click += btnContact;
-            mySidenav.Controls.Add(button1);
+            Master.test1 = button1;
+        }
+
+        protected void btnContact(object sender, EventArgs e)
+        {
+            
         }
     }
 }

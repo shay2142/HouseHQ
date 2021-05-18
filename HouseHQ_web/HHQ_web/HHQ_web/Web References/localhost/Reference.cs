@@ -65,6 +65,16 @@ namespace HHQ_web.localhost {
         
         private System.Threading.SendOrPostCallback getAllAppsOnPCOperationCompleted;
         
+        private System.Threading.SendOrPostCallback sentMsgOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback logOffAllUsersOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getAllUsersRemoteAppsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getAppDBOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getBLOCKS_IP_DBOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -156,6 +166,21 @@ namespace HHQ_web.localhost {
         
         /// <remarks/>
         public event getAllAppsOnPCCompletedEventHandler getAllAppsOnPCCompleted;
+        
+        /// <remarks/>
+        public event sentMsgCompletedEventHandler sentMsgCompleted;
+        
+        /// <remarks/>
+        public event logOffAllUsersCompletedEventHandler logOffAllUsersCompleted;
+        
+        /// <remarks/>
+        public event getAllUsersRemoteAppsCompletedEventHandler getAllUsersRemoteAppsCompleted;
+        
+        /// <remarks/>
+        public event getAppDBCompletedEventHandler getAppDBCompleted;
+        
+        /// <remarks/>
+        public event getBLOCKS_IP_DBCompletedEventHandler getBLOCKS_IP_DBCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getAllAppsForUsers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -742,6 +767,155 @@ namespace HHQ_web.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/sentMsg", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string sentMsg(string ip, string namePc, string msg) {
+            object[] results = this.Invoke("sentMsg", new object[] {
+                        ip,
+                        namePc,
+                        msg});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void sentMsgAsync(string ip, string namePc, string msg) {
+            this.sentMsgAsync(ip, namePc, msg, null);
+        }
+        
+        /// <remarks/>
+        public void sentMsgAsync(string ip, string namePc, string msg, object userState) {
+            if ((this.sentMsgOperationCompleted == null)) {
+                this.sentMsgOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsentMsgOperationCompleted);
+            }
+            this.InvokeAsync("sentMsg", new object[] {
+                        ip,
+                        namePc,
+                        msg}, this.sentMsgOperationCompleted, userState);
+        }
+        
+        private void OnsentMsgOperationCompleted(object arg) {
+            if ((this.sentMsgCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.sentMsgCompleted(this, new sentMsgCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/logOffAllUsers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string logOffAllUsers(string ip) {
+            object[] results = this.Invoke("logOffAllUsers", new object[] {
+                        ip});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void logOffAllUsersAsync(string ip) {
+            this.logOffAllUsersAsync(ip, null);
+        }
+        
+        /// <remarks/>
+        public void logOffAllUsersAsync(string ip, object userState) {
+            if ((this.logOffAllUsersOperationCompleted == null)) {
+                this.logOffAllUsersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnlogOffAllUsersOperationCompleted);
+            }
+            this.InvokeAsync("logOffAllUsers", new object[] {
+                        ip}, this.logOffAllUsersOperationCompleted, userState);
+        }
+        
+        private void OnlogOffAllUsersOperationCompleted(object arg) {
+            if ((this.logOffAllUsersCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.logOffAllUsersCompleted(this, new logOffAllUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getAllUsersRemoteApps", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public getAllUsersRemoteApp getAllUsersRemoteApps(string ip) {
+            object[] results = this.Invoke("getAllUsersRemoteApps", new object[] {
+                        ip});
+            return ((getAllUsersRemoteApp)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getAllUsersRemoteAppsAsync(string ip) {
+            this.getAllUsersRemoteAppsAsync(ip, null);
+        }
+        
+        /// <remarks/>
+        public void getAllUsersRemoteAppsAsync(string ip, object userState) {
+            if ((this.getAllUsersRemoteAppsOperationCompleted == null)) {
+                this.getAllUsersRemoteAppsOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAllUsersRemoteAppsOperationCompleted);
+            }
+            this.InvokeAsync("getAllUsersRemoteApps", new object[] {
+                        ip}, this.getAllUsersRemoteAppsOperationCompleted, userState);
+        }
+        
+        private void OngetAllUsersRemoteAppsOperationCompleted(object arg) {
+            if ((this.getAllUsersRemoteAppsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getAllUsersRemoteAppsCompleted(this, new getAllUsersRemoteAppsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getAppDB", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public jsonSentApp getAppDB(string ip) {
+            object[] results = this.Invoke("getAppDB", new object[] {
+                        ip});
+            return ((jsonSentApp)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getAppDBAsync(string ip) {
+            this.getAppDBAsync(ip, null);
+        }
+        
+        /// <remarks/>
+        public void getAppDBAsync(string ip, object userState) {
+            if ((this.getAppDBOperationCompleted == null)) {
+                this.getAppDBOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAppDBOperationCompleted);
+            }
+            this.InvokeAsync("getAppDB", new object[] {
+                        ip}, this.getAppDBOperationCompleted, userState);
+        }
+        
+        private void OngetAppDBOperationCompleted(object arg) {
+            if ((this.getAppDBCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getAppDBCompleted(this, new getAppDBCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getBLOCKS_IP_DB", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public jsonSentBLOCKS_IP getBLOCKS_IP_DB(string ip) {
+            object[] results = this.Invoke("getBLOCKS_IP_DB", new object[] {
+                        ip});
+            return ((jsonSentBLOCKS_IP)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getBLOCKS_IP_DBAsync(string ip) {
+            this.getBLOCKS_IP_DBAsync(ip, null);
+        }
+        
+        /// <remarks/>
+        public void getBLOCKS_IP_DBAsync(string ip, object userState) {
+            if ((this.getBLOCKS_IP_DBOperationCompleted == null)) {
+                this.getBLOCKS_IP_DBOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetBLOCKS_IP_DBOperationCompleted);
+            }
+            this.InvokeAsync("getBLOCKS_IP_DB", new object[] {
+                        ip}, this.getBLOCKS_IP_DBOperationCompleted, userState);
+        }
+        
+        private void OngetBLOCKS_IP_DBOperationCompleted(object arg) {
+            if ((this.getBLOCKS_IP_DBCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getBLOCKS_IP_DBCompleted(this, new getBLOCKS_IP_DBCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -858,6 +1032,147 @@ namespace HHQ_web.localhost {
             }
             set {
                 this.imgField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class sentBLOCKS_IP {
+        
+        private int ipIDField;
+        
+        private string ipField;
+        
+        /// <remarks/>
+        public int ipID {
+            get {
+                return this.ipIDField;
+            }
+            set {
+                this.ipIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ip {
+            get {
+                return this.ipField;
+            }
+            set {
+                this.ipField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class jsonSentBLOCKS_IP {
+        
+        private sentBLOCKS_IP[] jsonBLOCKS_IPField;
+        
+        /// <remarks/>
+        public sentBLOCKS_IP[] jsonBLOCKS_IP {
+            get {
+                return this.jsonBLOCKS_IPField;
+            }
+            set {
+                this.jsonBLOCKS_IPField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class sentApp {
+        
+        private int appIDField;
+        
+        private string nameField;
+        
+        private string rEMOTEAPPField;
+        
+        /// <remarks/>
+        public int appID {
+            get {
+                return this.appIDField;
+            }
+            set {
+                this.appIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string REMOTEAPP {
+            get {
+                return this.rEMOTEAPPField;
+            }
+            set {
+                this.rEMOTEAPPField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class jsonSentApp {
+        
+        private sentApp[] jsonAppField;
+        
+        /// <remarks/>
+        public sentApp[] jsonApp {
+            get {
+                return this.jsonAppField;
+            }
+            set {
+                this.jsonAppField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class getAllUsersRemoteApp {
+        
+        private string[] usersField;
+        
+        /// <remarks/>
+        public string[] users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
             }
         }
     }
@@ -1659,6 +1974,136 @@ namespace HHQ_web.localhost {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void sentMsgCompletedEventHandler(object sender, sentMsgCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class sentMsgCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal sentMsgCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void logOffAllUsersCompletedEventHandler(object sender, logOffAllUsersCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class logOffAllUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal logOffAllUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void getAllUsersRemoteAppsCompletedEventHandler(object sender, getAllUsersRemoteAppsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getAllUsersRemoteAppsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getAllUsersRemoteAppsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getAllUsersRemoteApp Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getAllUsersRemoteApp)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void getAppDBCompletedEventHandler(object sender, getAppDBCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getAppDBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getAppDBCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public jsonSentApp Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((jsonSentApp)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void getBLOCKS_IP_DBCompletedEventHandler(object sender, getBLOCKS_IP_DBCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getBLOCKS_IP_DBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getBLOCKS_IP_DBCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public jsonSentBLOCKS_IP Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((jsonSentBLOCKS_IP)(this.results[0]));
             }
         }
     }

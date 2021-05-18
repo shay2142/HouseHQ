@@ -210,31 +210,31 @@ namespace HouseHQ_server
                                 case "113"://sent DB
                                     msg = sentDB();
                                     break;
-                                case "114":
+                                case "114"://get user apps
                                     msg = getUserApps(json[1]);
                                     break;
-                                case "115":
+                                case "115"://sent logs db
                                     msg = sentLogs();
                                     break;
-                                case "116":
+                                case "116"://add level key
                                     msg = addLevelKey(json[1]);
                                     break;
-                                case "117":
+                                case "117":// get all levels key
                                     msg = getLevelKey();
                                     break;
-                                case "118":
+                                case "118"://delete app for level key
                                     msg = deleteAppForLevel(json[1]);
                                     break;
-                                case "119":
+                                case "119":// delete level key
                                     msg = deleteLevel(json[1]);
                                     break;
-                                case "120":
+                                case "120"://update app level key
                                     msg = updateAppsForLevel(json[1]);
                                     break;
-                                case "121":
+                                case "121"://delete logs
                                     msg = deleteLogs();
                                     break;
-                                case "122":
+                                case "122"://get all app in server 
                                     msg = getAllAppsOnPC();
                                     break;
                                 case "123"://sent msg
@@ -245,7 +245,8 @@ namespace HouseHQ_server
                                     break;
                                 case "125"://logoff user
                                     break;
-                                case "126"://get all users connet to remoteApp
+                                case "126"://get all users conncet to remoteApp
+                                    msg = getAllUsersRemoteApp();
                                     break;
                                 case "127"://sent app db
                                     msg = sentApp();
@@ -849,7 +850,11 @@ namespace HouseHQ_server
          */
         private bool IsValidJson(string strInput)
         {
-            if (string.IsNullOrWhiteSpace(strInput)) { return false; }
+            if (string.IsNullOrWhiteSpace(strInput)) 
+            { 
+                return false; 
+            }
+
             strInput = strInput.Trim();
             if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || //For object
                 (strInput.StartsWith("[") && strInput.EndsWith("]"))) //For array

@@ -8,13 +8,14 @@ using Newtonsoft.Json;
 
 namespace HHQ_web
 {
-    public partial class Manager : System.Web.UI.Page
+    public partial class Manager1 : System.Web.UI.Page
     {
         public List<string> apps;
         public string IP;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Master.setPageName = "MANAGER";
             getData();
             GetDB();
         }
@@ -29,8 +30,9 @@ namespace HHQ_web
                 {
                     Response.Redirect("~/login.aspx");
                 }
-                userName.InnerHtml = user.name;
+                Master.UserNamePropertyOnMasterPage = user.name;
                 IP = Session["ip"].ToString();
+                Master.getIp(IP);
             }
         }
 
@@ -40,10 +42,10 @@ namespace HHQ_web
 
             GridView1.DataSource = getDB.getDB(IP).db;
             GridView1.DataBind();
-            
+
         }
 
-        protected void btnMangar(object sender, EventArgs e)
+        protected void btnMangar1(object sender, EventArgs e)
         {
 
         }
@@ -53,18 +55,9 @@ namespace HHQ_web
 
         }
 
-        protected void btnApps(object sender, EventArgs e)
+        protected void btnApps1(object sender, EventArgs e)
         {
             Response.Redirect("~/Apps.aspx");
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            localhost.WebService1 logout = new localhost.WebService1();
-            if (logout.logout(IP, userName.InnerHtml) == "209")
-            {
-                Response.Redirect("~/login.aspx");
-            }
         }
 
         protected void createUsers_Click(object sender, EventArgs e)
