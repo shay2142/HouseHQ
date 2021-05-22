@@ -4,5 +4,10 @@
     <asp:Button runat="server" class="mybtn" ID="Button2" Text="APPS" OnClick="btnApps" ForeColor ="#f1f1f1"/>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+    <br>
+    <br>
+    <asp:Panel ID="Panel1" runat="server">
+    </asp:Panel>
+    <br>
+    <br>
 </asp:Content>

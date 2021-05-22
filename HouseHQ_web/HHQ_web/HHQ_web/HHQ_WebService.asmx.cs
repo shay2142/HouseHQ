@@ -184,114 +184,6 @@ namespace HHQ_web
          output:
          */
         [WebMethod]
-        public getAllApps getAllAppsForUser(string ip, string userName)//114
-        {
-            getUserInformation msg = new getUserInformation()
-            {
-                userName = userName
-            };
-            string json = JsonConvert.SerializeObject(msg);
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, ip, "114");
-
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                if (results[0] == "214")
-                {
-                    var application = JsonConvert.DeserializeObject<getAllApps>(results[1]);
-                    return application;
-                }
-            }
-            getAllApps empty = new getAllApps()
-            {
-                allAppList = new List<string> { }
-            };
-            return empty;
-        }
-
-        /*
-
-
-         input: 
-
-         output:
-         */
-        [WebMethod]
-        public string logout(string ip, string userName)//109
-        {
-            logoutUser msg = new logoutUser()
-            {
-                userName = userName
-            };
-
-            string json = JsonConvert.SerializeObject(msg);
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, ip, "109");
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                return results[0];
-            }
-            return "400";
-        }
-
-        /*
-
-
-         input: 
-
-         output:
-         */
-        [WebMethod]
-        public jsonSentDB getDB(string ip)//113
-        {
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, ip, "113");
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                if (results[0] == "213")
-                {
-                    var user = JsonConvert.DeserializeObject<jsonSentDB>(results[1]);
-                    return user;
-                }
-            }
-            return new jsonSentDB();
-        }
-
-        /*
-
-
-         input: 
-
-         output:
-         */
-        [WebMethod]
-        public jsonSentLogs getLogs(string ip)//115
-        {
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, ip, "115");
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                if (results[0] == "215")
-                {
-                    var user = JsonConvert.DeserializeObject<jsonSentLogs>(results[1]);
-                    return user;
-                }
-            }
-            return new jsonSentLogs();
-        }
-
-        /*
-
-
-         input: 
-
-         output:
-         */
-        [WebMethod]
         public string createUsers(string ip, string userName, string password, string mail, string levelKey)//102
         {
             singup create = new singup()
@@ -369,6 +261,41 @@ namespace HHQ_web
          output:
          */
         [WebMethod]
+        public string addAppsToServer(string ip, string userName, string password, List<addApps> listApps)//104
+        {
+            addAppsOnServer addApps = new addAppsOnServer
+            {
+                userName = userName,
+                password = password,
+                listApps = listApps
+            };
+            string json = JsonConvert.SerializeObject(addApps);
+            httpClient connect = new httpClient();
+            string result = connect.sent(json, ip, "104");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+
+                if (results[0] == "204")
+                {
+                    return results[0];
+                }
+                else
+                {
+                    return JsonConvert.DeserializeObject<error>(results[1]).msg;
+                }
+            }
+            return "error";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        [WebMethod]
         public getAllApps allApps(string ip)//105
         {
             httpClient connect = new httpClient();
@@ -383,6 +310,41 @@ namespace HHQ_web
                 }
             }
             return new getAllApps();
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        [WebMethod]
+        public string deleteAppsForServer(string ip, string userName, string password, List<string> listApps)//106
+        {
+            deleteAppsForServer delete = new deleteAppsForServer
+            {
+                userName = userName,
+                password = password,
+                appsList = listApps
+            };
+            string json = JsonConvert.SerializeObject(delete);
+            httpClient connect = new httpClient();
+            string result = connect.sent(json, ip, "106");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+
+                if (results[0] == "206")
+                {
+                    return results[0];
+                }
+                else
+                {
+                    return JsonConvert.DeserializeObject<error>(results[1]).msg;
+                }
+            }
+            return "error";
         }
 
         /*
@@ -444,6 +406,32 @@ namespace HHQ_web
                 }
             }
             return "error";
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        [WebMethod]
+        public string logout(string ip, string userName)//109
+        {
+            logoutUser msg = new logoutUser()
+            {
+                userName = userName
+            };
+
+            string json = JsonConvert.SerializeObject(msg);
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(json, ip, "109");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+                return results[0];
+            }
+            return "400";
         }
 
         /*
@@ -537,31 +525,20 @@ namespace HHQ_web
          output:
          */
         [WebMethod]
-        public string addAppsToServer(string ip, string userName, string password, List<addApps> listApps)//104
+        public jsonSentDB getDB(string ip)//113
         {
-            addAppsOnServer addApps = new addAppsOnServer
-            {
-                userName = userName,
-                password = password,
-                listApps = listApps
-            };
-            string json = JsonConvert.SerializeObject(addApps);
-            httpClient connect = new httpClient();
-            string result = connect.sent(json, ip, "104");
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(null, ip, "113");
             if (result != null)
             {
                 string[] results = result.Split('&');
-
-                if (results[0] == "204")
+                if (results[0] == "213")
                 {
-                    return results[0];
-                }
-                else
-                { 
-                    return JsonConvert.DeserializeObject<error>(results[1]).msg;
+                    var user = JsonConvert.DeserializeObject<jsonSentDB>(results[1]);
+                    return user;
                 }
             }
-            return "error";
+            return new jsonSentDB();
         }
 
         /*
@@ -572,32 +549,78 @@ namespace HHQ_web
          output:
          */
         [WebMethod]
-        public string deleteAppsForServer(string ip, string userName, string password, List<string> listApps)//106
+        public getAllApps getAllAppsForUser(string ip, string userName)//114
         {
-            deleteAppsForServer delete = new deleteAppsForServer
+            getUserInformation msg = new getUserInformation()
             {
-                userName = userName,
-                password = password,
-                appsList = listApps
+                userName = userName
             };
-            string json = JsonConvert.SerializeObject(delete);
-            httpClient connect = new httpClient();
-            string result = connect.sent(json, ip, "106");
+            string json = JsonConvert.SerializeObject(msg);
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(json, ip, "114");
+
             if (result != null)
             {
                 string[] results = result.Split('&');
-
-                if (results[0] == "206")
+                if (results[0] == "214")
                 {
-                    return results[0];
-                }
-                else
-                {
-                    return JsonConvert.DeserializeObject<error>(results[1]).msg;
+                    var application = JsonConvert.DeserializeObject<getAllApps>(results[1]);
+                    return application;
                 }
             }
-            return "error";
+            getAllApps empty = new getAllApps()
+            {
+                allAppList = new List<string> { }
+            };
+            return empty;
         }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        [WebMethod]
+        public jsonSentLogs getLogs(string ip)//115
+        {
+            httpClient testLogin = new httpClient();
+            string result = testLogin.sent(null, ip, "115");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+                if (results[0] == "215")
+                {
+                    var user = JsonConvert.DeserializeObject<jsonSentLogs>(results[1]);
+                    return user;
+                }
+            }
+            return new jsonSentLogs();
+        }
+
+        //116 add level key
+
+        //117 get all levels key
+
+        //118 delete app for level key
+
+        //119 update app level key
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        [WebMethod]
+        public void deleteLogs(string ip)//121
+        {
+            httpClient connect = new httpClient();
+            connect.sent(null, ip, "121");//check??
+        }
+
 
         /*
 
@@ -676,6 +699,8 @@ namespace HHQ_web
             }
             return "";
         }
+
+        //125 logoff user
 
         /*
 

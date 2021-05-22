@@ -61,6 +61,45 @@ namespace HHQ_web
                 Panel1.Controls.Add(label);
 
             }
+            
+            ImageButton image = new ImageButton();
+            image.ID = "addApp";
+            image.ImageUrl = @"~\img\add.png";
+            image.AlternateText = "add apps";
+            image.CssClass = "mybtn2";
+            image.Click += addApp_Click;
+            Master.test2 = image;
+
+            Label label1 = new Label();
+            label1.Text = "&nbsp&nbsp&nbsp&nbsp&nbsp";
+            Master.test3 = label1;
+
+            ImageButton image1 = new ImageButton();
+            image1.ID = "delete app";
+            image1.ImageUrl = @"~\img\delete.png";
+            image1.AlternateText = "delete app";
+            image1.CssClass = "mybtn2";
+            image1.Click += deleteApp_Click;
+            Master.test2 = image1;
+        }
+        public void addApp_Click(object sender, EventArgs e)
+        { 
+            
+        }
+
+        public void deleteApp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void button_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            remoteApp1.createRemoteAppFile(IP, button.Text, Master.UserNamePropertyOnMasterPage);
+            Response.ContentType = "application/exe";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + button.Text + ".exe");
+            Response.TransmitFile(Server.MapPath("~/remoteApp/" + Master.UserNamePropertyOnMasterPage + "_" + button.Text.Replace(" ", "") + ".exe"));
+            Response.End();
         }
 
         protected void btnApps(object sender, EventArgs e)
@@ -81,16 +120,6 @@ namespace HHQ_web
         protected void btnManger(object sender, EventArgs e)
         {
             Response.Redirect("Manager.aspx");
-        }
-
-        public void button_Click(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            remoteApp1.createRemoteAppFile(IP, button.Text, Master.UserNamePropertyOnMasterPage);
-            Response.ContentType = "application/exe";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + button.Text + ".exe");
-            Response.TransmitFile(Server.MapPath("~/remoteApp/" + Master.UserNamePropertyOnMasterPage + "_" + button.Text.Replace(" ", "") + ".exe"));
-            Response.End();
         }
 
         protected void ContactUs()

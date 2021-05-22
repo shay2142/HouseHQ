@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,9 @@ namespace HHQ_web
     public partial class logs1 : System.Web.UI.Page
     {
         public string IP;
+        public localhost.jsonSentLogs LOGS;
+        public string userName;
+        public DateTime dateTimeNow;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,11 +30,59 @@ namespace HHQ_web
                 Master.UserNamePropertyOnMasterPage = user.name;
                 IP = Session["ip"].ToString();
                 Master.getIp(IP);
-                localhost.WebService1 getLogs = new localhost.WebService1();
 
-                GridView1.DataSource = getLogs.getLogs(IP).jsonLogs;
+                userName = JsonConvert.DeserializeObject<okLogin>(Session["json"].ToString()).name;
+
+                localhost.WebService1 getLogs = new localhost.WebService1();
+                localhost.jsonSentLogs logs = getLogs.getLogs(IP);
+
+                GridView1.DataSource = logs.jsonLogs;
                 GridView1.DataBind();
+
+                LOGS = logs;
             }
+        }
+        public void logToTxtFile(localhost.jsonSentLogs user)
+        {
+            dateTimeNow = DateTime.Now;
+
+            using (StreamWriter writer = new StreamWriter(@"C:\Users\shay5\Documents\househq\HouseHQ_web\HHQ_web\HHQ_web\remoteApp\logs_" + userName + ".txt"))
+            {
+                int maxID = 0;
+                int maxDate = 0;
+                int maxType = 0;
+                int maxSource = 0;
+                foreach (var log in user.jsonLogs)
+                {
+                    maxID = maxID < log.ID.ToString().Length ? log.ID.ToString().Length : maxID;
+                    maxDate = maxDate < log.dateLogs.ToString().Length ? log.dateLogs.ToString().Length : maxDate;
+                    maxType = maxType < log.typeLog.ToString().Length ? log.typeLog.ToString().Length : maxType;
+                    maxSource = maxSource < log.source.ToString().Length ? log.source.ToString().Length : maxSource;
+                }
+                writer.WriteLine("ID" + new string(' ', maxID - "ID".Length) + "|Date logs" + new string(' ', maxDate - "Date logs".Length) + "|Type logs" + new string(' ', maxType - "Type logs".Length) + "|Source" + new string(' ', maxSource - "Source".Length) + "|log");
+                writer.WriteLine(new string('-', maxID) + "+" + new string('-', maxDate) + "+" + new string('-', maxType) + "+" + new string('-', maxSource) + "+" + new string('-', 100));
+
+                foreach (var log in user.jsonLogs)
+                {
+                    writer.WriteLine(log.ID + new string(' ', maxID - log.ID.ToString().Length) + "|" + log.dateLogs + new string(' ', maxDate - log.dateLogs.ToString().Length) + "|" + log.typeLog + new string(' ', maxType - log.typeLog.ToString().Length) + "|" + log.source + new string(' ', maxSource - log.source.ToString().Length) + "|" + log.log);
+                    writer.WriteLine(new string('-', maxID) + "+" + new string('-', maxDate) + "+" + new string('-', maxType) + "+" + new string('-', maxSource) + "+" + new string('-', 100));
+                }
+            }
+        }
+        protected void btnSaveLogs(object sender, EventArgs e)
+        {
+            logToTxtFile(LOGS);
+            Response.ContentType = "txt";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=logs_" + userName + "_" + dateTimeNow.ToString("MM/dd/yyyy-HH:mm") + ".txt");
+            Response.TransmitFile(Server.MapPath("~/remoteApp/logs_" + userName + ".txt"));
+            Response.End();
+        }
+        protected void btnDeleteLogs(object sender, EventArgs e)
+        {
+            logToTxtFile(LOGS);//?
+            localhost.WebService1 deleteLogs = new localhost.WebService1();
+            deleteLogs.deleteLogs(IP);
+            Page_Load(sender, e);
         }
         protected void btnApps(object sender, EventArgs e)
         {

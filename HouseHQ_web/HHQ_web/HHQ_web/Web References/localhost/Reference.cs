@@ -35,23 +35,21 @@ namespace HHQ_web.localhost {
         
         private System.Threading.SendOrPostCallback loginOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getAllAppsForUserOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback logoutOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getDBOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getLogsOperationCompleted;
-        
         private System.Threading.SendOrPostCallback createUsersOperationCompleted;
         
         private System.Threading.SendOrPostCallback changeAccountOperationCompleted;
         
+        private System.Threading.SendOrPostCallback addAppsToServerOperationCompleted;
+        
         private System.Threading.SendOrPostCallback allAppsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteAppsForServerOperationCompleted;
         
         private System.Threading.SendOrPostCallback deleteAppsFromUserOperationCompleted;
         
         private System.Threading.SendOrPostCallback addAppForUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback logoutOperationCompleted;
         
         private System.Threading.SendOrPostCallback deleteUserOperationCompleted;
         
@@ -59,9 +57,13 @@ namespace HHQ_web.localhost {
         
         private System.Threading.SendOrPostCallback getUserInformationOperationCompleted;
         
-        private System.Threading.SendOrPostCallback addAppsToServerOperationCompleted;
+        private System.Threading.SendOrPostCallback getDBOperationCompleted;
         
-        private System.Threading.SendOrPostCallback deleteAppsForServerOperationCompleted;
+        private System.Threading.SendOrPostCallback getAllAppsForUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getLogsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteLogsOperationCompleted;
         
         private System.Threading.SendOrPostCallback getAllAppsOnPCOperationCompleted;
         
@@ -123,31 +125,28 @@ namespace HHQ_web.localhost {
         public event loginCompletedEventHandler loginCompleted;
         
         /// <remarks/>
-        public event getAllAppsForUserCompletedEventHandler getAllAppsForUserCompleted;
-        
-        /// <remarks/>
-        public event logoutCompletedEventHandler logoutCompleted;
-        
-        /// <remarks/>
-        public event getDBCompletedEventHandler getDBCompleted;
-        
-        /// <remarks/>
-        public event getLogsCompletedEventHandler getLogsCompleted;
-        
-        /// <remarks/>
         public event createUsersCompletedEventHandler createUsersCompleted;
         
         /// <remarks/>
         public event changeAccountCompletedEventHandler changeAccountCompleted;
         
         /// <remarks/>
+        public event addAppsToServerCompletedEventHandler addAppsToServerCompleted;
+        
+        /// <remarks/>
         public event allAppsCompletedEventHandler allAppsCompleted;
+        
+        /// <remarks/>
+        public event deleteAppsForServerCompletedEventHandler deleteAppsForServerCompleted;
         
         /// <remarks/>
         public event deleteAppsFromUserCompletedEventHandler deleteAppsFromUserCompleted;
         
         /// <remarks/>
         public event addAppForUserCompletedEventHandler addAppForUserCompleted;
+        
+        /// <remarks/>
+        public event logoutCompletedEventHandler logoutCompleted;
         
         /// <remarks/>
         public event deleteUserCompletedEventHandler deleteUserCompleted;
@@ -159,10 +158,16 @@ namespace HHQ_web.localhost {
         public event getUserInformationCompletedEventHandler getUserInformationCompleted;
         
         /// <remarks/>
-        public event addAppsToServerCompletedEventHandler addAppsToServerCompleted;
+        public event getDBCompletedEventHandler getDBCompleted;
         
         /// <remarks/>
-        public event deleteAppsForServerCompletedEventHandler deleteAppsForServerCompleted;
+        public event getAllAppsForUserCompletedEventHandler getAllAppsForUserCompleted;
+        
+        /// <remarks/>
+        public event getLogsCompletedEventHandler getLogsCompleted;
+        
+        /// <remarks/>
+        public event deleteLogsCompletedEventHandler deleteLogsCompleted;
         
         /// <remarks/>
         public event getAllAppsOnPCCompletedEventHandler getAllAppsOnPCCompleted;
@@ -284,126 +289,6 @@ namespace HHQ_web.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getAllAppsForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public getAllApps getAllAppsForUser(string ip, string userName) {
-            object[] results = this.Invoke("getAllAppsForUser", new object[] {
-                        ip,
-                        userName});
-            return ((getAllApps)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getAllAppsForUserAsync(string ip, string userName) {
-            this.getAllAppsForUserAsync(ip, userName, null);
-        }
-        
-        /// <remarks/>
-        public void getAllAppsForUserAsync(string ip, string userName, object userState) {
-            if ((this.getAllAppsForUserOperationCompleted == null)) {
-                this.getAllAppsForUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAllAppsForUserOperationCompleted);
-            }
-            this.InvokeAsync("getAllAppsForUser", new object[] {
-                        ip,
-                        userName}, this.getAllAppsForUserOperationCompleted, userState);
-        }
-        
-        private void OngetAllAppsForUserOperationCompleted(object arg) {
-            if ((this.getAllAppsForUserCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getAllAppsForUserCompleted(this, new getAllAppsForUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/logout", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string logout(string ip, string userName) {
-            object[] results = this.Invoke("logout", new object[] {
-                        ip,
-                        userName});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void logoutAsync(string ip, string userName) {
-            this.logoutAsync(ip, userName, null);
-        }
-        
-        /// <remarks/>
-        public void logoutAsync(string ip, string userName, object userState) {
-            if ((this.logoutOperationCompleted == null)) {
-                this.logoutOperationCompleted = new System.Threading.SendOrPostCallback(this.OnlogoutOperationCompleted);
-            }
-            this.InvokeAsync("logout", new object[] {
-                        ip,
-                        userName}, this.logoutOperationCompleted, userState);
-        }
-        
-        private void OnlogoutOperationCompleted(object arg) {
-            if ((this.logoutCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.logoutCompleted(this, new logoutCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getDB", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public jsonSentDB getDB(string ip) {
-            object[] results = this.Invoke("getDB", new object[] {
-                        ip});
-            return ((jsonSentDB)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getDBAsync(string ip) {
-            this.getDBAsync(ip, null);
-        }
-        
-        /// <remarks/>
-        public void getDBAsync(string ip, object userState) {
-            if ((this.getDBOperationCompleted == null)) {
-                this.getDBOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetDBOperationCompleted);
-            }
-            this.InvokeAsync("getDB", new object[] {
-                        ip}, this.getDBOperationCompleted, userState);
-        }
-        
-        private void OngetDBOperationCompleted(object arg) {
-            if ((this.getDBCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getDBCompleted(this, new getDBCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getLogs", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public jsonSentLogs getLogs(string ip) {
-            object[] results = this.Invoke("getLogs", new object[] {
-                        ip});
-            return ((jsonSentLogs)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getLogsAsync(string ip) {
-            this.getLogsAsync(ip, null);
-        }
-        
-        /// <remarks/>
-        public void getLogsAsync(string ip, object userState) {
-            if ((this.getLogsOperationCompleted == null)) {
-                this.getLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetLogsOperationCompleted);
-            }
-            this.InvokeAsync("getLogs", new object[] {
-                        ip}, this.getLogsOperationCompleted, userState);
-        }
-        
-        private void OngetLogsOperationCompleted(object arg) {
-            if ((this.getLogsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getLogsCompleted(this, new getLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/createUsers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string createUsers(string ip, string userName, string password, string mail, string levelKey) {
             object[] results = this.Invoke("createUsers", new object[] {
@@ -480,6 +365,41 @@ namespace HHQ_web.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/addAppsToServer", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string addAppsToServer(string ip, string userName, string password, addApps[] listApps) {
+            object[] results = this.Invoke("addAppsToServer", new object[] {
+                        ip,
+                        userName,
+                        password,
+                        listApps});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void addAppsToServerAsync(string ip, string userName, string password, addApps[] listApps) {
+            this.addAppsToServerAsync(ip, userName, password, listApps, null);
+        }
+        
+        /// <remarks/>
+        public void addAppsToServerAsync(string ip, string userName, string password, addApps[] listApps, object userState) {
+            if ((this.addAppsToServerOperationCompleted == null)) {
+                this.addAppsToServerOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddAppsToServerOperationCompleted);
+            }
+            this.InvokeAsync("addAppsToServer", new object[] {
+                        ip,
+                        userName,
+                        password,
+                        listApps}, this.addAppsToServerOperationCompleted, userState);
+        }
+        
+        private void OnaddAppsToServerOperationCompleted(object arg) {
+            if ((this.addAppsToServerCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.addAppsToServerCompleted(this, new addAppsToServerCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/allApps", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public getAllApps allApps(string ip) {
             object[] results = this.Invoke("allApps", new object[] {
@@ -505,6 +425,41 @@ namespace HHQ_web.localhost {
             if ((this.allAppsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.allAppsCompleted(this, new allAppsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/deleteAppsForServer", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string deleteAppsForServer(string ip, string userName, string password, string[] listApps) {
+            object[] results = this.Invoke("deleteAppsForServer", new object[] {
+                        ip,
+                        userName,
+                        password,
+                        listApps});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void deleteAppsForServerAsync(string ip, string userName, string password, string[] listApps) {
+            this.deleteAppsForServerAsync(ip, userName, password, listApps, null);
+        }
+        
+        /// <remarks/>
+        public void deleteAppsForServerAsync(string ip, string userName, string password, string[] listApps, object userState) {
+            if ((this.deleteAppsForServerOperationCompleted == null)) {
+                this.deleteAppsForServerOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteAppsForServerOperationCompleted);
+            }
+            this.InvokeAsync("deleteAppsForServer", new object[] {
+                        ip,
+                        userName,
+                        password,
+                        listApps}, this.deleteAppsForServerOperationCompleted, userState);
+        }
+        
+        private void OndeleteAppsForServerOperationCompleted(object arg) {
+            if ((this.deleteAppsForServerCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteAppsForServerCompleted(this, new deleteAppsForServerCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -571,6 +526,37 @@ namespace HHQ_web.localhost {
             if ((this.addAppForUserCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.addAppForUserCompleted(this, new addAppForUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/logout", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string logout(string ip, string userName) {
+            object[] results = this.Invoke("logout", new object[] {
+                        ip,
+                        userName});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void logoutAsync(string ip, string userName) {
+            this.logoutAsync(ip, userName, null);
+        }
+        
+        /// <remarks/>
+        public void logoutAsync(string ip, string userName, object userState) {
+            if ((this.logoutOperationCompleted == null)) {
+                this.logoutOperationCompleted = new System.Threading.SendOrPostCallback(this.OnlogoutOperationCompleted);
+            }
+            this.InvokeAsync("logout", new object[] {
+                        ip,
+                        userName}, this.logoutOperationCompleted, userState);
+        }
+        
+        private void OnlogoutOperationCompleted(object arg) {
+            if ((this.logoutCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.logoutCompleted(this, new logoutCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -668,72 +654,119 @@ namespace HHQ_web.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/addAppsToServer", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string addAppsToServer(string ip, string userName, string password, addApps[] listApps) {
-            object[] results = this.Invoke("addAppsToServer", new object[] {
-                        ip,
-                        userName,
-                        password,
-                        listApps});
-            return ((string)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getDB", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public jsonSentDB getDB(string ip) {
+            object[] results = this.Invoke("getDB", new object[] {
+                        ip});
+            return ((jsonSentDB)(results[0]));
         }
         
         /// <remarks/>
-        public void addAppsToServerAsync(string ip, string userName, string password, addApps[] listApps) {
-            this.addAppsToServerAsync(ip, userName, password, listApps, null);
+        public void getDBAsync(string ip) {
+            this.getDBAsync(ip, null);
         }
         
         /// <remarks/>
-        public void addAppsToServerAsync(string ip, string userName, string password, addApps[] listApps, object userState) {
-            if ((this.addAppsToServerOperationCompleted == null)) {
-                this.addAppsToServerOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddAppsToServerOperationCompleted);
+        public void getDBAsync(string ip, object userState) {
+            if ((this.getDBOperationCompleted == null)) {
+                this.getDBOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetDBOperationCompleted);
             }
-            this.InvokeAsync("addAppsToServer", new object[] {
-                        ip,
-                        userName,
-                        password,
-                        listApps}, this.addAppsToServerOperationCompleted, userState);
+            this.InvokeAsync("getDB", new object[] {
+                        ip}, this.getDBOperationCompleted, userState);
         }
         
-        private void OnaddAppsToServerOperationCompleted(object arg) {
-            if ((this.addAppsToServerCompleted != null)) {
+        private void OngetDBOperationCompleted(object arg) {
+            if ((this.getDBCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.addAppsToServerCompleted(this, new addAppsToServerCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getDBCompleted(this, new getDBCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/deleteAppsForServer", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string deleteAppsForServer(string ip, string userName, string password, string[] listApps) {
-            object[] results = this.Invoke("deleteAppsForServer", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getAllAppsForUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public getAllApps getAllAppsForUser(string ip, string userName) {
+            object[] results = this.Invoke("getAllAppsForUser", new object[] {
                         ip,
-                        userName,
-                        password,
-                        listApps});
-            return ((string)(results[0]));
+                        userName});
+            return ((getAllApps)(results[0]));
         }
         
         /// <remarks/>
-        public void deleteAppsForServerAsync(string ip, string userName, string password, string[] listApps) {
-            this.deleteAppsForServerAsync(ip, userName, password, listApps, null);
+        public void getAllAppsForUserAsync(string ip, string userName) {
+            this.getAllAppsForUserAsync(ip, userName, null);
         }
         
         /// <remarks/>
-        public void deleteAppsForServerAsync(string ip, string userName, string password, string[] listApps, object userState) {
-            if ((this.deleteAppsForServerOperationCompleted == null)) {
-                this.deleteAppsForServerOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteAppsForServerOperationCompleted);
+        public void getAllAppsForUserAsync(string ip, string userName, object userState) {
+            if ((this.getAllAppsForUserOperationCompleted == null)) {
+                this.getAllAppsForUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAllAppsForUserOperationCompleted);
             }
-            this.InvokeAsync("deleteAppsForServer", new object[] {
+            this.InvokeAsync("getAllAppsForUser", new object[] {
                         ip,
-                        userName,
-                        password,
-                        listApps}, this.deleteAppsForServerOperationCompleted, userState);
+                        userName}, this.getAllAppsForUserOperationCompleted, userState);
         }
         
-        private void OndeleteAppsForServerOperationCompleted(object arg) {
-            if ((this.deleteAppsForServerCompleted != null)) {
+        private void OngetAllAppsForUserOperationCompleted(object arg) {
+            if ((this.getAllAppsForUserCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.deleteAppsForServerCompleted(this, new deleteAppsForServerCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getAllAppsForUserCompleted(this, new getAllAppsForUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getLogs", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public jsonSentLogs getLogs(string ip) {
+            object[] results = this.Invoke("getLogs", new object[] {
+                        ip});
+            return ((jsonSentLogs)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getLogsAsync(string ip) {
+            this.getLogsAsync(ip, null);
+        }
+        
+        /// <remarks/>
+        public void getLogsAsync(string ip, object userState) {
+            if ((this.getLogsOperationCompleted == null)) {
+                this.getLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetLogsOperationCompleted);
+            }
+            this.InvokeAsync("getLogs", new object[] {
+                        ip}, this.getLogsOperationCompleted, userState);
+        }
+        
+        private void OngetLogsOperationCompleted(object arg) {
+            if ((this.getLogsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getLogsCompleted(this, new getLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/deleteLogs", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void deleteLogs(string ip) {
+            this.Invoke("deleteLogs", new object[] {
+                        ip});
+        }
+        
+        /// <remarks/>
+        public void deleteLogsAsync(string ip) {
+            this.deleteLogsAsync(ip, null);
+        }
+        
+        /// <remarks/>
+        public void deleteLogsAsync(string ip, object userState) {
+            if ((this.deleteLogsOperationCompleted == null)) {
+                this.deleteLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteLogsOperationCompleted);
+            }
+            this.InvokeAsync("deleteLogs", new object[] {
+                        ip}, this.deleteLogsOperationCompleted, userState);
+        }
+        
+        private void OndeleteLogsOperationCompleted(object arg) {
+            if ((this.deleteLogsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteLogsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1183,105 +1216,6 @@ namespace HHQ_web.localhost {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class addApps {
-        
-        private string pathExeFileField;
-        
-        private string nameAppField;
-        
-        /// <remarks/>
-        public string pathExeFile {
-            get {
-                return this.pathExeFileField;
-            }
-            set {
-                this.pathExeFileField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string nameApp {
-            get {
-                return this.nameAppField;
-            }
-            set {
-                this.nameAppField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class userInformation {
-        
-        private string passwordField;
-        
-        private string mailField;
-        
-        private string keyField;
-        
-        /// <remarks/>
-        public string password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string mail {
-            get {
-                return this.mailField;
-            }
-            set {
-                this.mailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string key {
-            get {
-                return this.keyField;
-            }
-            set {
-                this.keyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class getAllUsers {
-        
-        private string[] usersListField;
-        
-        /// <remarks/>
-        public string[] usersList {
-            get {
-                return this.usersListField;
-            }
-            set {
-                this.usersListField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
     public partial class sentLogs {
         
         private int idField;
@@ -1474,6 +1408,72 @@ namespace HHQ_web.localhost {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class userInformation {
+        
+        private string passwordField;
+        
+        private string mailField;
+        
+        private string keyField;
+        
+        /// <remarks/>
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string mail {
+            get {
+                return this.mailField;
+            }
+            set {
+                this.mailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class getAllUsers {
+        
+        private string[] usersListField;
+        
+        /// <remarks/>
+        public string[] usersList {
+            get {
+                return this.usersListField;
+            }
+            set {
+                this.usersListField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
     public partial class getAllApps {
         
         private string[] allAppListField;
@@ -1485,6 +1485,39 @@ namespace HHQ_web.localhost {
             }
             set {
                 this.allAppListField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class addApps {
+        
+        private string pathExeFileField;
+        
+        private string nameAppField;
+        
+        /// <remarks/>
+        public string pathExeFile {
+            get {
+                return this.pathExeFileField;
+            }
+            set {
+                this.pathExeFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string nameApp {
+            get {
+                return this.nameAppField;
+            }
+            set {
+                this.nameAppField = value;
             }
         }
     }
@@ -1590,110 +1623,6 @@ namespace HHQ_web.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void getAllAppsForUserCompletedEventHandler(object sender, getAllAppsForUserCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getAllAppsForUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getAllAppsForUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public getAllApps Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((getAllApps)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void logoutCompletedEventHandler(object sender, logoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class logoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal logoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void getDBCompletedEventHandler(object sender, getDBCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getDBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getDBCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public jsonSentDB Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((jsonSentDB)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void getLogsCompletedEventHandler(object sender, getLogsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public jsonSentLogs Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((jsonSentLogs)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void createUsersCompletedEventHandler(object sender, createUsersCompletedEventArgs e);
     
     /// <remarks/>
@@ -1746,6 +1675,32 @@ namespace HHQ_web.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void addAppsToServerCompletedEventHandler(object sender, addAppsToServerCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class addAppsToServerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal addAppsToServerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void allAppsCompletedEventHandler(object sender, allAppsCompletedEventArgs e);
     
     /// <remarks/>
@@ -1766,6 +1721,32 @@ namespace HHQ_web.localhost {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((getAllApps)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void deleteAppsForServerCompletedEventHandler(object sender, deleteAppsForServerCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class deleteAppsForServerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal deleteAppsForServerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -1809,6 +1790,32 @@ namespace HHQ_web.localhost {
         private object[] results;
         
         internal addAppForUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void logoutCompletedEventHandler(object sender, logoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class logoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal logoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1902,55 +1909,85 @@ namespace HHQ_web.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void addAppsToServerCompletedEventHandler(object sender, addAppsToServerCompletedEventArgs e);
+    public delegate void getDBCompletedEventHandler(object sender, getDBCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class addAppsToServerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getDBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal addAppsToServerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getDBCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public string Result {
+        public jsonSentDB Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((jsonSentDB)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void deleteAppsForServerCompletedEventHandler(object sender, deleteAppsForServerCompletedEventArgs e);
+    public delegate void getAllAppsForUserCompletedEventHandler(object sender, getAllAppsForUserCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class deleteAppsForServerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getAllAppsForUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal deleteAppsForServerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getAllAppsForUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public string Result {
+        public getAllApps Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((getAllApps)(this.results[0]));
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void getLogsCompletedEventHandler(object sender, getLogsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public jsonSentLogs Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((jsonSentLogs)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void deleteLogsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]

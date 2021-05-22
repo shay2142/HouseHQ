@@ -76,108 +76,6 @@
           <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="getAllAppsForUser">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getAllAppsForUserResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getAllAppsForUserResult" type="tns:getAllApps" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="getAllApps">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="allAppList" type="tns:ArrayOfString" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="logout">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="logoutResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="logoutResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getDB">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getDBResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getDBResult" type="tns:jsonSentDB" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="jsonSentDB">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="db" type="tns:ArrayOfGetDB" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="ArrayOfGetDB">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="getDB" nillable="true" type="tns:getDB" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="getDB">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="mail" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="LEVEL_KEY" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="STATUS" type="s:string" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="getLogs">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getLogsResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getLogsResult" type="tns:jsonSentLogs" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="jsonSentLogs">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="jsonLogs" type="tns:ArrayOfSentLogs" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="ArrayOfSentLogs">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="sentLogs" nillable="true" type="tns:sentLogs" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="sentLogs">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="dateLogs" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="typeLog" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="log" type="s:string" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="createUsers">
         <s:complexType>
           <s:sequence>
@@ -215,6 +113,34 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="addAppsToServer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="listApps" type="tns:ArrayOfAddApps" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAddApps">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="addApps" nillable="true" type="tns:addApps" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="addApps">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="pathExeFile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nameApp" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="addAppsToServerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="addAppsToServerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="allApps">
         <s:complexType>
           <s:sequence>
@@ -226,6 +152,28 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="allAppsResult" type="tns:getAllApps" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="getAllApps">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="allAppList" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="deleteAppsForServer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="listApps" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteAppsForServerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="deleteAppsForServerResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -258,6 +206,21 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="addAppForUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="logout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="logoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="logoutResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -318,50 +281,97 @@
           <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="addAppsToServer">
+      <s:element name="getDB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDBResult" type="tns:jsonSentDB" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="jsonSentDB">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="db" type="tns:ArrayOfGetDB" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGetDB">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="getDB" nillable="true" type="tns:getDB" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="getDB">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="mail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LEVEL_KEY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STATUS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getAllAppsForUser">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="listApps" type="tns:ArrayOfAddApps" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfAddApps">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="addApps" nillable="true" type="tns:addApps" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="addApps">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="pathExeFile" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="nameApp" type="s:string" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="addAppsToServerResponse">
+      <s:element name="getAllAppsForUserResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="addAppsToServerResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="getAllAppsForUserResult" type="tns:getAllApps" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="deleteAppsForServer">
+      <s:element name="getLogs">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="listApps" type="tns:ArrayOfString" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="deleteAppsForServerResponse">
+      <s:element name="getLogsResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="deleteAppsForServerResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="getLogsResult" type="tns:jsonSentLogs" />
           </s:sequence>
         </s:complexType>
+      </s:element>
+      <s:complexType name="jsonSentLogs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="jsonLogs" type="tns:ArrayOfSentLogs" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSentLogs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sentLogs" nillable="true" type="tns:sentLogs" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sentLogs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="dateLogs" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="typeLog" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="log" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="deleteLogs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteLogsResponse">
+        <s:complexType />
       </s:element>
       <s:element name="getAllAppsOnPC">
         <s:complexType>
@@ -507,30 +517,6 @@
   <wsdl:message name="loginSoapOut">
     <wsdl:part name="parameters" element="tns:loginResponse" />
   </wsdl:message>
-  <wsdl:message name="getAllAppsForUserSoapIn">
-    <wsdl:part name="parameters" element="tns:getAllAppsForUser" />
-  </wsdl:message>
-  <wsdl:message name="getAllAppsForUserSoapOut">
-    <wsdl:part name="parameters" element="tns:getAllAppsForUserResponse" />
-  </wsdl:message>
-  <wsdl:message name="logoutSoapIn">
-    <wsdl:part name="parameters" element="tns:logout" />
-  </wsdl:message>
-  <wsdl:message name="logoutSoapOut">
-    <wsdl:part name="parameters" element="tns:logoutResponse" />
-  </wsdl:message>
-  <wsdl:message name="getDBSoapIn">
-    <wsdl:part name="parameters" element="tns:getDB" />
-  </wsdl:message>
-  <wsdl:message name="getDBSoapOut">
-    <wsdl:part name="parameters" element="tns:getDBResponse" />
-  </wsdl:message>
-  <wsdl:message name="getLogsSoapIn">
-    <wsdl:part name="parameters" element="tns:getLogs" />
-  </wsdl:message>
-  <wsdl:message name="getLogsSoapOut">
-    <wsdl:part name="parameters" element="tns:getLogsResponse" />
-  </wsdl:message>
   <wsdl:message name="createUsersSoapIn">
     <wsdl:part name="parameters" element="tns:createUsers" />
   </wsdl:message>
@@ -543,11 +529,23 @@
   <wsdl:message name="changeAccountSoapOut">
     <wsdl:part name="parameters" element="tns:changeAccountResponse" />
   </wsdl:message>
+  <wsdl:message name="addAppsToServerSoapIn">
+    <wsdl:part name="parameters" element="tns:addAppsToServer" />
+  </wsdl:message>
+  <wsdl:message name="addAppsToServerSoapOut">
+    <wsdl:part name="parameters" element="tns:addAppsToServerResponse" />
+  </wsdl:message>
   <wsdl:message name="allAppsSoapIn">
     <wsdl:part name="parameters" element="tns:allApps" />
   </wsdl:message>
   <wsdl:message name="allAppsSoapOut">
     <wsdl:part name="parameters" element="tns:allAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteAppsForServerSoapIn">
+    <wsdl:part name="parameters" element="tns:deleteAppsForServer" />
+  </wsdl:message>
+  <wsdl:message name="deleteAppsForServerSoapOut">
+    <wsdl:part name="parameters" element="tns:deleteAppsForServerResponse" />
   </wsdl:message>
   <wsdl:message name="deleteAppsFromUserSoapIn">
     <wsdl:part name="parameters" element="tns:deleteAppsFromUser" />
@@ -560,6 +558,12 @@
   </wsdl:message>
   <wsdl:message name="addAppForUserSoapOut">
     <wsdl:part name="parameters" element="tns:addAppForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="logoutSoapIn">
+    <wsdl:part name="parameters" element="tns:logout" />
+  </wsdl:message>
+  <wsdl:message name="logoutSoapOut">
+    <wsdl:part name="parameters" element="tns:logoutResponse" />
   </wsdl:message>
   <wsdl:message name="deleteUserSoapIn">
     <wsdl:part name="parameters" element="tns:deleteUser" />
@@ -579,17 +583,29 @@
   <wsdl:message name="getUserInformationSoapOut">
     <wsdl:part name="parameters" element="tns:getUserInformationResponse" />
   </wsdl:message>
-  <wsdl:message name="addAppsToServerSoapIn">
-    <wsdl:part name="parameters" element="tns:addAppsToServer" />
+  <wsdl:message name="getDBSoapIn">
+    <wsdl:part name="parameters" element="tns:getDB" />
   </wsdl:message>
-  <wsdl:message name="addAppsToServerSoapOut">
-    <wsdl:part name="parameters" element="tns:addAppsToServerResponse" />
+  <wsdl:message name="getDBSoapOut">
+    <wsdl:part name="parameters" element="tns:getDBResponse" />
   </wsdl:message>
-  <wsdl:message name="deleteAppsForServerSoapIn">
-    <wsdl:part name="parameters" element="tns:deleteAppsForServer" />
+  <wsdl:message name="getAllAppsForUserSoapIn">
+    <wsdl:part name="parameters" element="tns:getAllAppsForUser" />
   </wsdl:message>
-  <wsdl:message name="deleteAppsForServerSoapOut">
-    <wsdl:part name="parameters" element="tns:deleteAppsForServerResponse" />
+  <wsdl:message name="getAllAppsForUserSoapOut">
+    <wsdl:part name="parameters" element="tns:getAllAppsForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLogsSoapIn">
+    <wsdl:part name="parameters" element="tns:getLogs" />
+  </wsdl:message>
+  <wsdl:message name="getLogsSoapOut">
+    <wsdl:part name="parameters" element="tns:getLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteLogsSoapIn">
+    <wsdl:part name="parameters" element="tns:deleteLogs" />
+  </wsdl:message>
+  <wsdl:message name="deleteLogsSoapOut">
+    <wsdl:part name="parameters" element="tns:deleteLogsResponse" />
   </wsdl:message>
   <wsdl:message name="getAllAppsOnPCSoapIn">
     <wsdl:part name="parameters" element="tns:getAllAppsOnPC" />
@@ -640,22 +656,6 @@
       <wsdl:input message="tns:loginSoapIn" />
       <wsdl:output message="tns:loginSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="getAllAppsForUser">
-      <wsdl:input message="tns:getAllAppsForUserSoapIn" />
-      <wsdl:output message="tns:getAllAppsForUserSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="logout">
-      <wsdl:input message="tns:logoutSoapIn" />
-      <wsdl:output message="tns:logoutSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getDB">
-      <wsdl:input message="tns:getDBSoapIn" />
-      <wsdl:output message="tns:getDBSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getLogs">
-      <wsdl:input message="tns:getLogsSoapIn" />
-      <wsdl:output message="tns:getLogsSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="createUsers">
       <wsdl:input message="tns:createUsersSoapIn" />
       <wsdl:output message="tns:createUsersSoapOut" />
@@ -664,9 +664,17 @@
       <wsdl:input message="tns:changeAccountSoapIn" />
       <wsdl:output message="tns:changeAccountSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="addAppsToServer">
+      <wsdl:input message="tns:addAppsToServerSoapIn" />
+      <wsdl:output message="tns:addAppsToServerSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="allApps">
       <wsdl:input message="tns:allAppsSoapIn" />
       <wsdl:output message="tns:allAppsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteAppsForServer">
+      <wsdl:input message="tns:deleteAppsForServerSoapIn" />
+      <wsdl:output message="tns:deleteAppsForServerSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="deleteAppsFromUser">
       <wsdl:input message="tns:deleteAppsFromUserSoapIn" />
@@ -675,6 +683,10 @@
     <wsdl:operation name="addAppForUser">
       <wsdl:input message="tns:addAppForUserSoapIn" />
       <wsdl:output message="tns:addAppForUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdl:input message="tns:logoutSoapIn" />
+      <wsdl:output message="tns:logoutSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="deleteUser">
       <wsdl:input message="tns:deleteUserSoapIn" />
@@ -688,13 +700,21 @@
       <wsdl:input message="tns:getUserInformationSoapIn" />
       <wsdl:output message="tns:getUserInformationSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="addAppsToServer">
-      <wsdl:input message="tns:addAppsToServerSoapIn" />
-      <wsdl:output message="tns:addAppsToServerSoapOut" />
+    <wsdl:operation name="getDB">
+      <wsdl:input message="tns:getDBSoapIn" />
+      <wsdl:output message="tns:getDBSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="deleteAppsForServer">
-      <wsdl:input message="tns:deleteAppsForServerSoapIn" />
-      <wsdl:output message="tns:deleteAppsForServerSoapOut" />
+    <wsdl:operation name="getAllAppsForUser">
+      <wsdl:input message="tns:getAllAppsForUserSoapIn" />
+      <wsdl:output message="tns:getAllAppsForUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLogs">
+      <wsdl:input message="tns:getLogsSoapIn" />
+      <wsdl:output message="tns:getLogsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteLogs">
+      <wsdl:input message="tns:deleteLogsSoapIn" />
+      <wsdl:output message="tns:deleteLogsSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="getAllAppsOnPC">
       <wsdl:input message="tns:getAllAppsOnPCSoapIn" />
@@ -750,42 +770,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getAllAppsForUser">
-      <soap:operation soapAction="http://tempuri.org/getAllAppsForUser" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="logout">
-      <soap:operation soapAction="http://tempuri.org/logout" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getDB">
-      <soap:operation soapAction="http://tempuri.org/getDB" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getLogs">
-      <soap:operation soapAction="http://tempuri.org/getLogs" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="createUsers">
       <soap:operation soapAction="http://tempuri.org/createUsers" style="document" />
       <wsdl:input>
@@ -804,8 +788,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="addAppsToServer">
+      <soap:operation soapAction="http://tempuri.org/addAppsToServer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="allApps">
       <soap:operation soapAction="http://tempuri.org/allApps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAppsForServer">
+      <soap:operation soapAction="http://tempuri.org/deleteAppsForServer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -824,6 +826,15 @@
     </wsdl:operation>
     <wsdl:operation name="addAppForUser">
       <soap:operation soapAction="http://tempuri.org/addAppForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <soap:operation soapAction="http://tempuri.org/logout" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -858,8 +869,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="addAppsToServer">
-      <soap:operation soapAction="http://tempuri.org/addAppsToServer" style="document" />
+    <wsdl:operation name="getDB">
+      <soap:operation soapAction="http://tempuri.org/getDB" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -867,8 +878,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="deleteAppsForServer">
-      <soap:operation soapAction="http://tempuri.org/deleteAppsForServer" style="document" />
+    <wsdl:operation name="getAllAppsForUser">
+      <soap:operation soapAction="http://tempuri.org/getAllAppsForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLogs">
+      <soap:operation soapAction="http://tempuri.org/getLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteLogs">
+      <soap:operation soapAction="http://tempuri.org/deleteLogs" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -960,42 +989,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getAllAppsForUser">
-      <soap12:operation soapAction="http://tempuri.org/getAllAppsForUser" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="logout">
-      <soap12:operation soapAction="http://tempuri.org/logout" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getDB">
-      <soap12:operation soapAction="http://tempuri.org/getDB" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getLogs">
-      <soap12:operation soapAction="http://tempuri.org/getLogs" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="createUsers">
       <soap12:operation soapAction="http://tempuri.org/createUsers" style="document" />
       <wsdl:input>
@@ -1014,8 +1007,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="addAppsToServer">
+      <soap12:operation soapAction="http://tempuri.org/addAppsToServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="allApps">
       <soap12:operation soapAction="http://tempuri.org/allApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAppsForServer">
+      <soap12:operation soapAction="http://tempuri.org/deleteAppsForServer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1034,6 +1045,15 @@
     </wsdl:operation>
     <wsdl:operation name="addAppForUser">
       <soap12:operation soapAction="http://tempuri.org/addAppForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <soap12:operation soapAction="http://tempuri.org/logout" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1068,8 +1088,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="addAppsToServer">
-      <soap12:operation soapAction="http://tempuri.org/addAppsToServer" style="document" />
+    <wsdl:operation name="getDB">
+      <soap12:operation soapAction="http://tempuri.org/getDB" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1077,8 +1097,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="deleteAppsForServer">
-      <soap12:operation soapAction="http://tempuri.org/deleteAppsForServer" style="document" />
+    <wsdl:operation name="getAllAppsForUser">
+      <soap12:operation soapAction="http://tempuri.org/getAllAppsForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLogs">
+      <soap12:operation soapAction="http://tempuri.org/getLogs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteLogs">
+      <soap12:operation soapAction="http://tempuri.org/deleteLogs" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

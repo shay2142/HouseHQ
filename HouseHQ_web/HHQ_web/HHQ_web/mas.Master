@@ -61,6 +61,20 @@
                     font-size: 150%;
                 }
 
+            .sidenav button, .mybtn2 {
+                
+            }
+
+                .sidenav button:hover, .mybtn2:hover {
+                    width: 45px;
+                    height: auto;
+                }
+
+                .sidenav button:active, .mybtn2:active {
+                    width: 40px;
+                    height: auto;
+                }
+
             .sidenav .closebtn {
                 position: absolute;
                 top: 0;
@@ -120,25 +134,26 @@
             color: #f1f1f1;
             font-size: 150%;
         }
+
         .mybtn1 {
-                text-decoration: none;
-                font-size: 15px;
-                color: #818181;
-                transition: 0.3s;
-                background: none;
-                border: none;
-                block-size: auto;
+            text-decoration: none;
+            font-size: 15px;
+            color: #818181;
+            transition: 0.3s;
+            background: none;
+            border: none;
+            block-size: auto;
+        }
+
+            .mybtn1:hover {
+                color: #f1f1f1;
+                font-size: 150%;
             }
 
-                .mybtn1:hover {
-                    color: #f1f1f1;
-                    font-size: 150%;
-                }
-
-                .mybtn1:active {
-                    color: #f1f1f1;
-                    font-size: 150%;
-                }
+            .mybtn1:active {
+                color: #f1f1f1;
+                font-size: 150%;
+            }
     </style>
 </head>
 
@@ -152,16 +167,15 @@
                 <label runat="server" id="userName">User name</label>
                 <br>
                 <%--<asp:Button runat="server" CssClass="logout" ID="Button4" Text="logout" OnClick="Button1_Click" />--%>
-                <asp:Button runat="server" CssClass="logout" ID="Button1" Text="logout" OnClick ="Button1_Click"/>
+                <asp:Button runat="server" CssClass="logout" ID="Button1" Text="logout" OnClick="Button1_Click" />
 
             </div>
             <br>
             <%--<button href="#" aria-atomic="True" onclick="">About</button>--%>
             <%--<asp:Button runat="server" class="mybtn" ID="Button3" Text="APPS" OnClick="btnApps" ForeColor ="#f1f1f1"/>--%>
             <%--<asp:Button runat="server" class="mybtn" ID="Button2" Text="APPS" ForeColor ="#f1f1f1"/>--%>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">  
-          
-        </asp:ContentPlaceHolder> 
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            </asp:ContentPlaceHolder>
             <%--<asp:Button runat="server" class="mybtn" ID="Button3" Text="Manager" OnClick="btnMangar" />--%>
             <%--<asp:Button runat="server" class="mybtn" ID="btnLogin" Text="APPS" OnClick="btnApps" />--%>
             <%--<a href="#">Services</a>
@@ -171,9 +185,8 @@
 
         <div id="main">
             <span style="font-size: 30px; cursor: pointer" onclick="openAndClsoeNav()">&#9776;<%=page%></span>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">  
-          
-        </asp:ContentPlaceHolder> 
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
 
         <script>

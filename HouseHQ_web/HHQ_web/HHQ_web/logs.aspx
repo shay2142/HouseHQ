@@ -11,6 +11,10 @@
     <asp:Button ID="back" runat="server" Text="Back" class="mybtn1" OnClick="backPage"/>
     <br>
     <br>
+    <asp:Button ID="saveLogs" runat="server" Text="save logs" class="mybtn1" OnClick="btnSaveLogs"/>
+    <asp:Button ID="deleteLogs" runat="server" Text="delete all logs" class="mybtn1" OnClick="btnDeleteLogs"/>
+    <br>
+    <br>
     <asp:GridView ID="GridView1" runat="server">
     </asp:GridView>
     <br>

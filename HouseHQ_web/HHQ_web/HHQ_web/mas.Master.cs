@@ -54,6 +54,26 @@ namespace HHQ_web
             }
         }
 
+        public ImageButton test2
+        {
+            set
+            {
+                // Set new value for control on master page  
+                ContentPlaceHolder1.Controls.Add(value);
+
+            }
+        }
+
+        public Label test3
+        {
+            set
+            {
+                // Set new value for control on master page  
+                ContentPlaceHolder1.Controls.Add(value);
+
+            }
+        }
+
         public string setPageName
         {
             set
