@@ -33,13 +33,11 @@ namespace HHQ_web
         public string UserNamePropertyOnMasterPage
         {
             get
-            {
-                // Get value of control on master page  
+            {  
                 return userName.InnerHtml;
             }
             set
             {
-                // Set new value for control on master page  
                 userName.InnerHtml = value;
             }
         }
@@ -47,30 +45,24 @@ namespace HHQ_web
         public Button test1
         {
             set
-            {
-                // Set new value for control on master page  
+            { 
                 ContentPlaceHolder2.Controls.Add(value);
-
             }
         }
 
         public ImageButton test2
         {
             set
-            {
-                // Set new value for control on master page  
+            {  
                 ContentPlaceHolder1.Controls.Add(value);
-
             }
         }
 
         public Label test3
         {
             set
-            {
-                // Set new value for control on master page  
+            { 
                 ContentPlaceHolder1.Controls.Add(value);
-
             }
         }
 

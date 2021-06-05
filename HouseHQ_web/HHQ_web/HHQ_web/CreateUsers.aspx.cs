@@ -43,7 +43,7 @@ namespace HHQ_web
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Manager.aspx");
+            Response.Redirect("~/usersManager.aspx");
         }
     }
 }

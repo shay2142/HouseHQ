@@ -6,12 +6,18 @@
     <asp:Button runat="server" class="mybtn" ID="ContactUs" Text="Contact Us" OnClick="btnContact" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:GridView ID="GridView1" runat="server">
-    </asp:GridView>
     <br>
     <br>
-    <asp:Button ID="createUsers" runat="server" Text="create users" class="mybtn1" OnClick="createUsers_Click" />
-    <asp:Button ID="deleteUsers" runat="server" Text="delete users" class="mybtn1" OnClick="deleteUsers_Click" />
-    <asp:Button ID="changeUser" runat="server" Text="change user" class="mybtn1" OnClick="changeUser_Click" />
+    <asp:Button ID="usersManager" runat="server" Text="users manager" class="mybtn1" OnClick="usersManager_Click" />
+    <br>
+    <br>
+    <asp:Button ID="remoteAppManagement" runat="server" Text="remote app management" class="mybtn1" OnClick="remoteAppManagement_Click" />
+    <br>
+    <br>
+    <asp:Button ID="levelKeyManagement" runat="server" Text="level key management" class="mybtn1" OnClick="levelKeyManagement_Click" />
+    <br>
+    <br>
     <asp:Button ID="logs" runat="server" Text="view logs" class="mybtn1" OnClick="viewLogs_Click" />
+    <br>
+    <br>
 </asp:Content>

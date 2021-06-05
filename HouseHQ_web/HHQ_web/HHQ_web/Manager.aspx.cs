@@ -17,7 +17,6 @@ namespace HHQ_web
         {
             Master.setPageName = "MANAGER";
             getData();
-            GetDB();
         }
 
         public void getData()
@@ -36,15 +35,6 @@ namespace HHQ_web
             }
         }
 
-        public void GetDB()
-        {
-            localhost.WebService1 getDB = new localhost.WebService1();
-
-            GridView1.DataSource = getDB.getDB(IP).db;
-            GridView1.DataBind();
-
-        }
-
         protected void btnMangar1(object sender, EventArgs e)
         {
 
@@ -60,20 +50,21 @@ namespace HHQ_web
             Response.Redirect("~/Apps.aspx");
         }
 
-        protected void createUsers_Click(object sender, EventArgs e)
+        protected void usersManager_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/CreateUsers.aspx");
+            Response.Redirect("~/usersManager.aspx");
         }
 
-        protected void deleteUsers_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void changeUser_Click(object sender, EventArgs e)
+        protected void remoteAppManagement_Click(object sender, EventArgs e)
         {
 
         }
+
+        protected void levelKeyManagement_Click(object sender, EventArgs e)
+        { 
+        
+        }
+
         protected void viewLogs_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/logs.aspx");

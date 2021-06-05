@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4h0eMBXppd7x9pzcXWO8bTI33mDn8QYXMA4eSMHpo/pnDTqAGeEHTLCA+OMq2oqY8OSjy8od461piPFxnHrtgg==",
+  "dgSpecHash": "2bopWTkBDy4/YaOWVzmiG0twnBKN9RlfmRIqTRy6lUrz7VpooceS96LZ9EnmbATGMXdB4tQ7PNR40hkU0MHUXA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\shay5\\source\\repos\\client\\client\\client.csproj",
+  "projectFilePath": "C:\\Users\\shay5\\Documents\\househq\\HouseHQ_files\\Backend files\\client\\client\\client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shay5\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],

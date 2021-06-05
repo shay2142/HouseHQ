@@ -6,8 +6,8 @@
 
 int main ()
 {
-  char IP_server[] = "127.0.0.1";
-  char remoteAppName[] = "AfterFX";
+  char IP_server[] = "shaypc";
+  char remoteAppName[] = "Adobe Photoshop CC 2018";
   char fileName[] = "remoteApp.rdp";
   FILE * fp;
 

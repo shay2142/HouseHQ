@@ -109,15 +109,17 @@
     <Content Include="CreateUsers.aspx" />
     <Content Include="Delete users.aspx" />
     <Content Include="Download.aspx" />
+    <Content Include="levelKeyManagement.aspx" />
     <Content Include="levelKeyManager.aspx" />
     <Content Include="login.aspx" />
     <Content Include="logs.aspx" />
     <Content Include="Manager.aspx" />
     <Content Include="my.css" />
+    <Content Include="RemoteAppManagement.aspx" />
     <Content Include="singup.aspx" />
-    <Content Include="usersManager.aspx" />
     <Content Include="mas.Master" />
     <Content Include="WebForm3.aspx" />
+    <Content Include="usersManager.aspx" />
     <Content Include="WebForm5.aspx" />
     <Content Include="Apps.aspx" />
     <None Include="Properties\Settings.settings">
@@ -165,6 +167,13 @@
     <Compile Include="hash.cs" />
     <Compile Include="httpClient.cs" />
     <Compile Include="json.cs" />
+    <Compile Include="levelKeyManagement.aspx.cs">
+      <DependentUpon>levelKeyManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="levelKeyManagement.aspx.designer.cs">
+      <DependentUpon>levelKeyManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="levelKeyManager.aspx.cs">
       <DependentUpon>levelKeyManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -207,6 +216,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="remoteApp.cs" />
+    <Compile Include="RemoteAppManagement.aspx.cs">
+      <DependentUpon>RemoteAppManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RemoteAppManagement.aspx.designer.cs">
+      <DependentUpon>RemoteAppManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="singup.aspx.cs">
       <DependentUpon>singup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -220,13 +236,6 @@
     </Compile>
     <Compile Include="test.Master.designer.cs">
       <DependentUpon>test.Master</DependentUpon>
-    </Compile>
-    <Compile Include="usersManager.aspx.cs">
-      <DependentUpon>usersManager.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usersManager.aspx.designer.cs">
-      <DependentUpon>usersManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web References\localhost\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -257,6 +266,13 @@
     </Compile>
     <Compile Include="WebForm3.aspx.designer.cs">
       <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="usersManager.aspx.cs">
+      <DependentUpon>usersManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usersManager.aspx.designer.cs">
+      <DependentUpon>usersManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm5.aspx.cs">
       <DependentUpon>WebForm5.aspx</DependentUpon>
