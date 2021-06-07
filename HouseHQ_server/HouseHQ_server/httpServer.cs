@@ -167,7 +167,7 @@ namespace HouseHQ_server
                         Console.WriteLine(json[1]);
 
                         string msg = "";
-                        if (IsValidJson(json[1]) || (Int32.Parse(json[0]) > 100 && Int32.Parse(json[0]) < 200))
+                        if (IsValidJson(json[1]) && codes.codes().ContainsKey(json[0]) || codes.codes().ContainsKey(json[0]))
                         {
                             switch (json[0])
                             {
