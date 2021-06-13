@@ -16,7 +16,7 @@ namespace HHQ_web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Master.setPageName = "USER SMANAGER";
+            Master.setPageName = "USERS MANAGER";
             getData();
             GetDB();
         }

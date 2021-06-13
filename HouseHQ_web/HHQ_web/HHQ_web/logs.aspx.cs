@@ -52,20 +52,22 @@ namespace HHQ_web
                 int maxDate = 0;
                 int maxType = 0;
                 int maxSource = 0;
+                int maxLog = 0;
                 foreach (var log in user.jsonLogs)
                 {
                     maxID = maxID < log.ID.ToString().Length ? log.ID.ToString().Length : maxID;
                     maxDate = maxDate < log.dateLogs.ToString().Length ? log.dateLogs.ToString().Length : maxDate;
                     maxType = maxType < log.typeLog.ToString().Length ? log.typeLog.ToString().Length : maxType;
                     maxSource = maxSource < log.source.ToString().Length ? log.source.ToString().Length : maxSource;
+                    maxLog = maxLog < log.log.ToString().Length ? log.log.ToString().Length : maxLog;
                 }
                 writer.WriteLine("ID" + new string(' ', maxID - "ID".Length) + "|Date logs" + new string(' ', maxDate - "Date logs".Length) + "|Type logs" + new string(' ', maxType - "Type logs".Length) + "|Source" + new string(' ', maxSource - "Source".Length) + "|log");
-                writer.WriteLine(new string('-', maxID) + "+" + new string('-', maxDate) + "+" + new string('-', maxType) + "+" + new string('-', maxSource) + "+" + new string('-', 100));
+                writer.WriteLine(new string('-', maxID) + "+" + new string('-', maxDate) + "+" + new string('-', maxType) + "+" + new string('-', maxSource) + "+" + new string('-', maxLog));
 
                 foreach (var log in user.jsonLogs)
                 {
                     writer.WriteLine(log.ID + new string(' ', maxID - log.ID.ToString().Length) + "|" + log.dateLogs + new string(' ', maxDate - log.dateLogs.ToString().Length) + "|" + log.typeLog + new string(' ', maxType - log.typeLog.ToString().Length) + "|" + log.source + new string(' ', maxSource - log.source.ToString().Length) + "|" + log.log);
-                    writer.WriteLine(new string('-', maxID) + "+" + new string('-', maxDate) + "+" + new string('-', maxType) + "+" + new string('-', maxSource) + "+" + new string('-', 100));
+                    writer.WriteLine(new string('-', maxID) + "+" + new string('-', maxDate) + "+" + new string('-', maxType) + "+" + new string('-', maxSource) + "+" + new string('-', maxLog));
                 }
             }
         }
