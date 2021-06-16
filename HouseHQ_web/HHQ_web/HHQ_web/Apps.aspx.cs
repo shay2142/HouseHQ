@@ -13,11 +13,21 @@ namespace HHQ_web
         public List<string> apps;
         public string IP;
         public remoteApp remoteApp1 = new remoteApp();
+        public string title = "";
+        public List<string> addApps = new List<string>();
+        public List<string> deleteApps = new List<string>();
+        public string userName;
+        public bool test = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Panel1.Controls.Clear();
+            Panel2.Controls.Clear();
+            title = "";
             Master.setPageName = "APPS";
             getData();
+            if(test)
+                edit_Click(sender, e);
         }
 
         public void getData()
@@ -39,13 +49,13 @@ namespace HHQ_web
                 ContactUs();
                 //user1.InnerHtml = "Hi there, " + user.name + "!";
                 Master.UserNamePropertyOnMasterPage = user.name;
-
+                userName = user.name;
             }
 
             foreach (var app in apps)
             {
                 Button button = new Button();
-                button.ID = app;
+                button.ID = app + "1";
                 button.Text = app;
                 button.Click += button_Click; //adding the event
                 button.BackColor = System.Drawing.Color.FromArgb(46, 51, 73);
@@ -59,37 +69,67 @@ namespace HHQ_web
                 Label label = new Label();
                 label.Text = " ";
                 Panel1.Controls.Add(label);
-
             }
-            
-            ImageButton image = new ImageButton();
-            image.ID = "addApp";
-            image.ImageUrl = @"~\img\add.png";
-            image.AlternateText = "add apps";
-            image.CssClass = "mybtn2";
-            image.Click += addApp_Click;
-            Master.test2 = image;
+        }
+        public void edit_Click(object sender, EventArgs e)
+        {
+            test = true;
+            title = "EDIT APPS";
+            localhost.WebService1 allApps = new localhost.WebService1();
+            var jsongetApps = allApps.allApps(IP);
 
             Label label1 = new Label();
-            label1.Text = "&nbsp&nbsp&nbsp&nbsp&nbsp";
-            Master.test3 = label1;
-
-            ImageButton image1 = new ImageButton();
-            image1.ID = "delete app";
-            image1.ImageUrl = @"~\img\delete.png";
-            image1.AlternateText = "delete app";
-            image1.CssClass = "mybtn2";
-            image1.Click += deleteApp_Click;
-            Master.test2 = image1;
+            label1.Text = " \r\r\r";
+            Panel2.Controls.Add(label1);
+            foreach (var app in jsongetApps.allAppList)
+            {
+                CheckBox checkBox = new CheckBox();
+                checkBox.ID = app;
+                checkBox.Text = app;
+                checkBox.BackColor = System.Drawing.Color.FromArgb(46, 51, 73);
+                checkBox.ForeColor = System.Drawing.Color.FromArgb(0, 126, 249);
+                checkBox.CssClass = "test1";
+                checkBox.Font.Name = "Nirmala UI";
+                checkBox.Font.Bold = true;
+                checkBox.Font.Size = FontUnit.Point(10);
+                checkBox.TabIndex = 10;
+                checkBox.CheckedChanged += CheckedChanged;
+                if (apps.Contains(app))
+                {
+                    //checkBox.Enabled = false;
+                    checkBox.Checked = true;
+                    //test.ForeColor = Color.FromArgb(46, 51, 73);
+                }
+                Panel2.Controls.Add(checkBox);
+                Label label = new Label();
+                label.Text = " ";
+                Panel2.Controls.Add(label);
+            }
+            Button button = new Button();
+            button.ID = "update";
+            button.Text = "UPDATE";
+            button.CssClass = "update";
+            //button.Click += edit_Click;
+            div.Controls.Add(button);
         }
-        public void addApp_Click(object sender, EventArgs e)
-        { 
-            
-        }
 
-        public void deleteApp_Click(object sender, EventArgs e)
+        public void CheckedChanged(object sender, EventArgs e)
         {
 
+            localhost.WebService1 update = new localhost.WebService1();
+            CheckBox checkbox = (CheckBox)sender;
+
+            if (checkbox.Checked == true)
+            {
+                update.addAppForUser(IP, userName, checkbox.Text);
+
+            }
+            else if (checkbox.Checked == false)
+            {
+                update.deleteAppsFromUser(IP, userName, checkbox.Text);
+            }
+            //getData();
+            Page_Load(sender, e);
         }
 
         public void button_Click(object sender, EventArgs e)
@@ -134,7 +174,7 @@ namespace HHQ_web
 
         protected void btnContact(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

@@ -83,6 +83,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,6 +123,7 @@
     <Content Include="usersManager.aspx" />
     <Content Include="WebForm5.aspx" />
     <Content Include="Apps.aspx" />
+    <Content Include="AppsMater.Master" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -143,6 +145,13 @@
     <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppsMater.Master.cs">
+      <DependentUpon>AppsMater.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppsMater.Master.designer.cs">
+      <DependentUpon>AppsMater.Master</DependentUpon>
+    </Compile>
     <Compile Include="CreateUsers.aspx.cs">
       <DependentUpon>CreateUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
