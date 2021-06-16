@@ -1324,13 +1324,23 @@ namespace dataBase
         {
             var list = new List<sentLogs>();
             List<int> logsID = getAllLogsID(con);
+            string keyTypeLog = "Error";
+
             foreach (int logID in logsID)
             {
+                if (codes.codes().ContainsKey(getCodeForLog(con, logID)))
+                {
+                    keyTypeLog = codes.codes()[getCodeForLog(con, logID)];
+                }
+                else
+                {
+                    keyTypeLog = "Error";
+                }
                 list.Add(new sentLogs()
                 {
                     ID = logID,
                     dateLogs = getDateForLog(con, logID),
-                    typeLog = codes.codes()[getCodeForLog(con, logID)],
+                    typeLog = keyTypeLog,
                     source = getSourceForLog(con, logID),
                     log = getJ_LOGForLog(con, logID)
                 });
