@@ -13,13 +13,7 @@
     <br>
     <asp:GridView ID="GridView1" runat="server">
     </asp:GridView>
-    <br>
-    <br>
     <asp:Button ID="createUsers" runat="server" Text="create users" class="mybtn1" OnClick="createUsers_Click" />
-    <br>
-    <br>
     <asp:Button ID="deleteUsers" runat="server" Text="delete users" class="mybtn1" OnClick="deleteUsers_Click" />
-    <br>
-    <br>
     <asp:Button ID="changeUser" runat="server" Text="change user" class="mybtn1" OnClick="changeUser_Click" />
 </asp:Content>
