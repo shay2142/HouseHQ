@@ -485,167 +485,184 @@ namespace HouseHQ_server
         }
 
         /*
-              The function receives a login request if the user exists The function returns information accordingly if it does not exist it returns an error message.
+        The function disconnects the user
 
-               input: 
-                  -string login json
+         input: 
+            - json msg
 
-               output:
-                  - ok login json if all good
-                  - if not eror json msg
-               */
-        public string login(string json)
+         output:
+            - json msg
+         */
+        public string logout(string json)
         {
-            var user = JsonConvert.DeserializeObject<login>(json);
-            Console.WriteLine(user.name);
-            if (db.userNameIsExists(con, user.name) && db.passwordIsCorrect(con, user.name, user.password))
-            {
-                okLogin test = new okLogin()
-                {
-                    name = user.name,
-                    mail = db.getMailForUser(con, user.name),
-                    appList = db.getUserApplications(con, user.name),
-                    key = db.getLevelKey(con, user.name)
-                };
-                db.updateStatus(con, user.name, "online");//update status to online
+            var user = JsonConvert.DeserializeObject<logoutUser>(json);
+            db.updateStatus(con, user.userName, "offline");
 
-                return "201&" + JsonConvert.SerializeObject(test);
+            return "209&";
+        }
+
+        /*
+        The function deletes users from the server
+
+         input: 
+            - json msg
+
+         output:
+            - json msg
+         */
+        public string deleteUser(string json)
+        {
+            var user = JsonConvert.DeserializeObject<deleteUser>(json);
+            if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "admin"))
+            {
+                db.deleteAppsUser(con, user.userNameDelete);
+                db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
+
+                return "210&";
             }
             else
             {
-                return error("Username or password incorrect");
-            }
-        }
-
-        /*
-        The function receives a singup request does not exist The function returns information depending on whether it exists it returns an error message
-
-         input: 
-            - singup json msg
-
-         output:
-            - 202 if all good
-            - if not error msg
-         */
-        public string singup(string json)
-        {
-            var user = JsonConvert.DeserializeObject<singup>(json);
-            //DB
-            if (!db.userNameIsExists(con, user.name))
-            {
-                db.insertVluesToUsers(con, user.name, user.password, user.mail);
-
-                if (user.key == "admin")
-                {
-                    db.updateUser(con, user.name, user.password, null, null, user.key);
-                }
-                db.updateStatus(con, user.name, "offline");
-
-                return "202&";
-            }
-            else
-            {
-                return error("username is exist");
+                return error("username is incorrect");
             }
 
         }
 
         /*
-        The function receives a changeAccount request
-
-         input: 
-            - json msg
-
-         output:
-            - 203 if all good
-         */
-        public string changeAccount(string json)
-        {
-            var user = JsonConvert.DeserializeObject<changeAccount>(json);
-
-            string answer = db.updateUser(con, user.userName, user.oldPassword, user.newPassword, user.mail, user.level);
-
-            if (answer != "")
-            {
-                return error(answer);
-            }
-            return "203&";
-        }
-
-        /*
-        The function receives a request to add applications to the server
-
-         input: 
-            - json msg
-
-         output:
-            - json msg
-         */
-        public string addAppsToServer(string json)
-        {
-            var user = JsonConvert.DeserializeObject<addAppsOnServer>(json);
-
-            remoteApp remote = new remoteApp();
-
-            if (db.passwordIsCorrect(con, user.userName, user.password) && db.userNameIsExists(con, user.userName) && db.getLevelKey(con, user.userName) == "admin")
-            {
-                foreach (var app in user.listApps)
-                {
-                    remote.createRemoteApp(this, app.pathExeFile, app.nameApp);
-                }
-                return "204&";
-            }
-            return error("access is denied");
-        }
-
-        /*
-        The function returns all applications
+        The function sends all users
 
          input: none
 
          output:
             - json msg
          */
-        public string allApps()
+        public string getAllUsers()
         {
+            getAllUsers msg = new getAllUsers()
+            {
+                usersList = db.getAllUsers(con)
+            };
+            return "211&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+        The function sends information of all users
+
+         input: 
+            - json msg
+
+         output:
+            - json msg
+         */
+        public string getUserInformation(string json)
+        {
+            var user = JsonConvert.DeserializeObject<getUserInformation>(json);
+            userInformation msg = new userInformation()
+            {
+                password = db.getPassForUser(con, user.userName),
+                mail = db.getMailForUser(con, user.userName),
+                key = db.getLevelKey(con, user.userName)
+            };
+            return "212&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+        The function sends the entire database
+
+         input:
+            - json msg
+
+         output:
+            - json msg
+         */
+        public string sentDB()
+        {
+            jsonSentDB msg = new jsonSentDB
+            {
+                db = db.getDB(con)
+            };
+
+            return "213&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+        The function returns the user's applications
+
+         input:
+            - json msg
+
+         output:
+            - json msg
+         */
+        public string getUserApps(string json)
+        {
+            var user = JsonConvert.DeserializeObject<getUserInformation>(json);
             getAllApps msg = new getAllApps()
             {
-                allAppList = db.getAllApplications(con)
+                allAppList = db.getUserApplications(con, user.userName)
             };
-            return "205&" + JsonConvert.SerializeObject(msg);
+
+            return "214&" + JsonConvert.SerializeObject(msg);
         }
 
         /*
-        The function deletes applications from the server
+        The function sends the logs
 
-         input: 
-            - json msg
+         input: none
 
          output:
-            -json msg
+            - json msg
          */
-        public string deleteAppsForServer(string json)
+        public string sentLogs()
         {
-            var user = JsonConvert.DeserializeObject<deleteAppsForServer>(json);
-
-            remoteApp remote = new remoteApp();
-
-            if (db.passwordIsCorrect(con, user.userName, user.password) && db.userNameIsExists(con, user.userName) && db.getLevelKey(con, user.userName) == "admin")
+            jsonSentLogs msg = new jsonSentLogs()
             {
-                foreach (string app in user.appsList)
-                {
-                    if (db.appIsExists(con, app))
-                    {
-                        remote.deleteRemoteApp(this, app);
-                        return "206&";
-                    }
-                }
+                jsonLogs = db.sentLogsDB(con)
+            };
+
+            return "215&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+        The function adds a new level key
+
+         input: 
+            - json msg
+
+         output:
+            - json msg
+         */
+        public string addLevelKey(string json)
+        {
+            var user = JsonConvert.DeserializeObject<addLevelKey>(json);
+            if (!db.levelIsExists(con, user.nameLevel))
+            {
+                db.createLevel(con, user.nameLevel, user.admin);
             }
-            return error("access is denied");
+            db.insertAppToLevel(con, user.nameLevel, user.apps);
+
+            return "216&";
         }
 
         /*
-        The function deletes applications from the user
+        The function sends all the level key
+
+         input: none
+
+         output:
+            - json msg
+         */
+        public string getLevelKey()
+        {
+            jsonSentLevels msg = new jsonSentLevels()
+            {
+                jsonLevels = db.sentLevelsInformation(con)
+            };
+
+            return "217&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+        The function deletes a level key application
 
          input: 
             - json msg
@@ -653,17 +670,15 @@ namespace HouseHQ_server
          output:
             - json msg
          */
-        public string deleteAppsFromUser(string json)
+        public string deleteAppForLevel(string json)
         {
-            var user = JsonConvert.DeserializeObject<deleteAppFromUser>(json);
-
-            db.deleteAppsFromUser(con, user.userName, user.appName);
-
-            return "207&";
+            var user = JsonConvert.DeserializeObject<deleteAppForLevel>(json);
+            db.deleteAppForLevel(con, user.nameLevel, user.apps);
+            return "218&";
         }
 
         /*
-        The function adds apps to the user
+        The function deletes the level key
 
          input: 
             - json msg
@@ -671,12 +686,11 @@ namespace HouseHQ_server
          output:
             - json msg
          */
-        public string addAppForUser(string json)
+        public string deleteLevel(string json)
         {
-            var user = JsonConvert.DeserializeObject<addAppForUser>(json);
-            db.addAppForUser(con, user.userName, user.appName);
-            //check if app or user name exist mybe and password
-            return "208&";
+            var user = JsonConvert.DeserializeObject<deleteLevel>(json);
+            db.deleteLevel(con, user.nameLevel);
+            return "219&";
         }
 
         /*
