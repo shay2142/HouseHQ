@@ -46,11 +46,11 @@ namespace HouseHQ_server
         }
 
         /*
+        The function opens a form window on a new process
 
+         input: none
 
-         input: 
-
-         output:
+         output: none
          */
         public void frmNewFormThread()
         {
@@ -58,14 +58,15 @@ namespace HouseHQ_server
         }
 
         /*
+        The function activates the server and connects the DB
 
+         input: none
 
-         input: 
-
-         output:
+         output: none
          */
         public void runServer()
         {
+            //connect DB
             string path = @"HHQ_DB.sqlite";
             string cs = @"URI=file:" + path;
 
@@ -74,12 +75,14 @@ namespace HouseHQ_server
 
             db.createTables(con);
 
+            //new form window 
             var newThread = new System.Threading.Thread(frmNewFormThread);
             newThread.SetApartmentState(System.Threading.ApartmentState.STA);
             newThread.Start();
 
             remoteApp app = new remoteApp();
             app.laodApp(this);
+
 
             url = "http://+:8080/";
             String[] prefixes = { url };
@@ -102,11 +105,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function finds all the IP addresses of the server and returns them accordingly
 
-
-         input: 
+         input: none
 
          output:
+            - ip address
          */
         public string GetLocalIPAddress()
         {
@@ -122,11 +126,11 @@ namespace HouseHQ_server
         }
 
         /*
+        The actual function communicates with the customer and returns information according to what he sent
 
+         input: none
 
-         input: 
-
-         output:
+         output: Task results
          */
         public async Task HandleIncomingConnections()
         {
@@ -257,6 +261,8 @@ namespace HouseHQ_server
                                 case "129"://connect to remote app ? now just app no hhq_web
                                     //sent computer name and open thred remote app manager
                                     break;
+                                case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -284,11 +290,14 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a login request if the user exists The function returns information accordingly if it does not exist it returns an error message.
 
          input: 
+            -string login json
 
          output:
+            - ok login json if all good
+            - if not eror json msg
          */
         public string login(string json)
         {
@@ -303,7 +312,7 @@ namespace HouseHQ_server
                     appList = db.getUserApplications(con, user.name),
                     key = db.getLevelKey(con, user.name)
                 };
-                db.updateStatus(con, user.name, "online");
+                db.updateStatus(con, user.name, "online");//update status to online
 
                 return "201&" + JsonConvert.SerializeObject(test);
             }
@@ -314,11 +323,14 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a singup request does not exist The function returns information depending on whether it exists it returns an error message
 
          input: 
+            - singup json msg
 
          output:
+            - 202 if all good
+            - if not error msg
          */
         public string singup(string json)
         {
@@ -344,11 +356,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a changeAccount request
 
          input: 
+            - json msg
 
          output:
+            - 203 if all good
          */
         public string changeAccount(string json)
         {
@@ -364,11 +378,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a request to add applications to the server
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string addAppsToServer(string json)
         {
@@ -388,11 +404,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function returns all applications
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string allApps()
         {
@@ -404,11 +421,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function deletes applications from the server
 
          input: 
+            - json msg
 
          output:
+            -json msg
          */
         public string deleteAppsForServer(string json)
         {
@@ -431,11 +450,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function deletes applications from the user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string deleteAppsFromUser(string json)
         {
@@ -447,11 +468,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function adds apps to the user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string addAppForUser(string json)
         {
@@ -462,201 +485,208 @@ namespace HouseHQ_server
         }
 
         /*
+              The function receives a login request if the user exists The function returns information accordingly if it does not exist it returns an error message.
 
+               input: 
+                  -string login json
 
-         input: 
-
-         output:
-         */
-        public string logout(string json)//return???
+               output:
+                  - ok login json if all good
+                  - if not eror json msg
+               */
+        public string login(string json)
         {
-            var user = JsonConvert.DeserializeObject<logoutUser>(json);
-            db.updateStatus(con, user.userName, "offline");
-
-            return "209&";
-        }
-
-        /*
-
-
-         input: 
-
-         output:
-         */
-        public string deleteUser(string json)
-        {
-            var user = JsonConvert.DeserializeObject<deleteUser>(json);
-            if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "admin"))
+            var user = JsonConvert.DeserializeObject<login>(json);
+            Console.WriteLine(user.name);
+            if (db.userNameIsExists(con, user.name) && db.passwordIsCorrect(con, user.name, user.password))
             {
-                db.deleteAppsUser(con, user.userNameDelete);
-                db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
+                okLogin test = new okLogin()
+                {
+                    name = user.name,
+                    mail = db.getMailForUser(con, user.name),
+                    appList = db.getUserApplications(con, user.name),
+                    key = db.getLevelKey(con, user.name)
+                };
+                db.updateStatus(con, user.name, "online");//update status to online
 
-                return "210&";
+                return "201&" + JsonConvert.SerializeObject(test);
             }
             else
             {
-                return error("username is incorrect");
+                return error("Username or password incorrect");
+            }
+        }
+
+        /*
+        The function receives a singup request does not exist The function returns information depending on whether it exists it returns an error message
+
+         input: 
+            - singup json msg
+
+         output:
+            - 202 if all good
+            - if not error msg
+         */
+        public string singup(string json)
+        {
+            var user = JsonConvert.DeserializeObject<singup>(json);
+            //DB
+            if (!db.userNameIsExists(con, user.name))
+            {
+                db.insertVluesToUsers(con, user.name, user.password, user.mail);
+
+                if (user.key == "admin")
+                {
+                    db.updateUser(con, user.name, user.password, null, null, user.key);
+                }
+                db.updateStatus(con, user.name, "offline");
+
+                return "202&";
+            }
+            else
+            {
+                return error("username is exist");
             }
 
         }
 
         /*
-
+        The function receives a changeAccount request
 
          input: 
+            - json msg
 
          output:
+            - 203 if all good
          */
-        public string getAllUsers()
+        public string changeAccount(string json)
         {
-            getAllUsers msg = new getAllUsers()
+            var user = JsonConvert.DeserializeObject<changeAccount>(json);
+
+            string answer = db.updateUser(con, user.userName, user.oldPassword, user.newPassword, user.mail, user.level);
+
+            if (answer != "")
             {
-                usersList = db.getAllUsers(con)
-            };
-            return "211&" + JsonConvert.SerializeObject(msg);
+                return error(answer);
+            }
+            return "203&";
         }
 
         /*
-
+        The function receives a request to add applications to the server
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
-        public string getUserInformation(string json)
+        public string addAppsToServer(string json)
         {
-            var user = JsonConvert.DeserializeObject<getUserInformation>(json);
-            userInformation msg = new userInformation()
+            var user = JsonConvert.DeserializeObject<addAppsOnServer>(json);
+
+            remoteApp remote = new remoteApp();
+
+            if (db.passwordIsCorrect(con, user.userName, user.password) && db.userNameIsExists(con, user.userName) && db.getLevelKey(con, user.userName) == "admin")
             {
-                password = db.getPassForUser(con, user.userName),
-                mail = db.getMailForUser(con, user.userName),
-                key = db.getLevelKey(con, user.userName)
-            };
-            return "212&" + JsonConvert.SerializeObject(msg);
+                foreach (var app in user.listApps)
+                {
+                    remote.createRemoteApp(this, app.pathExeFile, app.nameApp);
+                }
+                return "204&";
+            }
+            return error("access is denied");
         }
 
         /*
+        The function returns all applications
 
-
-         input: 
-
-         output:
-         */
-        public string sentDB()
-        {
-            jsonSentDB msg = new jsonSentDB
-            {
-                db = db.getDB(con)
-            };
-
-            return "213&" + JsonConvert.SerializeObject(msg);
-        }
-
-        /*
-
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
-        public string getUserApps(string json)
+        public string allApps()
         {
-            var user = JsonConvert.DeserializeObject<getUserInformation>(json);
             getAllApps msg = new getAllApps()
             {
-                allAppList = db.getUserApplications(con, user.userName)
+                allAppList = db.getAllApplications(con)
             };
-
-            return "214&" + JsonConvert.SerializeObject(msg);
+            return "205&" + JsonConvert.SerializeObject(msg);
         }
 
         /*
-
-
-         input: 
-
-         output:
-         */
-        public string sentLogs()
-        {
-            jsonSentLogs msg = new jsonSentLogs()
-            {
-                jsonLogs = db.sentLogsDB(con)
-            };
-
-            return "215&" + JsonConvert.SerializeObject(msg);
-        }
-
-        /*
-
+        The function deletes applications from the server
 
          input: 
+            - json msg
 
          output:
+            -json msg
          */
-        public string addLevelKey(string json)
+        public string deleteAppsForServer(string json)
         {
-            var user = JsonConvert.DeserializeObject<addLevelKey>(json);
-            if (!db.levelIsExists(con, user.nameLevel))
+            var user = JsonConvert.DeserializeObject<deleteAppsForServer>(json);
+
+            remoteApp remote = new remoteApp();
+
+            if (db.passwordIsCorrect(con, user.userName, user.password) && db.userNameIsExists(con, user.userName) && db.getLevelKey(con, user.userName) == "admin")
             {
-                db.createLevel(con, user.nameLevel, user.admin);
+                foreach (string app in user.appsList)
+                {
+                    if (db.appIsExists(con, app))
+                    {
+                        remote.deleteRemoteApp(this, app);
+                        return "206&";
+                    }
+                }
             }
-            db.insertAppToLevel(con, user.nameLevel, user.apps);
-
-            return "216&";
+            return error("access is denied");
         }
 
         /*
-
+        The function deletes applications from the user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
-        public string getLevelKey()
+        public string deleteAppsFromUser(string json)
         {
-            jsonSentLevels msg = new jsonSentLevels()
-            {
-                jsonLevels = db.sentLevelsInformation(con)
-            };
+            var user = JsonConvert.DeserializeObject<deleteAppFromUser>(json);
 
-            return "217&" + JsonConvert.SerializeObject(msg);
+            db.deleteAppsFromUser(con, user.userName, user.appName);
+
+            return "207&";
         }
 
         /*
-
+        The function adds apps to the user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
-        public string deleteAppForLevel(string json)
+        public string addAppForUser(string json)
         {
-            var user = JsonConvert.DeserializeObject<deleteAppForLevel>(json);
-            db.deleteAppForLevel(con, user.nameLevel, user.apps);
-            return "218&";
+            var user = JsonConvert.DeserializeObject<addAppForUser>(json);
+            db.addAppForUser(con, user.userName, user.appName);
+            //check if app or user name exist mybe and password
+            return "208&";
         }
 
         /*
-
-
-         input: 
-
-         output:
-         */
-        public string deleteLevel(string json)
-        {
-            var user = JsonConvert.DeserializeObject<deleteLevel>(json);
-            db.deleteLevel(con, user.nameLevel);
-            return "219&";
-        }
-
-        /*
-
+        The function adds level key applications
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string updateAppsForLevel(string json)
         {
@@ -677,11 +707,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function deletes the logs
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string deleteLogs()
         {
@@ -690,11 +721,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function sends all computers connected to the remoteApp
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string getAllAppsOnPC()
         {
@@ -707,11 +739,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function sends a message to a specific user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string sentMsg(string json)
         {
@@ -724,11 +758,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function disconnects all users from the remoteApp
 
-
-         input: 
-
+         input: none
+            
          output:
+            - json msg
          */
         public string logoffAllUsers()
         {
@@ -740,9 +775,10 @@ namespace HouseHQ_server
         /*
 
 
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string getAllUsersRemoteApp()
         {
@@ -756,11 +792,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function returns all users who are connected to the remoteApp
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string sentApp()
         {
@@ -773,11 +810,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function returns all blocked IP addresses
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string sentBLOCKS_IP()
         {
@@ -790,11 +828,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function returns an error message
 
          input: 
+            - string msg
 
          output:
+            - json msg
          */
         public string error(string msg)
         {
@@ -806,11 +846,12 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function updates the user status
 
          input: 
+            - string hashUser
 
-         output:
+         output: none
          */
         public void updateStatus(string hashUser)
         {
@@ -823,11 +864,14 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function actually returns a response to the customer
 
          input: 
+            - HttpListenerResponse resp
+            - string msg
+            - string ContentType
 
-         output:
+         output: none
          */
         public void response(HttpListenerResponse resp, string msg, string ContentType)
         {
@@ -842,11 +886,12 @@ namespace HouseHQ_server
         }
 
         /*
-
+        Analyzes the jsons she receives and checks if the message from the user she received is correct
 
          input: 
-
+            - string strInput
          output:
+            - bool ture or false
          */
         private bool IsValidJson(string strInput)
         {
