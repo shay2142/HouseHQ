@@ -180,21 +180,12 @@
                 <br>
                 <label runat="server" id="userName">User name</label>
                 <br>
-                <%--<asp:Button runat="server" CssClass="logout" ID="Button4" Text="logout" OnClick="Button1_Click" />--%>
                 <asp:Button runat="server" CssClass="logout" ID="Button1" Text="logout" OnClick="Button1_Click" />
 
             </div>
             <br>
-            <%--<button href="#" aria-atomic="True" onclick="">About</button>--%>
-            <%--<asp:Button runat="server" class="mybtn" ID="Button3" Text="APPS" OnClick="btnApps" ForeColor ="#f1f1f1"/>--%>
-            <%--<asp:Button runat="server" class="mybtn" ID="Button2" Text="APPS" ForeColor ="#f1f1f1"/>--%>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
             </asp:ContentPlaceHolder>
-            <%--<asp:Button runat="server" class="mybtn" ID="Button3" Text="Manager" OnClick="btnMangar" />--%>
-            <%--<asp:Button runat="server" class="mybtn" ID="btnLogin" Text="APPS" OnClick="btnApps" />--%>
-            <%--<a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>--%>
         </div>
 
         <div id="main">

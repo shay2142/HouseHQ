@@ -173,9 +173,9 @@
     <Compile Include="Download.aspx.designer.cs">
       <DependentUpon>Download.aspx</DependentUpon>
     </Compile>
-    <Compile Include="hash.cs" />
-    <Compile Include="httpClient.cs" />
-    <Compile Include="json.cs" />
+    <Compile Include="App_Code\hash.cs" />
+    <Compile Include="App_Code\httpClient.cs" />
+    <Compile Include="App_Code\json.cs" />
     <Compile Include="levelKeyManagement.aspx.cs">
       <DependentUpon>levelKeyManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -224,7 +224,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="remoteApp.cs" />
+    <Compile Include="App_Code\remoteApp.cs" />
     <Compile Include="RemoteAppManagement.aspx.cs">
       <DependentUpon>RemoteAppManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -297,7 +297,7 @@
     <Compile Include="Apps.aspx.designer.cs">
       <DependentUpon>Apps.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WS_Json.cs" />
+    <Compile Include="App_Code\WS_Json.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
