@@ -20,7 +20,6 @@ namespace HouseHQ_server
          */
         public void laodApp(httpServer Http)
         {
-            string path = @"readApp.bat";
             List<string> appsInServer = new List<string>();
 
             foreach (string app in getAppsRemoteApp())
