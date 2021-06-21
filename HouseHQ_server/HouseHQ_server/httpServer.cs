@@ -46,11 +46,11 @@ namespace HouseHQ_server
         }
 
         /*
+        The function opens a form window on a new process
 
+         input: none
 
-         input: 
-
-         output:
+         output: none
          */
         public void frmNewFormThread()
         {
@@ -58,14 +58,15 @@ namespace HouseHQ_server
         }
 
         /*
+        The function activates the server and connects the DB
 
+         input: none
 
-         input: 
-
-         output:
+         output: none
          */
         public void runServer()
         {
+            //connect DB
             string path = @"HHQ_DB.sqlite";
             string cs = @"URI=file:" + path;
 
@@ -74,12 +75,14 @@ namespace HouseHQ_server
 
             db.createTables(con);
 
+            //new form window 
             var newThread = new System.Threading.Thread(frmNewFormThread);
             newThread.SetApartmentState(System.Threading.ApartmentState.STA);
             newThread.Start();
 
             remoteApp app = new remoteApp();
             app.laodApp(this);
+
 
             url = "http://+:8080/";
             String[] prefixes = { url };
@@ -102,11 +105,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function finds all the IP addresses of the server and returns them accordingly
 
-
-         input: 
+         input: none
 
          output:
+            - ip address
          */
         public string GetLocalIPAddress()
         {
@@ -122,11 +126,11 @@ namespace HouseHQ_server
         }
 
         /*
+        The actual function communicates with the customer and returns information according to what he sent
 
+         input: none
 
-         input: 
-
-         output:
+         output: Task results
          */
         public async Task HandleIncomingConnections()
         {
@@ -257,6 +261,8 @@ namespace HouseHQ_server
                                 case "129"://connect to remote app ? now just app no hhq_web
                                     //sent computer name and open thred remote app manager
                                     break;
+                                case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -284,11 +290,14 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a login request if the user exists The function returns information accordingly if it does not exist it returns an error message.
 
          input: 
+            -string login json
 
          output:
+            - ok login json if all good
+            - if not eror json msg
          */
         public string login(string json)
         {
@@ -303,7 +312,7 @@ namespace HouseHQ_server
                     appList = db.getUserApplications(con, user.name),
                     key = db.getLevelKey(con, user.name)
                 };
-                db.updateStatus(con, user.name, "online");
+                db.updateStatus(con, user.name, "online");//update status to online
 
                 return "201&" + JsonConvert.SerializeObject(test);
             }
@@ -314,11 +323,14 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a singup request does not exist The function returns information depending on whether it exists it returns an error message
 
          input: 
+            - singup json msg
 
          output:
+            - 202 if all good
+            - if not error msg
          */
         public string singup(string json)
         {
@@ -344,11 +356,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a changeAccount request
 
          input: 
+            - json msg
 
          output:
+            - 203 if all good
          */
         public string changeAccount(string json)
         {
@@ -364,11 +378,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function receives a request to add applications to the server
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string addAppsToServer(string json)
         {
@@ -388,11 +404,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function returns all applications
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string allApps()
         {
@@ -404,11 +421,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function deletes applications from the server
 
          input: 
+            - json msg
 
          output:
+            -json msg
          */
         public string deleteAppsForServer(string json)
         {
@@ -431,11 +450,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function deletes applications from the user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string deleteAppsFromUser(string json)
         {
@@ -447,11 +468,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function adds apps to the user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string addAppForUser(string json)
         {
@@ -462,13 +485,15 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function disconnects the user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
-        public string logout(string json)//return???
+        public string logout(string json)
         {
             var user = JsonConvert.DeserializeObject<logoutUser>(json);
             db.updateStatus(con, user.userName, "offline");
@@ -477,11 +502,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function deletes users from the server
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string deleteUser(string json)
         {
@@ -501,11 +528,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function sends all users
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string getAllUsers()
         {
@@ -517,11 +545,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function sends information of all users
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string getUserInformation(string json)
         {
@@ -536,11 +566,13 @@ namespace HouseHQ_server
         }
 
         /*
+        The function sends the entire database
 
-
-         input: 
+         input:
+            - json msg
 
          output:
+            - json msg
          */
         public string sentDB()
         {
@@ -553,11 +585,13 @@ namespace HouseHQ_server
         }
 
         /*
+        The function returns the user's applications
 
-
-         input: 
+         input:
+            - json msg
 
          output:
+            - json msg
          */
         public string getUserApps(string json)
         {
@@ -571,11 +605,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function sends the logs
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string sentLogs()
         {
@@ -588,11 +623,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function adds a new level key
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string addLevelKey(string json)
         {
@@ -607,11 +644,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function sends all the level key
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string getLevelKey()
         {
@@ -624,11 +662,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function deletes a level key application
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string deleteAppForLevel(string json)
         {
@@ -638,11 +678,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function deletes the level key
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string deleteLevel(string json)
         {
@@ -652,11 +694,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function adds level key applications
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string updateAppsForLevel(string json)
         {
@@ -677,11 +721,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function deletes the logs
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string deleteLogs()
         {
@@ -690,11 +735,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function sends all computers connected to the remoteApp
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string getAllAppsOnPC()
         {
@@ -707,11 +753,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function sends a message to a specific user
 
          input: 
+            - json msg
 
          output:
+            - json msg
          */
         public string sentMsg(string json)
         {
@@ -724,11 +772,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function disconnects all users from the remoteApp
 
-
-         input: 
-
+         input: none
+            
          output:
+            - json msg
          */
         public string logoffAllUsers()
         {
@@ -740,9 +789,10 @@ namespace HouseHQ_server
         /*
 
 
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string getAllUsersRemoteApp()
         {
@@ -756,11 +806,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function returns all users who are connected to the remoteApp
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string sentApp()
         {
@@ -773,11 +824,12 @@ namespace HouseHQ_server
         }
 
         /*
+        The function returns all blocked IP addresses
 
-
-         input: 
+         input: none
 
          output:
+            - json msg
          */
         public string sentBLOCKS_IP()
         {
@@ -790,11 +842,13 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function returns an error message
 
          input: 
+            - string msg
 
          output:
+            - json msg
          */
         public string error(string msg)
         {
@@ -806,11 +860,12 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function updates the user status
 
          input: 
+            - string hashUser
 
-         output:
+         output: none
          */
         public void updateStatus(string hashUser)
         {
@@ -823,11 +878,14 @@ namespace HouseHQ_server
         }
 
         /*
-
+        The function actually returns a response to the customer
 
          input: 
+            - HttpListenerResponse resp
+            - string msg
+            - string ContentType
 
-         output:
+         output: none
          */
         public void response(HttpListenerResponse resp, string msg, string ContentType)
         {
@@ -842,11 +900,12 @@ namespace HouseHQ_server
         }
 
         /*
-
+        Analyzes the jsons she receives and checks if the message from the user she received is correct
 
          input: 
-
+            - string strInput
          output:
+            - bool ture or false
          */
         private bool IsValidJson(string strInput)
         {

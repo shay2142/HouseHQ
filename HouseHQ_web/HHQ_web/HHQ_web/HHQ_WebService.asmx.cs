@@ -22,11 +22,14 @@ namespace HHQ_web
         public hash hashPass = new hash();
 
         /*
-
+        API gat all apps for users
 
          input: 
-
+            - string ip - ip address to server
+            - string userName - user name to login
+            - string password - to login
          output:
+            - list<string> all apps for users
          */
         [WebMethod]
         public List<string> getAllAppsForUsers(string ipServer, string userName, string password)
@@ -65,11 +68,16 @@ namespace HHQ_web
         }
 
         /*
-
+        run app get url to Download app and connect in remoteApp
 
          input: 
+            - string ip - ip address to server
+            - string userName - to login
+            - string password - to login
+            - string appName - to run app
 
          output:
+            - string url to Download app to connect
          */
         [WebMethod]
         public string runApp(string ipServer, string userName, string password, string appName)
@@ -119,11 +127,14 @@ namespace HHQ_web
         }
 
         /*
+        code: 101 - login
 
-
-         input: 
-
+         input:
+            - string ip - ip address to server
+            - string userName - to login
+            - string password - to login
          output:
+            - object type WS_Login - ok login or error
          */
         [WebMethod]
         public WS_Login login(string ip, string userName, string password)//101
@@ -177,11 +188,17 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 102 - create users
 
          input: 
+            - string ip - ip address to server
+            - string userName
+            - string password
+            - string mail
+            - string level key
 
          output:
+            - string msg to user
          */
         [WebMethod]
         public string createUsers(string ip, string userName, string password, string mail, string levelKey)//102
@@ -214,11 +231,18 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 103 - change account
 
          input: 
+            - string ip - ip address to server   
+            - string userName
+            - string oldPassword
+            - string newPassword
+            - string mail
+            - string level
 
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string changeAccount(string ip, string userName, string oldPassword, string newPassword, string mail, string level)//103
@@ -254,11 +278,15 @@ namespace HHQ_web
         }
 
         /*
+        code: 104 add apps to server
 
-
-         input: 
-
+         input:
+            - string ip - ip address to server
+            - string user name
+            - string password
+            - list<addApps> listApps - list to add apps on server
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string addAppsToServer(string ip, string userName, string password, List<addApps> listApps)//104
@@ -289,11 +317,13 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 105 - get all apps
 
          input: 
+            - string ip - ip address to server
 
          output:
+            - object type getAllApps - to get all apps
          */
         [WebMethod]
         public getAllApps allApps(string ip)//105
@@ -313,11 +343,16 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 106 - delete app for server
 
          input: 
+            - string ip - ip address to server    
+            - string userName
+            - string password
+            - List<string> listApps - list apps to delete RemoteApp
 
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string deleteAppsForServer(string ip, string userName, string password, List<string> listApps)//106
@@ -348,11 +383,16 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 107 - delete app from user
 
          input: 
+            - string ip - ip address to server
+            - string userName
+            --> string password <--
+            - string appName - to delete
 
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string deleteAppsFromUser(string ip, string userName, string appName)//107
@@ -378,11 +418,16 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 108 - add app for user
 
          input: 
+            - string ip - ip address to server
+            - string userName
+            --> string password <--
+            - string appName - to add
 
-         output:
+        output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string addAppForUser(string ip, string userName, string appName)//108
@@ -409,11 +454,15 @@ namespace HHQ_web
         }
 
         /*
+        code: 109 - logout to server
 
-
-         input: 
+         input:
+            - string ip - ip address to server
+            - string userName
+            --> string password?? <--
 
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string logout(string ip, string userName)//109
@@ -435,11 +484,16 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 110 - deleteUser
 
          input: 
+            - string ip - ip address to server
+            - string userNameDelete
+            - string adminUserName
+            --> string adminPassword
 
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string deleteUser(string ip, string userNameDelete, string adminUserName)//110
@@ -465,11 +519,14 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 111 - get all users
 
          input: 
+            - string ip - ip address to server
+            --> user & pass - admin?? <--
 
          output:
+            - object type getAllUsers
          */
         [WebMethod]
         public getAllUsers allUsers(string ip)//111
@@ -489,11 +546,15 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 112 - get user infornattion
 
          input: 
+            - string ip - ip address to server
+            - string userName
+            --> user & pass - admin || this user ?? <--
 
          output:
+            - object type userInformation
          */
         [WebMethod]
         public userInformation getUserInformation(string ip, string userName)//112
@@ -518,11 +579,14 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 113 - get DB users
 
          input: 
+            - string ip - ip address to server
+            --> admin?? <--
 
          output:
+            - object type jsonSentDB
          */
         [WebMethod]
         public jsonSentDB getDB(string ip)//113
@@ -542,11 +606,15 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 114
 
          input: 
+            - string ip - ip address to server
+            - string userName
+            --> pass <--
 
          output:
+            - object type getAllApps
          */
         [WebMethod]
         public getAllApps getAllAppsForUser(string ip, string userName)//114
@@ -576,11 +644,14 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 115 - get logs
 
          input: 
+            - string ip - ip address to server
+            --> admin <--
 
          output:
+            - object type jsonSentLogs
          */
         [WebMethod]
         public jsonSentLogs getLogs(string ip)//115
@@ -611,6 +682,7 @@ namespace HHQ_web
 
 
          input: 
+            - string ip - ip address to server
 
          output:
          */
@@ -623,14 +695,17 @@ namespace HHQ_web
 
 
         /*
-
+        code: 122 - get all apps on pc
 
          input: 
+            - string ip - ip address to server
+            --> admin <--
 
          output:
+            - object type getAllAppsOnPC
          */
         [WebMethod]
-        public string getAllAppsOnPC(string ip)//122
+        public getAllAppsOnPC getAllAppsOnPC(string ip)//122
         {
             httpClient connect = new httpClient();
             string result = connect.sent(null, ip, "122");
@@ -640,18 +715,22 @@ namespace HHQ_web
 
                 if (results[0] == "222")
                 {
-                    return results[1];
+                    return JsonConvert.DeserializeObject<getAllAppsOnPC>(results[1]);
                 }
             }
-            return "";
+            return new getAllAppsOnPC();
         }
 
         /*
-
+        code: 123 - sent msg to users
 
          input: 
+            - string ip - ip address to server
+            - string namePc
+            - string msg
 
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string sentMsg(string ip, string namePc, string msg)
@@ -677,11 +756,14 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 124 - log Off All Users
 
          input: 
+            - string ip - ip address to server
+            --> admin <--
 
          output:
+            - string - Message accordingly
          */
         [WebMethod]
         public string logOffAllUsers(string ip)
@@ -703,11 +785,14 @@ namespace HHQ_web
         //125 logoff user
 
         /*
-
+        code: 126 - get All Users Remote App
 
          input: 
+            - string ip - ip address to server
+            --> admin <--
 
          output:
+            - object type getAllUsersRemoteApp
          */
         [WebMethod]
         public getAllUsersRemoteApp getAllUsersRemoteApps(string ip)
@@ -727,11 +812,14 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 127 - get App DB
 
          input: 
+            - string ip - ip address to server
+            --> admin <--
 
          output:
+            - object type jsonSentApp
          */
         [WebMethod]
         public jsonSentApp getAppDB(string ip)
@@ -751,11 +839,14 @@ namespace HHQ_web
         }
 
         /*
-
+        code: 128 - get BLOCKS_IP DB
 
          input: 
+            - string ip - ip address to server
+            --> admin <--
 
          output:
+            - object type jsonSentBLOCKS_IP
          */
         [WebMethod]
         public jsonSentBLOCKS_IP getBLOCKS_IP_DB(string ip)

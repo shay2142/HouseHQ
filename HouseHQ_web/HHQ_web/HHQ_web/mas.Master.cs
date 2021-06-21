@@ -66,6 +66,14 @@ namespace HHQ_web
             }
         }
 
+        public Panel test4
+        {
+            set
+            {
+                ContentPlaceHolder1.Controls.Add(value);
+            }
+        }
+
         public string setPageName
         {
             set

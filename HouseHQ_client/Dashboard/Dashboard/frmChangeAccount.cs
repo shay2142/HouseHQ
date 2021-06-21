@@ -138,6 +138,11 @@ namespace Dashboard
         private void button1_Click(object sender, EventArgs e)
         {
             string level = null;
+            string oldPassword = hashPass.ComputeSha256Hash(oldPass.Text);
+            if (type == "manager")
+            {
+                oldPassword = oldPass.Text;
+            }
             if (txtPassword.Text == txtComPassword.Text)
             {
                 if(checkbxAdmin.Checked)
@@ -147,7 +152,7 @@ namespace Dashboard
                 changeAccount test = new changeAccount()
                 {
                    userName = UserName,
-                   oldPassword = hashPass.ComputeSha256Hash(oldPass.Text),
+                   oldPassword = oldPassword,
                    newPassword = hashPass.ComputeSha256Hash(txtPassword.Text),
                    mail = txtMail.Text,
                    level = level

@@ -23,7 +23,7 @@ namespace HHQ_web
 
             if (jsonLogin.error == null)
             {
-               ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
                 Session["json"] = JsonConvert.SerializeObject(jsonLogin.okLogin);
                 Session["ip"] = ipServer.Value;
                 Response.Redirect("Apps.aspx");
