@@ -1358,7 +1358,11 @@ namespace dataBase
         public List<sentLevels> sentLevelsInformation(SQLiteConnection con)
         {
             var list = new List<sentLevels>();
-            List<int> levelsID = getAllLevelID(con);
+            List<int> levelsID = getAllLevelID(con);  
+
+
+
+
             foreach (int levelID in levelsID)
             {
                 list.Add(new sentLevels()

@@ -105,7 +105,6 @@ D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Newtonsoft.Json.xml
 D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Data.SQLite.xml
 D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.AccessControl.xml
 D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Security.Principal.Windows.xml
-D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
 D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.AddApps.resources
 D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form1.resources
 D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.Form2.resources
@@ -150,3 +149,4 @@ C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Hou
 D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.dll
 D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.xml
 D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.DB_view.resources
+D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
