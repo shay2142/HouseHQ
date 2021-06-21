@@ -23,7 +23,7 @@ namespace HTTP_CLIENT
             string result = "";
             string port = "8080";
             var splitList = ip.Split(':');
-            if (splitList.Length > 1 && (splitList[1] == null || splitList[1] == ""))
+            if (splitList.Length > 1 && !(splitList[1] == null || splitList[1] == ""))
             {
                 port = splitList[1];
             }
