@@ -16,6 +16,7 @@ using System.Threading;
 using jsonDeserialize;
 using jsonSerializer;
 using dataBase;
+using NATUPNPLib;
 
 namespace HouseHQ_server
 {
@@ -27,6 +28,9 @@ namespace HouseHQ_server
         [STAThread]
         static void Main()
         {
+            upnp upnp = new upnp();
+            upnp.createUpnp();
+
             httpServer server2 = new httpServer();
             server2.runServer();
         }

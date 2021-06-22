@@ -150,3 +150,5 @@ D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.dll
 D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\Cassia.xml
 D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.DB_view.resources
 D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
+C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NATUPNPLib.dll
+C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.ResolveComReference.cache

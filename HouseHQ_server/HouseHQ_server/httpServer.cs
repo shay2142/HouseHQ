@@ -261,7 +261,7 @@ namespace HouseHQ_server
                                 case "129"://connect to remote app ? now just app no hhq_web
                                     //sent computer name and open thred remote app manager
                                     break;
-                                case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation
+                                case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation -- and get ip and port for rdp con
                                     break;
                                 default://400 error
                                     msg = error("code is incorrect");
