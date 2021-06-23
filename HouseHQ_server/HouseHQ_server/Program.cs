@@ -28,6 +28,9 @@ namespace HouseHQ_server
         [STAThread]
         static void Main()
         {
+            rdpwrap rdp = new rdpwrap();
+            rdp.update();
+
             upnp upnp = new upnp();
             upnp.createUpnp();
 

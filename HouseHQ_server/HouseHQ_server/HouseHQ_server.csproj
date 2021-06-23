@@ -117,6 +117,7 @@
       <DependentUpon>DB_view.cs</DependentUpon>
     </Compile>
     <Compile Include="fierwall.cs" />
+    <Compile Include="rdpwrap.cs" />
     <Compile Include="remoteApp Management.cs" />
     <Compile Include="remoteApp.cs" />
     <Compile Include="DB.cs" />
