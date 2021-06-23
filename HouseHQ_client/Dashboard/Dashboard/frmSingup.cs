@@ -60,6 +60,25 @@ namespace Dashboard
 
                     if (results[0] == "202")
                     {
+                        login login = new login()
+                        {
+                            name = txtUsername.Text,
+                            password = txtPassword.Text
+                        };
+                        string json2 = JsonConvert.SerializeObject(login);
+                        string result2 = testLogin.sent(json2, IP, "131");
+                        if (result2 != null)
+                        {
+                            string[] results2 = result2.Split('&');
+                            if (results2[0] == "231")
+                            {
+                                MessageBox.Show(JsonConvert.DeserializeObject<msg>(results2[1]).message, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else if (results2[0] == "400")
+                            { 
+                                MessageBox.Show(JsonConvert.DeserializeObject<error>(results2[1]).msg, "Create User Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
                         MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         manager.GetDB();
                     }

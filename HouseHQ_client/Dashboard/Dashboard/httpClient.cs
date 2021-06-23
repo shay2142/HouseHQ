@@ -8,12 +8,15 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using System.Net;
+using Dashboard;
 
 
 namespace HTTP_CLIENT
 {
     class httpClient
     {
+        public hash hashPass = new hash();
+
         public httpClient()
         {
         }
@@ -23,6 +26,9 @@ namespace HTTP_CLIENT
             string result = "";
             string port = "8080";
             var splitList = ip.Split(':');
+
+            code = hashPass.ComputeSha256Hash(code);
+
             if (splitList.Length > 1 && !(splitList[1] == null || splitList[1] == ""))
             {
                 port = splitList[1];

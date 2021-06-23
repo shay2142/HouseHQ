@@ -165,4 +165,9 @@ namespace Dashboard
         public string port { get; set; }
         public string app { get; set; }
     }
+
+    class msg
+    {
+        public string message { get; set; }
+    }
 }

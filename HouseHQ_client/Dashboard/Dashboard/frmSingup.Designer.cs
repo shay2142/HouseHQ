@@ -123,7 +123,7 @@
             this.checkbxShowPas.AutoSize = true;
             this.checkbxShowPas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkbxShowPas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkbxShowPas.Location = new System.Drawing.Point(135, 291);
+            this.checkbxShowPas.Location = new System.Drawing.Point(40, 291);
             this.checkbxShowPas.Name = "checkbxShowPas";
             this.checkbxShowPas.Size = new System.Drawing.Size(119, 21);
             this.checkbxShowPas.TabIndex = 3;
@@ -138,7 +138,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(38, 345);
+            this.button1.Location = new System.Drawing.Point(37, 356);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 35);
             this.button1.TabIndex = 4;
@@ -152,7 +152,7 @@
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.button2.Location = new System.Drawing.Point(38, 386);
+            this.button2.Location = new System.Drawing.Point(37, 397);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(217, 35);
             this.button2.TabIndex = 4;
@@ -199,7 +199,7 @@
             this.checkbxAdmin.AutoSize = true;
             this.checkbxAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkbxAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkbxAdmin.Location = new System.Drawing.Point(134, 318);
+            this.checkbxAdmin.Location = new System.Drawing.Point(40, 318);
             this.checkbxAdmin.Name = "checkbxAdmin";
             this.checkbxAdmin.Size = new System.Drawing.Size(65, 21);
             this.checkbxAdmin.TabIndex = 22;
@@ -211,7 +211,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.ClientSize = new System.Drawing.Size(285, 440);
+            this.ClientSize = new System.Drawing.Size(285, 460);
             this.Controls.Add(this.checkbxAdmin);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.label10);
