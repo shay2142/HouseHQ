@@ -127,6 +127,7 @@
     <Compile Include="hash.cs" />
     <Compile Include="httpClient.cs" />
     <Compile Include="json.cs" />
+    <Compile Include="loginParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

@@ -103,5 +103,12 @@ namespace jsonDeserialize
     { 
         public string namePc { get; set; }
         public string msg { get; set; }
-    } 
+    }
+
+    class runApp
+    {
+        public string app { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+    }
 }

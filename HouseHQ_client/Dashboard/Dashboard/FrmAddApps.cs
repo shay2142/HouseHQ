@@ -17,25 +17,21 @@ namespace Dashboard
     public partial class FrmAddApps : Form
     {
         public List<string> apps;
-        public List<string> userApps;
-        public string IP;
-        public string userName;
 
         public frmApps appsWindow { get; set; }
         public Form1 dashbord { get; set; }
+        public loginParameters USER = new loginParameters();
 
-        public FrmAddApps(string ip, List<string> userApps, string userName, frmApps window, Form1 window2)
+        public FrmAddApps(loginParameters users, frmApps window, Form1 window2)
         {
             InitializeComponent();
 
-            this.userApps = userApps;
-            this.userName = userName;
-            IP = ip;
+            USER = users;
             appsWindow = window;
             dashbord = window2;
 
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, ip, "105");
+            string result = testLogin.sent(null, USER.ipServer, "105");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -65,7 +61,7 @@ namespace Dashboard
                 test.UseVisualStyleBackColor = true;
                 test.Click += new System.EventHandler(test_click);
 
-                if (userApps.Contains(app))
+                if (USER.apps.Contains(app))
                 {
                     test.Enabled = false;
                     test.Checked = true;
@@ -103,12 +99,12 @@ namespace Dashboard
                     good = true;
                     addAppForUser msg = new addAppForUser()
                     {
-                        userName = userName,
+                        userName = USER.userName,
                         appName = ((CheckBox)newApp).Text
                     };
                     string json = JsonConvert.SerializeObject(msg);
                     httpClient testLogin = new httpClient();
-                    string result = testLogin.sent(json, IP, "108");
+                    string result = testLogin.sent(json, USER.ipServer, "108");
                     if (result != null)
                     {
                         string[] results = result.Split('&');
@@ -129,7 +125,7 @@ namespace Dashboard
             if (appsWindow != null)
             {
                 appsWindow.Close();
-                frmApps apps = new frmApps(IP, userName, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                frmApps apps = new frmApps(USER, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                 apps.FormBorderStyle = FormBorderStyle.None;
                 dashbord.pnlFormLoader.Controls.Add(apps);
                 apps.Show();

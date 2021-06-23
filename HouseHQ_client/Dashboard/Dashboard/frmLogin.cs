@@ -38,6 +38,7 @@ namespace Dashboard
         private void  button1_Click(object sender, EventArgs e)
         {
             string ip = IP.Text;
+            loginParameters userPram = new loginParameters();
 
             if (!checkInput())
             {
@@ -58,7 +59,16 @@ namespace Dashboard
                 if (results[0] == "201")
                 {
                     var user = JsonConvert.DeserializeObject<okLogin>(results[1]);
-                    new Form1(results[1], IP.Text).Show();
+
+                    userPram.ipServer = ip;
+                    userPram.userName = test.name;
+                    userPram.password = txtpassword.Text;
+                    userPram.mail = user.mail;
+                    userPram.key = user.key;
+                    userPram.img = user.img;
+                    userPram.apps = user.appList;
+
+                    new Form1(userPram).Show();
                     this.Hide();
                 }
                 else if (results[0] == "400")

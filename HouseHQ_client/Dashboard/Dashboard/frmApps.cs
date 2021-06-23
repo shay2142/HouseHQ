@@ -17,17 +17,16 @@ namespace Dashboard
 {
     public partial class frmApps : Form
     {
-        public List<string> apps;
-        public string IP_server;
-        public string userName;
         public Form1 dashbord;
 
-        public frmApps(string ip, string userName, Form1 form)
+        public loginParameters USER = new loginParameters();
+        public hash hashPass = new hash();
+
+        public frmApps(loginParameters user, Form1 form)
         {
             InitializeComponent();
-            
-            this.userName = userName;
-            IP_server = ip;
+
+            USER = user;
             dashbord = form;
 
             getData();
@@ -37,22 +36,22 @@ namespace Dashboard
         {
             getUserInformation msg = new getUserInformation()
             {
-                userName = userName
+                userName = USER.userName
             };
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, IP_server, "114");
+            string result = testLogin.sent(json, USER.ipServer, "114");
             if (result != null)
             {
                 string[] results = result.Split('&');
                 if (results[0] == "214")
                 {
                     var user = JsonConvert.DeserializeObject<getAllApps>(results[1]);
-                    apps = user.allAppList;
+                    USER.apps = user.allAppList;
                 }
             }
 
-            foreach (var app in apps)
+            foreach (var app in USER.apps)
             {
                 Button test = new Button();
                 test.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -74,7 +73,7 @@ namespace Dashboard
             }
         }
 
-        public void createReamoteAppFile(string remoteAppName)
+        public void createReamoteAppFile(string remoteAppName, string ip, string port)
         {
             string path = @"reamoteapp.rdp";
             File.Delete(path);
@@ -86,10 +85,10 @@ namespace Dashboard
                 {
                     sw.WriteLine("allow desktop composition:i:1");
                     sw.WriteLine("allow font smoothing:i:1");
-                    sw.WriteLine("alternate full address:s:" + IP_server);
+                    sw.WriteLine("alternate full address:s:" + ip + ":" + port);
                     sw.WriteLine("alternate shell:s:rdpinit.exe");
                     sw.WriteLine("devicestoredirect:s:*");
-                    sw.WriteLine("full address:s:" + IP_server);
+                    sw.WriteLine("full address:s:" + ip + ":" + port);
                     sw.WriteLine("prompt for credentials on client:i:1");
                     sw.WriteLine("promptcredentialonce:i:0");
                     sw.WriteLine("redirectcomports:i:1");
@@ -108,7 +107,32 @@ namespace Dashboard
         private void reamoteApp(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            createReamoteAppFile(button.Text);
+
+            runApp msg = new runApp()
+            {
+                userName = USER.userName,
+                password = hashPass.ComputeSha256Hash(USER.password),
+                app = button.Text
+            };
+            string json = JsonConvert.SerializeObject(msg);
+
+            httpClient runApp = new httpClient();
+            string result = runApp.sent(json, USER.ipServer, "130");
+            if (result != null)
+            {
+                string[] results = result.Split('&');
+                if (results[0] == "230")
+                {
+                    var user = JsonConvert.DeserializeObject<okRunApp>(results[1]);
+                    createReamoteAppFile(user.app, user.ip, user.port);
+                }
+                else if (results[0] == "400")
+                {
+                    var user = JsonConvert.DeserializeObject<error>(results[1]);
+                    MessageBox.Show(user.msg, "Run app Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            
         }
         private void frmApps_Load(object sender, EventArgs e)
         {
@@ -117,7 +141,7 @@ namespace Dashboard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FrmAddApps(IP_server, apps, userName, this, dashbord).Show();
+            new FrmAddApps(USER, this, dashbord).Show();
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -127,7 +151,7 @@ namespace Dashboard
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new FrmDeleteApps(IP_server, apps, userName, this, dashbord).Show();
+            new FrmDeleteApps(USER, this, dashbord).Show();
         }
     }
 }

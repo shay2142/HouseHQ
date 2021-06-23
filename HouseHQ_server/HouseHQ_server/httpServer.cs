@@ -262,6 +262,7 @@ namespace HouseHQ_server
                                     //sent computer name and open thred remote app manager
                                     break;
                                 case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation -- and get ip and port for rdp con
+                                    msg = runApp(json[1]);
                                     break;
                                 default://400 error
                                     msg = error("code is incorrect");
@@ -302,7 +303,6 @@ namespace HouseHQ_server
         public string login(string json)
         {
             var user = JsonConvert.DeserializeObject<login>(json);
-            Console.WriteLine(user.name);
             if (db.userNameIsExists(con, user.name) && db.passwordIsCorrect(con, user.name, user.password))
             {
                 okLogin test = new okLogin()
@@ -841,6 +841,42 @@ namespace HouseHQ_server
             return "228&" + JsonConvert.SerializeObject(msg);
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string runApp(string json)
+        {
+            upnp upnp = new upnp();
+           
+            var user = JsonConvert.DeserializeObject<runApp>(json);
+
+            if (db.userNameIsExists(con, user.userName) && db.passwordIsCorrect(con, user.userName, user.password))
+            {
+                if (db.appIsExistsInUser(con, user.userName, user.app))
+                {
+                    okRunApp msg = new okRunApp()
+                    {
+                        ip = upnp.GetIPAddress(),
+                        port = upnp.getRdpPort().ToString(),
+                        app = user.app
+                    };
+
+                    return "230&" + JsonConvert.SerializeObject(msg);
+                }
+                else
+                {
+                    return error("You do not have access to the app");
+                }
+            }
+            else
+            {
+                return error("Username or password incorrect");
+            }
+        }
         /*
         The function returns an error message
 

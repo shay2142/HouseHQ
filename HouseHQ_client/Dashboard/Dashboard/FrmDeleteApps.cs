@@ -16,22 +16,20 @@ namespace Dashboard
 {
     public partial class FrmDeleteApps : Form
     {
-        public string IP;
-        public string userName;
+        public loginParameters USER = new loginParameters();
 
         public frmApps appsWindow { get; set; }
         public Form1 dashbord { get; set; }
 
-        public FrmDeleteApps(string ip, List<string> apps, string userName, frmApps window, Form1 window2)
+        public FrmDeleteApps(loginParameters user, frmApps window, Form1 window2)
         {
             InitializeComponent();
 
-            this.userName = userName;
-            IP = ip;
+            USER = user;
             appsWindow = window;
             dashbord = window2;
 
-            foreach (var app in apps)
+            foreach (var app in USER.apps)
             {
                 CheckBox test = new CheckBox();
                 test.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -81,12 +79,12 @@ namespace Dashboard
                 {
                     deleteAppFromUser msg = new deleteAppFromUser()
                     {
-                        userName = userName,
+                        userName = USER.userName,
                         appName = ((CheckBox)newApp).Text
                     };
                     string json = JsonConvert.SerializeObject(msg);
                     httpClient testLogin = new httpClient();
-                    string result = testLogin.sent(json, IP, "107");
+                    string result = testLogin.sent(json, USER.ipServer, "107");
                     if (result != null)
                     {
                         string[] results = result.Split('&');
@@ -104,7 +102,7 @@ namespace Dashboard
                 MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 appsWindow.Close();
-                frmApps apps = new frmApps(IP, userName, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                frmApps apps = new frmApps(USER, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                 apps.FormBorderStyle = FormBorderStyle.None;
                 dashbord.pnlFormLoader.Controls.Add(apps);
                 apps.Show();
