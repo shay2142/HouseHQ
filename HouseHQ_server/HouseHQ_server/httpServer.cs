@@ -158,7 +158,6 @@ namespace HouseHQ_server
 
                 if ((req.HttpMethod == "POST") && !db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
-                    Console.WriteLine("test");
                     using (System.IO.StreamReader reader = new System.IO.StreamReader(req.InputStream, req.ContentEncoding))
                     {
                         string s = reader.ReadToEnd();

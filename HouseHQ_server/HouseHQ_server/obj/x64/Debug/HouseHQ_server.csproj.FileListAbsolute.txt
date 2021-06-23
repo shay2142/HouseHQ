@@ -152,3 +152,4 @@ D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.DB_view.re
 D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAssemblyReference.cache
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NATUPNPLib.dll
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.ResolveComReference.cache
+C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NetFwTypeLib.dll

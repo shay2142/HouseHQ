@@ -31,6 +31,9 @@ namespace HouseHQ_server
             upnp upnp = new upnp();
             upnp.createUpnp();
 
+            fierwall rule = new fierwall();
+            rule.createRulefierwall();
+
             httpServer server2 = new httpServer();
             server2.runServer();
         }
