@@ -41,6 +41,8 @@ namespace HouseHQ_server
                 {"127", "sent app db" },
                 {"128", "sent blockIp db" },
                 {"130", "run app"},
+                {"131", "create user on windows"},
+                {"132", "change user on windows"},
                 {"400", "error"},
                 {"201", "ok login"},
                 {"202", "ok singup"},
@@ -70,7 +72,9 @@ namespace HouseHQ_server
                 {"226", "ok get all users connet to remoteApp" },
                 {"227", "ok sent app db" },
                 {"228", "ok sent blockIp db" },
-                {"230", "ok run app"}
+                {"230", "ok run app"},
+                {"231", "ok create user on windows"},
+                {"232", "ok change user on windows"},
             };
         }
     }

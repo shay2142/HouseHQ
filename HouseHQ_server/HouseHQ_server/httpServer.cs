@@ -263,6 +263,12 @@ namespace HouseHQ_server
                                 case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation -- and get ip and port for rdp con
                                     msg = runApp(json[1]);
                                     break;
+                                case "131":
+                                    msg = createUserWin(json[1]);
+                                    break;
+                                case "132":
+                                    msg = changeUserWin(json[1]);
+                                    break;
                                 default://400 error
                                     msg = error("code is incorrect");
                                     break;
@@ -511,11 +517,14 @@ namespace HouseHQ_server
          */
         public string deleteUser(string json)
         {
+            createUser delete = new createUser();
+
             var user = JsonConvert.DeserializeObject<deleteUser>(json);
             if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "admin"))
             {
                 db.deleteAppsUser(con, user.userNameDelete);
                 db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
+                delete.deleteUserOnWin(user.userNameDelete);
 
                 return "210&";
             }
@@ -876,6 +885,68 @@ namespace HouseHQ_server
                 return error("Username or password incorrect");
             }
         }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string createUserWin(string json)
+        {
+            createUser create = new createUser();
+
+            var user = JsonConvert.DeserializeObject<login>(json);
+
+            string ans = create.createUserOnWin(user.name, user.password);
+
+            if (ans == "Account Created Successfully")
+            {
+                msg msg = new msg()
+                {
+                    message = ans
+                };
+
+                return "231&" + JsonConvert.SerializeObject(msg);
+            }
+            else
+            {
+                return error(ans);
+            }
+
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string changeUserWin(string json)
+        {
+            createUser change = new createUser();
+
+            var user = JsonConvert.DeserializeObject<login>(json);
+
+            string ans = change.changePassword(user.name, user.password);
+
+            if (ans == "Success!")
+            {
+                msg msg = new msg()
+                {
+                    message = ans
+                };
+
+                return "232&" + JsonConvert.SerializeObject(msg);
+            }
+            else
+            {
+                return error(ans);
+            }
+        }
+
         /*
         The function returns an error message
 
