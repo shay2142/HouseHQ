@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <style dir="ltrול">
+    <style dir="ltr">
         body {
             background-color: #1e1e1e;
             font-family: 'Noto Sans', sans-serif;

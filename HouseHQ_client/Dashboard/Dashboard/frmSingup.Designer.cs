@@ -74,7 +74,7 @@
             this.txtUsername.Multiline = true;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(216, 28);
-            this.txtUsername.TabIndex = 2;
+            this.txtUsername.TabIndex = 1;
             // 
             // label3
             // 
@@ -95,7 +95,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '•';
             this.txtPassword.Size = new System.Drawing.Size(216, 28);
-            this.txtPassword.TabIndex = 2;
+            this.txtPassword.TabIndex = 3;
             // 
             // label4
             // 
@@ -116,7 +116,7 @@
             this.txtComPassword.Name = "txtComPassword";
             this.txtComPassword.PasswordChar = '•';
             this.txtComPassword.Size = new System.Drawing.Size(216, 28);
-            this.txtComPassword.TabIndex = 2;
+            this.txtComPassword.TabIndex = 4;
             // 
             // checkbxShowPas
             // 
@@ -126,7 +126,7 @@
             this.checkbxShowPas.Location = new System.Drawing.Point(40, 291);
             this.checkbxShowPas.Name = "checkbxShowPas";
             this.checkbxShowPas.Size = new System.Drawing.Size(119, 21);
-            this.checkbxShowPas.TabIndex = 3;
+            this.checkbxShowPas.TabIndex = 5;
             this.checkbxShowPas.Text = "Show Password";
             this.checkbxShowPas.UseVisualStyleBackColor = true;
             this.checkbxShowPas.CheckedChanged += new System.EventHandler(this.checkbxShowPas_CheckedChanged);
@@ -141,7 +141,7 @@
             this.button1.Location = new System.Drawing.Point(37, 356);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 35);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 7;
             this.button1.Text = "CREATE";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -169,7 +169,7 @@
             this.txtMail.Multiline = true;
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(216, 28);
-            this.txtMail.TabIndex = 13;
+            this.txtMail.TabIndex = 2;
             // 
             // label10
             // 
@@ -202,7 +202,7 @@
             this.checkbxAdmin.Location = new System.Drawing.Point(40, 318);
             this.checkbxAdmin.Name = "checkbxAdmin";
             this.checkbxAdmin.Size = new System.Drawing.Size(65, 21);
-            this.checkbxAdmin.TabIndex = 22;
+            this.checkbxAdmin.TabIndex = 6;
             this.checkbxAdmin.Text = "Admin";
             this.checkbxAdmin.UseVisualStyleBackColor = true;
             // 

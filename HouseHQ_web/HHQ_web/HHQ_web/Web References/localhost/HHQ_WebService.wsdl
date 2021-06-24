@@ -373,20 +373,6 @@
       <s:element name="deleteLogsResponse">
         <s:complexType />
       </s:element>
-      <s:element name="getAllAppsOnPC">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getAllAppsOnPCResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getAllAppsOnPCResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="sentMsg">
         <s:complexType>
           <s:sequence>
@@ -607,12 +593,6 @@
   <wsdl:message name="deleteLogsSoapOut">
     <wsdl:part name="parameters" element="tns:deleteLogsResponse" />
   </wsdl:message>
-  <wsdl:message name="getAllAppsOnPCSoapIn">
-    <wsdl:part name="parameters" element="tns:getAllAppsOnPC" />
-  </wsdl:message>
-  <wsdl:message name="getAllAppsOnPCSoapOut">
-    <wsdl:part name="parameters" element="tns:getAllAppsOnPCResponse" />
-  </wsdl:message>
   <wsdl:message name="sentMsgSoapIn">
     <wsdl:part name="parameters" element="tns:sentMsg" />
   </wsdl:message>
@@ -715,10 +695,6 @@
     <wsdl:operation name="deleteLogs">
       <wsdl:input message="tns:deleteLogsSoapIn" />
       <wsdl:output message="tns:deleteLogsSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getAllAppsOnPC">
-      <wsdl:input message="tns:getAllAppsOnPCSoapIn" />
-      <wsdl:output message="tns:getAllAppsOnPCSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="sentMsg">
       <wsdl:input message="tns:sentMsgSoapIn" />
@@ -898,15 +874,6 @@
     </wsdl:operation>
     <wsdl:operation name="deleteLogs">
       <soap:operation soapAction="http://tempuri.org/deleteLogs" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getAllAppsOnPC">
-      <soap:operation soapAction="http://tempuri.org/getAllAppsOnPC" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1117,15 +1084,6 @@
     </wsdl:operation>
     <wsdl:operation name="deleteLogs">
       <soap12:operation soapAction="http://tempuri.org/deleteLogs" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getAllAppsOnPC">
-      <soap12:operation soapAction="http://tempuri.org/getAllAppsOnPC" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

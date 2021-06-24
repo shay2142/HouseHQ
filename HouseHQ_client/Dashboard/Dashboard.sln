@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{7AE9F65A-B445-4C1B-9EA8-137BD05BB86D}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HHQ_client", "HHQ_client\HHQ_client.vdproj", "{8449A549-CD8C-4FB8-A65F-692847B1A723}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,13 @@ Global
 		{7AE9F65A-B445-4C1B-9EA8-137BD05BB86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE9F65A-B445-4C1B-9EA8-137BD05BB86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE9F65A-B445-4C1B-9EA8-137BD05BB86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8449A549-CD8C-4FB8-A65F-692847B1A723}.Debug|Any CPU.ActiveCfg = Debug
+		{8449A549-CD8C-4FB8-A65F-692847B1A723}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C56D9B6-7756-4E74-8341-21DC7DF74E00}
 	EndGlobalSection
 EndGlobal

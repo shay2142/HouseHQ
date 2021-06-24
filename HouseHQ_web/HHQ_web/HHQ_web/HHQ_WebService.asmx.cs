@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Xml.Serialization;
 
 using Newtonsoft.Json;
 
@@ -14,6 +15,7 @@ namespace HHQ_web
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
+    [XmlRoot("dictionary")]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
@@ -704,22 +706,22 @@ namespace HHQ_web
          output:
             - object type getAllAppsOnPC
          */
-        [WebMethod]
-        public getAllAppsOnPC getAllAppsOnPC(string ip)//122
-        {
-            httpClient connect = new httpClient();
-            string result = connect.sent(null, ip, "122");
-            if (result != null)
-            {
-                string[] results = result.Split('&');
+        //[WebMethod]
+        //public getAllAppsOnPC getAllAppsOnPC(string ip)//122
+        //{
+        //    httpClient connect = new httpClient();
+        //    string result = connect.sent(null, ip, "122");
+        //    if (result != null)
+        //    {
+        //        string[] results = result.Split('&');
 
-                if (results[0] == "222")
-                {
-                    return JsonConvert.DeserializeObject<getAllAppsOnPC>(results[1]);
-                }
-            }
-            return new getAllAppsOnPC();
-        }
+        //        if (results[0] == "222")
+        //        {
+        //            return JsonConvert.DeserializeObject<getAllAppsOnPC>(results[1]);
+        //        }
+        //    }
+        //    return new getAllAppsOnPC();
+        //}
 
         /*
         code: 123 - sent msg to users
