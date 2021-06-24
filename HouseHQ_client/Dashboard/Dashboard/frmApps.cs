@@ -75,7 +75,7 @@ namespace Dashboard
 
         public void createReamoteAppFile(string remoteAppName, string ip, string port)
         {
-            string path = @"reamoteapp.rdp";
+            string path = @"C:\Users\Public\reamoteapp.rdp";
             File.Delete(path);
 
             if (!File.Exists(path))
