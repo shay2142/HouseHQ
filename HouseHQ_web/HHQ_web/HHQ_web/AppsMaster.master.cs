@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace HHQ_web
 {
-    public partial class AppsMater : System.Web.UI.MasterPage
+    public partial class AppsMaster : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -142,11 +142,6 @@ namespace HHQ_web
         public WS_Login login(string ip, string userName, string password)//101
         {
             hash hashPass = new hash();
-            var splitList = ip.Split(':');
-            if (splitList.Length == 2)
-            {
-                ip = splitList[0];
-            }
             login test = new login()
             {
                 name = userName,
