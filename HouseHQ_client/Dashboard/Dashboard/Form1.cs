@@ -167,7 +167,7 @@ namespace Dashboard
 
         private void label2_Click(object sender, EventArgs e)
         {
-            File.Delete(@"reamoteapp.rdp");
+            File.Delete(@"C:\Users\Public\reamoteapp.rdp");
             new frmLogin().Show();
             logout();
             this.Hide();

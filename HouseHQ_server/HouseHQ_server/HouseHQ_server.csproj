@@ -148,6 +148,7 @@
     <Compile Include="jsonSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringCipher.cs" />
     <Compile Include="upnp.cs" />
     <EmbeddedResource Include="AddApps.resx">
       <DependentUpon>AddApps.cs</DependentUpon>

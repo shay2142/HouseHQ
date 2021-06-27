@@ -1,9 +1,11 @@
 ﻿using Dashboard;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 
 namespace HTTP_CLIENT
@@ -42,7 +44,9 @@ namespace HTTP_CLIENT
 
         public async Task<string> msg(string json, string ip, string port, string code)
         {
-            var data = new StringContent(code + "&" + json, Encoding.UTF8, "application/json");
+            int len = (code + "&" + json).Length;
+
+            var data = new StringContent(StringCipher.Encrypt(code + "&" + json, hashPass.ComputeSha256Hash((code + "&" + json).Length.ToString())), Encoding.UTF8, "application/json|" + len);
 
             var url = "http://" + ip + ":" + port + "/";
 
@@ -50,7 +54,9 @@ namespace HTTP_CLIENT
 
             var response = await client.PostAsync(url, data);
 
-            return response.Content.ReadAsStringAsync().Result;
+            string req = StringCipher.Decrypt(response.Content.ReadAsStringAsync().Result, hashPass.ComputeSha256Hash(response.Content.Headers.GetValues("Content-Type").FirstOrDefault().Split('|')[1]));
+
+            return req;
         }
     }
 }

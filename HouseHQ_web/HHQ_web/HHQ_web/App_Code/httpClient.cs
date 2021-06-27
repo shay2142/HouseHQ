@@ -43,15 +43,20 @@ namespace HHQ_web
 
         public async Task<string> msg(string json, string ip, string port, string code)
         {
-            var data = new StringContent(code + "&" + json, Encoding.UTF8, "application/json");
+            int len = (code + "&" + json).Length;
+
+            var data = new StringContent(hashPass.Encrypt(code + "&" + json, hashPass.ComputeSha256Hash((code + "&" + json).Length.ToString())), Encoding.UTF8, "application/json|" + len);
 
             var url = "http://" + ip + ":" + port + "/";
 
             var client = new HttpClient();
 
-            var response = await client.PostAsync(url, data);
+             var response = await client.PostAsync(url, data);
 
-            return response.Content.ReadAsStringAsync().Result;
+            string req = hashPass.Decrypt(response.Content.ReadAsStringAsync().Result, hashPass.ComputeSha256Hash(response.Content.Headers.GetValues("Content-Type").FirstOrDefault().Split('|')[1]));
+
+
+            return req;
         }
     }
 }
