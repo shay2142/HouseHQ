@@ -24,6 +24,7 @@ namespace HouseHQ_server
     {
         public hash hash = new hash();
         public Codes codes = new Codes();
+        public botMsg bot = new botMsg();
         public SQLiteConnection con;
         public HttpListener listener;
         internal DB db = new DB();
@@ -334,6 +335,8 @@ namespace HouseHQ_server
                 };
                 db.updateStatus(con, user.name, "online");//update status to online
 
+                bot.sentMsgForWhatsApp("217854", "+972503234654", user.name + " login!");//WhatsApp Bot
+
                 return "201&" + JsonConvert.SerializeObject(test);
             }
             else
@@ -517,6 +520,8 @@ namespace HouseHQ_server
         {
             var user = JsonConvert.DeserializeObject<logoutUser>(json);
             db.updateStatus(con, user.userName, "offline");
+
+            bot.sentMsgForWhatsApp("217854", "+972503234654", user.userName + " logout!");//WhatsApp Bot
 
             return "209&";
         }
@@ -887,6 +892,9 @@ namespace HouseHQ_server
                         port = upnp.getRdpPort().ToString(),
                         app = user.app
                     };
+
+                    bot.sentMsgForWhatsApp("217854", "+972503234654", user.userName + " run " + user.app + " now");//WhatsApp Bot
+
 
                     return "230&" + JsonConvert.SerializeObject(msg);
                 }

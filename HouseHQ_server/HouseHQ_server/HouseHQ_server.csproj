@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Apps.cs" />
+    <Compile Include="botMsg.cs" />
     <Compile Include="Codes.cs" />
     <Compile Include="createUser.cs" />
     <Compile Include="DB_view.cs">
