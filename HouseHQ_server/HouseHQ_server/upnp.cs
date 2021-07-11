@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Management;
 using NATUPNPLib;
 
 namespace HouseHQ_server
@@ -122,11 +123,18 @@ namespace HouseHQ_server
         public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection nics = mc.GetInstances();
+            foreach (ManagementObject nic in nics)
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                if (Convert.ToBoolean(nic["ipEnabled"]) == true && nic["DefaultIPGateway"] != null)
                 {
-                    return ip.ToString();
+                    string mac = nic["MacAddress"].ToString(); // Mac address
+                    string ip = (nic["IPAddress"] as String[])[0]; // IP address
+                    string ipsubnet = (nic["IPSubnet"] as String[])[0]; // Subnet mask
+                    string ipgateway = (nic["DefaultIPGateway"] as String[])[0]; // Default gateway
+
+                    return ip;
                 }
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
