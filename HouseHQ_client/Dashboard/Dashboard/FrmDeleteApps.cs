@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 
 using HTTP_CLIENT;
+using System.IO;
 
 namespace Dashboard
 {
@@ -47,7 +48,28 @@ namespace Dashboard
                 test.UseVisualStyleBackColor = true;
                 test.UseVisualStyleBackColor = true;
                 test.Click += new System.EventHandler(test_click);
+                getImg msg2 = new getImg()
+                {
+                    appName = app
+                };
 
+                httpClient testLogin = new httpClient();
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+
+                if (result1 != null)
+                {
+                    //Console.WriteLine(result1);
+                    string[] results1 = result1.Split('&');
+                    if (results1[0] == "233")
+                    {
+                        var user1 = JsonConvert.DeserializeObject<img>(results1[1]);
+                        var data = Encoding.ASCII.GetString(user1.data, 0, user1.data.Length);
+                        byte[] bitmapData = Convert.FromBase64String(data.Substring(0, data.Length));
+                        Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
+                        Bitmap bitmap = new Bitmap(img, new Size(48, 48));
+                        test.Image = bitmap;
+                    }
+                }
                 flowLayoutPanel1.Controls.Add(test);
             }
         }
@@ -68,6 +90,13 @@ namespace Dashboard
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
         private void button1_Click(object sender, EventArgs e)

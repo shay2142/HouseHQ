@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 using Newtonsoft.Json;
 
@@ -61,6 +62,27 @@ namespace Dashboard
                 test.UseVisualStyleBackColor = true;
                 test.Click += new System.EventHandler(test_click);
 
+                getImg msg2 = new getImg()
+                {
+                    appName = app
+                };
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+
+                if (result1 != null)
+                {
+                    //Console.WriteLine(result1);
+                    string[] results1 = result1.Split('&');
+                    if (results1[0] == "233")
+                    {
+                        var user = JsonConvert.DeserializeObject<img>(results1[1]);
+                        var data = Encoding.ASCII.GetString(user.data, 0, user.data.Length);
+                        byte[] bitmapData = Convert.FromBase64String(data.Substring(0, data.Length));
+                        Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
+                        Bitmap bitmap = new Bitmap(img, new Size(48, 48));
+                        test.Image = bitmap;
+                    }
+                }
+
                 if (USER.apps.Contains(app))
                 {
                     test.Enabled = false;
@@ -82,6 +104,13 @@ namespace Dashboard
             {
                 app.ForeColor = System.Drawing.Color.FromArgb(0, 126, 249);
             }
+        }
+
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
