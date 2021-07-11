@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 using Newtonsoft.Json;
 
@@ -17,25 +18,21 @@ namespace Dashboard
     public partial class FrmAddApps : Form
     {
         public List<string> apps;
-        public List<string> userApps;
-        public string IP;
-        public string userName;
 
         public frmApps appsWindow { get; set; }
         public Form1 dashbord { get; set; }
+        public loginParameters USER = new loginParameters();
 
-        public FrmAddApps(string ip, List<string> userApps, string userName, frmApps window, Form1 window2)
+        public FrmAddApps(loginParameters users, frmApps window, Form1 window2)
         {
             InitializeComponent();
 
-            this.userApps = userApps;
-            this.userName = userName;
-            IP = ip;
+            USER = users;
             appsWindow = window;
             dashbord = window2;
 
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, ip, "105");
+            string result = testLogin.sent(null, USER.ipServer, "105");
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -65,7 +62,28 @@ namespace Dashboard
                 test.UseVisualStyleBackColor = true;
                 test.Click += new System.EventHandler(test_click);
 
-                if (userApps.Contains(app))
+                getImg msg2 = new getImg()
+                {
+                    appName = app
+                };
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+
+                if (result1 != null)
+                {
+                    //Console.WriteLine(result1);
+                    string[] results1 = result1.Split('&');
+                    if (results1[0] == "233")
+                    {
+                        var user = JsonConvert.DeserializeObject<img>(results1[1]);
+                        var data = Encoding.ASCII.GetString(user.data, 0, user.data.Length);
+                        byte[] bitmapData = Convert.FromBase64String(data.Substring(0, data.Length));
+                        Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
+                        Bitmap bitmap = new Bitmap(img, new Size(48, 48));
+                        test.Image = bitmap;
+                    }
+                }
+
+                if (USER.apps.Contains(app))
                 {
                     test.Enabled = false;
                     test.Checked = true;
@@ -88,6 +106,13 @@ namespace Dashboard
             }
         }
 
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
+
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -103,12 +128,12 @@ namespace Dashboard
                     good = true;
                     addAppForUser msg = new addAppForUser()
                     {
-                        userName = userName,
+                        userName = USER.userName,
                         appName = ((CheckBox)newApp).Text
                     };
                     string json = JsonConvert.SerializeObject(msg);
                     httpClient testLogin = new httpClient();
-                    string result = testLogin.sent(json, IP, "108");
+                    string result = testLogin.sent(json, USER.ipServer, "108");
                     if (result != null)
                     {
                         string[] results = result.Split('&');
@@ -129,7 +154,7 @@ namespace Dashboard
             if (appsWindow != null)
             {
                 appsWindow.Close();
-                frmApps apps = new frmApps(IP, userName, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                frmApps apps = new frmApps(USER, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                 apps.FormBorderStyle = FormBorderStyle.None;
                 dashbord.pnlFormLoader.Controls.Add(apps);
                 apps.Show();

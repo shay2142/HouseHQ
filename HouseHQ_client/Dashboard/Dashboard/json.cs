@@ -151,4 +151,33 @@ namespace Dashboard
         public string source { get; set; }
         public string log { get; set; }
     }
+
+    class runApp
+    {
+        public string app { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+    }
+
+    class okRunApp
+    {
+        public string ip { get; set; }
+        public string port { get; set; }
+        public string app { get; set; }
+    }
+
+    class msg
+    {
+        public string message { get; set; }
+    }
+
+    class img
+    {
+        public byte[] data { get; set; }
+    }
+
+    class getImg
+    {
+        public string appName { get; set; }
+    }
 }

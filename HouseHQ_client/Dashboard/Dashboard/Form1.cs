@@ -32,27 +32,21 @@ namespace Dashboard
                int nHeightEllipse
 
          );
-
-        public string IP_server;
-        public List<string> apps;
-        public string userName;
-        public string key;
-
-        public Form1(string result, string ip)
+        public loginParameters USER  = new loginParameters();
+        public Form1(loginParameters user)
         {
             InitializeComponent();
-            this.IP_server = ip;
-            var user = JsonConvert.DeserializeObject<okLogin>(result);
-            apps = user.appList;
-            userName = user.name;
-            key = user.key;
-            label1.Text = user.name;
+
+            USER = user;
+            label1.Text = USER.userName;
+
+
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             pnlNav.BackColor = Color.FromArgb(24, 30, 54);
 
             lbltitle.Text = "HouseHQ";
 
-            if (user.key != "admin")
+            if (USER.key != "admin")
             {
                 panel1.Controls.Remove(btnManager);
             }
@@ -73,7 +67,7 @@ namespace Dashboard
 
             lbltitle.Text = "Apps";
             this.pnlFormLoader.Controls.Clear();
-            frmApps frmDashboard_vrb = new frmApps(IP_server, userName, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmApps frmDashboard_vrb = new frmApps(USER, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmDashboard_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmDashboard_vrb);
             frmDashboard_vrb.Show();
@@ -89,7 +83,7 @@ namespace Dashboard
 
             lbltitle.Text = "Manager";
             this.pnlFormLoader.Controls.Clear();
-            frmManager frmAnalytics_vrb = new frmManager(IP_server, userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmManager frmAnalytics_vrb = new frmManager(USER.ipServer, USER.userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmAnalytics_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmAnalytics_vrb);
             frmAnalytics_vrb.Show();
@@ -118,7 +112,7 @@ namespace Dashboard
             pnlNav.BackColor = Color.FromArgb(0, 126, 249);
 
             this.pnlFormLoader.Controls.Clear();
-            frmSettings frmSettings_vrb = new frmSettings(IP_server, userName, key) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmSettings frmSettings_vrb = new frmSettings(USER.ipServer, USER.userName, USER.key) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmSettings_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmSettings_vrb);
             frmSettings_vrb.Show();
@@ -173,7 +167,7 @@ namespace Dashboard
 
         private void label2_Click(object sender, EventArgs e)
         {
-            File.Delete(@"reamoteapp.rdp");
+            File.Delete(@"C:\Users\Public\reamoteapp.rdp");
             new frmLogin().Show();
             logout();
             this.Hide();
@@ -183,11 +177,11 @@ namespace Dashboard
         {
             logoutUser test = new logoutUser()
             {
-                userName = userName
+                userName = USER.userName
             };
             string json = JsonConvert.SerializeObject(test);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, IP_server, "109");
+            string result = testLogin.sent(json, USER.ipServer, "109");
         }
     }
 }

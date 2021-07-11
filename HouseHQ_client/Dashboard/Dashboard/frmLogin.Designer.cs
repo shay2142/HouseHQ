@@ -50,7 +50,7 @@
             this.button2.Location = new System.Drawing.Point(37, 358);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(216, 35);
-            this.button2.TabIndex = 14;
+            this.button2.TabIndex = 6;
             this.button2.Text = "CLEAR";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -65,7 +65,7 @@
             this.button1.Location = new System.Drawing.Point(38, 317);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 35);
-            this.button1.TabIndex = 15;
+            this.button1.TabIndex = 5;
             this.button1.Text = "LOGIN";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -78,7 +78,7 @@
             this.checkbxShowPas.Location = new System.Drawing.Point(126, 284);
             this.checkbxShowPas.Name = "checkbxShowPas";
             this.checkbxShowPas.Size = new System.Drawing.Size(119, 21);
-            this.checkbxShowPas.TabIndex = 13;
+            this.checkbxShowPas.TabIndex = 4;
             this.checkbxShowPas.Text = "Show Password";
             this.checkbxShowPas.UseVisualStyleBackColor = true;
             this.checkbxShowPas.CheckedChanged += new System.EventHandler(this.checkbxShowPas_CheckedChanged);
@@ -93,7 +93,7 @@
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.PasswordChar = '•';
             this.txtpassword.Size = new System.Drawing.Size(216, 28);
-            this.txtpassword.TabIndex = 11;
+            this.txtpassword.TabIndex = 3;
             this.txtpassword.TextChanged += new System.EventHandler(this.txtpassword_TextChanged);
             // 
             // label3
@@ -115,7 +115,7 @@
             this.txtUsername.Multiline = true;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(216, 28);
-            this.txtUsername.TabIndex = 12;
+            this.txtUsername.TabIndex = 1;
             // 
             // label2
             // 
@@ -155,7 +155,7 @@
             this.IP.Multiline = true;
             this.IP.Name = "IP";
             this.IP.Size = new System.Drawing.Size(216, 28);
-            this.IP.TabIndex = 19;
+            this.IP.TabIndex = 2;
             // 
             // buttonClose
             // 
@@ -166,7 +166,7 @@
             this.buttonClose.Location = new System.Drawing.Point(252, 12);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(25, 25);
-            this.buttonClose.TabIndex = 20;
+            this.buttonClose.TabIndex = 7;
             this.buttonClose.Text = "X";
             this.buttonClose.UseVisualStyleBackColor = false;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);

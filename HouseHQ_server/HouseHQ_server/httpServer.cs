@@ -22,7 +22,9 @@ namespace HouseHQ_server
 {
     public class httpServer
     {
+        public hash hash = new hash();
         public Codes codes = new Codes();
+        public botMsg bot = new botMsg();
         public SQLiteConnection con;
         public HttpListener listener;
         internal DB db = new DB();
@@ -155,129 +157,152 @@ namespace HouseHQ_server
                 Console.WriteLine(req.UserAgent);
                 Console.WriteLine(req.RemoteEndPoint);
                 Console.WriteLine();
+                Console.WriteLine(req.Headers);
+                Console.WriteLine();
 
                 if ((req.HttpMethod == "POST") && !db.ipIsBlock(con, req.RemoteEndPoint.Address.ToString()))
                 {
-                    Console.WriteLine("test");
                     using (System.IO.StreamReader reader = new System.IO.StreamReader(req.InputStream, req.ContentEncoding))
                     {
-                        string s = reader.ReadToEnd();
-                        Console.WriteLine("InputStream: {0}", s);
-
-                        db.insertVluesToLOGS(con, s, "client->server");
-
-                        string[] json = s.Split('&');
-                        Console.WriteLine(json[0]);
-                        Console.WriteLine(json[1]);
-
-                        string msg = "";
-                        if (IsValidJson(json[1]) && codes.codes().ContainsKey(json[0]) || codes.codes().ContainsKey(json[0]))
+                        string x = reader.ReadToEnd();
+                        Console.WriteLine("InputStream Encrypt: {0}", x);
+                        if (req.Headers["Content-Type"].Split(';')[0].Contains("|"))
                         {
-                            switch (json[0])
+                            string s = StringCipher.Decrypt(x, hash.ComputeSha256Hash(req.Headers["Content-Type"].Split(';')[0].Split('|')[1]));
+
+                            Console.WriteLine();
+                            Console.WriteLine("InputStream Decrypt: {0}", s);
+                            Console.WriteLine();
+
+                            db.insertVluesToLOGS(con, s, "client->server");
+
+                            string[] json = s.Split('&');
+                            Console.WriteLine(json[0]);
+                            Console.WriteLine(json[1]);
+
+                            string msg = "";
+                            string code = hash.getCodeHash(json[0]);
+
+                            if (IsValidJson(json[1]) && codes.codes().ContainsKey(code) || codes.codes().ContainsKey(code))
                             {
-                                case "101"://login
-                                    msg = login(json[1]);
-                                    break;
-                                case "102": //singup
-                                    msg = singup(json[1]);
-                                    break;
-                                case "103"://change account
-                                    msg = changeAccount(json[1]);
-                                    break;
-                                case "104"://add apps
-                                    msg = addAppsToServer(json[1]);
-                                    break;
-                                case "105"://all apps
-                                    msg = allApps();
-                                    break;
-                                case "106"://delete apps
-                                    msg = deleteAppsForServer(json[1]);
-                                    break;
-                                case "107"://delete apps from user
-                                    msg = deleteAppsFromUser(json[1]);
-                                    break;
-                                case "108"://add apps for user
-                                    msg = addAppForUser(json[1]);
-                                    break;
-                                case "109"://logout
-                                    msg = logout(json[1]);
-                                    break;
-                                case "110"://delete user
-                                    msg = deleteUser(json[1]);
-                                    break;
-                                case "111"://getAllUsers
-                                    msg = getAllUsers();
-                                    break;
-                                case "112"://get user information 
-                                    msg = getUserInformation(json[1]);
-                                    break;
-                                case "113"://sent DB
-                                    msg = sentDB();
-                                    break;
-                                case "114"://get user apps
-                                    msg = getUserApps(json[1]);
-                                    break;
-                                case "115"://sent logs db
-                                    msg = sentLogs();
-                                    break;
-                                case "116"://add level key
-                                    msg = addLevelKey(json[1]);
-                                    break;
-                                case "117":// get all levels key
-                                    msg = getLevelKey();
-                                    break;
-                                case "118"://delete app for level key
-                                    msg = deleteAppForLevel(json[1]);
-                                    break;
-                                case "119":// delete level key
-                                    msg = deleteLevel(json[1]);
-                                    break;
-                                case "120"://update app level key
-                                    msg = updateAppsForLevel(json[1]);
-                                    break;
-                                case "121"://delete logs
-                                    msg = deleteLogs();
-                                    break;
-                                case "122"://get all app in server 
-                                    msg = getAllAppsOnPC();
-                                    break;
-                                case "123"://sent msg
-                                    msg = sentMsg(json[1]);
-                                    break;
-                                case "124"://logoff all users
-                                    msg = logoffAllUsers();
-                                    break;
-                                case "125"://logoff user
-                                    break;
-                                case "126"://get all users conncet to remoteApp
-                                    msg = getAllUsersRemoteApp();
-                                    break;
-                                case "127"://sent app db
-                                    msg = sentApp();
-                                    break;
-                                case "128"://sent blockIp db
-                                    msg = sentBLOCKS_IP();
-                                    break;
-                                case "129"://connect to remote app ? now just app no hhq_web
-                                    //sent computer name and open thred remote app manager
-                                    break;
-                                case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation
-                                    break;
-                                default://400 error
-                                    msg = error("code is incorrect");
-                                    break;
+                                switch (code)
+                                {
+                                    case "101"://login
+                                        msg = login(json[1]);
+                                        break;
+                                    case "102": //singup
+                                        msg = singup(json[1]);
+                                        break;
+                                    case "103"://change account
+                                        msg = changeAccount(json[1]);
+                                        break;
+                                    case "104"://add apps
+                                        msg = addAppsToServer(json[1]);
+                                        break;
+                                    case "105"://all apps
+                                        msg = allApps();
+                                        break;
+                                    case "106"://delete apps
+                                        msg = deleteAppsForServer(json[1]);
+                                        break;
+                                    case "107"://delete apps from user
+                                        msg = deleteAppsFromUser(json[1]);
+                                        break;
+                                    case "108"://add apps for user
+                                        msg = addAppForUser(json[1]);
+                                        break;
+                                    case "109"://logout
+                                        msg = logout(json[1]);
+                                        break;
+                                    case "110"://delete user
+                                        msg = deleteUser(json[1]);
+                                        break;
+                                    case "111"://getAllUsers
+                                        msg = getAllUsers();
+                                        break;
+                                    case "112"://get user information 
+                                        msg = getUserInformation(json[1]);
+                                        break;
+                                    case "113"://sent DB
+                                        msg = sentDB();
+                                        break;
+                                    case "114"://get user apps
+                                        msg = getUserApps(json[1]);
+                                        break;
+                                    case "115"://sent logs db
+                                        msg = sentLogs();
+                                        break;
+                                    case "116"://add level key
+                                        msg = addLevelKey(json[1]);
+                                        break;
+                                    case "117":// get all levels key
+                                        msg = getLevelKey();
+                                        break;
+                                    case "118"://delete app for level key
+                                        msg = deleteAppForLevel(json[1]);
+                                        break;
+                                    case "119":// delete level key
+                                        msg = deleteLevel(json[1]);
+                                        break;
+                                    case "120"://update app level key
+                                        msg = updateAppsForLevel(json[1]);
+                                        break;
+                                    case "121"://delete logs
+                                        msg = deleteLogs();
+                                        break;
+                                    case "122"://get all app in server 
+                                        msg = getAllAppsOnPC();
+                                        break;
+                                    case "123"://sent msg
+                                        msg = sentMsg(json[1]);
+                                        break;
+                                    case "124"://logoff all users
+                                        msg = logoffAllUsers();
+                                        break;
+                                    case "125"://logoff user
+                                        break;
+                                    case "126"://get all users conncet to remoteApp
+                                        msg = getAllUsersRemoteApp();
+                                        break;
+                                    case "127"://sent app db
+                                        msg = sentApp();
+                                        break;
+                                    case "128"://sent blockIp db
+                                        msg = sentBLOCKS_IP();
+                                        break;
+                                    case "129"://connect to remote app ? now just app no hhq_web
+                                               //sent computer name and open thred remote app manager
+                                        break;
+                                    case "130"://run app - Verification with the DB that the user has access to the software and a login confirmation -- and get ip and port for rdp con
+                                        msg = runApp(json[1]);
+                                        break;
+                                    case "131":
+                                        msg = createUserWin(json[1]);
+                                        break;
+                                    case "132":
+                                        msg = changeUserWin(json[1]);
+                                        break;
+                                    case "133"://sent icon - test
+                                        msg = sentImg(json[1]);
+                                        break;
+                                    default://400 error
+                                        msg = error("code is incorrect");
+                                        break;
+                                }
+
+                                response(resp, StringCipher.Encrypt(msg, hash.ComputeSha256Hash(msg.Length.ToString())), "json|" + msg.Length);
+
+                                db.insertVluesToLOGS(con, msg, "server->client");
+                                if (json.Length == 3)
+                                {
+                                    updateStatus(json[2]);
+                                }
+                                Console.WriteLine(msg);
                             }
-                            response(resp, msg, "json");
-                            db.insertVluesToLOGS(con, msg, "server->client");
-                            if (json.Length == 3)
+                            else
                             {
-                                updateStatus(json[2]);
+                                response(resp, "the msg is not json", "text");
                             }
-                            Console.WriteLine(msg);
-                        }
-                        else
-                        {
-                            response(resp, "the msg is not json", "text");
                         }
                     }
                 }
@@ -302,7 +327,6 @@ namespace HouseHQ_server
         public string login(string json)
         {
             var user = JsonConvert.DeserializeObject<login>(json);
-            Console.WriteLine(user.name);
             if (db.userNameIsExists(con, user.name) && db.passwordIsCorrect(con, user.name, user.password))
             {
                 okLogin test = new okLogin()
@@ -313,6 +337,8 @@ namespace HouseHQ_server
                     key = db.getLevelKey(con, user.name)
                 };
                 db.updateStatus(con, user.name, "online");//update status to online
+
+                bot.sentMsgForWhatsApp("217854", "+972503234654", user.name + " login!");//WhatsApp Bot
 
                 return "201&" + JsonConvert.SerializeObject(test);
             }
@@ -498,6 +524,8 @@ namespace HouseHQ_server
             var user = JsonConvert.DeserializeObject<logoutUser>(json);
             db.updateStatus(con, user.userName, "offline");
 
+            bot.sentMsgForWhatsApp("217854", "+972503234654", user.userName + " logout!");//WhatsApp Bot
+
             return "209&";
         }
 
@@ -512,11 +540,14 @@ namespace HouseHQ_server
          */
         public string deleteUser(string json)
         {
+            createUser delete = new createUser();
+
             var user = JsonConvert.DeserializeObject<deleteUser>(json);
             if (db.userNameIsExists(con, user.adminUserName) && db.userNameIsExists(con, user.userNameDelete) && (db.getLevelKey(con, user.adminUserName) == "admin"))
             {
                 db.deleteAppsUser(con, user.userNameDelete);
                 db.deleteValueFromeTable(con, "USERS", "USERNAME", user.userNameDelete);
+                delete.deleteUserOnWin(user.userNameDelete);
 
                 return "210&";
             }
@@ -839,6 +870,125 @@ namespace HouseHQ_server
             };
 
             return "228&" + JsonConvert.SerializeObject(msg);
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string runApp(string json)
+        {
+            upnp upnp = new upnp();
+           
+            var user = JsonConvert.DeserializeObject<runApp>(json);
+
+            if (db.userNameIsExists(con, user.userName) && db.passwordIsCorrect(con, user.userName, user.password))
+            {
+                if (db.appIsExistsInUser(con, user.userName, user.app))
+                {
+                    okRunApp msg = new okRunApp()
+                    {
+                        ip = upnp.GetIPAddress(),
+                        port = upnp.getRdpPort().ToString(),
+                        app = user.app
+                    };
+
+                    bot.sentMsgForWhatsApp("217854", "+972503234654", user.userName + " run " + user.app + " now");//WhatsApp Bot
+
+
+                    return "230&" + JsonConvert.SerializeObject(msg);
+                }
+                else
+                {
+                    return error("You do not have access to the app");
+                }
+            }
+            else
+            {
+                return error("Username or password incorrect");
+            }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string createUserWin(string json)
+        {
+            createUser create = new createUser();
+
+            var user = JsonConvert.DeserializeObject<login>(json);
+
+            string ans = create.createUserOnWin(user.name, user.password);
+
+            if (ans == "Account Created Successfully")
+            {
+                msg msg = new msg()
+                {
+                    message = ans
+                };
+
+                return "231&" + JsonConvert.SerializeObject(msg);
+            }
+            else
+            {
+                return error(ans);
+            }
+
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string changeUserWin(string json)
+        {
+            createUser change = new createUser();
+
+            var user = JsonConvert.DeserializeObject<login>(json);
+
+            string ans = change.changePassword(user.name, user.password);
+
+            if (ans == "Success!")
+            {
+                msg msg = new msg()
+                {
+                    message = ans
+                };
+
+                return "232&" + JsonConvert.SerializeObject(msg);
+            }
+            else
+            {
+                return error(ans);
+            }
+        }
+
+        public string sentImg(string json)
+        {
+            var user = JsonConvert.DeserializeObject<getImg>(json);
+            try
+            {
+                img msg = new img()
+                {
+                    data = sentImage.sentImg(user.appName)
+                };
+
+                return "233&" + JsonConvert.SerializeObject(msg);
+            }
+            catch
+            {
+                return error("ERORR");
+            }
         }
 
         /*

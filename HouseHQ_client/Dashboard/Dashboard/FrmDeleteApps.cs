@@ -11,27 +11,26 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 
 using HTTP_CLIENT;
+using System.IO;
 
 namespace Dashboard
 {
     public partial class FrmDeleteApps : Form
     {
-        public string IP;
-        public string userName;
+        public loginParameters USER = new loginParameters();
 
         public frmApps appsWindow { get; set; }
         public Form1 dashbord { get; set; }
 
-        public FrmDeleteApps(string ip, List<string> apps, string userName, frmApps window, Form1 window2)
+        public FrmDeleteApps(loginParameters user, frmApps window, Form1 window2)
         {
             InitializeComponent();
 
-            this.userName = userName;
-            IP = ip;
+            USER = user;
             appsWindow = window;
             dashbord = window2;
 
-            foreach (var app in apps)
+            foreach (var app in USER.apps)
             {
                 CheckBox test = new CheckBox();
                 test.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -49,7 +48,28 @@ namespace Dashboard
                 test.UseVisualStyleBackColor = true;
                 test.UseVisualStyleBackColor = true;
                 test.Click += new System.EventHandler(test_click);
+                getImg msg2 = new getImg()
+                {
+                    appName = app
+                };
 
+                httpClient testLogin = new httpClient();
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+
+                if (result1 != null)
+                {
+                    //Console.WriteLine(result1);
+                    string[] results1 = result1.Split('&');
+                    if (results1[0] == "233")
+                    {
+                        var user1 = JsonConvert.DeserializeObject<img>(results1[1]);
+                        var data = Encoding.ASCII.GetString(user1.data, 0, user1.data.Length);
+                        byte[] bitmapData = Convert.FromBase64String(data.Substring(0, data.Length));
+                        Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
+                        Bitmap bitmap = new Bitmap(img, new Size(48, 48));
+                        test.Image = bitmap;
+                    }
+                }
                 flowLayoutPanel1.Controls.Add(test);
             }
         }
@@ -72,6 +92,13 @@ namespace Dashboard
             this.Hide();
         }
 
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             bool good = true;
@@ -81,12 +108,12 @@ namespace Dashboard
                 {
                     deleteAppFromUser msg = new deleteAppFromUser()
                     {
-                        userName = userName,
+                        userName = USER.userName,
                         appName = ((CheckBox)newApp).Text
                     };
                     string json = JsonConvert.SerializeObject(msg);
                     httpClient testLogin = new httpClient();
-                    string result = testLogin.sent(json, IP, "107");
+                    string result = testLogin.sent(json, USER.ipServer, "107");
                     if (result != null)
                     {
                         string[] results = result.Split('&');
@@ -104,7 +131,7 @@ namespace Dashboard
                 MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 appsWindow.Close();
-                frmApps apps = new frmApps(IP, userName, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                frmApps apps = new frmApps(USER, dashbord) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                 apps.FormBorderStyle = FormBorderStyle.None;
                 dashbord.pnlFormLoader.Controls.Add(apps);
                 apps.Show();

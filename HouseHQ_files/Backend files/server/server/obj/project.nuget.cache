@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "0lentTPtvfRQH5zf2RA0or3L0lMOHdibXCgKLWtqjShfxu/U3UxPFs620d1Z7i6jqAQP2VvFBVeQglOgyGjntw==",
+  "dgSpecHash": "eBImlzdOqEKdj6PrcS3M/iSrmy8eM2Zs10fRTsPBezlNKsBH8OXWup38aZaPnB0sU6ibGY+w9XPDaiAtknorKw==",
   "success": true,
   "projectFilePath": "C:\\Users\\shay5\\Documents\\househq\\HouseHQ_files\\Backend files\\server\\server\\server.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\shay5\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\shay5\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
   ],
   "logs": []
 }

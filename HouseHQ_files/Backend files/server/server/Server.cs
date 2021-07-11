@@ -7,6 +7,8 @@ using System.Threading;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using System.Drawing;
+using System.IO;
 
 namespace server
 {
@@ -16,7 +18,8 @@ namespace server
         public Server(int port)
         {
             //IPAddress localAddr = IPAddress.Parse(ip);
-            IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
+            //IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
+            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
             IPAddress ipAddr = ipHost.AddressList[0];
             server = new TcpListener(ipAddr, port);
             server.Start();
@@ -41,6 +44,28 @@ namespace server
                 server.Stop();
             }
         }
+
+        public byte[] sentImg()
+        {
+            //Use graphics to send the image not the file!
+            // Send the data through the socket.    
+            Image img = Image.FromFile(@"D:\HHQ.jpg");
+
+            using (MemoryStream m = new MemoryStream())
+            {
+                img.Save(m, img.RawFormat);
+                byte[] imageBytes = m.ToArray();
+
+                // Convert byte[] to Base64 String
+                string base64String = Convert.ToBase64String(imageBytes);
+                byte[] base64Bytes = Encoding.ASCII.GetBytes(base64String);
+                //Console.WriteLine(base64String);
+                //Console.WriteLine("<EOF>");
+                return base64Bytes;
+
+            }
+        }
+
         public void HandleDeivce(Object obj)
         {
             TcpClient client = (TcpClient)obj;
@@ -59,16 +84,12 @@ namespace server
                     var user = System.Text.Json.JsonSerializer.Deserialize<login>(data);
                     Console.WriteLine(user.name);
 
-                    ok test = new ok()
+                    var imgg = sentImg();
+
+                    img test = new img()
                     {
-                        code = 200,
-                        name = user.name,
-                        appList = new List<string>()
-                        { 
-                            "app1",
-                            "app2",
-                            "app3"
-                        }
+                        data = imgg,
+                         nameFile = @"D:\HHQ.jpg"
                     };
 
                     string str = JsonConvert.SerializeObject(test);
@@ -105,5 +126,11 @@ namespace server
         public string key { get; set; }
 
         public string img { get; set; }
+    }
+
+    class img
+    {
+        public string nameFile { get; set; }
+        public byte[] data { get; set; }
     }
 }

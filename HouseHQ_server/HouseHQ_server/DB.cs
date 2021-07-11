@@ -343,16 +343,19 @@ namespace dataBase
          */
         public void insertVluesToLOGS(SQLiteConnection con, string json, string type)
         {
+            hash hash = new hash();
             DateTime aDate = DateTime.Now;
             string[] jsons = json.Split('&');
 
-            if (jsons[0] == "215")
+            string code = hash.getCodeHash(jsons[0]);
+
+            if (code == "215")
             {
                 jsons[1] = "sent logs";
             }
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
-                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + jsons[0] + "', '" + type + "', '" + jsons[1] + "')";
+                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + code + "', '" + type + "', '" + jsons[1] + "')";
                 cmd.ExecuteNonQuery();
             }
         }

@@ -47,5 +47,28 @@ namespace HouseHQ_server
             }
             return "";
         }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getCodeHash(string hashCode)
+        {
+            Codes code = new Codes();
+
+            Dictionary<string, string>.KeyCollection keys = code.codes().Keys;
+
+            foreach (string key in keys)
+            {
+                if (hashCode == ComputeSha256Hash(key))
+                {
+                    return key;
+                }
+            }
+            return "";
+        }
     }
 }

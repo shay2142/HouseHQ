@@ -114,4 +114,21 @@ namespace jsonSerializer
     { 
         public List<string> users { get; set; }
     }
+
+    class okRunApp
+    {
+        public string ip { get; set; }
+        public string port { get; set; }
+        public string app { get; set; }
+    }
+
+    class msg
+    {
+        public string message { get; set; }
+    }
+
+    class img
+    {
+        public byte[] data { get; set; }
+    }
 }
