@@ -29,6 +29,11 @@ namespace HouseHQ_server
                 {
                     Http.db.insertVluesToAPP(Http.con, Path.GetFileNameWithoutExtension(app), Path.GetFileNameWithoutExtension(app));
                 }
+
+                if (!File.Exists(@".\appImg\" + Path.GetFileNameWithoutExtension(app) + ".png"))
+                {
+                    sentImage.getIconFromExe(getPathOfApp(Path.GetFileNameWithoutExtension(app)), Path.GetFileNameWithoutExtension(app));
+                }
             }
 
             foreach (string app in Http.db.getAllApplications(Http.con))
@@ -38,6 +43,29 @@ namespace HouseHQ_server
                     Http.db.deleteApps(Http.con, app);
                 }
             }
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getPathOfApp(string appName)
+        {
+            string registry_key = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + appName + "\\";
+            using (Microsoft.Win32.RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
+            {
+                foreach (string value_name in key.GetValueNames())
+                {
+                    if (value_name == "Path")
+                    {
+                        return key.GetValue(value_name).ToString();
+                    }
+                }
+            }
+            return "";
         }
 
         /*

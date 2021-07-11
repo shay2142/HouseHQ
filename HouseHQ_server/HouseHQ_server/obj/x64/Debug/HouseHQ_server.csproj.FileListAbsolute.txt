@@ -153,3 +153,4 @@ D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csprojAsse
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NATUPNPLib.dll
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.ResolveComReference.cache
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NetFwTypeLib.dll
+C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Drawing.Common.dll

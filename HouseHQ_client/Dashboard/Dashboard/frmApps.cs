@@ -65,6 +65,28 @@ namespace Dashboard
                 test.Name = app;
                 test.Size = new System.Drawing.Size(101, 91);
                 test.Text = app;
+                //test.Image = Image.FromFile(@"C:\Users\shay5\Documents\househq\HouseHQ_files\porntend HHQ\login_and_Register_System (2)\login and Register System\login and Register System\img\icons8-visual-studio-2019-48.png");
+                getImg msg2 = new getImg()
+                {
+                    appName = app
+                };
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+
+                if (result1 != null)
+                {
+                    //Console.WriteLine(result1);
+                    string[] results1 = result1.Split('&');
+                    if (results1[0] == "233")
+                    {
+                        var user = JsonConvert.DeserializeObject<img>(results1[1]);
+                        var data = Encoding.ASCII.GetString(user.data, 0, user.data.Length);
+                        byte[] bitmapData = Convert.FromBase64String(data.Substring(0, data.Length));
+                        Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
+                        Bitmap bitmap = new Bitmap(img, new Size(48, 48));
+                        test.Image = bitmap;
+                    }
+                }
+                
                 test.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
                 test.UseVisualStyleBackColor = true;
                 test.UseVisualStyleBackColor = true;
@@ -152,6 +174,13 @@ namespace Dashboard
         private void button2_Click(object sender, EventArgs e)
         {
             new FrmDeleteApps(USER, this, dashbord).Show();
+        }
+
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
     }
 }

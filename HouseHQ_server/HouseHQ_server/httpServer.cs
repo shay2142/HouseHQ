@@ -282,6 +282,9 @@ namespace HouseHQ_server
                                     case "132":
                                         msg = changeUserWin(json[1]);
                                         break;
+                                    case "133"://sent icon - test
+                                        msg = sentImg(json[1]);
+                                        break;
                                     default://400 error
                                         msg = error("code is incorrect");
                                         break;
@@ -967,6 +970,24 @@ namespace HouseHQ_server
             else
             {
                 return error(ans);
+            }
+        }
+
+        public string sentImg(string json)
+        {
+            var user = JsonConvert.DeserializeObject<getImg>(json);
+            try
+            {
+                img msg = new img()
+                {
+                    data = sentImage.sentImg(user.appName)
+                };
+
+                return "233&" + JsonConvert.SerializeObject(msg);
+            }
+            catch
+            {
+                return error("ERORR");
             }
         }
 

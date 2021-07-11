@@ -170,4 +170,14 @@ namespace Dashboard
     {
         public string message { get; set; }
     }
+
+    class img
+    {
+        public byte[] data { get; set; }
+    }
+
+    class getImg
+    {
+        public string appName { get; set; }
+    }
 }

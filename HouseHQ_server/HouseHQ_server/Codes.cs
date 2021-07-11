@@ -43,6 +43,7 @@ namespace HouseHQ_server
                 {"130", "run app"},
                 {"131", "create user on windows"},
                 {"132", "change user on windows"},
+                {"133", "sent image"},
                 {"400", "error"},
                 {"201", "ok login"},
                 {"202", "ok singup"},
@@ -75,6 +76,7 @@ namespace HouseHQ_server
                 {"230", "ok run app"},
                 {"231", "ok create user on windows"},
                 {"232", "ok change user on windows"},
+                {"233", "ok sent image"}
             };
         }
     }
