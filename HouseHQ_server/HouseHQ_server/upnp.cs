@@ -13,6 +13,7 @@ namespace HouseHQ_server
 {
     class upnp
     {
+        public string IP = GetLocalIPAddress();
         /*
 
 
@@ -22,7 +23,7 @@ namespace HouseHQ_server
          */
         public void createUpnp()
         {
-
+            
             UPnPNAT NatMgr = new UPnPNAT();
 
             if (NatMgr == null)
@@ -40,7 +41,7 @@ namespace HouseHQ_server
 
             foreach (IStaticPortMapping pm in mappings)
             {
-                if (pm.InternalClient == GetLocalIPAddress() && pm.Description == "HHQ")
+                if (pm.InternalClient == IP && pm.Description == "HHQ")
                 {
                     mappings.Remove(pm.ExternalPort, pm.Protocol);
                 }
@@ -60,7 +61,7 @@ namespace HouseHQ_server
             Random rnd = new Random();
             try
             {
-                mappings.Add(rnd.Next(1000, 65535), "TCP", 3389, GetLocalIPAddress(), true, "HHQ");
+                mappings.Add(rnd.Next(1000, 65535), "TCP", 3389, IP, true, "HHQ");
             }
             catch
             {
@@ -81,7 +82,7 @@ namespace HouseHQ_server
             IStaticPortMappingCollection mappings = NatMgr.StaticPortMappingCollection;
             foreach (IStaticPortMapping pm in mappings)
             {
-                if (pm.InternalClient == GetLocalIPAddress() && pm.Description == "HHQ")
+                if (pm.InternalClient == IP && pm.Description == "HHQ")
                 {
                     return pm.ExternalPort;
                 }
