@@ -154,3 +154,7 @@ C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Int
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.ResolveComReference.cache
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NetFwTypeLib.dll
 C:\Users\shay5\Documents\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Drawing.Common.dll
+D:\househq\HouseHQ_server\HouseHQ_server\bin\x64\Debug\System.Drawing.Common.dll
+D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NATUPNPLib.dll
+D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\Interop.NetFwTypeLib.dll
+D:\househq\HouseHQ_server\HouseHQ_server\obj\x64\Debug\HouseHQ_server.csproj.ResolveComReference.cache
