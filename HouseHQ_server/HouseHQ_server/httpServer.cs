@@ -96,6 +96,10 @@ namespace HouseHQ_server
             listener.Start();
             Console.WriteLine("Listening for connections on {0}", url);
 
+            //remoteApp_Management remote = new remoteApp_Management();
+            //var threadRemoteApp = new System.Threading.Thread(remote.remoteAppRunning(this));
+            //threadRemoteApp.Start();
+
             // Handle requests
             Task listenTask = HandleIncomingConnections();
             listenTask.GetAwaiter().GetResult();
@@ -327,24 +331,32 @@ namespace HouseHQ_server
         public string login(string json)
         {
             var user = JsonConvert.DeserializeObject<login>(json);
-            if (db.userNameIsExists(con, user.name) && db.passwordIsCorrect(con, user.name, user.password))
+            string userName = hash.getUserNameHash(this, user.name);
+            try
             {
-                okLogin test = new okLogin()
+                if (db.userNameIsExists(con, userName) && db.passwordIsCorrect(con, userName, user.password))
                 {
-                    name = user.name,
-                    mail = db.getMailForUser(con, user.name),
-                    appList = db.getUserApplications(con, user.name),
-                    key = db.getLevelKey(con, user.name)
-                };
-                db.updateStatus(con, user.name, "online");//update status to online
+                    okLogin test = new okLogin()
+                    {
+                        name = userName,
+                        mail = db.getMailForUser(con, userName),
+                        appList = db.getUserApplications(con, userName),
+                        key = db.getLevelKey(con, userName)
+                    };
+                    db.updateStatus(con, userName, "online");//update status to online
 
-                bot.sentMsgForWhatsApp("217854", "+972503234654", user.name + " login!");//WhatsApp Bot
+                    bot.sentMsgForWhatsApp("217854", "+972503234654", userName + " login!");//WhatsApp Bot
 
-                return "201&" + JsonConvert.SerializeObject(test);
+                    return "201&" + JsonConvert.SerializeObject(test);
+                }
+                else
+                {
+                    return error("Username or password incorrect");
+                }
             }
-            else
+            catch
             {
-                return error("Username or password incorrect");
+                return error("Input is incorrect");
             }
         }
 
@@ -362,23 +374,29 @@ namespace HouseHQ_server
         {
             var user = JsonConvert.DeserializeObject<singup>(json);
             //DB
-            if (!db.userNameIsExists(con, user.name))
+            try
             {
-                db.insertVluesToUsers(con, user.name, user.password, user.mail);
-
-                if (user.key == "admin")
+                if (!db.userNameIsExists(con, user.name))
                 {
-                    db.updateUser(con, user.name, user.password, null, null, user.key);
+                    db.insertVluesToUsers(con, user.name, user.password, user.mail);
+
+                    if (user.key == "admin")
+                    {
+                        db.updateUser(con, user.name, user.password, null, null, user.key);
+                    }
+                    db.updateStatus(con, user.name, "offline");
+
+                    return "202&";
                 }
-                db.updateStatus(con, user.name, "offline");
-
-                return "202&";
+                else
+                {
+                    return error("username is exist");
+                }
             }
-            else
+            catch
             {
-                return error("username is exist");
+                return error("Input is incorrect");
             }
-
         }
 
         /*
@@ -882,7 +900,8 @@ namespace HouseHQ_server
         public string runApp(string json)
         {
             upnp upnp = new upnp();
-           
+            createUser create = new createUser();
+
             var user = JsonConvert.DeserializeObject<runApp>(json);
 
             if (db.userNameIsExists(con, user.userName) && db.passwordIsCorrect(con, user.userName, user.password))
@@ -895,6 +914,8 @@ namespace HouseHQ_server
                         port = upnp.getRdpPort().ToString(),
                         app = user.app
                     };
+
+                    create.EnableADUserUsingUserPrincipal(user.userName);
 
                     bot.sentMsgForWhatsApp("217854", "+972503234654", user.userName + " run " + user.app + " now");//WhatsApp Bot
 
@@ -973,6 +994,13 @@ namespace HouseHQ_server
             }
         }
 
+        /*
+
+
+         input: 
+
+         output:
+         */
         public string sentImg(string json)
         {
             var user = JsonConvert.DeserializeObject<getImg>(json);

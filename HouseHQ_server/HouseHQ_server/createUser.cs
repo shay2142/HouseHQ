@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,7 @@ namespace HouseHQ_server
                 grp = AD.Children.Find("Remote Desktop Users", "group");
                 if (grp != null) 
                 {
+                    grp.Invoke("Add", new object[] { NewUser.Path.ToString() }); 
                     grp.Invoke("Add", new object[] { NewUser.Path.ToString() }); 
                 }
 
@@ -68,6 +70,63 @@ namespace HouseHQ_server
             }
         }
 
+        //disable - אל תאפשר
+        public void DiableADUserUsingUserPrincipal(string username)
+        {
+            try
+            {
+                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain);
+                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity
+                        (principalContext, username);
+                userPrincipal.Enabled = false;
+                userPrincipal.Save();
+
+                //MessageBox.Show("AD Account disabled for {0}", username);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        //enable - אפשר
+        public void EnableADUserUsingUserPrincipal(string username)
+        {
+            try
+            {
+                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain);
+                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity
+                (principalContext, username);
+                userPrincipal.Enabled = true;
+                userPrincipal.Save();
+
+                //return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            //return false;
+        }
+
+        public void deleteUser(string username)
+        {
+            try
+            {
+                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain);
+                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity
+                (principalContext, username);
+                userPrincipal.Delete();
+                //return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            //return false;
+        }
         /*
 
 

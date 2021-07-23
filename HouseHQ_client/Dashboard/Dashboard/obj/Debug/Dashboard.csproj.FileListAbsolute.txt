@@ -115,4 +115,4 @@ C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Da
 C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CopyComplete
 C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.exe
 C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.pdb
-C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.csprojAssemblyReference.cache
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.AssemblyReference.cache
