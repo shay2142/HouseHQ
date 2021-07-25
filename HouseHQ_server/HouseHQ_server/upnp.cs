@@ -18,6 +18,7 @@ namespace HouseHQ_server
 
 
          input: 
+         
 
          output:
          */
@@ -38,6 +39,7 @@ namespace HouseHQ_server
                 Console.WriteLine("No mappings found. Do you have a uPnP enabled router as your gateway ? ");
                 return;
             }
+
 
             foreach (IStaticPortMapping pm in mappings)
             {
