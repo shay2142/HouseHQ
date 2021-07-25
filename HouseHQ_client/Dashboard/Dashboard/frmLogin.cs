@@ -47,7 +47,7 @@ namespace Dashboard
 
             login test = new login()
             {
-                name = txtUsername.Text,
+                name = hashPass.ComputeSha256Hash(txtUsername.Text),
                 password = hashPass.ComputeSha256Hash(txtpassword.Text)
             };
             string json = JsonConvert.SerializeObject(test);
@@ -61,7 +61,7 @@ namespace Dashboard
                     var user = JsonConvert.DeserializeObject<okLogin>(results[1]);
 
                     userPram.ipServer = ip;
-                    userPram.userName = test.name;
+                    userPram.userName = user.name;
                     userPram.password = txtpassword.Text;
                     userPram.mail = user.mail;
                     userPram.key = user.key;

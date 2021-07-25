@@ -1,23 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Cassia;
+using dataBase;
+using System.Threading;
 
 namespace HouseHQ_server
 {
     class remoteApp_Management
     {
+        public DB db = new DB();
 
+        //לא עובד צריך לבדוק
+        public ThreadStart remoteAppRunning(httpServer http)
+        {
+            createUser create = new createUser();
+            List<int> listSessionId = new List<int>();
+            while (true)
+            {
+                foreach (var user in getUser())
+                {
+                    //remote.disconnectInactiveUsers();
+                    //if this user in DB
+                    //Console.WriteLine(user);
+                    //remote.sentMsg(remote.getSessionId(user), "test");
+                    int sessionId = getSessionId(user, listSessionId);
+                    if (user != "" && !userIsConnect(sessionId) && http.db.userNameIsExists(http.con, user))
+                    {
+                        logOff(sessionId);
+                        //Console.WriteLine("logoff - " + user);
+                    }
+                    else if (user != "" && userIsConnect(sessionId) && http.db.getLevelKey(http.con, user) != "admin")
+                    {
+                        create.DiableADUserUsingUserPrincipal(user);
+                    }
+                }
+                System.Threading.Thread.Sleep(60000);//דקה
+            }
+
+        }
         /*
 
 
-         input: 
+        input: 
 
-         output:
-         */
-        public void killProcess(List<string> namePc, List<string> processToKill)
+        output:
+        */
+        public void killProcess(List<string> usersName, List<string> processToKill)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
             using (ITerminalServer server = manager.GetLocalServer())
@@ -27,7 +56,7 @@ namespace HouseHQ_server
                 {
                     foreach (ITerminalServicesSession session in server.GetSessions())
                     {
-                        if (namePc.Contains(session.ClientName))
+                        if (usersName.Contains(session.UserName))
                         {
                             foreach (var proc in session.GetProcesses())
                             {
@@ -39,12 +68,13 @@ namespace HouseHQ_server
                                     }
                                     catch
                                     {
-                                        killProcess(namePc, processToKill);
+                                        killProcess(usersName, processToKill);
                                     }
                                 }
                             }
                         }
                     }
+                    //System.Threading.Thread.Sleep(10);
                     System.Threading.Thread.Sleep(1000);
                 }
             }
@@ -57,7 +87,7 @@ namespace HouseHQ_server
 
          output:
          */
-        public int getSessionId(string namePc)
+        public int getSessionId(string userName, List<int> listSessionId)
         {
             ITerminalServicesManager manager = new TerminalServicesManager();
             using (ITerminalServer server = manager.GetLocalServer())
@@ -65,13 +95,79 @@ namespace HouseHQ_server
                 server.Open();
                 foreach (ITerminalServicesSession session in server.GetSessions())
                 {
-                    if (session.ClientName == namePc && session.ClientName.ToString() != "")
+                    if (session.UserName == userName && session.UserName.ToString() != "" && !listSessionId.Contains(session.SessionId))
+                    {
+                        listSessionId.Add(session.SessionId);
+                        return session.SessionId;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        public int getSessionId(string userName)
+        {
+            ITerminalServicesManager manager = new TerminalServicesManager();
+            using (ITerminalServer server = manager.GetLocalServer())
+            {
+                server.Open();
+                foreach (ITerminalServicesSession session in server.GetSessions())
+                {
+                    if (session.UserName == userName && session.UserName.ToString() != "")
                     {
                         return session.SessionId;
                     }
                 }
             }
-            return 0;
+            return -1;
+        }
+
+        public List<string> getUser()
+        {
+            List<string> ans = new List<string>();
+
+            ITerminalServicesManager manager = new TerminalServicesManager();
+            using (ITerminalServer server = manager.GetLocalServer())
+            {
+                server.Open();
+                foreach (ITerminalServicesSession session in server.GetSessions())
+                {
+                    ans.Add(session.UserName);
+                    Console.WriteLine(session.UserName + " - " + session.ConnectionState);
+                }
+            }
+            return ans;
+        }
+
+        /*
+
+
+        input: 
+
+        output:
+        */
+        public bool userIsConnect(int sessionId)
+        {
+            ITerminalServicesManager manager = new TerminalServicesManager();
+            using (ITerminalServer server = manager.GetLocalServer())
+            {
+                server.Open();
+                try
+                {
+                    if (server.GetSession(sessionId).ConnectionState.ToString() == "Active")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
 
         /*
@@ -92,7 +188,7 @@ namespace HouseHQ_server
                     server.GetSession(sessionId).MessageBox(msg);
                 }
                 catch
-                { 
+                {
                 }
             }
         }
@@ -115,43 +211,11 @@ namespace HouseHQ_server
                     server.GetSession(sessionId).Logoff();
                 }
                 catch
-                { 
+                {
+
                 }
             }
         }
-
-
-        /*
-
-
-         input: 
-
-         output:
-         */
-        public bool theUserIsConnect(int sessionId)
-        {
-            ITerminalServicesManager manager = new TerminalServicesManager();
-            using (ITerminalServer server = manager.GetLocalServer())
-            {
-                server.Open();
-                try
-                {
-                    if (server.GetSession(sessionId).ToString() != "")
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-
 
         /*
 
@@ -174,8 +238,8 @@ namespace HouseHQ_server
                 {
                     return "";
                 }
-                
-            }  
+
+            }
         }
 
         /*
@@ -233,24 +297,32 @@ namespace HouseHQ_server
 
          output:
          */
-        public void disconnectInactiveUsers()
-        {
-            string time;
-            foreach (var user in getAllClientName())
-            {
-                time = getLastInputTime(getSessionId(user));
-                if (time != "")
-                {
-                    if (userIsOff(DateTime.ParseExact(time, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)))
-                    {
-                        sentMsg(getSessionId(user), "Inactivity you are disconnected");
-                        System.Threading.Thread.Sleep(50);
-                        logOff(getSessionId(user));
-                    }
-                }
-            }
-
-        }
+        //public void disconnectInactiveUsers()
+        //{
+        //    string time;
+        //    int sessionId;
+        //    foreach (var user in getUser())
+        //    {
+        //        try
+        //        {
+        //            sessionId = getSessionId(user);
+        //            time = getLastInputTime(sessionId);
+        //            if (time != "")
+        //            {
+        //                if (userIsOff(DateTime.ParseExact(time, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)))
+        //                {
+        //                    sentMsg(sessionId, "Inactivity you are disconnected");
+        //                    System.Threading.Thread.Sleep(50);
+        //                    logOff(sessionId);
+        //                }
+        //            }
+        //        }
+        //        catch
+        //        { 
+        //        }
+                
+        //    }
+        //}
 
         /*
 
