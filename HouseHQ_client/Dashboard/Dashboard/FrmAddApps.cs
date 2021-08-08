@@ -22,6 +22,7 @@ namespace Dashboard
         public frmApps appsWindow { get; set; }
         public Form1 dashbord { get; set; }
         public loginParameters USER = new loginParameters();
+        public hash Hash = new hash();
 
         public FrmAddApps(loginParameters users, frmApps window, Form1 window2)
         {
@@ -32,7 +33,7 @@ namespace Dashboard
             dashbord = window2;
 
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, USER.ipServer, "105");
+            string result = testLogin.sent(null, USER.ipServer, "105", USER.userName, Hash.ComputeSha256Hash(USER.password));
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -40,6 +41,12 @@ namespace Dashboard
                 {
                     var user = JsonConvert.DeserializeObject<getAllApps>(results[1]);
                     apps = user.allAppList;
+                }
+                else if (results[0] == "404")
+                {
+                    new frmLogin().Show();
+                    USER.dash.Hide();
+                    this.Hide();
                 }
             } 
             foreach (var app in apps)
@@ -66,7 +73,7 @@ namespace Dashboard
                 {
                     appName = app
                 };
-                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133", USER.userName, Hash.ComputeSha256Hash(USER.password));
 
                 if (result1 != null)
                 {
@@ -80,6 +87,12 @@ namespace Dashboard
                         Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
                         Bitmap bitmap = new Bitmap(img, new Size(48, 48));
                         test.Image = bitmap;
+                    }
+                    else if (results1[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
 
@@ -133,7 +146,7 @@ namespace Dashboard
                     };
                     string json = JsonConvert.SerializeObject(msg);
                     httpClient testLogin = new httpClient();
-                    string result = testLogin.sent(json, USER.ipServer, "108");
+                    string result = testLogin.sent(json, USER.ipServer, "108", USER.userName, Hash.ComputeSha256Hash(USER.password));
                     if (result != null)
                     {
                         string[] results = result.Split('&');
@@ -142,6 +155,12 @@ namespace Dashboard
                             good = false;
 
                             MessageBox.Show("Something went wrong Try again!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (results[0] == "404")
+                        {
+                            new frmLogin().Show();
+                            USER.dash.Hide();
+                            this.Hide();
                         }
                     }
                 }

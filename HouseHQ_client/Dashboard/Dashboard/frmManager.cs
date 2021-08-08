@@ -17,14 +17,13 @@ namespace Dashboard
 {
     public partial class frmManager : Form
     {
-        public string IP;
-        public string UserName;
+        public loginParameters USER = new loginParameters();
+        public hash hashPass = new hash();
 
-        public frmManager(string ip, string userName)
+        public frmManager(loginParameters user)
         {
             InitializeComponent();
-            IP = ip;
-            UserName = userName;
+            USER = user;
             GetDB();
         }
 
@@ -32,7 +31,7 @@ namespace Dashboard
         {
             var list = new List<getDB>();
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, IP, "113");
+            string result = testLogin.sent(null, USER.ipServer, "113", USER.userName, hashPass.ComputeSha256Hash(USER.password));
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -41,23 +40,29 @@ namespace Dashboard
                     var user = JsonConvert.DeserializeObject<jsonSentDB>(results[1]);
                     list = user.db;
                 }
+                else if (results[0] == "404")
+                {
+                    new frmLogin().Show();
+                    USER.dash.Hide();
+                    this.Hide();
+                }
             }
             dataGridView1.DataSource = list;
         }
         private void btnAddU_Click(object sender, EventArgs e)
         {
-            frmRegister form = new frmRegister(IP, this);
+            frmRegister form = new frmRegister(USER, this);
             form.Show();
         }
 
         private void btnChangeDet_Click(object sender, EventArgs e)
         {
-            new frmChangeAccount(IP, "", "admin", "manager").Show();
+            new frmChangeAccount(USER, "manager").Show();
         }
 
         private void btnRemU_Click(object sender, EventArgs e)
         {
-            frmDeleteUser form = new frmDeleteUser(IP, UserName, this);
+            frmDeleteUser form = new frmDeleteUser(USER, this);
             form.Show();
         }
     }

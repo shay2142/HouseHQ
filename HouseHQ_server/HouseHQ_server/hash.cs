@@ -48,6 +48,20 @@ namespace HouseHQ_server
             return "";
         }
 
+        public string getUserNamePassHash(httpServer Http, string hashUser)
+        {
+            List<string> userName = Http.db.getAllUsers(Http.con);
+            
+            foreach (string user in userName)
+            {
+                if (hashUser == ComputeSha256Hash(user + Http.db.getPassForUser(Http.con, user)))
+                {
+                    return user;
+                }
+            }
+            return "";
+        }
+
         /*
 
 

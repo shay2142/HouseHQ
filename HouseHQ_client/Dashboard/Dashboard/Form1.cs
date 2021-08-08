@@ -33,11 +33,14 @@ namespace Dashboard
 
          );
         public loginParameters USER  = new loginParameters();
+        public hash Hash = new hash();
+
         public Form1(loginParameters user)
         {
             InitializeComponent();
 
             USER = user;
+            USER.dash = this;
             label1.Text = USER.userName;
 
 
@@ -83,7 +86,7 @@ namespace Dashboard
 
             lbltitle.Text = "Manager";
             this.pnlFormLoader.Controls.Clear();
-            frmManager frmAnalytics_vrb = new frmManager(USER.ipServer, USER.userName) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmManager frmAnalytics_vrb = new frmManager(USER) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmAnalytics_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmAnalytics_vrb);
             frmAnalytics_vrb.Show();
@@ -112,7 +115,7 @@ namespace Dashboard
             pnlNav.BackColor = Color.FromArgb(0, 126, 249);
 
             this.pnlFormLoader.Controls.Clear();
-            frmSettings frmSettings_vrb = new frmSettings(USER.ipServer, USER.userName, USER.key) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmSettings frmSettings_vrb = new frmSettings(USER) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmSettings_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmSettings_vrb);
             frmSettings_vrb.Show();
@@ -167,13 +170,17 @@ namespace Dashboard
 
         private void label2_Click(object sender, EventArgs e)
         {
+            string ans = "";
             File.Delete(@"C:\Users\Public\reamoteapp.rdp");
+            ans = logout();
+
             new frmLogin().Show();
-            logout();
             this.Hide();
+            
+
         }
 
-        public void logout()
+        public string logout()
         {
             logoutUser test = new logoutUser()
             {
@@ -181,7 +188,8 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(test);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, USER.ipServer, "109");
+            string result = testLogin.sent(json, USER.ipServer, "109", USER.userName, Hash.ComputeSha256Hash(USER.password));
+            return result;
         }
     }
 }

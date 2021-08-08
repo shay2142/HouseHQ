@@ -18,6 +18,7 @@ namespace Dashboard
     public partial class FrmDeleteApps : Form
     {
         public loginParameters USER = new loginParameters();
+        public hash Hash = new hash();
 
         public frmApps appsWindow { get; set; }
         public Form1 dashbord { get; set; }
@@ -54,7 +55,7 @@ namespace Dashboard
                 };
 
                 httpClient testLogin = new httpClient();
-                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133",USER.userName, Hash.ComputeSha256Hash(USER.password));
 
                 if (result1 != null)
                 {
@@ -68,6 +69,12 @@ namespace Dashboard
                         Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
                         Bitmap bitmap = new Bitmap(img, new Size(48, 48));
                         test.Image = bitmap;
+                    }
+                    else if (results1[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
                 flowLayoutPanel1.Controls.Add(test);
@@ -113,7 +120,7 @@ namespace Dashboard
                     };
                     string json = JsonConvert.SerializeObject(msg);
                     httpClient testLogin = new httpClient();
-                    string result = testLogin.sent(json, USER.ipServer, "107");
+                    string result = testLogin.sent(json, USER.ipServer, "107", USER.userName, Hash.ComputeSha256Hash(USER.password));
                     if (result != null)
                     {
                         string[] results = result.Split('&');
@@ -122,6 +129,12 @@ namespace Dashboard
                             good = false;
 
                             MessageBox.Show("Something went wrong Try again!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (results[0] == "404")
+                        {
+                            new frmLogin().Show();
+                            USER.dash.Hide();
+                            this.Hide();
                         }
                     }
                 }

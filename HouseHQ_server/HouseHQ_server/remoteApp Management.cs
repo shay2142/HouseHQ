@@ -11,30 +11,41 @@ namespace HouseHQ_server
     {
         public DB db = new DB();
 
-        //לא עובד צריך לבדוק
-        public ThreadStart remoteAppRunning(httpServer http)
+        public void remoteAppRunning(httpServer http)
         {
             createUser create = new createUser();
-            List<int> listSessionId = new List<int>();
             while (true)
             {
-                foreach (var user in getUser())
+                ITerminalServicesManager manager = new TerminalServicesManager();
+                using (ITerminalServer server = manager.GetLocalServer())//Issues a disconnected user
                 {
-                    //remote.disconnectInactiveUsers();
-                    //if this user in DB
-                    //Console.WriteLine(user);
-                    //remote.sentMsg(remote.getSessionId(user), "test");
-                    int sessionId = getSessionId(user, listSessionId);
-                    if (user != "" && !userIsConnect(sessionId) && http.db.userNameIsExists(http.con, user))
+                    server.Open();
+                    foreach (ITerminalServicesSession session in server.GetSessions())
                     {
-                        logOff(sessionId);
-                        //Console.WriteLine("logoff - " + user);
-                    }
-                    else if (user != "" && userIsConnect(sessionId) && http.db.getLevelKey(http.con, user) != "admin")
-                    {
-                        create.DiableADUserUsingUserPrincipal(user);
+                        if (session.ConnectionState.ToString() == "Disconnected" && session.UserName != "" && create.userIsRDP(session.UserName))
+                        {
+                            create.DiableADUserUsingUserPrincipal(session.UserName);
+                            session.Logoff();
+                        }
                     }
                 }
+
+                //אולי לעשות את זה יותר יעיל
+                foreach (var user in http.db.getAllUsers(http.con))
+                {
+                    if (http.db.getStatusForUser(http.con, user) == "online")
+                    {
+                        var userLogs = db.getLogsPerUser(http.con, user);
+                        DateTime dateNow = DateTime.Now;
+                        var isOnline = dateNow - DateTime.ParseExact(userLogs[userLogs.Count - 1].dateLogs, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                        if (isOnline.Minutes > 30 || isOnline.Hours > 0 || isOnline.Days > 0)//Disconnects an inactive user for 30 minutes
+                        {
+                            db.updateStatus(http.con, user, "offline");
+                        }
+                    }
+                }
+
                 System.Threading.Thread.Sleep(60000);//דקה
             }
 

@@ -18,7 +18,7 @@ namespace HTTP_CLIENT
         {
         }
 
-        public string sent(string json, string ip, string code)
+        public string sent(string json, string ip, string code, string userName, string password)
         {
             string result = "";
             string port = "8080";
@@ -32,8 +32,16 @@ namespace HTTP_CLIENT
             }
             try
             {
-                Task<string> task = Task.Run(async () => await msg(json, splitList[0], port, code));
-                result = task.Result;
+                Task<string> task = Task.Run(async () => await msg(json, splitList[0], port, code, userName, password));
+                try
+                {
+                    task.Wait();
+                    result = task.Result;
+                }
+                catch
+                {
+                    result = "404&{msg:\"Server not found can be written, IP is incorrect\"}";
+                }
             }
             catch (InvalidCastException e)
             {
@@ -42,11 +50,11 @@ namespace HTTP_CLIENT
             return result;
         }
 
-        public async Task<string> msg(string json, string ip, string port, string code)
+        public async Task<string> msg(string json, string ip, string port, string code, string userName, string password)
         {
             int len = (code + "&" + json).Length;
 
-            var data = new StringContent(StringCipher.Encrypt(code + "&" + json, hashPass.ComputeSha256Hash((code + "&" + json).Length.ToString())), Encoding.UTF8, "application/json|" + len);
+            var data = new StringContent(StringCipher.Encrypt(code + "&" + json + "&" + hashPass.ComputeSha256Hash(userName + password), hashPass.ComputeSha256Hash((code + "&" + json).Length.ToString())), Encoding.UTF8, "application/json|" + len);
 
             var url = "http://" + ip + ":" + port + "/";
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
@@ -80,6 +81,46 @@ namespace HouseHQ_server
                         (principalContext, username);
                 userPrincipal.Enabled = false;
                 userPrincipal.Save();
+
+                //MessageBox.Show("AD Account disabled for {0}", username);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+        public bool userIsRDP(string userName)
+        {
+            using (DirectoryEntry d = new DirectoryEntry("WinNT://" + Environment.MachineName.ToString() + ",computer"))
+            {
+                using (DirectoryEntry g = d.Children.Find("Remote Desktop Users", "group"))
+                {
+                    object members = g.Invoke("Members", null);
+                    foreach (object member in (IEnumerable)members)
+                    {
+                        DirectoryEntry x = new DirectoryEntry(member);
+
+                        if (userName == x.Name)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void getGroup(string username = "S")
+        {
+            try
+            {
+                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain);
+                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity
+                        (principalContext, username);
+                //userPrincipal.Enabled = false;
+                Console.WriteLine(userPrincipal.GetAuthorizationGroups());
 
                 //MessageBox.Show("AD Account disabled for {0}", username);
             }

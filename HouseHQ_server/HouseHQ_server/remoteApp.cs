@@ -41,6 +41,12 @@ namespace HouseHQ_server
                 if (!appsInServer.Contains(app))
                 {
                     Http.db.deleteApps(Http.con, app);
+
+                    //צריך למחוק את כל התמונות שלא צריך מהתיקיה
+                    if (File.Exists(@".\appImg\" + Path.GetFileNameWithoutExtension(app) + ".png"))
+                    {
+                        File.Delete(@".\appImg\" + Path.GetFileNameWithoutExtension(app) + ".png");
+                    }
                 }
             }
         }

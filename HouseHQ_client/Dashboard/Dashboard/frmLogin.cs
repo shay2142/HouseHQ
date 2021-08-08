@@ -52,7 +52,7 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(test);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, ip, "101");
+            string result = testLogin.sent(json, ip, "101", txtUsername.Text, test.password);
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -71,11 +71,11 @@ namespace Dashboard
                     new Form1(userPram).Show();
                     this.Hide();
                 }
-                else if (results[0] == "400")
+                else if (results[0] == "400" || results[0] == "404")
                 {
                     var user = JsonConvert.DeserializeObject<error>(results[1]);
                     MessageBox.Show(user.msg, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                } 
             }
         }
 

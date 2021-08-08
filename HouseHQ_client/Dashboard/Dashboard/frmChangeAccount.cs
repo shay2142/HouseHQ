@@ -20,17 +20,18 @@ namespace Dashboard
     public partial class frmChangeAccount : Form
     {
         public hash hashPass = new hash();
+        public loginParameters USER = new loginParameters();
 
-        public string IP;
         public ComboBox comboUsers;
-        public string UserName;
         public string type;
+        public string UserName;
 
-        public frmChangeAccount(string ip, string userName, string key, string type)
+        public frmChangeAccount(loginParameters userPram, string type)
         {
             InitializeComponent();
-            IP = ip;
+            USER = userPram;
             this.type = type;
+            UserName = USER.userName;
 
             if (type == "user")
             {
@@ -38,22 +39,21 @@ namespace Dashboard
                 
                 checkbxAdmin.Enabled = false;
                 txtUsername.Enabled = false;
-                txtUsername.Text = userName;
+                txtUsername.Text = UserName;
 
-                if (key == "admin")
+                if (USER.key == "admin")
                 {
                     checkbxAdmin.Checked = true;
                 }
 
-                UserName = txtUsername.Text;
-                sendGetUserInformation(txtUsername.Text);
+                sendGetUserInformation(UserName);
             }
             else if (type == "manager")
             {
                 createComboText();
 
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(null, IP, "111");
+                string result = testLogin.sent(null, USER.ipServer, "111", USER.userName, hashPass.ComputeSha256Hash(USER.password));
                 if (result != null)
                 {
                     string[] results = result.Split('&');
@@ -65,6 +65,12 @@ namespace Dashboard
 
                             comboUsers.Items.Add(user);
                         }
+                    }
+                    else if (results[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
             }
@@ -78,7 +84,7 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, IP, "112");
+            string result = testLogin.sent(json, USER.ipServer, "112", USER.userName, hashPass.ComputeSha256Hash(USER.password));
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -98,6 +104,12 @@ namespace Dashboard
                     {
                         oldPass.Text = user.password;
                     }
+                }
+                else if (results[0] == "404")
+                {
+                    new frmLogin().Show();
+                    USER.dash.Hide();
+                    this.Hide();
                 }
             }
             UserName = userName;
@@ -161,7 +173,7 @@ namespace Dashboard
                 string json = JsonConvert.SerializeObject(test);
 
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, IP, "103");
+                string result = testLogin.sent(json, USER.ipServer, "103", USER.userName, hashPass.ComputeSha256Hash(USER.password));
                 if (result != null)
                 {
                     string[] results = result.Split('&');
@@ -174,7 +186,7 @@ namespace Dashboard
                             password = txtPassword.Text
                         };
                         string json2 = JsonConvert.SerializeObject(login);
-                        string result2 = testLogin.sent(json2, IP, "132");
+                        string result2 = testLogin.sent(json2, USER.ipServer, "132", USER.userName, hashPass.ComputeSha256Hash(USER.password));
                         if (result2 != null)
                         {
                             string[] results2 = result2.Split('&');
@@ -193,6 +205,12 @@ namespace Dashboard
                     {
                         var user = JsonConvert.DeserializeObject<error>(results[1]);
                         MessageBox.Show(user.msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (results[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
             }

@@ -32,7 +32,7 @@ namespace dataBase
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS APPS(appsID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, usersID INTEGER, appID INTEGER, FOREIGN KEY(usersID) REFERENCES USERS(usersID), FOREIGN KEY(appID) REFERENCES APP(appID));";
                 cmd.ExecuteNonQuery();
 
-                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LOGS(logID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, DATE_LOGS TEXT NOT NULL, CODE TEXT NOT NULL, TYPE TEXT NOT NULL, J_LOG TEXT NOT NULL);";
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LOGS(logID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, DATE_LOGS TEXT NOT NULL, CODE TEXT NOT NULL, TYPE TEXT NOT NULL, J_LOG TEXT NOT NULL, usersID INTEGER REFERENCES USERS (usersID) );";
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = @"CREATE TABLE IF NOT EXISTS LEVEL(levelID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name_level TEXT NOT NULL, admin BOOLEAN NOT NULL);";
@@ -341,13 +341,17 @@ namespace dataBase
 
          output:
          */
-        public void insertVluesToLOGS(SQLiteConnection con, string json, string type)
+        public void insertVluesToLOGS(SQLiteConnection con, string json, string type, string userName)
         {
             hash hash = new hash();
             DateTime aDate = DateTime.Now;
             string[] jsons = json.Split('&');
+            string code = jsons[0];
 
-            string code = hash.getCodeHash(jsons[0]);
+            if (type == "client->server")
+            {
+                code = hash.getCodeHash(jsons[0]);
+            }
 
             if (code == "215")
             {
@@ -355,7 +359,7 @@ namespace dataBase
             }
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
-                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + code + "', '" + type + "', '" + jsons[1] + "')";
+                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG, usersID) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + code + "', '" + type + "', '" + jsons[1] + "', '" + getIdForUser(con, userName) + "')";
                 cmd.ExecuteNonQuery();
             }
         }
@@ -1316,6 +1320,47 @@ namespace dataBase
             return list;
         }
 
+        public List<int> getUserLogsID(SQLiteConnection con, string userName)
+        {
+            List<int> logsList = new List<int>();
+            using (SQLiteCommand cmd = new SQLiteCommand("select logID from LOGS where usersID = (SELECT usersID from USERS WHERE USERNAME='" + userName + "');", con))
+            {
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    logsList.Add(rdr.GetInt32(0));
+                }
+            }
+            return logsList;
+        }
+
+        /*
+
+
+        input: 
+
+        output:
+        */
+        public List<sentLogs> getLogsPerUser(SQLiteConnection con, string userName)
+        {
+            var list = new List<sentLogs>();
+            List<int> logsID = getUserLogsID(con, userName);
+
+            foreach (int logID in logsID)
+            {
+                list.Add(new sentLogs()
+                {
+                    ID = logID,
+                    dateLogs = getDateForLog(con, logID),
+                    typeLog = getCodeForLog(con, logID),
+                    source = getSourceForLog(con, logID),
+                    log = getJ_LOGForLog(con, logID)
+                });
+            }
+            return list;
+        }
+
         /*
 
 
@@ -1362,9 +1407,6 @@ namespace dataBase
         {
             var list = new List<sentLevels>();
             List<int> levelsID = getAllLevelID(con);  
-
-
-
 
             foreach (int levelID in levelsID)
             {

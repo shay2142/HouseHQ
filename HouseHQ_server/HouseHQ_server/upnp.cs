@@ -78,16 +78,23 @@ namespace HouseHQ_server
          */
         public int getRdpPort()
         {
-            UPnPNAT NatMgr = new UPnPNAT();
-            IStaticPortMappingCollection mappings = NatMgr.StaticPortMappingCollection;
-            foreach (IStaticPortMapping pm in mappings)
+            try
             {
-                if (pm.InternalClient == IP && pm.Description == "HHQ")
+                UPnPNAT NatMgr = new UPnPNAT();
+                IStaticPortMappingCollection mappings = NatMgr.StaticPortMappingCollection;
+                foreach (IStaticPortMapping pm in mappings)
                 {
-                    return pm.ExternalPort;
+                    if (pm.InternalClient == IP && pm.Description == "HHQ")
+                    {
+                        return pm.ExternalPort;
+                    }
                 }
+                return 3389;
             }
-            return -1;
+            catch
+            {
+                return 3389;
+            }
         }
 
         /*
@@ -99,19 +106,27 @@ namespace HouseHQ_server
          */
         public string GetIPAddress()
         {
-            String address = "";
-            WebRequest request = WebRequest.Create("http://checkip.dyndns.org/");
-            using (WebResponse response = request.GetResponse())
-            using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+            try
             {
-                address = stream.ReadToEnd();
+                String address = "";
+                WebRequest request = WebRequest.Create("http://checkip.dyndns.org/");
+                using (WebResponse response = request.GetResponse())
+                using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+                {
+                    address = stream.ReadToEnd();
+                }
+
+                int first = address.IndexOf("Address: ") + 9;
+                int last = address.LastIndexOf("</body>");
+                address = address.Substring(first, last - first);
+
+                return address;
             }
-
-            int first = address.IndexOf("Address: ") + 9;
-            int last = address.LastIndexOf("</body>");
-            address = address.Substring(first, last - first);
-
-            return address;
+            catch
+            {
+                return GetLocalIPAddress();
+            }
+            
         }
 
         /*

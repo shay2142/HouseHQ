@@ -40,7 +40,7 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, USER.ipServer, "114");
+            string result = testLogin.sent(json, USER.ipServer, "114", USER.userName, hashPass.ComputeSha256Hash(USER.password));
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -48,6 +48,12 @@ namespace Dashboard
                 {
                     var user = JsonConvert.DeserializeObject<getAllApps>(results[1]);
                     USER.apps = user.allAppList;
+                }
+                else if (results[0] == "404")
+                {
+                    new frmLogin().Show();
+                    USER.dash.Hide();
+                    this.Hide();
                 }
             }
 
@@ -70,7 +76,7 @@ namespace Dashboard
                 {
                     appName = app
                 };
-                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133");
+                string result1 = testLogin.sent(JsonConvert.SerializeObject(msg2), USER.ipServer, "133", USER.userName, hashPass.ComputeSha256Hash(USER.password));
 
                 if (result1 != null)
                 {
@@ -84,6 +90,12 @@ namespace Dashboard
                         Image img = byteArrayToImage(bitmapData);// Construct a bitmap from the button image resource.
                         Bitmap bitmap = new Bitmap(img, new Size(48, 48));
                         test.Image = bitmap;
+                    }
+                    else if (results1[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
                 
@@ -139,7 +151,7 @@ namespace Dashboard
             string json = JsonConvert.SerializeObject(msg);
 
             httpClient runApp = new httpClient();
-            string result = runApp.sent(json, USER.ipServer, "130");
+            string result = runApp.sent(json, USER.ipServer, "130", USER.userName, hashPass.ComputeSha256Hash(USER.password));
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -152,6 +164,12 @@ namespace Dashboard
                 {
                     var user = JsonConvert.DeserializeObject<error>(results[1]);
                     MessageBox.Show(user.msg, "Run app Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (results[0] == "404")
+                {
+                    new frmLogin().Show();
+                    USER.dash.Hide();
+                    this.Hide();
                 }
             }
             
