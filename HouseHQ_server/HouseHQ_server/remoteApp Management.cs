@@ -45,10 +45,8 @@ namespace HouseHQ_server
                         }
                     }
                 }
-
                 System.Threading.Thread.Sleep(60000);//דקה
             }
-
         }
         /*
 

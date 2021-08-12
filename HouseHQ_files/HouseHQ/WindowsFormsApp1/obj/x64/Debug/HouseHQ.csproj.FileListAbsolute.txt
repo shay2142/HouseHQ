@@ -20,7 +20,6 @@ C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\bin\x64\
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\bin\x64\Debug\WindowsFormsApp1.pdb
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\bin\x64\Debug\Interop.MSTSCLib.dll
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\bin\x64\Debug\AxInterop.MSTSCLib.dll
-C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\HouseHQ.csprojAssemblyReference.cache
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\Interop.MSTSCLib.dll
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\AxInterop.MSTSCLib.dll
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\HouseHQ.csproj.ResolveComReference.cache
@@ -32,3 +31,7 @@ C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\HouseHQ.csproj.CoreCompileInputs.cache
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\WindowsFormsApp1.exe
 C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\WindowsFormsApp1.pdb
+C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\HouseHQ.csproj.AssemblyReference.cache
+C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\Interop.MsRdpSessionManager.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\Interop.MsRdpWebAccessLib.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\HouseHQ\WindowsFormsApp1\obj\x64\Debug\Interop.RDPCOMAPILib.dll

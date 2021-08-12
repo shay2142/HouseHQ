@@ -95,5 +95,12 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2(ipServer.Text, user.Text, pass.Text);
+            //this.Hide();
+            form2.Show();
+        }
     }
 }

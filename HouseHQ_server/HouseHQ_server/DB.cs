@@ -353,13 +353,20 @@ namespace dataBase
                 code = hash.getCodeHash(jsons[0]);
             }
 
-            if (code == "215")
+            switch (code)
             {
-                jsons[1] = "sent logs";
+                case "215":
+                    jsons[1] = "sent logs";
+                    break;
+                case "233":
+                    jsons[1] = "sent image";
+                    break;
+                default:
+                    break;
             }
             using (SQLiteCommand cmd = new SQLiteCommand(con))
             {
-                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG, usersID) VALUES('" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "', '" + code + "', '" + type + "', '" + jsons[1] + "', '" + getIdForUser(con, userName) + "')";
+                cmd.CommandText = "INSERT INTO LOGS(DATE_LOGS, CODE, TYPE, J_LOG, usersID) VALUES('" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "', '" + code + "', '" + type + "', '" + jsons[1] + "', '" + getIdForUser(con, userName) + "')";
                 cmd.ExecuteNonQuery();
             }
         }

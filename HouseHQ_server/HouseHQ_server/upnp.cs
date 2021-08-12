@@ -155,7 +155,9 @@ namespace HouseHQ_server
                     return ip;
                 }
             }
-            throw new Exception("No network adapters with an IPv4 address in the system!");
+            Console.WriteLine("No network adapters with an IPv4 address in the system!");
+
+            return "127.0.0.1";
         }
     }
 }
