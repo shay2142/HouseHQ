@@ -193,8 +193,9 @@ namespace HouseHQ_server
                                 try
                                 {
                                     string userName = hash.getUserNamePassHash(this, json[2]);
+                                    bool remember = hash.getBoolHash(json[3]);
 
-                                    if (db.getStatusForUser(con, userName) == "online" || code == "101")
+                                    if (db.getStatusForUser(con, userName) == "online" || code == "101" || remember)
                                     {
                                         db.insertVluesToLOGS(con, s, "client->server", userName);
 

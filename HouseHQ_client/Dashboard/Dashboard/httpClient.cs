@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
+using Dashboard;
 
-
-namespace HTTP_CLIENT
+namespace Dashboard
 {
     class httpClient
     {
@@ -52,9 +52,11 @@ namespace HTTP_CLIENT
 
         public async Task<string> msg(string json, string ip, string port, string code, string userName, string password)
         {
+            bool remember = Properties.Settings.Default.userName != "" && Properties.Settings.Default.password != "" && Properties.Settings.Default.ipServer != "";
+
             int len = (code + "&" + json).Length;
 
-            var data = new StringContent(StringCipher.Encrypt(code + "&" + json + "&" + hashPass.ComputeSha256Hash(userName + password), hashPass.ComputeSha256Hash((code + "&" + json).Length.ToString())), Encoding.UTF8, "application/json|" + len);
+            var data = new StringContent(StringCipher.Encrypt(code + "&" + json + "&" + hashPass.ComputeSha256Hash(userName + password) + "&" + hashPass.ComputeSha256Hash(remember.ToString()), hashPass.ComputeSha256Hash((code + "&" + json).Length.ToString())), Encoding.UTF8, "application/json|" + len);
 
             var url = "http://" + ip + ":" + port + "/";
 

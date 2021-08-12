@@ -62,6 +62,15 @@ namespace HouseHQ_server
             return "";
         }
 
+        public bool getBoolHash(string hashBool)
+        {
+            if (hashBool == ComputeSha256Hash("True"))
+            {
+                return true;
+            }
+            return false;
+        }
+
         /*
 
 

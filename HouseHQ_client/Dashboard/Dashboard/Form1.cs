@@ -13,8 +13,6 @@ using Newtonsoft.Json;
 using System.Threading;
 using System.IO;
 
-using HTTP_CLIENT;
-
 namespace Dashboard
 {
     public partial class Form1 : Form
@@ -173,6 +171,8 @@ namespace Dashboard
             string ans = "";
             File.Delete(@"C:\Users\Public\reamoteapp.rdp");
             ans = logout();
+            Properties.Settings.Default.Reset();
+            USER.remember = false;
 
             new frmLogin().Show();
             this.Hide();

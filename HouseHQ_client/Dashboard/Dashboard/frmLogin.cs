@@ -11,7 +11,6 @@ using System.Data.OleDb;
 using Newtonsoft.Json;
 using System.Net.Http;
 
-using HTTP_CLIENT;
 using System.Net;
 
 namespace Dashboard
@@ -23,6 +22,11 @@ namespace Dashboard
         public frmLogin()
         {
             InitializeComponent();
+
+            //if (Properties.Settings.Default.userName != "" && Properties.Settings.Default.password != "" && Properties.Settings.Default.ipServer != "")
+            //{
+            //    login(Properties.Settings.Default.ipServer, Properties.Settings.Default.userName, Properties.Settings.Default.password);
+            //}
         }
 
         public bool checkInput()
@@ -37,22 +41,41 @@ namespace Dashboard
         }
         private void  button1_Click(object sender, EventArgs e)
         {
+
             string ip = IP.Text;
-            loginParameters userPram = new loginParameters();
+            bool remember = false;
 
             if (!checkInput())
             {
                 MessageBox.Show("Invalid username or password or IP", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            if (rememberBox.Checked)
+            {
+                Properties.Settings.Default.ipServer = ip;
+                Properties.Settings.Default.userName = txtUsername.Text;
+                Properties.Settings.Default.password = txtpassword.Text;
+                Properties.Settings.Default.Save();
+                remember = true;
+            }
+
+            login(ip, txtUsername.Text, txtpassword.Text, remember);
+
+
+        }
+
+        public void login(string ip, string userName, string password, bool remember)
+        {
+            loginParameters userPram = new loginParameters();
+
             login test = new login()
             {
-                name = hashPass.ComputeSha256Hash(txtUsername.Text),
-                password = hashPass.ComputeSha256Hash(txtpassword.Text)
+                name = hashPass.ComputeSha256Hash(userName),
+                password = hashPass.ComputeSha256Hash(password)
             };
             string json = JsonConvert.SerializeObject(test);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, ip, "101", txtUsername.Text, test.password);
+            string result = testLogin.sent(json, ip, "101", userName, test.password);
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -62,11 +85,12 @@ namespace Dashboard
 
                     userPram.ipServer = ip;
                     userPram.userName = user.name;
-                    userPram.password = txtpassword.Text;
+                    userPram.password = password;
                     userPram.mail = user.mail;
                     userPram.key = user.key;
                     userPram.img = user.img;
                     userPram.apps = user.appList;
+                    userPram.remember = remember;
 
                     new Form1(userPram).Show();
                     this.Hide();
@@ -75,7 +99,7 @@ namespace Dashboard
                 {
                     var user = JsonConvert.DeserializeObject<error>(results[1]);
                     MessageBox.Show(user.msg, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } 
+                }
             }
         }
 

@@ -11,8 +11,6 @@ using System.IO;
 
 using Newtonsoft.Json;
 
-using HTTP_CLIENT;
-
 namespace Dashboard
 {
     public partial class FrmAddApps : Form
