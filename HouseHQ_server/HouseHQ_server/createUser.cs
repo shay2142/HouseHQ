@@ -37,6 +37,8 @@ namespace HouseHQ_server
                     grp.Invoke("Add", new object[] { NewUser.Path.ToString() }); 
                 }
 
+                DiableADUserUsingUserPrincipal(Name);
+
                 return "Account Created Successfully";
 
             }
@@ -76,20 +78,16 @@ namespace HouseHQ_server
         {
             try
             {
-                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain);
-                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity
-                        (principalContext, username);
-                userPrincipal.Enabled = false;
-                userPrincipal.Save();
-
-                //MessageBox.Show("AD Account disabled for {0}", username);
+                DirectoryEntry local = new DirectoryEntry("WinNT://localhost");
+                DirectoryEntry user = local.Children.Find(username);
+                user.InvokeSet("AccountDisabled", true);
+                user.CommitChanges();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
-
 
         public bool userIsRDP(string userName)
         {
@@ -112,43 +110,20 @@ namespace HouseHQ_server
             return false;
         }
 
-        public void getGroup(string username = "S")
-        {
-            try
-            {
-                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain);
-                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity
-                        (principalContext, username);
-                //userPrincipal.Enabled = false;
-                Console.WriteLine(userPrincipal.GetAuthorizationGroups());
-
-                //MessageBox.Show("AD Account disabled for {0}", username);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
         //enable - אפשר
         public void EnableADUserUsingUserPrincipal(string username)
         {
             try
             {
-                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain);
-                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity
-                (principalContext, username);
-                userPrincipal.Enabled = true;
-                userPrincipal.Save();
-
-                //return true;
+                DirectoryEntry local = new DirectoryEntry("WinNT://localhost");
+                DirectoryEntry user = local.Children.Find(username);
+                user.InvokeSet("AccountDisabled", false);
+                user.CommitChanges();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-            //return false;
         }
 
         public void deleteUser(string username)

@@ -39,7 +39,7 @@ namespace HouseHQ_server
                         DateTime dateNow = DateTime.Now;
                         var isOnline = dateNow - DateTime.ParseExact(userLogs[userLogs.Count - 1].dateLogs, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-                        if (isOnline.Minutes > 0 || isOnline.Hours > 0 || isOnline.Days > 0)//Disconnects an inactive user for 30 minutes
+                        if (isOnline.Minutes > 30 || isOnline.Hours > 0 || isOnline.Days > 0)//Disconnects an inactive user for 30 minutes
                         {
                             db.updateStatus(http.con, user, "offline");
                         }
