@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "t0atFibSn5eNu9PbGr/HBv2KWDnIbyi0iKV8xJ7SlcEdJvwisX8FnOSXqayy6NYNkVGprEosODyAsdrGxp2jZg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\shay5\\Documents\\househq\\HouseHQ_files\\Backend files\\httpClient\\newHttpServer\\newHttpServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shay5\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\portable.bouncycastle\\1.8.10\\portable.bouncycastle.1.8.10.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

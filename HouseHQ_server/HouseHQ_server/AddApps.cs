@@ -27,18 +27,21 @@ namespace HouseHQ_server
 
         private void createRemoteApp_Click(object sender, EventArgs e)
         {
+            string nameApp = Path.GetFileNameWithoutExtension(namePath.Text);
 
-            if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text)) == null)
+            if (nameProg.Text != null)
             {
-                RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + Path.GetFileNameWithoutExtension(namePath.Text));
+                nameApp = nameProg.Text;
+            }
+            if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + nameApp) == null)
+            {
+                RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList\Applications\" + nameApp);
                 key.SetValue("Path", namePath.Text);
                 key.Close();
 
                 remoteApp app = new remoteApp();
                 app.laodApp(Http);
             }
-
-
         }
 
         private void namePath_TextChanged(object sender, EventArgs e)

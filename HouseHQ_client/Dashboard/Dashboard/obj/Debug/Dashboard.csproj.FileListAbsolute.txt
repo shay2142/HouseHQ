@@ -89,3 +89,32 @@ C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dash
 C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmChangeAccount.resources
 C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.FrmDeleteApps.resources
 C:\Users\shay5\Documents\househq\porntend HHQ\Dashboard\Dashboard\obj\Debug\Dashboard.frmDeleteUser.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\Dashboard.exe.config
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\Dashboard.exe
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\Dashboard.pdb
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\CircularProgressBar.dll
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\Newtonsoft.Json.dll
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\WinFormAnimation.dll
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\CircularProgressBar.xml
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\Newtonsoft.Json.xml
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\bin\Debug\WinFormAnimation.xml
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.Form1.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.FrmAddApps.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmChangeAccount.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.FrmDeleteApps.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmDeleteUser.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmLogin.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmManager.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmContactUs.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmApps.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmSettings.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmRegister.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.Properties.Resources.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.GenerateResource.cache
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CoreCompileInputs.cache
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CopyComplete
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.exe
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.pdb
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.AssemblyReference.cache
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmUserManagement.resources
+C:\Users\shay5\Documents\househq\HouseHQ_client\Dashboard\Dashboard\obj\Debug\Dashboard.frmLogs.resources

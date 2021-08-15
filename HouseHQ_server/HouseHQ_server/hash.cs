@@ -26,5 +26,72 @@ namespace HouseHQ_server
                 return builder.ToString();
             }
         }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getUserNameHash(httpServer Http, string hashUser)
+        {
+            List<string> userName = Http.db.getAllUsers(Http.con);
+
+            foreach (string user in userName)
+            {
+                if (hashUser == ComputeSha256Hash(user))
+                {
+                    return user;
+                }
+            }
+            return "";
+        }
+
+        public string getUserNamePassHash(httpServer Http, string hashUser)
+        {
+            List<string> userName = Http.db.getAllUsers(Http.con);
+            
+            foreach (string user in userName)
+            {
+                if (hashUser == ComputeSha256Hash(user + Http.db.getPassForUser(Http.con, user)))
+                {
+                    return user;
+                }
+            }
+            return "";
+        }
+
+        public bool getBoolHash(string hashBool)
+        {
+            if (hashBool == ComputeSha256Hash("True"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /*
+
+
+         input: 
+
+         output:
+         */
+        public string getCodeHash(string hashCode)
+        {
+            Codes code = new Codes();
+
+            Dictionary<string, string>.KeyCollection keys = code.codes().Keys;
+
+            foreach (string key in keys)
+            {
+                if (hashCode == ComputeSha256Hash(key))
+                {
+                    return key;
+                }
+            }
+            return "";
+        }
     }
 }

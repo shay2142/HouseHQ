@@ -39,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.IP = new System.Windows.Forms.TextBox();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.rememberBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button2
@@ -47,10 +48,10 @@
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.button2.Location = new System.Drawing.Point(37, 358);
+            this.button2.Location = new System.Drawing.Point(37, 379);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(216, 35);
-            this.button2.TabIndex = 14;
+            this.button2.TabIndex = 6;
             this.button2.Text = "CLEAR";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -62,10 +63,10 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(38, 317);
+            this.button1.Location = new System.Drawing.Point(38, 338);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 35);
-            this.button1.TabIndex = 15;
+            this.button1.TabIndex = 5;
             this.button1.Text = "LOGIN";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -78,7 +79,7 @@
             this.checkbxShowPas.Location = new System.Drawing.Point(126, 284);
             this.checkbxShowPas.Name = "checkbxShowPas";
             this.checkbxShowPas.Size = new System.Drawing.Size(119, 21);
-            this.checkbxShowPas.TabIndex = 13;
+            this.checkbxShowPas.TabIndex = 4;
             this.checkbxShowPas.Text = "Show Password";
             this.checkbxShowPas.UseVisualStyleBackColor = true;
             this.checkbxShowPas.CheckedChanged += new System.EventHandler(this.checkbxShowPas_CheckedChanged);
@@ -93,7 +94,7 @@
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.PasswordChar = '•';
             this.txtpassword.Size = new System.Drawing.Size(216, 28);
-            this.txtpassword.TabIndex = 11;
+            this.txtpassword.TabIndex = 3;
             this.txtpassword.TextChanged += new System.EventHandler(this.txtpassword_TextChanged);
             // 
             // label3
@@ -115,7 +116,7 @@
             this.txtUsername.Multiline = true;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(216, 28);
-            this.txtUsername.TabIndex = 12;
+            this.txtUsername.TabIndex = 1;
             // 
             // label2
             // 
@@ -155,7 +156,7 @@
             this.IP.Multiline = true;
             this.IP.Name = "IP";
             this.IP.Size = new System.Drawing.Size(216, 28);
-            this.IP.TabIndex = 19;
+            this.IP.TabIndex = 2;
             // 
             // buttonClose
             // 
@@ -166,17 +167,30 @@
             this.buttonClose.Location = new System.Drawing.Point(252, 12);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(25, 25);
-            this.buttonClose.TabIndex = 20;
+            this.buttonClose.TabIndex = 7;
             this.buttonClose.Text = "X";
             this.buttonClose.UseVisualStyleBackColor = false;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // rememberBox
+            // 
+            this.rememberBox.AutoSize = true;
+            this.rememberBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rememberBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rememberBox.Location = new System.Drawing.Point(126, 311);
+            this.rememberBox.Name = "rememberBox";
+            this.rememberBox.Size = new System.Drawing.Size(113, 21);
+            this.rememberBox.TabIndex = 19;
+            this.rememberBox.Text = "Remember me";
+            this.rememberBox.UseVisualStyleBackColor = true;
             // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(289, 412);
+            this.ClientSize = new System.Drawing.Size(289, 443);
+            this.Controls.Add(this.rememberBox);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.IP);
             this.Controls.Add(this.label4);
@@ -213,5 +227,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox IP;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.CheckBox rememberBox;
     }
 }

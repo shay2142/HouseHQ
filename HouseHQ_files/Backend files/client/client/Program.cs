@@ -32,18 +32,20 @@ namespace client
 
             string stringjson = JsonConvert.SerializeObject(testLogin);
 
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                Connect("USER2", stringjson);
-            }).Start();
+            //new Thread(() =>
+            //{
+            //    Thread.CurrentThread.IsBackground = true;
+            //    Connect("localhost", stringjson);
+            //}).Start();
+            Connect("localhost", stringjson);
+
             //new Thread(() =>
             //{
             //    Thread.CurrentThread.IsBackground = true;
             //    Connect("192.168.0.194", "Hello I'm Device 2...");
             //}).Start();
             Console.ReadLine();
-        }
+        }   
         static void Connect(String server, String message)
         {
             try

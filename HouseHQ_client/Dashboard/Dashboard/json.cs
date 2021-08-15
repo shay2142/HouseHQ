@@ -10,7 +10,7 @@ namespace Dashboard
     {
     }
 
-    class okLogin
+    public class okLogin
     {
         // Make sure all class attributes have relevant getter setter.
 
@@ -25,14 +25,14 @@ namespace Dashboard
         public string img { get; set; }
     }
 
-    class okSingup
+    public class okSingup
     {
         // Make sure all class attributes have relevant getter setter.
 
         public bool ok { get; set; }
     }
 
-    class login
+    public class login
     {
         // Make sure all class attributes have relevant getter setter.
         public string name { get; set; }
@@ -40,7 +40,7 @@ namespace Dashboard
         public string password { get; set; }
     }
 
-    class singup
+    public class singup
     {
         public string name { get; set; }
 
@@ -51,29 +51,29 @@ namespace Dashboard
         public string key { get; set; }
     }
 
-    class error
+    public class error
     {
         public string msg { get; set; }
     }
 
-    class getAllUsers
+    public class getAllUsers
     {
         public List<string> usersList { get; set; }
     }
 
-    class userInformation
+    public class userInformation
     {
         public string password { get; set; }
         public string mail { get; set; }
         public string key { get; set; }
     }
 
-    class getUserInformation
+    public class getUserInformation
     {
         public string userName { get; set; }
     }
 
-    class changeAccount
+    public class changeAccount
     {
         public string userName { get; set; }
         public string oldPassword { get; set; }
@@ -92,37 +92,92 @@ namespace Dashboard
         public string STATUS { get; set; }
     }
 
-    class jsonSentDB
+    public class jsonSentDB
     {
         public List<getDB> db { get; set; }
     }
 
-    class getAllApps
+    public class getAllApps
     {
         public List<string> allAppList { get; set; }
     }
 
-    class addAppForUser
+    public class addAppForUser
     {
         public string userName { get; set; }
         public string appName { get; set; }
     }
 
-    class deleteAppFromUser
+    public class deleteAppFromUser
     {
         public string userName { get; set; }
         public string appName { get; set; }
     }
 
-    class deleteUser
+    public class deleteUser
     {
         public string userNameDelete { get; set; }
         public string adminUserName { get; set; }
     }
 
-    class logoutUser
+    public class logoutUser
     {
         public string userName { get; set; }
     }
 
+    public class WS_Login
+    {
+        public okLogin okLogin { get; set; }
+        public error error { get; set; }
+    }
+
+    public class deleteAppsForServer
+    {
+        public string userName { get; set; }
+        public string password { get; set; }
+        public List<string> appsList { get; set; }
+    }
+
+    public class jsonSentLogs
+    {
+        public List<sentLogs> jsonLogs { get; set; }
+    }
+
+    public class sentLogs
+    {
+        public int ID { get; set; }
+        public string dateLogs { get; set; }
+        public string typeLog { get; set; }
+        public string source { get; set; }
+        public string log { get; set; }
+    }
+
+    class runApp
+    {
+        public string app { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+    }
+
+    class okRunApp
+    {
+        public string ip { get; set; }
+        public string port { get; set; }
+        public string app { get; set; }
+    }
+
+    class msg
+    {
+        public string message { get; set; }
+    }
+
+    class img
+    {
+        public byte[] data { get; set; }
+    }
+
+    class getImg
+    {
+        public string appName { get; set; }
+    }
 }

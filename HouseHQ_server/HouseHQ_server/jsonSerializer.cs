@@ -6,23 +6,15 @@ namespace jsonSerializer
 {
     class okLogin
     {
-        // Make sure all class attributes have relevant getter setter.
-
         public string name { get; set; }
-
         public string mail { get; set; }
-
         public List<string> appList { get; set; }
-
         public string key { get; set; }
-
         public string img { get; set; }
     }
 
     class okSingup
     {
-        // Make sure all class attributes have relevant getter setter.
-
         public bool ok { get; set; }
     }
 
@@ -47,6 +39,7 @@ namespace jsonSerializer
         public string mail { get; set; }
         public string key { get; set; }
     }
+
     class sentDB
     {
         public int ID { get; set; }
@@ -56,8 +49,86 @@ namespace jsonSerializer
         public string LEVEL_KEY { get; set; }
         public string STATUS { get; set; }
     }
+
     class jsonSentDB
     {
         public List<sentDB> db { get; set; }
+    }
+
+    class sentLogs
+    {
+        public int ID { get; set; }
+        public string dateLogs { get; set; }
+        public string typeLog { get; set; }
+        public string source { get; set; }
+        public string log { get; set; }
+    }
+
+    class jsonSentLogs
+    {
+        public List<sentLogs> jsonLogs { get; set; }
+    }
+
+    class sentLevels
+    {
+        public int ID { get; set; }
+        public string name { get; set; }
+        public List<string> apps { get; set; }
+        public bool admin { get; set; }
+    }
+
+    class jsonSentLevels
+    { 
+        public List<sentLevels> jsonLevels { get; set; }
+    }
+
+    class getAllAppsOnPC
+    { 
+        public Dictionary<string, HouseHQ_server.app> getApps { get; set; }
+    }
+
+    class sentApp
+    {
+        public int appID { get; set; }
+        public string name { get; set; }
+        public string REMOTEAPP { get; set; }
+    }
+
+    class sentBLOCKS_IP
+    { 
+        public int ipID { get; set; }
+        public string ip { get; set; }
+    }
+
+    class jsonSentApp
+    {
+        public List<sentApp> jsonApp { get; set; }
+    }
+
+    class jsonSentBLOCKS_IP
+    {
+        public List<sentBLOCKS_IP> jsonBLOCKS_IP { get; set; }
+    }
+
+    class getAllUsersRemoteApp
+    { 
+        public List<string> users { get; set; }
+    }
+
+    class okRunApp
+    {
+        public string ip { get; set; }
+        public string port { get; set; }
+        public string app { get; set; }
+    }
+
+    class msg
+    {
+        public string message { get; set; }
+    }
+
+    class img
+    {
+        public byte[] data { get; set; }
     }
 }

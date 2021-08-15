@@ -55,5 +55,16 @@ namespace HouseHQ_server
         {
             new AddApps(Http).Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new Form1(Http, "").Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new DB_view(Http).Show();
+            this.Hide();
+        }
     }
 }

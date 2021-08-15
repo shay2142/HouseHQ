@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "D99dqz/CdOz30FaC8yTEIf1WoWFudAvoG+wKD90iyj404ormblEJAssaaxZkZKG4FLrzxBCvk7UOAHMAK0wGiw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\shay5\\Documents\\househq\\HouseHQ_files\\Backend files\\httpClient\\exeToIco\\exeToIco.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shay5\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\shay5\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
