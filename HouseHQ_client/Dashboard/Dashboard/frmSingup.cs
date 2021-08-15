@@ -20,9 +20,9 @@ namespace Dashboard
         public loginParameters USER = new loginParameters();
         public hash hashPass = new hash();
 
-        public frmManager manager;
+        public frmUserManagement manager;
 
-        public frmRegister(loginParameters user, frmManager window)
+        public frmRegister(loginParameters user, frmUserManagement window)
         {
             InitializeComponent();
             USER = user;

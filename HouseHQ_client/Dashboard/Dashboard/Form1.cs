@@ -84,7 +84,7 @@ namespace Dashboard
 
             lbltitle.Text = "Manager";
             this.pnlFormLoader.Controls.Clear();
-            frmManager frmAnalytics_vrb = new frmManager(USER) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmManager frmAnalytics_vrb = new frmManager(USER, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmAnalytics_vrb.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(frmAnalytics_vrb);
             frmAnalytics_vrb.Show();
@@ -143,6 +143,7 @@ namespace Dashboard
         private void button1_Click_1(object sender, EventArgs e)
         {
             logout();
+            File.Delete(@"C:\Users\Public\reamoteapp.rdp");
             Application.Exit();
         }
 

@@ -17,9 +17,9 @@ namespace Dashboard
     {
         public loginParameters USER = new loginParameters();
         public hash hashPass = new hash();
-        public frmManager manager;
+        public frmUserManagement manager;
 
-        public frmDeleteUser(loginParameters userPram, frmManager window)
+        public frmDeleteUser(loginParameters userPram, frmUserManagement window)
         {
             InitializeComponent();
             USER = userPram;
