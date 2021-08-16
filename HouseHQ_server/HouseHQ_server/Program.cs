@@ -16,6 +16,7 @@ using System.Threading;
 using jsonDeserialize;
 using jsonSerializer;
 using dataBase;
+using NATUPNPLib;
 
 namespace HouseHQ_server
 {
@@ -27,6 +28,15 @@ namespace HouseHQ_server
         [STAThread]
         static void Main()
         {
+            rdpwrap rdp = new rdpwrap();
+            rdp.update();
+
+            upnp upnp = new upnp();
+            upnp.createUpnp();
+
+            fierwall rule = new fierwall();
+            rule.createRulefierwall();
+
             httpServer server2 = new httpServer();
             server2.runServer();
         }

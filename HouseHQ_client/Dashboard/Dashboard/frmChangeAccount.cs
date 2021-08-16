@@ -12,7 +12,6 @@ using System.Data.OleDb;
 using Newtonsoft.Json;
 using System.Net.Http;
 
-using HTTP_CLIENT;
 using System.Net;
 
 namespace Dashboard
@@ -20,17 +19,18 @@ namespace Dashboard
     public partial class frmChangeAccount : Form
     {
         public hash hashPass = new hash();
+        public loginParameters USER = new loginParameters();
 
-        public string IP;
         public ComboBox comboUsers;
-        public string UserName;
         public string type;
+        public string UserName;
 
-        public frmChangeAccount(string ip, string userName, string key, string type)
+        public frmChangeAccount(loginParameters userPram, string type)
         {
             InitializeComponent();
-            IP = ip;
+            USER = userPram;
             this.type = type;
+            UserName = USER.userName;
 
             if (type == "user")
             {
@@ -38,22 +38,21 @@ namespace Dashboard
                 
                 checkbxAdmin.Enabled = false;
                 txtUsername.Enabled = false;
-                txtUsername.Text = userName;
+                txtUsername.Text = UserName;
 
-                if (key == "admin")
+                if (USER.key == "admin")
                 {
                     checkbxAdmin.Checked = true;
                 }
 
-                UserName = txtUsername.Text;
-                sendGetUserInformation(txtUsername.Text);
+                sendGetUserInformation(UserName);
             }
             else if (type == "manager")
             {
                 createComboText();
 
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(null, testLogin.hostToIp(IP), "111");
+                string result = testLogin.sent(null, USER.ipServer, "111", USER.userName, hashPass.ComputeSha256Hash(USER.password));
                 if (result != null)
                 {
                     string[] results = result.Split('&');
@@ -65,6 +64,12 @@ namespace Dashboard
 
                             comboUsers.Items.Add(user);
                         }
+                    }
+                    else if (results[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
             }
@@ -78,7 +83,7 @@ namespace Dashboard
             };
             string json = JsonConvert.SerializeObject(msg);
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(json, testLogin.hostToIp(IP), "112");
+            string result = testLogin.sent(json, USER.ipServer, "112", USER.userName, hashPass.ComputeSha256Hash(USER.password));
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -98,6 +103,12 @@ namespace Dashboard
                     {
                         oldPass.Text = user.password;
                     }
+                }
+                else if (results[0] == "404")
+                {
+                    new frmLogin().Show();
+                    USER.dash.Hide();
+                    this.Hide();
                 }
             }
             UserName = userName;
@@ -138,6 +149,11 @@ namespace Dashboard
         private void button1_Click(object sender, EventArgs e)
         {
             string level = null;
+            string oldPassword = hashPass.ComputeSha256Hash(oldPass.Text);
+            if (type == "manager")
+            {
+                oldPassword = oldPass.Text;
+            }
             if (txtPassword.Text == txtComPassword.Text)
             {
                 if(checkbxAdmin.Checked)
@@ -147,7 +163,7 @@ namespace Dashboard
                 changeAccount test = new changeAccount()
                 {
                    userName = UserName,
-                   oldPassword = hashPass.ComputeSha256Hash(oldPass.Text),
+                   oldPassword = oldPassword,
                    newPassword = hashPass.ComputeSha256Hash(txtPassword.Text),
                    mail = txtMail.Text,
                    level = level
@@ -156,19 +172,44 @@ namespace Dashboard
                 string json = JsonConvert.SerializeObject(test);
 
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(IP), "103");
+                string result = testLogin.sent(json, USER.ipServer, "103", USER.userName, hashPass.ComputeSha256Hash(USER.password));
                 if (result != null)
                 {
                     string[] results = result.Split('&');
 
                     if (results[0] == "203")
                     {
+                        login login = new login()
+                        {
+                            name = UserName,
+                            password = txtPassword.Text
+                        };
+                        string json2 = JsonConvert.SerializeObject(login);
+                        string result2 = testLogin.sent(json2, USER.ipServer, "132", USER.userName, hashPass.ComputeSha256Hash(USER.password));
+                        if (result2 != null)
+                        {
+                            string[] results2 = result2.Split('&');
+                            if (results2[0] == "232")
+                            {
+                                MessageBox.Show(JsonConvert.DeserializeObject<msg>(results2[1]).message, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else if (results2[0] == "400")
+                            {
+                                MessageBox.Show(JsonConvert.DeserializeObject<error>(results2[1]).msg, "Create User Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
                         MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else if (results[0] == "400")
                     {
                         var user = JsonConvert.DeserializeObject<error>(results[1]);
                         MessageBox.Show(user.msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (results[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
             }

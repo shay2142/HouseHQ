@@ -27,6 +27,7 @@ namespace HouseHQ_server
 
         private void button1_Click(object sender, EventArgs e)
         {
+            createUser create = new createUser();
 
             if (txtUsername.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtMail.Text == "")
             {
@@ -38,6 +39,7 @@ namespace HouseHQ_server
                 if (label1.Text == "create admin")
                 {
                     Http.db.createAdminDefault(Http.con, txtUsername.Text, hashPass.ComputeSha256Hash(txtPassword.Text), txtMail.Text);
+                    create.createUserOnWin(txtUsername.Text, txtPassword.Text);
                 }
                 else
                 {
@@ -49,6 +51,9 @@ namespace HouseHQ_server
                         {
                             Http.db.updateUser(Http.con, txtUsername.Text, hashPass.ComputeSha256Hash(txtPassword.Text), null, null, "admin");
                         }
+
+                        create.createUserOnWin(txtUsername.Text, txtPassword.Text);
+
                         Http.db.updateStatus(Http.con, txtUsername.Text, "offline");
                     }
                 }

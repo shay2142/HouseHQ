@@ -82,7 +82,7 @@
             this.btnsettings.Location = new System.Drawing.Point(0, 510);
             this.btnsettings.Name = "btnsettings";
             this.btnsettings.Size = new System.Drawing.Size(186, 42);
-            this.btnsettings.TabIndex = 1;
+            this.btnsettings.TabIndex = 4;
             this.btnsettings.Text = "Settings";
             this.btnsettings.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnsettings.UseVisualStyleBackColor = true;
@@ -101,7 +101,7 @@
             this.btnContactUs.Location = new System.Drawing.Point(0, 238);
             this.btnContactUs.Name = "btnContactUs";
             this.btnContactUs.Size = new System.Drawing.Size(186, 42);
-            this.btnContactUs.TabIndex = 1;
+            this.btnContactUs.TabIndex = 3;
             this.btnContactUs.Text = "Contact Us";
             this.btnContactUs.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnContactUs.UseVisualStyleBackColor = true;
@@ -120,7 +120,7 @@
             this.btnManager.Location = new System.Drawing.Point(0, 196);
             this.btnManager.Name = "btnManager";
             this.btnManager.Size = new System.Drawing.Size(186, 42);
-            this.btnManager.TabIndex = 1;
+            this.btnManager.TabIndex = 2;
             this.btnManager.Text = "Manager";
             this.btnManager.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnManager.UseVisualStyleBackColor = true;

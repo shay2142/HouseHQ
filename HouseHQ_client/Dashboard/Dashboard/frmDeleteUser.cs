@@ -10,26 +10,23 @@ using System.Windows.Forms;
 
 using Newtonsoft.Json;
 
-using HTTP_CLIENT;
 
 namespace Dashboard
 {
     public partial class frmDeleteUser : Form
     {
-        public string IP;
-        public string adminUserName;
-        public frmManager manager;
+        public loginParameters USER = new loginParameters();
+        public hash hashPass = new hash();
+        public frmUserManagement manager;
 
-        public frmDeleteUser(string ip, string admin, frmManager window)
+        public frmDeleteUser(loginParameters userPram, frmUserManagement window)
         {
             InitializeComponent();
-
-            IP = ip;
+            USER = userPram;
             manager = window;
-            adminUserName = admin;
 
             httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, testLogin.hostToIp(IP), "111");
+            string result = testLogin.sent(null, USER.ipServer, "111", USER.userName, hashPass.ComputeSha256Hash(USER.password));
             if (result != null)
             {
                 string[] results = result.Split('&');
@@ -40,6 +37,12 @@ namespace Dashboard
                     {
                         comboUsers.Items.Add(user);
                     }
+                }
+                else if (results[0] == "404")
+                {
+                    new frmLogin().Show();
+                    USER.dash.Hide();
+                    this.Hide();
                 }
             }
         }
@@ -55,12 +58,12 @@ namespace Dashboard
             {
                 deleteUser msg = new deleteUser()
                 {
-                    adminUserName = adminUserName,
+                    adminUserName = USER.userName,
                     userNameDelete = comboUsers.Text
                 };
                 string json = JsonConvert.SerializeObject(msg);
                 httpClient testLogin = new httpClient();
-                string result = testLogin.sent(json, testLogin.hostToIp(IP), "110");
+                string result = testLogin.sent(json, USER.ipServer, "110", USER.userName, hashPass.ComputeSha256Hash(USER.password));
                 if (result != null)
                 {
                     string[] results = result.Split('&');
@@ -74,7 +77,13 @@ namespace Dashboard
                         MessageBox.Show("The details have changed successfully", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Hide();
                         manager.GetDB();
-                        new frmDeleteUser(IP, adminUserName, manager).Show();
+                        new frmDeleteUser(USER, manager).Show();
+                    }
+                    else if (results[0] == "404")
+                    {
+                        new frmLogin().Show();
+                        USER.dash.Hide();
+                        this.Hide();
                     }
                 }
             }

@@ -1,63 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using Newtonsoft.Json;
-using System.Net.Http;
-
-using HTTP_CLIENT;
 
 namespace Dashboard
 {
     public partial class frmManager : Form
     {
-        public string IP;
-        public string UserName;
+        public loginParameters USER = new loginParameters();
+        public hash hashPass = new hash();
+        public Form1 Form;
 
-        public frmManager(string ip, string userName)
+        public frmManager(loginParameters user, Form1 form)
         {
             InitializeComponent();
-            IP = ip;
-            UserName = userName;
-            GetDB();
-        }
-
-        public void GetDB()
-        {
-            var list = new List<getDB>();
-            httpClient testLogin = new httpClient();
-            string result = testLogin.sent(null, testLogin.hostToIp(IP), "113");
-            if (result != null)
-            {
-                string[] results = result.Split('&');
-                if (results[0] == "213")
-                {
-                    var user = JsonConvert.DeserializeObject<jsonSentDB>(results[1]);
-                    list = user.db;
-                }
-            }
-            dataGridView1.DataSource = list;
-        }
-        private void btnAddU_Click(object sender, EventArgs e)
-        {
-            frmRegister form = new frmRegister(IP, this);
-            form.Show();
+            USER = user;
+            Form = form;
         }
 
         private void btnChangeDet_Click(object sender, EventArgs e)
         {
-            new frmChangeAccount(IP, "", "admin", "manager").Show();
+            this.Hide();
+            Form.pnlFormLoader.Controls.Clear();
+            frmUserManagement form = new frmUserManagement(USER, Form) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            form.FormBorderStyle = FormBorderStyle.None;
+            Form.pnlFormLoader.Controls.Add(form);
+            form.Show();
         }
 
-        private void btnRemU_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            frmDeleteUser form = new frmDeleteUser(IP, UserName, this);
+
+        }
+
+        private void frmLogs_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form.pnlFormLoader.Controls.Clear();
+            frmLogs form = new frmLogs(USER, Form) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            form.FormBorderStyle = FormBorderStyle.None;
+            Form.pnlFormLoader.Controls.Add(form);
             form.Show();
         }
     }

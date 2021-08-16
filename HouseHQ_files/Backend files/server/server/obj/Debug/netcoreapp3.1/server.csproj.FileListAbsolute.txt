@@ -28,3 +28,23 @@ E:\server\server\obj\Debug\netcoreapp3.1\server.csproj.CoreCompileInputs.cache
 E:\server\server\obj\Debug\netcoreapp3.1\server.csproj.CopyComplete
 Y:\server\server\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 Y:\server\server\obj\Debug\netcoreapp3.1\server.csproj.CopyComplete
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\server.exe
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\server.deps.json
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\server.runtimeconfig.json
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\server.runtimeconfig.dev.json
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\server.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\server.pdb
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.csprojAssemblyReference.cache
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.AssemblyInfoInputs.cache
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.AssemblyInfo.cs
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.csproj.CoreCompileInputs.cache
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.csproj.CopyComplete
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.dll
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.pdb
+C:\Users\shay5\Documents\househq\HouseHQ_files\Backend files\server\server\obj\Debug\netcoreapp3.1\server.genruntimeconfig.cache

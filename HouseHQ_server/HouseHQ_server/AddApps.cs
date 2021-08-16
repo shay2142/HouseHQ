@@ -42,8 +42,6 @@ namespace HouseHQ_server
                 remoteApp app = new remoteApp();
                 app.laodApp(Http);
             }
-
-
         }
 
         private void namePath_TextChanged(object sender, EventArgs e)
