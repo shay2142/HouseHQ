@@ -2,6 +2,9 @@
 
 Server that is on the public and private network, it contains files and programs and shares its program screen, a computer on the net can send him commands with the mouse and keyboard to see the changes.
 
+HouseHQ it is a server that is on the network, contains files and software and shares its screen.
+<br/>Weaker computers will be able to run games and heavy software on the server that they could not run on the computer itself and it will look like the software is running on the computer but it will actually run on the server.
+
 ## Getting Started
 ### Prerequisites
 
@@ -48,7 +51,8 @@ HouseHQ_clien
 
 ## Built With
 
-* [vs2019](https://visualstudio.microsoft.com/vs/) - The IDE framework used and GUI  framework.
+* [visual studio 2019](https://visualstudio.microsoft.com/vs/) - The IDE framework used and GUI  framework.
+* [visual studio code](https://code.visualstudio.com/) - The IDE framework used.
 
 ## Authors
 
