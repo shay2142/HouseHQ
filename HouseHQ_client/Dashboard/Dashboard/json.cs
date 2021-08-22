@@ -180,4 +180,29 @@ namespace Dashboard
     {
         public string appName { get; set; }
     }
+
+    class getAllAppsOnPC
+    {
+        public Dictionary<string, app> getApps { get; set; }
+    }
+
+    public class app
+    {
+        public string appName { get; set; }
+        public string folder { get; set; }
+        public string EXE_File { get; set; }
+    }
+
+    class addAppsOnServer
+    {
+        public string userName { get; set; }
+        public string password { get; set; }
+        public List<addApps> listApps { get; set; }
+    }
+
+    class addApps
+    {
+        public string pathExeFile { get; set; }
+        public string nameApp { get; set; }
+    }
 }

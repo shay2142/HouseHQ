@@ -361,6 +361,9 @@ namespace dataBase
                 case "233":
                     jsons[1] = "sent image";
                     break;
+                case "222":
+                    jsons[1] = "sent apps on server";
+                    break;
                 default:
                     break;
             }

@@ -16,6 +16,5 @@ namespace Dashboard
         public string img;
         public List<string> apps;
         public Form1 dash;
-        public bool remember;
     }
 }

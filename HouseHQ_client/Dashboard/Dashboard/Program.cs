@@ -49,7 +49,6 @@ namespace Dashboard
                         userPram.key = user.key;
                         userPram.img = user.img;
                         userPram.apps = user.appList;
-                        userPram.remember = true;
 
                         Application.Run(new Form1(userPram));
                         //this.Hide();

@@ -35,7 +35,10 @@ namespace Dashboard
                     var users = JsonConvert.DeserializeObject<getAllUsers>(results[1]);
                     foreach (var user in users.usersList)
                     {
-                        comboUsers.Items.Add(user);
+                        if (user != USER.userName)
+                        {
+                            comboUsers.Items.Add(user);
+                        }
                     }
                 }
                 else if (results[0] == "404")

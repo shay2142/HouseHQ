@@ -43,12 +43,13 @@ namespace Dashboard
         {
 
             string ip = IP.Text;
-            bool remember = false;
 
             if (!checkInput())
             {
                 MessageBox.Show("Invalid username or password or IP", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            Properties.Settings.Default.remember = rememberBox.Checked;
 
             if (rememberBox.Checked)
             {
@@ -56,15 +57,14 @@ namespace Dashboard
                 Properties.Settings.Default.userName = txtUsername.Text;
                 Properties.Settings.Default.password = txtpassword.Text;
                 Properties.Settings.Default.Save();
-                remember = true;
             }
 
-            login(ip, txtUsername.Text, txtpassword.Text, remember);
+            login(ip, txtUsername.Text, txtpassword.Text);
 
 
         }
 
-        public void login(string ip, string userName, string password, bool remember)
+        public void login(string ip, string userName, string password)
         {
             loginParameters userPram = new loginParameters();
 
@@ -90,7 +90,6 @@ namespace Dashboard
                     userPram.key = user.key;
                     userPram.img = user.img;
                     userPram.apps = user.appList;
-                    userPram.remember = remember;
 
                     new Form1(userPram).Show();
                     this.Hide();

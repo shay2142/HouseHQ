@@ -40,5 +40,11 @@ namespace Dashboard
             Form.pnlFormLoader.Controls.Add(form);
             form.Show();
         }
+
+        private void btnAddS_Click(object sender, EventArgs e)
+        {
+            frmAddAppToServer form = new frmAddAppToServer(USER);
+            form.Show();
+        }
     }
 }

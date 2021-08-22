@@ -52,7 +52,7 @@ namespace Dashboard
 
         public async Task<string> msg(string json, string ip, string port, string code, string userName, string password)
         {
-            bool remember = Properties.Settings.Default.userName != "" && Properties.Settings.Default.password != "" && Properties.Settings.Default.ipServer != "";
+            bool remember = Properties.Settings.Default.remember;
 
             int len = (code + "&" + json).Length;
 

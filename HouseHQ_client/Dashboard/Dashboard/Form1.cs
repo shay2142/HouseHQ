@@ -173,7 +173,6 @@ namespace Dashboard
             File.Delete(@"C:\Users\Public\reamoteapp.rdp");
             ans = logout();
             Properties.Settings.Default.Reset();
-            USER.remember = false;
 
             new frmLogin().Show();
             this.Hide();

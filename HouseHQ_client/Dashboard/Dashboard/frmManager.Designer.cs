@@ -76,6 +76,7 @@
             this.btnAddS.Size = new System.Drawing.Size(39, 41);
             this.btnAddS.TabIndex = 3;
             this.btnAddS.UseVisualStyleBackColor = true;
+            this.btnAddS.Click += new System.EventHandler(this.btnAddS_Click);
             // 
             // btnChangeDet
             // 
