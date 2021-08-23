@@ -17,6 +17,7 @@ git clone https://github.com/stascorp/rdpwrap.git
 or
 
 **[Installer downloads](https://github.com/stascorp/rdpwrap/releases)**
+<br><br>{Soon there will be no need for RDP Wrapper Library v1.6.2}
 
 ### Installing
 
@@ -31,6 +32,7 @@ git clone git@gitlab.com:magshimim-markez-2021/06/606/househq.git
 Take the server files and transfer them to all the server:
 
 *HouseHQ_server is only available for: Windows 10 Pro
+<br><br>{Coming soon installer to HouseHQ server}
 ```
 HouseHQ_server
 ```
@@ -40,7 +42,9 @@ Take the client files and transfer them to all the clients:
 ```
 HouseHQ_client
 ```
-download HouseHQ client installer for windows **[here](https://gitlab.com/magshimim-markez-2021/06/606/househq/-/raw/master/HHQ_client.msi)**
+Download HouseHQ client installer for windows **[here](https://gitlab.com/magshimim-markez-2021/06/606/househq/-/raw/master/HHQ_client.msi)**
+
+
 
 ## Usage
 
