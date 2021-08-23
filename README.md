@@ -38,8 +38,9 @@ HouseHQ_server
 Take the client files and transfer them to all the clients:
 
 ```
-HouseHQ_clien
+HouseHQ_client
 ```
+download HouseHQ client installer for windows **[here](https://gitlab.com/magshimim-markez-2021/06/606/househq/-/raw/master/HHQ_client.msi)**
 
 ## Usage
 
