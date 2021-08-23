@@ -31,13 +31,25 @@ git clone git@gitlab.com:magshimim-markez-2021/06/606/househq.git
 
 Take the server files and transfer them to all the server:
 
-*HouseHQ_server is only available for: Windows 10 Pro
-<br><br>{Coming soon installer to HouseHQ server}
+**HouseHQ_server is available for:**
+- Windows 10 Pro.
+- Windows 10 Enterprise.
+- Windows 8 Enterprise.
+- Windows 8 Professional.
+- Windows 7 Professional.
+- Windows 7 Enterprise.
+- Windows 7 Ultimate.
+- All windows server versions from 2008.
+<br>**In x64 versions.**
+<br><br>
+{Coming soon installer to HouseHQ server}
 ```
 HouseHQ_server
 ```
 
 Take the client files and transfer them to all the clients:
+<br><br>
+**HouseHQ_client is supported for all versions of windows x64 and x86.**
 
 ```
 HouseHQ_client
