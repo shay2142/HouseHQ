@@ -22,7 +22,7 @@ namespace HouseHQ_server
 
          output:
          */
-        public void createUpnp()
+        public void createUpnp_RDP()
         {
             
             UPnPNAT NatMgr = new UPnPNAT();

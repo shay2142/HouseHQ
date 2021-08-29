@@ -28,11 +28,11 @@ namespace HouseHQ_server
         [STAThread]
         static void Main()
         {
-            rdpwrap rdp = new rdpwrap();
-            rdp.update();
+            //rdpwrap rdp = new rdpwrap();
+            //rdp.update();
 
             upnp upnp = new upnp();
-            upnp.createUpnp();
+            upnp.createUpnp_RDP();
 
             fierwall rule = new fierwall();
             rule.createRulefierwall();
