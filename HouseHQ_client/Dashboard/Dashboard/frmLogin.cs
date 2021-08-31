@@ -22,7 +22,6 @@ namespace Dashboard
         public frmLogin()
         {
             InitializeComponent();
-
             //if (Properties.Settings.Default.userName != "" && Properties.Settings.Default.password != "" && Properties.Settings.Default.ipServer != "")
             //{
             //    login(Properties.Settings.Default.ipServer, Properties.Settings.Default.userName, Properties.Settings.Default.password);

@@ -79,3 +79,20 @@ def create_table(conn, create_table_sql):
         c.execute(create_table_sql)
     except Error as e:
         print(e)
+
+def closeDB(conn):
+    conn.close()
+
+def insertValueToUsers(conn, values):
+    """
+    insert value to Users
+    :param conn:
+    :param project:
+    :return: project id
+    """
+    sql = ''' INSERT INTO USERS(USERNAME, PASSWORD, EMAIL, LEVEL_KEY, prodact_keyID)
+              VALUES(?,?,?,?,?) '''
+    cur = conn.cursor()
+    cur.execute(sql, values)
+    conn.commit()
+    return cur.lastrowid
