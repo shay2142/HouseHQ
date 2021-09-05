@@ -43,4 +43,7 @@ def getServers():
 if __name__ == '__main__':
     conn = db.create_connection()
     db.create_tables(conn)
-    app.run(host='0.0.0.0', port=8080)
+    db.insertValueToUsers(conn, ('shay1', '12345', 'shay@gmail.com', 'admin', prodact_key))
+    db.getUserInformation(conn, "shay1")
+    db.closeDB(conn)
+    #app.run(host='0.0.0.0', port=8080)

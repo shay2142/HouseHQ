@@ -69,7 +69,8 @@ def create_tables(conn):
 
 
 def create_table(conn, create_table_sql):
-    """ create a table from the create_table_sql statement
+    """ 
+    create a table from the create_table_sql statement
     :param conn: Connection object
     :param create_table_sql: a CREATE TABLE statement
     :return:
@@ -80,8 +81,23 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
-def closeDB(conn):
-    conn.close()
+def insertValueToServer(conn, values):
+    """
+    insert value to SERVER
+    :param conn:
+    :param project:
+    :return: project id
+    """
+    if not domainIsExists(conn, values[2]):
+
+        sql = ''' INSERT INTO SERVER(ip, port, dominServer, version, STATUS)
+                VALUES(?,?,?,?,?) ''' #! ip && port ???
+        cur = conn.cursor()
+        cur.execute(sql, values)
+        conn.commit()
+        return cur.lastrowid
+    else:
+        print("the domain already exists")
 
 def insertValueToUsers(conn, values):
     """
@@ -90,9 +106,94 @@ def insertValueToUsers(conn, values):
     :param project:
     :return: project id
     """
-    sql = ''' INSERT INTO USERS(USERNAME, PASSWORD, EMAIL, LEVEL_KEY, prodact_keyID)
-              VALUES(?,?,?,?,?) '''
+    if not userNameIsExists(conn, values[0]):
+
+        sql = ''' INSERT INTO USERS(USERNAME, PASSWORD, EMAIL, LEVEL_KEY, prodact_keyID)
+                VALUES(?,?,?,?,?) '''
+        cur = conn.cursor()
+        cur.execute(sql, values)
+        conn.commit()
+        return cur.lastrowid
+    else:
+        print("the user name already exists")
+
+def domainIsExists(conn, domain):
+    """
+    Query users by domain
+    :param conn: the Connection object
+    :param domain:
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT dominServer FROM USERS WHERE USERNAME=?", (domain,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        if row[0] == domain:
+            return True
+    return False
+
+def userNameIsExists(conn, userName):
+    """
+    Query users by userName
+    :param conn: the Connection object
+    :param userName:
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT USERNAME FROM USERS WHERE USERNAME=?", (userName,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        if row[0] == userName:
+            return True
+    return False
+
+def deleteTable(conn, tableName):
+    """
+    Delete all rows in the table
+    :param conn: Connection to the SQLite database
+    :return:
+    """
+    sql = 'DELETE FROM ' + tableName
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+
+def passwordIsCorrect(conn, userName, password):
+    cur = conn.cursor()
+    cur.execute("SELECT PASSWORD FROM USERS WHERE USERNAME=?", (userName,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        if row[0] == password:
+            return True
+    return False
+
+def getUserInformation(conn, userName):
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM USERS WHERE USERNAME=?", (userName,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+        return row
+    return -1
+
+def updateUserInformation(conn, values):
+    sql = ''' UPDATE USERS
+              SET PASSWORD = ? ,
+                  EMAIL = ? ,
+                  LEVEL_KEY = ? ,
+                  prodact_keyID = ?,
+              WHERE id = ?''' #! prodact key ID
     cur = conn.cursor()
     cur.execute(sql, values)
     conn.commit()
-    return cur.lastrowid
+
+def closeDB(conn):
+    conn.close()
