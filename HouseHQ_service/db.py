@@ -88,16 +88,17 @@ def insertValueToServer(conn, values):
     :param project:
     :return: project id
     """
-    if not domainIsExists(conn, values[2]):
+    if not domainIsExists(conn, values[2]) and not ipAndPortNotExists(conn, values[0], values[1]):
 
         sql = ''' INSERT INTO SERVER(ip, port, dominServer, version, STATUS)
-                VALUES(?,?,?,?,?) ''' #! ip && port ???
+                VALUES(?,?,?,?,?) '''
         cur = conn.cursor()
         cur.execute(sql, values)
         conn.commit()
         return cur.lastrowid
     else:
         print("the domain already exists")
+        return ""
 
 def insertValueToUsers(conn, values):
     """
@@ -117,6 +118,17 @@ def insertValueToUsers(conn, values):
     else:
         print("the user name already exists")
 
+def ipAndPortNotExists(conn, ip, port):
+    cur = conn.cursor()
+    cur.execute("SELECT dominServer FROM SERVER WHERE USERNAME=?", (ip,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        if row[0] == ip and row[1] == port:
+            return True
+    return False
+    
 def domainIsExists(conn, domain):
     """
     Query users by domain
@@ -125,7 +137,7 @@ def domainIsExists(conn, domain):
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT dominServer FROM USERS WHERE USERNAME=?", (domain,))
+    cur.execute("SELECT dominServer FROM SERVER WHERE USERNAME=?", (domain,))
 
     rows = cur.fetchall()
 
@@ -190,10 +202,41 @@ def updateUserInformation(conn, values):
                   EMAIL = ? ,
                   LEVEL_KEY = ? ,
                   prodact_keyID = ?,
-              WHERE id = ?''' #! prodact key ID
+              WHERE usersID = ?''' #! prodact key ID
     cur = conn.cursor()
     cur.execute(sql, values)
     conn.commit()
+
+def updateStatusServer(conn, values):
+    sql = ''' UPDATE SERVER
+              SET STATUS = ?,
+              WHERE serverID = ?''' #! prodact key ID
+    cur = conn.cursor()
+    cur.execute(sql, values)
+    conn.commit()
+
+def updateServer(conn, values):
+    sql = ''' UPDATE SERVER
+              SET ip = ? ,
+                  port = ? ,
+                  dominServer = ? ,
+                  version = ?,
+                  STATUS = ?,
+              WHERE serverID = ?''' #! prodact key ID
+    cur = conn.cursor()
+    cur.execute(sql, values)
+    conn.commit()
+
+def getServerInformation(conn, domain):
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM SERVER WHERE dominServer=?", (domain,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+        return row
+    return -1
 
 def closeDB(conn):
     conn.close()
