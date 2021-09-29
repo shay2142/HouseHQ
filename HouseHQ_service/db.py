@@ -30,7 +30,7 @@ def create_tables(conn):
 
     create_prodact_key_table = """
     CREATE TABLE IF NOT EXISTS PRODACT_KEY(
-        prodact_keyID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        prodact_keyID INTEGER PדישטRIMARY KEY AUTOINCREMENT NOT NULL,
         prodact_key TEXT NOT NULL,
         production_date TEXT NOT NULL,
         expiry_date TEXT NOT NULL,
@@ -98,7 +98,7 @@ def insertValueToServer(conn, values):
         return cur.lastrowid
     else:
         print("the domain already exists")
-        return ""
+        return "the domain already exists"
 
 def insertValueToUsers(conn, values):
     """

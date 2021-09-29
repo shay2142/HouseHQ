@@ -8,7 +8,6 @@ import db
 
 app = Flask(__name__)
 
-CONN = object
 servers = []
 prodact_key = "W269N-WFGWX-YVC9B-4J6C9-T83GX"  #for now...
 
@@ -29,6 +28,7 @@ def updateServer():
             elif ser["dominServer"] == server["dominServer"]:
                 return "This domain is already occupied"
 
+        db.insertValueToUsers(conn, (server["ip"], server["port"], server["dominServer"], server["prodact_key"], server["version"]))
         servers.append(server)
         return json.dumps(servers)
 
@@ -41,9 +41,11 @@ def getServers():
 
 
 if __name__ == '__main__':
+    global conn
     conn = db.create_connection()
     db.create_tables(conn)
-    db.insertValueToUsers(conn, ('shay1', '12345', 'shay@gmail.com', 'admin', prodact_key))
-    db.getUserInformation(conn, "shay1")
+    #db.insertValueToUsers(conn, ('shay1', '12345', 'shay@gmail.com', 'admin', prodact_key))
+    #db.getUserInformation(conn, "shay1")
+    app.run(host='0.0.0.0', port=8080)
     db.closeDB(conn)
     #app.run(host='0.0.0.0', port=8080)
